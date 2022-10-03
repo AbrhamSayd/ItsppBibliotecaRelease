@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:WPFBiblioteca"
              Startup="ApplicationStart">
     <Application.Resources>
-         
+        <FontFamily x:Key="SFCompactDisplay">pack://application:,,,/Fonts/#SFCompactDisplay</FontFamily>
+        <FontFamily x:Key="SFUIDisplay">pack://application:,,,/Fonts/#SFUIDisplay</FontFamily>
+        <FontFamily x:Key="SFUIText">pack://application:,,,/Fonts/#SFUIText</FontFamily>
+       
     </Application.Resources>
+
 </Application>
+   

@@ -8,10 +8,60 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Fonts\SF-Compact-Display-Regular.ttf" />
+    <None Remove="Fonts\SF-Compact-Display-Regular.woff" />
+    <None Remove="Fonts\SF-Compact-Display-Semibold.ttf" />
+    <None Remove="Fonts\SF-Compact-Display-Semibold.woff" />
+    <None Remove="Fonts\SF-UI-Display-Bold.ttf" />
+    <None Remove="Fonts\SF-UI-Display-Bold.woff" />
+    <None Remove="Fonts\SF-UI-Display-Medium.ttf" />
+    <None Remove="Fonts\SF-UI-Display-Medium.woff" />
+    <None Remove="Fonts\SF-UI-Display-Regular.ttf" />
+    <None Remove="Fonts\SF-UI-Display-Regular.woff" />
+    <None Remove="Fonts\SF-UI-Display-Semibold.ttf" />
+    <None Remove="Fonts\SF-UI-Display-Semibold.woff" />
+    <None Remove="Fonts\SF-UI-Text-Regular.ttf" />
+    <None Remove="Fonts\SF-UI-Text-Regular.woff" />
+    <None Remove="Fonts\SF-UI-Text-Semibold.ttf" />
+    <None Remove="Fonts\SF-UI-Text-Semibold.woff" />
+    <None Remove="Fonts\SFCompactDisplay-Regular.ttf" />
+    <None Remove="Fonts\SFCompactDisplay-Regular.woff" />
+    <None Remove="Fonts\SFCompactDisplay-Semibold.ttf" />
+    <None Remove="Fonts\SFCompactDisplay-Semibold.woff" />
+    <None Remove="Fonts\SFUIDisplay-Bold.ttf" />
+    <None Remove="Fonts\SFUIDisplay-Bold.woff" />
+    <None Remove="Fonts\SFUIDisplay-Medimum.ttf" />
+    <None Remove="Fonts\SFUIDisplay-Medimum.woff" />
+    <None Remove="Fonts\SFUIDisplay-Regular.ttf" />
+    <None Remove="Fonts\SFUIDisplay-Regular.woff" />
+    <None Remove="Fonts\SFUIDisplay-Semibold.ttf" />
+    <None Remove="Fonts\SFUIDisplay-Semibold.woff" />
+    <None Remove="Fonts\SFUIText-Regular.ttf" />
+    <None Remove="Fonts\SFUIText-Regular.woff" />
+    <None Remove="Fonts\SFUIText-Semibold.ttf" />
+    <None Remove="Fonts\SFUIText-Semibold.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fonts\SFCompactDisplay-Regular.ttf" />
+    <Resource Include="Fonts\SFCompactDisplay-Semibold.ttf" />
+    <Resource Include="Fonts\SFUIDisplay-Bold.ttf" />
+    <Resource Include="Fonts\SFUIDisplay-Medimum.ttf" />
+    <Resource Include="Fonts\SFUIDisplay-Regular.ttf" />
+    <Resource Include="Fonts\SFUIDisplay-Semibold.ttf" />
+    <Resource Include="Fonts\SFUIText-Regular.ttf" />
+    <Resource Include="Fonts\SFUIText-Semibold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fonts\SFCompactDisplay-Regular.woff" />
+    <Resource Include="Fonts\SFCompactDisplay-Semibold.woff" />
+    <Resource Include="Fonts\SFUIDisplay-Bold.woff" />
+    <Resource Include="Fonts\SFUIDisplay-Medimum.woff" />
+    <Resource Include="Fonts\SFUIDisplay-Regular.woff" />
+    <Resource Include="Fonts\SFUIDisplay-Semibold.woff" />
+    <Resource Include="Fonts\SFUIText-Regular.woff" />
+    <Resource Include="Fonts\SFUIText-Semibold.woff" />
     <Resource Include="Images\back-image.jpg" />
     <Resource Include="Images\key-icon.png" />
-    <Resource Include="Images\logo.png" />
-    <Resource Include="Images\user-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

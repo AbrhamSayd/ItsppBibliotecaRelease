@@ -145,40 +145,31 @@
                 <StackPanel Width="220"
                             Grid.Row="1"
                             Orientation="Vertical"
-                            Margin="0,35,0,0">
+                            Margin="30,35,0,0" HorizontalAlignment="Left">
 
-                    <Image Source="/Images/Logo.png"
+                    <Image Source="/Images/userLogo.png"
                            Width="100" Height="100"/>
 
-                    <TextBlock Text="RJ CODE"
+                    <TextBlock Text="Iniciar Sesión"
                                Foreground="White"
                                FontSize="25"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               HorizontalAlignment="Center"/>
-
-                    <TextBlock Text="Learning to code is useful no matter what your career ambitions are."
-                               Foreground="LightGray"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               TextWrapping="Wrap"
-                               TextAlignment="Center"
-                               Margin="0,5,0,0"/>
+                               FontFamily="{StaticResource SFUIDisplay}"
+                               HorizontalAlignment="Center"
+                               FontStyle="Normal"/>
 
 
                     <TextBlock Text="Username"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"                             
+                               FontFamily="{StaticResource SFUIText}"                             
                                Margin="0,35,0,0"/>
 
                     <TextBox x:Name="txtUser"
                              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="13"
                              FontWeight="Medium"
-                             FontFamily="Montserrat"                            
+                             FontFamily="/Fo"                            
                              Foreground="White"
                              CaretBrush="LightGray"
                              BorderBrush="DarkGray"
@@ -189,7 +180,7 @@
                              Padding="20,0,0,0">
 
                         <TextBox.Background>
-                            <ImageBrush ImageSource="/Images/user-icon.png"
+                            <ImageBrush ImageSource="pack://application:,,,/Images/user-icon.png"
                                         Stretch="None"
                                         AlignmentX="Left"/>
                         </TextBox.Background>
@@ -199,7 +190,7 @@
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"                             
+                               FontFamily="{StaticResource SFUIText}"                             
                                Margin="0,15,0,0"/>
 
                     <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -221,7 +212,7 @@
                             Content="LOG IN"
                             Foreground="White"
                             FontSize="12"
-                            FontFamily="Montserrat"
+                            FontFamily="{StaticResource SFUIDisplay}"
                             Cursor="Hand"                           
                             Margin="0,30,0,0">
 
