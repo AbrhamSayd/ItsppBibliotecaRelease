@@ -36,8 +36,7 @@
     <Border CornerRadius="12">
         <Border
             BorderThickness="2"
-            CornerRadius="10"
-            Opacity="0.95">
+            CornerRadius="10">
 
 
             <Border.Background>
