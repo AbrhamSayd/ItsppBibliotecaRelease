@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -21,16 +22,16 @@ namespace WPFBiblioteca.Repositories
         {
             bool validUser;
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new MySqlCommand())
             {
-                connection.Open();
-                command.Connection = connection;
-                command.CommandText = "select *from [User] where username=@username and [password]=@password";
-                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = credential.UserName;
-                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
+                connection.Open();//abrimos la connecion con MySQL
+                command.Connection = connection;//asignamos al comando la coneccion a mysql
+                command.CommandText = "select * from user where Username=@username and password=@password";//Query para evualar nuestro nombre de usuario y contraseñá
+                command.Parameters.Add("@username", MySqlDbType.VarChar).Value = credential.UserName;//definimos parametro de username
+                command.Parameters.Add("@password", MySqlDbType.VarChar).Value = credential.Password;//definimos parametro de password
                 validUser = command.ExecuteScalar() == null ? false : true;
             }
-            return validUser;
+            return validUser;//retorna si es que nuestro logeo fue correcto
         }
 
         public void Edit(UserModel userModel)
@@ -45,16 +46,16 @@ namespace WPFBiblioteca.Repositories
         {
             throw new NotImplementedException();
         }
-        public UserModel GetByUsername(string username)
+        public UserModel GetByUsername(string username)//obtener lista de usuarios de sistema
         {
             UserModel user = null;
-            using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var connection = GetConnection())//mandamos a llamar la connecion de MySQL
+            using (var command = new MySqlCommand())//creamos una instancia de MySQLCommand()
             {
-                connection.Open();
-                command.Connection = connection;
-                command.CommandText = "select *from [User] where username=@username";
-                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = username;
+                connection.Open();//abrimos la connecion con MySQL
+                command.Connection = connection;//asignamos al comando la coneccion a mysql
+                command.CommandText = "select *from user where username=@username"; //definimos nuestro query
+                command.Parameters.Add("@username", MySqlDbType.VarChar).Value = username;//definimos parametro de username
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -66,7 +67,6 @@ namespace WPFBiblioteca.Repositories
                             Password = string.Empty,
                             Name = reader[3].ToString(),
                             LastName = reader[4].ToString(),
-                            Email = reader[5].ToString(),
                         };
                     }
                 }

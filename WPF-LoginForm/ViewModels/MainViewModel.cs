@@ -43,12 +43,12 @@ namespace WPFBiblioteca.ViewModels
             if (user != null)
             {
                 CurrentUserAccount.Username = user.Username;
-                CurrentUserAccount.DisplayName = $"Welcome {user.Name} {user.LastName} ;)";
+                CurrentUserAccount.DisplayName = $"Bienvenido {user.Name} {user.LastName} ;)";
                 CurrentUserAccount.ProfilePicture = null;               
             }
             else
             {
-                CurrentUserAccount.DisplayName="Invalid user, not logged in";
+                CurrentUserAccount.DisplayName="Usuario invalido, no loggeado";
                 //Hide child views.
             }
         }

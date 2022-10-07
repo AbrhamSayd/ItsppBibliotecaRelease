@@ -21,7 +21,7 @@ namespace WPFBiblioteca.ViewModels
         private string _errorMessage;
         private bool _isViewVisible = true;
 
-        private IUserRepository userRepository;
+        private IUserRepository userRepository; // interface de usuario
 
         //Properties
         public string Username
@@ -34,7 +34,7 @@ namespace WPFBiblioteca.ViewModels
             set
             {
                 _username = value;
-                OnPropertyChanged(nameof(Username));
+                OnPropertyChanged(nameof(Username)); //Mandamos a informar que la propiedad cambio
             }
         }
 
@@ -96,6 +96,7 @@ namespace WPFBiblioteca.ViewModels
 
         private bool CanExecuteLoginCommand(object obj)
         {
+            //verificamos si los datos son correctos para avisar que si podemos ejecutar
             bool validData;
             if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 ||
                 Password == null || Password.Length < 3)
@@ -116,7 +117,7 @@ namespace WPFBiblioteca.ViewModels
             }
             else
             {
-                ErrorMessage = "* Invalid username or password";
+                ErrorMessage = "* Contraseña o nombre de usuario invalido";
             }
         }
 

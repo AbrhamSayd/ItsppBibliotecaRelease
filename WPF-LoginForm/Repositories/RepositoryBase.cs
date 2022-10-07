@@ -1,22 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace WPFBiblioteca.Repositories
 {
     public abstract class RepositoryBase
     {
+        
         private readonly string _connectionString;
         public RepositoryBase()
         {
-            _connectionString = "Server=(local); Database=MVVMLoginDb; Integrated Security=true";
+            //BaseDeDatosItspp22.
+            string server, database, uid, password;// se establece coneccion a base de datos externa,.
+            server = "bjleh1b6zqctbrjujbr0-mysql.services.clever-cloud.com";
+            database = "bjleh1b6zqctbrjujbr0";
+            uid = "uapdgnuxdwlim1mi";
+            password = "XgIn3rTTb4KH4I6wIQ5G";
+            _connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            
         }
-        protected SqlConnection GetConnection()
+        protected MySqlConnection GetConnection()
         {
-            return new SqlConnection(_connectionString);
+            return new MySqlConnection(_connectionString);
         }
     }
 }
