@@ -40,6 +40,13 @@
     <None Remove="Fonts\SFUIText-Regular.woff" />
     <None Remove="Fonts\SFUIText-Semibold.ttf" />
     <None Remove="Fonts\SFUIText-Semibold.woff" />
+    <None Remove="Images\ElipseLeftLogin.png" />
+    <None Remove="Images\ElipseRightLogin.png" />
+    <None Remove="Images\Logo Group.png" />
+    <None Remove="Images\logo.png" />
+    <None Remove="Images\tecnmLogo.png" />
+    <None Remove="Images\user-icon.png" />
+    <None Remove="Images\userLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Fonts\SFCompactDisplay-Regular.ttf" />
@@ -61,7 +68,14 @@
     <Resource Include="Fonts\SFUIText-Regular.woff" />
     <Resource Include="Fonts\SFUIText-Semibold.woff" />
     <Resource Include="Images\back-image.jpg" />
+    <Resource Include="Images\ElipseRightLogin.png" />
+    <Resource Include="Images\ElipseLeftLogin.png" />
     <Resource Include="Images\key-icon.png" />
+    <Resource Include="Images\Logo Group.png" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\tecnmLogo.png" />
+    <Resource Include="Images\user-icon.png" />
+    <Resource Include="Images\userLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
