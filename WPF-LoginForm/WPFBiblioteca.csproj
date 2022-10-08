@@ -42,11 +42,19 @@
     <None Remove="Fonts\SFUIText-Semibold.woff" />
     <None Remove="Images\ElipseLeftLogin.png" />
     <None Remove="Images\ElipseRightLogin.png" />
+    <None Remove="Images\img_btnCerrar-removebg-preview.png" />
+    <None Remove="Images\img_btnCerrar.png" />
+    <None Remove="Images\img_Decoration_Login.gif" />
+    <None Remove="Images\img_Tecnm_Logo.png" />
+    <None Remove="Images\img_Three_Dots-removebg-preview.png" />
+    <None Remove="Images\img_Three_Dots.png" />
     <None Remove="Images\Logo Group.png" />
     <None Remove="Images\logo.png" />
+    <None Remove="Images\Pass_Vector.png" />
     <None Remove="Images\tecnmLogo.png" />
     <None Remove="Images\user-icon.png" />
     <None Remove="Images\userLogo.png" />
+    <None Remove="Images\User_Vector.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Fonts\SFCompactDisplay-Regular.ttf" />
@@ -70,12 +78,20 @@
     <Resource Include="Images\back-image.jpg" />
     <Resource Include="Images\ElipseRightLogin.png" />
     <Resource Include="Images\ElipseLeftLogin.png" />
+    <Resource Include="Images\img_btnCerrar-removebg-preview.png" />
+    <Resource Include="Images\img_btnCerrar.png" />
+    <Resource Include="Images\img_Decoration_Login.gif" />
+    <Resource Include="Images\img_Tecnm_Logo.png" />
+    <Resource Include="Images\img_Three_Dots-removebg-preview.png" />
+    <Resource Include="Images\img_Three_Dots.png" />
     <Resource Include="Images\key-icon.png" />
     <Resource Include="Images\Logo Group.png" />
     <Resource Include="Images\logo.png" />
+    <Resource Include="Images\Pass_Vector.png" />
     <Resource Include="Images\tecnmLogo.png" />
     <Resource Include="Images\user-icon.png" />
     <Resource Include="Images\userLogo.png" />
+    <Resource Include="Images\User_Vector.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

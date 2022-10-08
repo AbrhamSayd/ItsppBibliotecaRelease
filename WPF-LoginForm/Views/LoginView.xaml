@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
     Title="LoginView"
-    Width="1372"
-    Height="772"
+    Width="1245"
+    Height="835"
     AllowsTransparency="True"
     Background="Transparent"
     MouseDown="Window_MouseDown"
@@ -23,9 +23,7 @@
     </Window.DataContext>
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
-
     </Window.Resources>
-
     <Window.Visibility>
         <Binding
             Converter="{StaticResource BooleanToVisibility}"
@@ -33,131 +31,228 @@
             Path="IsViewVisible" />
     </Window.Visibility>
 
-    <Border CornerRadius="12">
-        <Border
-            BorderThickness="2"
-            CornerRadius="10">
-
-
-            <Border.Background>
-                <SolidColorBrush Color="#FFFF" />
-            </Border.Background>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Border />
-
-
-                <Grid Grid.Row="0">
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="25" />
-                        <ColumnDefinition Width="25" />
-                        <ColumnDefinition Width="5" />
-                    </Grid.ColumnDefinitions>
-
+    <Border 
+        Background="White"
+        CornerRadius="50"
+        BorderBrush="Transparent">
+        <Grid>
+            <!--Boton three dots-->
+            <Border
+                x:Name="btnThreeDotsMinimize"
+                Margin="1156,22,24,788"
+                CornerRadius="12">
+                <Button
+                Height="25"
+                Background="Transparent"                
+                BorderBrush="Transparent" 
+                Click="btnThreeDotsMinimize_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="12"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                     <Image
-                        Margin="0,1,740,-739"
-                        Source="/Images/ElipseLeftLogin.png"
-                        Stretch="Fill" />
+                    Source="/Images/img_Three_Dots-removebg-preview.png">
+                    </Image>
+                </Button>
+            </Border>
+            <TextBlock
+            Margin="642,21,0,0"
+            TextWrapping="Wrap" FontSize="20" FontFamily="{DynamicResource SFUIUltraLight}" Foreground="#FF00785C" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="UltraLight"><Run Text="Puerto Peñasco"/><Run Language="es-mx" Text=", Sonora."/></TextBlock>
+            <TextBlock
+                Margin="0,21,275,0"
+                TextWrapping="Wrap" FontSize="22" FontFamily="{DynamicResource SFUILight}" Foreground="#FF00785C" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Light" ><Run Language="es-mx" Text="10:40 PM"/></TextBlock>
+            <TextBlock
+                Margin="0,21,134,0"
+                TextWrapping="Wrap" FontSize="22" FontFamily="{DynamicResource SFUIDisplay}" Foreground="#FF00785C" HorizontalAlignment="Right" VerticalAlignment="Top"  FontWeight="Bold"><Run Language="es-mx" Text="10/22/2022"/></TextBlock>
 
-                    <TextBlock
-                        Grid.Column="0"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        FontFamily="Montserrat"
-                        FontSize="10"
-                        Foreground="DarkGray"
-                        Text="LOG IN" />
+            <!--Border de hasta la izquierda-->
+            <Border 
+            CornerRadius="50,0,0,50"
+            HorizontalAlignment="Left"
+            Width="230">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FF7FD7AC" Offset="0.0" />
+                        <GradientStop Color="#79D2AC" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <!--segundo Border de hasta la izquierda-->
+            <Border 
+            CornerRadius="0,500,500,0"
+            HorizontalAlignment="Left"
+            Width="320" Margin="230,0,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FF7FD7AC" Offset="0.0" />
+                        <GradientStop Color="#79D2AC" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
-                    <Button
-                        x:Name="btnMinimize"
-                        Grid.Column="1"
-                        BorderThickness="0"
-                        Click="btnMinimize_Click"
-                        Content="-"
-                        Cursor="Hand"
-                        FontFamily="Montserrat"
-                        FontSize="16"
-                        Foreground="White">
+            <!--Border decorativo derecho de capa de el fondo-->
+            <Border 
+            CornerRadius="5000,0,50,0"
+            HorizontalAlignment="Left"
+            Width="384" Margin="802,464,0,151" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="8.568"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <Border.Background>
+                    <SolidColorBrush Color="#50C9CB"/>
+                </Border.Background>
+            </Border>
+            <!--Border decorativo derecho de capa de en medio-->
+            <Border 
+            CornerRadius="5000,0,50,0"
+            HorizontalAlignment="Left"
+            Width="568" Margin="678,480,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#62CEBF" Offset="0.003" />
+                        <GradientStop Color="#1EB9EC" Offset="0."/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <!--Border decorativo derecho de capa frontal-->
+            <Border 
+            CornerRadius="5000,0,50,0"
+            HorizontalAlignment="Left"
+            Width="476" Margin="770,480,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#7FD7AC" Offset="0.4" />
+                        <GradientStop Color="#1EB9EC" Offset="0.964"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Image 
+                    x:Name="_imgDecorationLogin" 
+                    Source="/Images/img_Decoration_Login.gif" 
+                    Margin="78,25,10,10" 
+                    RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                        <Image.Effect>
+                            <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="12" BlurRadius="9" />
+                        </Image.Effect>
+                    </Image>
+                </Grid>
+            </Border>
+            <!--Logo del TECNM-->
+            <Border
+                CornerRadius="75" 
+                Margin="572,170,420,425">
+                <Border.Background>
+                    <ImageBrush
+                        Stretch="Fill" 
+                        ImageSource="/Images/img_Tecnm_Logo.png">
+                    </ImageBrush>
+                </Border.Background>
+            </Border>
+            <TextBlock
+                Margin="0,170,78,0"
+                TextWrapping="Wrap" FontSize="48" Foreground="#FF2AA570" HorizontalAlignment="Right" VerticalAlignment="Top" Height="176" Width="318" FontFamily="{DynamicResource Roboto Mono Regular}" LineHeight="20" FontWeight="Bold"><Run Text="Tec"/><Run Text="n"/><Run Text="ológico N"/><Run Text="acional de Mexico"/></TextBlock>
+            <TextBlock
+                Margin="0,351,20,0"
+                TextWrapping="Wrap" FontSize="36" Foreground="#FF2AA570" HorizontalAlignment="Right" VerticalAlignment="Top" Height="42" Width="395" FontFamily="{DynamicResource SFUIDisplay}" LineHeight="20"><Run Language="es-mx" Text="Campus Puerto Peñasco"/></TextBlock>
 
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="#28AEED" />
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#278BEF" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
+            <!--Boton minimizar NOT IN USE-->
+            <!--<Button
+             x:Name="btnMinimize"
+             BorderThickness="0"
+             Click="btnMinimize_Click"
+             Content="-"
+             Cursor="Hand"
+             FontFamily="Montserrat"
+             FontSize="16"
+             Foreground="White" Margin="606,-383,-605,383">
 
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border
-                                    Width="18"
-                                    Height="18"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="9">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#28AEED" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#278BEF" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
 
-                    </Button>
-                    <Button
-                        x:Name="btnClose"
-                        Grid.Column="2"
-                        BorderThickness="0"
-                        Click="btnClose_Click"
-                        Content="X"
-                        Cursor="Hand"
-                        FontFamily="Montserrat"
-                        FontSize="12"
-                        Foreground="White">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border
+                         Width="18"
+                         Height="18"
+                         Background="{TemplateBinding Background}"
+                         CornerRadius="9">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>-->
 
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="#DA34AE" />
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#C62DAE" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
+            <!--Boton cerrar-->
+            <Border
+                CornerRadius="15" 
+                Margin="36,735,1051,31">
+                <Button
+                x:Name="btnClose"
+                Background="Transparent"                
+                BorderBrush="Transparent" Click="btnClose_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="12"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image
+                    Source="/Images/img_btnCerrar-removebg-preview.png" Height="62" Width="149">
+                    </Image>
+                </Button>
+            </Border>
 
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border
-                                    Width="18"
-                                    Height="18"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="9">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                    <StackPanel
+            <!--Stack Panel User Interactions Controls-->
+            <StackPanel
                         Width="417"
-                        Margin="30,33,0,-739"
+                        Margin="10,112,0,98"
                         HorizontalAlignment="Left"
                         Orientation="Vertical">
 
-                        <Image
+                <Image
                             Width="226"
                             Height="255"
                             Source="/Images/userLogo.png"
-                            Stretch="Fill" />
+                            Stretch="Fill">
+                    <Image.Effect>
+                        <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="3" BlurRadius="15" />
+                    </Image.Effect>
+                </Image>
 
-                        <TextBlock
+                <TextBlock
                             Width="225"
                             Height="36"
+                    Margin="0,0,0,30"
                             HorizontalAlignment="Center"
                             FontFamily="{StaticResource SFUIDisplay}"
                             FontSize="30"
@@ -166,89 +261,162 @@
                             Text="Iniciar Sesión"
                             TextAlignment="Center" />
 
-
-                        <TextBlock
-                            Margin="0,35,0,0"
-                            FontFamily="{StaticResource SFUIText}"
-                            FontSize="12"
-                            FontWeight="Medium"
-                            Foreground="DarkGray"
-                            Text="Username" />
-
+                <!--TEXTBOX and CARD for User-->
+                <Border
+                Width="365"
+                Height="40"
+                Margin="0,0,0,30"
+                Background="White"
+                CornerRadius="25">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="1" BlurRadius="10" />
+                    </Border.Effect>
+                    <Grid>
+                        <Image
+                            Margin="17,4,4,4"
+                            HorizontalAlignment="Left"
+                            Source="\Images\User_Vector.png"/>
                         <TextBox
-                            x:Name="txtUser"
-                            Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+                        x:Name="txtUser"
+                        Padding="5,0,0,0"
+                        Margin="50,5,25,5"
+                        Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                        Background="Transparent"
+                        BorderBrush="Transparent" 
+                        Foreground="Gray" 
+                        HorizontalAlignment="Left" 
+                        VerticalContentAlignment="Center" 
+                        FontFamily="{DynamicResource SFUILight}" 
+                        FontSize="24" 
+                        SelectionBrush="#FFE8E8E8" Width="295">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                                                    <Grid>
+                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
 
-                        <TextBlock
-                            Margin="0,15,0,0"
-                            FontFamily="{StaticResource SFUIText}"
-                            FontSize="12"
-                            FontWeight="Medium"
-                            Foreground="DarkGray"
-                            Text="Password" />
+                                                        <TextBlock x:Name="placeHolderTextBlock"
+                                           Foreground="Gray"
+                                           Text="Usuario"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           FontFamily="{TemplateBinding FontFamily}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           Margin="10,0,0,0"
+                                           Visibility="Collapsed"/>
+                                                    </Grid>
 
-                        <customcontrols:BindablePasswordBox
-                            Height="28"
-                            Margin="0,5,0,0"
-                            Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <TextBlock
-                            Margin="0,10,0,0"
-                            FontFamily="Montserrat"
-                            FontSize="12"
-                            FontWeight="Medium"
-                            Foreground="#D7596D"
-                            Text="{Binding ErrorMessage}"
-                            TextWrapping="Wrap" />
-
-                        <Button
-                            x:Name="btnLogin1"
-                            Margin="0,30,0,0"
-                            BorderThickness="0"
-                            Command="{Binding LoginCommand}"
-                            Content="LOG IN"
-                            Cursor="Hand"
-                            FontFamily="{StaticResource SFUIDisplay}"
-                            FontSize="12"
-                            Foreground="White">
-
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="#462AD8" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#28AEED" />
-                                        </Trigger>
-                                    </Style.Triggers>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsEnabled" Value="false">
+                                                        <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="true">
+                                                        <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsKeyboardFocused" Value="true">
+                                                        <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                                    </Trigger>
+                                                    <Trigger Property="Text" Value="">
+                                                        <Setter Property="Visibility" TargetName="placeHolderTextBlock" Value="Visible"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
                                 </Style>
-                            </Button.Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
+                </Border>
 
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border
+                <!--TEXTBOX and CARD for Password-->
+                <Border
+                Width="365"
+                Height="40"
+                Margin="0,0,0,15"
+                Background="White"
+                CornerRadius="25">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="1" BlurRadius="10" />
+                    </Border.Effect>
+                    <Grid>
+                        <Image
+                            Margin="15,2,2,2"
+                            HorizontalAlignment="Left"
+                            Source="\Images\Pass_Vector.png"/>
+                        <customcontrols:BindablePasswordBox
+                        Padding="5,0,0,0"
+                        Margin="50,5,25,5"
+                        Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Loaded="BindablePasswordBox_Loaded" />
+                    </Grid>
+                </Border>
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    FontFamily="SF UI Text"
+                    FontSize="16"
+                    FontWeight="Medium"
+                    Foreground="White" 
+                    Width="310" 
+                    Text="{Binding ErrorMessage}" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" />
+
+                <!--Button for Login-->
+                <Border
+                    Margin="0,0,0,5">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="1" BlurRadius="10" />
+                    </Border.Effect>
+                    <Button
+                    x:Name="btnLogin1"
+                    BorderThickness="0"
+                    Command="{Binding LoginCommand}"
+                    Content="Siguiente"
+                    Cursor="Hand"
+                    FontFamily="{StaticResource SFUIDisplay}"
+                    FontSize="24" 
+                    Foreground="Gray" Width="156">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="White" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border
                                         Width="150"
                                         Height="40"
                                         Background="{TemplateBinding Background}"
                                         CornerRadius="20">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                        <StackPanel
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Border>
+                <StackPanel
                             Margin="0,15,0,0"
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
 
-                            <TextBlock
+                    <TextBlock
                                 FontFamily="Montserrat"
                                 FontSize="12"
                                 FontWeight="Medium"
-                                Foreground="DarkGray"
+                                Foreground="White"
                                 Text="Forgot Password?" />
 
-                            <TextBlock
+                    <TextBlock
                                 Margin="8,0,0,0"
                                 Cursor="Hand"
                                 FontFamily="Montserrat"
@@ -257,28 +425,22 @@
                                 Foreground="White"
                                 Text="Reset" />
 
-                        </StackPanel>
+                </StackPanel>
 
-                    </StackPanel>
+            </StackPanel>
 
 
-                    <Image
-                        Margin="690,62,63,-288"
-                        Source="/Images/Logo Group.png"
-                        Stretch="Fill" />
-                    <Image
-                        Grid.ColumnSpan="4"
-                        Height="380"
-                        Margin="810,389,2,-739"
-                        OpacityMask="White"
-                        Source="/Images/ElipseRightLogin.png"
-                        Stretch="Fill" />
-                </Grid>
 
-            </Grid>
 
-        </Border>
 
+
+
+
+
+
+
+
+
+        </Grid>
     </Border>
-
 </Window>

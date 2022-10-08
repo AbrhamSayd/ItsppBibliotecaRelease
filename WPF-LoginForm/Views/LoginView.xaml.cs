@@ -30,7 +30,14 @@ namespace WPFBiblioteca.Views
                 DragMove();
         }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        //private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        //{
+        //    WindowState = WindowState.Minimized;
+        //}
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e) { }
+
+        private void btnThreeDotsMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
@@ -40,6 +47,9 @@ namespace WPFBiblioteca.Views
             Application.Current.Shutdown();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e) { }
+        private void BindablePasswordBox_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
