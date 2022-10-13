@@ -41,5 +41,7 @@ namespace WPFBiblioteca.CustomControls
         {
             Password = txtPassword.SecurePassword;
         }
+
+
     }
 }

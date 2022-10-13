@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFBiblioteca.Views
+namespace WPFBiblioteca.CustomControls
 {
     /// <summary>
-    /// Interaction logic for MainWindowView.xaml
+    /// Lógica de interacción para cdvEnterUser.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class cdvEnterUser : UserControl
     {
-        public MainView()
+        public cdvEnterUser()
         {
             InitializeComponent();
-        }
-
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
         }
     }
 }

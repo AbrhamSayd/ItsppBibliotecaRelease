@@ -214,24 +214,47 @@
             </Button>-->
 
             <!--Boton cerrar-->
-            <Border
-                CornerRadius="15" 
-                Margin="36,735,1051,31">
-                <Button
+
+            <Button
                 x:Name="btnClose"
                 Background="Transparent"                
-                BorderBrush="Transparent" Click="btnClose_Click">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="12"/>
-                        </Style>
-                    </Button.Resources>
+                BorderBrush="Transparent" 
+                Click="btnClose_Click"
+                Margin="50,735,1050,50" 
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="White" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <StackPanel
+                    HorizontalAlignment="Stretch"
+                    Orientation="Horizontal"
+                    Background="Transparent">
                     <Image
-                    Source="/Images/img_btnCerrar-removebg-preview.png" Height="62" Width="149">
+                    HorizontalAlignment="Left"
+                    Source="/Images/img_btnCerrar.png" 
+                    Height="45" Width="40">
                     </Image>
-                </Button>
-            </Border>
-
+                    <TextBlock 
+                    Text="Cerrar"
+                    Background="Transparent"
+                    VerticalAlignment="Center"
+                    Margin="5,0,0,0" FontFamily="SF Display" FontSize="30" Foreground="White"
+                        />
+                </StackPanel>
+            </Button>
             <!--Stack Panel User Interactions Controls-->
             <StackPanel
                         Width="417"
@@ -240,10 +263,10 @@
                         Orientation="Vertical">
 
                 <Image
-                            Width="226"
-                            Height="255"
-                            Source="/Images/userLogo.png"
-                            Stretch="Fill">
+                Width="226"
+                Height="255"
+                Source="/Images/userLogo.png"
+                Stretch="Fill">
                     <Image.Effect>
                         <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="3" BlurRadius="15" />
                     </Image.Effect>
@@ -262,97 +285,18 @@
                             TextAlignment="Center" />
 
                 <!--TEXTBOX and CARD for User-->
-                <Border
-                Width="365"
-                Height="40"
-                Margin="0,0,0,30"
-                Background="White"
-                CornerRadius="25">
-                    <Border.Effect>
-                        <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="1" BlurRadius="10" />
-                    </Border.Effect>
-                    <Grid>
-                        <Image
-                            Margin="17,4,4,4"
-                            HorizontalAlignment="Left"
-                            Source="\Images\User_Vector.png"/>
-                        <TextBox
-                        x:Name="txtUser"
-                        Padding="5,0,0,0"
-                        Margin="50,5,25,5"
-                        Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                        Background="Transparent"
-                        BorderBrush="Transparent" 
-                        Foreground="Gray" 
-                        HorizontalAlignment="Left" 
-                        VerticalContentAlignment="Center" 
-                        FontFamily="{DynamicResource SFUILight}" 
-                        FontSize="24" 
-                        SelectionBrush="#FFE8E8E8" Width="295">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type TextBox}">
-                                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
-                                                    <Grid>
-                                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-
-                                                        <TextBlock x:Name="placeHolderTextBlock"
-                                           Foreground="Gray"
-                                           Text="Usuario"
-                                           FontSize="{TemplateBinding FontSize}"
-                                           FontFamily="{TemplateBinding FontFamily}"
-                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                           Margin="10,0,0,0"
-                                           Visibility="Collapsed"/>
-                                                    </Grid>
-
-                                                </Border>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsEnabled" Value="false">
-                                                        <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                                                    </Trigger>
-                                                    <Trigger Property="IsMouseOver" Value="true">
-                                                        <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
-                                                    </Trigger>
-                                                    <Trigger Property="IsKeyboardFocused" Value="true">
-                                                        <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
-                                                    </Trigger>
-                                                    <Trigger Property="Text" Value="">
-                                                        <Setter Property="Visibility" TargetName="placeHolderTextBlock" Value="Visible"/>
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
-                    </Grid>
-                </Border>
+                <Grid
+                    Margin="0,0,0,20">
+                    <customcontrols:cdvEnterUser/>
+                    
+                </Grid>
 
                 <!--TEXTBOX and CARD for Password-->
-                <Border
-                Width="365"
-                Height="40"
-                Margin="0,0,0,15"
-                Background="White"
-                CornerRadius="25">
-                    <Border.Effect>
-                        <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="1" BlurRadius="10" />
-                    </Border.Effect>
-                    <Grid>
-                        <Image
-                            Margin="15,2,2,2"
-                            HorizontalAlignment="Left"
-                            Source="\Images\Pass_Vector.png"/>
-                        <customcontrols:BindablePasswordBox
-                        Padding="5,0,0,0"
-                        Margin="50,5,25,5"
-                        Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Loaded="BindablePasswordBox_Loaded" />
-                    </Grid>
-                </Border>
+                <Grid>
+                    <customcontrols:BindablePasswordBox      
+                        Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        Loaded="BindablePasswordBox_Loaded" />
+                </Grid>
 
                 <TextBlock
                     Margin="0,0,0,10"
@@ -365,7 +309,7 @@
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" />
 
-                <!--Button for Login-->
+                <!--Button -Siguiente- for Login-->
                 <Border
                     Margin="0,0,0,5">
                     <Border.Effect>
@@ -385,7 +329,8 @@
                                 <Setter Property="Background" Value="White" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#28AEED" />
+                                        <Setter Property="Background" Value="#FF9EA79F"/>
+                                        <Setter Property="Foreground" Value="White"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -428,17 +373,6 @@
                 </StackPanel>
 
             </StackPanel>
-
-
-
-
-
-
-
-
-
-
-
 
 
         </Grid>

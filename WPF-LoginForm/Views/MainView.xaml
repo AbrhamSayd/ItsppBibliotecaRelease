@@ -6,16 +6,27 @@
         xmlns:local="clr-namespace:WPFBiblioteca.Views"
         xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindowView" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen">
+        Title="MainWindowView" Height="900" Width="1700"
+        ShowInTaskbar="False" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="White">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
+    
+    
     <Grid>
         <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"
                    FontSize="30"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
     </Grid>
+    
+    
+    
+    
+    
 </Window>

@@ -1,63 +1,54 @@
-﻿<UserControl
-    x:Class="WPFBiblioteca.CustomControls.BindablePasswordBox"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:WPFBiblioteca.CustomControls"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" >
-
+﻿<UserControl x:Class="WPFBiblioteca.CustomControls.cdvEnterUser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFBiblioteca.CustomControls"
+             mc:Ignorable="d" >
     <Border
-    Width="365"
-    Height="40"
-     Background="White"
-     CornerRadius="25">
+                Width="365"
+                Height="40"
+                Background="White"
+                CornerRadius="25">
         <Border.Effect>
             <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="1" BlurRadius="10" />
         </Border.Effect>
         <Grid>
             <Image
-                            Margin="15,2,2,2"
+                            Margin="17,4,4,4"
                             HorizontalAlignment="Left"
-                            Source="\Images\Pass_Vector.png"/>
-            <PasswordBox
-        x:Name="txtPassword"
-        Margin="50,5,0,5"
-        Padding="0,0,0,0"
-        Background="Transparent"
-        BorderBrush="Transparent" 
-        Foreground="Gray" 
-        HorizontalAlignment="Left" 
-        VerticalContentAlignment="Center" 
-        FontFamily="{DynamicResource SFUILight}" 
-        FontSize="24" 
-        SelectionBrush="#FFE8E8E8" Width="315">
-
-                <!--<PasswordBox.Background>
-            <ImageBrush
-                AlignmentX="Left"
-                ImageSource="/WPFBiblioteca;component/Images/Pass_Vector.png"
-                Stretch="None" />
-        </PasswordBox.Background>-->
-
-                <PasswordBox.Style>
-                    <Style TargetType="PasswordBox">
+                            Source="\Images\User_Vector.png"/>
+            <TextBox
+                        x:Name="txtUser"
+                        Padding="0,0,0,0"
+                        Margin="50,5,25,5"
+                        Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                        Background="Transparent"
+                        BorderBrush="Transparent" 
+                        Foreground="Gray" 
+                        HorizontalAlignment="Left" 
+                        VerticalContentAlignment="Center" 
+                        FontFamily="{DynamicResource SFUILight}" 
+                        FontSize="24" 
+                        SelectionBrush="#FFE8E8E8" Width="295">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
                         <Setter Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                                <ControlTemplate TargetType="{x:Type TextBox}">
                                     <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
                                         <Grid>
                                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
 
                                             <TextBlock x:Name="placeHolderTextBlock"
                                            Foreground="Gray"
-                                           Text="Contraseña"
+                                           Text="Usuario"
                                            FontSize="{TemplateBinding FontSize}"
                                            FontFamily="{TemplateBinding FontFamily}"
                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                           Visibility="Collapsed"
-                                           Padding="5,0,0,0"/>
+                                           Margin="5,0,0,0"
+                                           Visibility="Collapsed"/>
                                         </Grid>
-
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsEnabled" Value="false">
@@ -69,19 +60,17 @@
                                         <Trigger Property="IsKeyboardFocused" Value="true">
                                             <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
                                         </Trigger>
-                                        <DataTrigger Binding="{Binding Path=Password}" Value="{x:Null}">
+                                        <Trigger Property="Text" Value="">
                                             <Setter Property="Visibility" TargetName="placeHolderTextBlock" Value="Visible"/>
-                                        </DataTrigger>
+                                        </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
                     </Style>
-                </PasswordBox.Style>
-
-            </PasswordBox>
+                </TextBox.Style>
+            </TextBox>
         </Grid>
     </Border>
-
-
+    
 </UserControl>

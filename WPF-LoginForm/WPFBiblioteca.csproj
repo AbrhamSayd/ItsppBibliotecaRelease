@@ -42,7 +42,6 @@
     <None Remove="Fonts\SFUIText-Semibold.woff" />
     <None Remove="Images\ElipseLeftLogin.png" />
     <None Remove="Images\ElipseRightLogin.png" />
-    <None Remove="Images\img_btnCerrar-removebg-preview.png" />
     <None Remove="Images\img_btnCerrar.png" />
     <None Remove="Images\img_Decoration_Login.gif" />
     <None Remove="Images\img_Tecnm_Logo.png" />
@@ -78,7 +77,6 @@
     <Resource Include="Images\back-image.jpg" />
     <Resource Include="Images\ElipseRightLogin.png" />
     <Resource Include="Images\ElipseLeftLogin.png" />
-    <Resource Include="Images\img_btnCerrar-removebg-preview.png" />
     <Resource Include="Images\img_btnCerrar.png" />
     <Resource Include="Images\img_Decoration_Login.gif" />
     <Resource Include="Images\img_Tecnm_Logo.png" />
