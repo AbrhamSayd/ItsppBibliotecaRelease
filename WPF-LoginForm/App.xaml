@@ -24,7 +24,17 @@
             <Setter Property="Foreground" Value="Black" />
         </Style>
 
-        
+         <!--FUTURA IMPLEMENTACION DE TEMAS-->
+        <!--<ResourceDictionary x:Key="themeTurquesa">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="ThemeDictionaryTurquesa">
+                    <ResourceDictionary.MergedDictionaries >
+                        <ResourceDictionary Source="/Themes/Turquesa.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>-->
+
     </Application.Resources>
 
 </Application>

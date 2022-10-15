@@ -32,15 +32,95 @@
         </Border.Background>
 
         <Grid x:Name="gridPrincipal">
-            <DockPanel
+            <DockPanel x:Name="dockSideMenu"
                 Height="auto"
-                Width="160"
+                Width="auto"
                 HorizontalAlignment="Left">
+                <Border
+                    x:Name="borderMenuSelectedIndicator"
+                    Width="10"
+                    Height="60"
+                    Background="#016283">
+                </Border>
                 <StackPanel
+                    Margin="-10,0,0,0"
                     Orientation="Vertical"
                     Width="160">
-                    <customcontrols:btnUserPrefab
-                        Margin="50,30,30,30"/>
+                    <!--btnUser-->
+                        <!--<customcontrols:btnUserPrefab
+                        Margin="50,30,30,30"/>-->
+                    <Border CornerRadius="20"
+                            Margin="30,30,30,80"
+                Background="Transparent">
+                        <Button           
+                    Background="Transparent"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                            <Image Source="/Images/SideMenuImages/imgUser.png" />
+                        </Button>
+                    </Border>
+                    
+                    <!--btnInventarioLibros-->
+                    <Border CornerRadius="20"
+                            Margin="30,0,30,30"
+                Background="Transparent">
+                        <Button            
+                    Background="Transparent"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                            <Image Source="/Images/SideMenuImages/imgInventarioLibros.png" />
+                        </Button>
+                    </Border>
+
+                    <!--btnPrestatarios-->
+                    <Border CornerRadius="20"
+                           Margin="30,0,30,30"
+                Background="Transparent">
+                        <Button           
+                    Background="Transparent"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                            <Image Source="/Images/SideMenuImages/imgPrestatarios.png" />
+                        </Button>
+                    </Border>
+
+                    <!--btnHome-->
+                    <Border CornerRadius="20"
+                            Margin="30,0,30,30"
+                Background="Transparent">
+                        <Button           
+                    Background="Transparent"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                            <Image Source="/Images/SideMenuImages/imgHome.png" />
+                        </Button>
+                    </Border>
+
+                    <!--btnPrestamosPendientes-->
+                    <Border CornerRadius="20"
+                            Margin="30,0,30,30"
+                Background="Transparent">
+                        <Button           
+                    Background="Transparent"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                            <Image Source="/Images/SideMenuImages/imgPrestamosPendientes.png" />
+                        </Button>
+                    </Border>
+
+                    <!--btnGenerarInformes-->
+                    <Border CornerRadius="20"
+                            Margin="30,0,30,30"
+                Background="Transparent">
+                        <Button           
+                    Background="Transparent"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                            <Image Source="/Images/SideMenuImages/imgGenerarInformes.png" />
+                        </Button>
+                    </Border>
+
+
                 </StackPanel>
             </DockPanel>
             <DockPanel
@@ -53,24 +133,30 @@
                     CornerRadius="50">
 
                     <Border
-                    x:Name="gridFather"
+                    x:Name="borderContent"
                     Height="900"
                     Width="1540"
                     Background="White"
                     DockPanel.Dock="Right"
                     CornerRadius="50">
+                        <Grid>
+                            <!--Blur effect future use-->
 
-                        <!--Blur effect future use-->
-
-                        <!--<Border.Effect>
+                            <!--<Border.Effect>
                         <BlurEffect Radius="50" KernelType="Gaussian"/>
                     </Border.Effect>-->
 
-                        <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"
+                            <customcontrols:searchBar_btnSearch
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Margin="50,50"/>
+
+                            <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"
                            FontSize="30"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"/>
-
+                            
+                        </Grid>
                     </Border>
                 </Border>
             </DockPanel>
