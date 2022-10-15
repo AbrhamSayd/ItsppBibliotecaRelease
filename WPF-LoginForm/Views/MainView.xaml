@@ -11,22 +11,36 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="White">
-
+        AllowsTransparency="True"
+        Background="Transparent"
+        BorderBrush="Transparent">
+    
+    
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-    
-    
-    <Grid>
+
+
+    <Border
+        CornerRadius="50"
+        BorderBrush="Transparent">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint=".1,1">
+                <GradientStop Color="#7FD7AC" Offset="0.94" />
+                <GradientStop Color="#1EB9EC" Offset="0.14"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        
+        <Grid x:Name="gridPrincipal" >
+
         <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"
                    FontSize="30"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
     </Grid>
-    
-    
-    
-    
-    
+    </Border>
+
+
+
+
 </Window>
