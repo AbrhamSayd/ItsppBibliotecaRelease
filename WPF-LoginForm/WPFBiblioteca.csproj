@@ -50,6 +50,12 @@
     <None Remove="Images\Logo Group.png" />
     <None Remove="Images\logo.png" />
     <None Remove="Images\Pass_Vector.png" />
+    <None Remove="Images\SideMenuImages\imgGenerarInformes.png" />
+    <None Remove="Images\SideMenuImages\imgHome.png" />
+    <None Remove="Images\SideMenuImages\imgInventarioLibros.png" />
+    <None Remove="Images\SideMenuImages\imgPrestamosPendientes.png" />
+    <None Remove="Images\SideMenuImages\imgPrestatarios.png" />
+    <None Remove="Images\SideMenuImages\imgUser.png" />
     <None Remove="Images\tecnmLogo.png" />
     <None Remove="Images\user-icon.png" />
     <None Remove="Images\userLogo.png" />
@@ -86,6 +92,12 @@
     <Resource Include="Images\Logo Group.png" />
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\Pass_Vector.png" />
+    <Resource Include="Images\SideMenuImages\imgGenerarInformes.png" />
+    <Resource Include="Images\SideMenuImages\imgHome.png" />
+    <Resource Include="Images\SideMenuImages\imgInventarioLibros.png" />
+    <Resource Include="Images\SideMenuImages\imgPrestamosPendientes.png" />
+    <Resource Include="Images\SideMenuImages\imgPrestatarios.png" />
+    <Resource Include="Images\SideMenuImages\imgUser.png" />
     <Resource Include="Images\tecnmLogo.png" />
     <Resource Include="Images\user-icon.png" />
     <Resource Include="Images\userLogo.png" />
