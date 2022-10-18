@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="SFCompactDisplay">pack://application:,,,/Fonts/#SFCompactDisplay</FontFamily>
+    <FontFamily x:Key="SFUIDisplay">pack://application:,,,/Fonts/#SFUIDisplay</FontFamily>
+    <FontFamily x:Key="SFUIText">pack://application:,,,/Fonts/#SFUIText</FontFamily>
+    <FontFamily x:Key="SFUILight">pack://application:,,,/Fonts/#sf-ui-display-light-58646b33e0551</FontFamily>
+    <FontFamily x:Key="SFUIUltraLight">pack://application:,,,/Fonts/#sf-ui-display-ultralight-58646b19bf205</FontFamily>
+    <FontFamily x:Key="SFUIMedium">pack://application:,,,/Fonts/#sf-ui-display-medium-58646be638f96</FontFamily>
+    <FontFamily x:Key="SFUIBold">pack://application:,,,/Fonts/#sf-ui-display-bold-58646a511e3d9</FontFamily>
+    <FontFamily x:Key="Roboto Mono Regular">pack://application:,,,/Fonts/#RobotoMono-Regular.ttf</FontFamily>
+
+</ResourceDictionary>
