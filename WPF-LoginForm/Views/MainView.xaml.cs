@@ -22,18 +22,18 @@ namespace WPFBiblioteca.Views
         public MainView()
         {
             InitializeComponent();
-            clase1();//SOLO PRUEBAS CAMBIARA LUEGO
+            //clase1();//SOLO PRUEBAS CAMBIARA LUEGO
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
-        public void clase1()
-        {
-            CustomControls.customRows obj = new CustomControls.customRows();
-            obj.Margin = new Thickness(465, 372, 0, 0);
-            gridPrincipal.Children.Add(obj);
-        }
+        //public void clase1()
+        //{
+        //    CustomControls.customRows obj = new CustomControls.customRows();
+        //    obj.Margin = new Thickness(465, 372, 0, 0);
+        //    gridPrincipal.Children.Add(obj);
+        //}
     }
 }
