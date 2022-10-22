@@ -44,6 +44,8 @@
     <None Remove="Images\ElipseRightLogin.png" />
     <None Remove="Images\img_btnCerrar.png" />
     <None Remove="Images\img_Decoration_Login.gif" />
+    <None Remove="Images\Img_LogoApp.png" />
+    <None Remove="Images\img_Tecnm_Logo GIANT.png" />
     <None Remove="Images\img_Tecnm_Logo.png" />
     <None Remove="Images\img_Three_Dots-removebg-preview.png" />
     <None Remove="Images\img_Three_Dots.png" />
@@ -85,6 +87,8 @@
     <Resource Include="Images\ElipseLeftLogin.png" />
     <Resource Include="Images\img_btnCerrar.png" />
     <Resource Include="Images\img_Decoration_Login.gif" />
+    <Resource Include="Images\Img_LogoApp.png" />
+    <Resource Include="Images\img_Tecnm_Logo GIANT.png" />
     <Resource Include="Images\img_Tecnm_Logo.png" />
     <Resource Include="Images\img_Three_Dots-removebg-preview.png" />
     <Resource Include="Images\img_Three_Dots.png" />

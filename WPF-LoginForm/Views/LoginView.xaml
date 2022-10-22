@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
     Title="LoginView"
-    Width="1245"
-    Height="835"
+    Width="1700"
+    Height="900"
     AllowsTransparency="True"
     Background="Transparent"
     MouseDown="Window_MouseDown"
@@ -45,7 +45,7 @@
                 Height="25"
                 Background="Transparent"                
                 BorderBrush="Transparent" 
-                Click="btnThreeDotsMinimize_Click">
+                Click="btnThreeDotsMinimize_Click" Margin="282,0,-150,65">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="12"/>
@@ -66,7 +66,7 @@
                 </Button>
             </Border>
             <TextBlock
-            Margin="642,21,0,0"
+            Margin="1094,16,0,0"
             TextWrapping="Wrap" FontSize="20" FontFamily="{DynamicResource SFUIUltraLight}" Foreground="#FF00785C" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="UltraLight"><Run Text="Puerto Peñasco"/><Run Language="es-mx" Text=", Sonora."/></TextBlock>
             <TextBlock
                 Margin="0,21,275,0"
@@ -79,11 +79,11 @@
             <Border 
             CornerRadius="50,0,0,50"
             HorizontalAlignment="Left"
-            Width="230">
+            Width="452">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Color="#FF7FD7AC" Offset="0.0" />
-                        <GradientStop Color="#79D2AC" Offset="1.0" />
+                        <GradientStop Color="#7CE2C1" Offset="1.0" />
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
@@ -91,16 +91,17 @@
             <Border 
             CornerRadius="0,500,500,0"
             HorizontalAlignment="Left"
-            Width="320" Margin="230,0,0,0">
+            Width="320" Margin="452,0,0,0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Color="#FF7FD7AC" Offset="0.0" />
-                        <GradientStop Color="#79D2AC" Offset="1.0" />
+                        <GradientStop Color="#7CE2C1" Offset="1.0" />
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
 
             <!--Border decorativo derecho de capa de el fondo-->
+            <!--
             <Border 
             CornerRadius="5000,0,50,0"
             HorizontalAlignment="Left"
@@ -117,7 +118,9 @@
                     <SolidColorBrush Color="#50C9CB"/>
                 </Border.Background>
             </Border>
+            -->
             <!--Border decorativo derecho de capa de en medio-->
+            <!--
             <Border 
             CornerRadius="5000,0,50,0"
             HorizontalAlignment="Left"
@@ -129,7 +132,9 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
+            -->
             <!--Border decorativo derecho de capa frontal-->
+            <!--
             <Border 
             CornerRadius="5000,0,50,0"
             HorizontalAlignment="Left"
@@ -159,8 +164,9 @@
                         </Image.Effect>
                     </Image>
                 </Grid>
-            </Border>
+            </Border>-->
             <!--Logo del TECNM-->
+            <!--
             <Border
                 CornerRadius="75" 
                 Margin="572,170,420,425">
@@ -170,13 +176,13 @@
                         ImageSource="/Images/img_Tecnm_Logo.png">
                     </ImageBrush>
                 </Border.Background>
-            </Border>
+            </Border>-->
             <TextBlock
-                Margin="0,170,78,0"
-                TextWrapping="Wrap" FontSize="48" Foreground="#FF2AA570" HorizontalAlignment="Right" VerticalAlignment="Top" Height="176" Width="318" FontFamily="{DynamicResource Roboto Mono Regular}" LineHeight="20" FontWeight="Bold"><Run Text="Tec"/><Run Text="n"/><Run Text="ológico N"/><Run Text="acional de Mexico"/></TextBlock>
+                Margin="0,286,0,0"
+                TextWrapping="Wrap" FontSize="85" Foreground="#00785C" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Height="192" Width="928" FontFamily="{DynamicResource Roboto Mono Regular}" LineHeight="20" FontWeight="Bold"><Run Text="Tec"/><Run Text="n"/><Run Text="ológico N"/><Run Text="acional de Mexico"/></TextBlock>
             <TextBlock
-                Margin="0,351,20,0"
-                TextWrapping="Wrap" FontSize="36" Foreground="#FF2AA570" HorizontalAlignment="Right" VerticalAlignment="Top" Height="42" Width="395" FontFamily="{DynamicResource SFUIDisplay}" LineHeight="20"><Run Language="es-mx" Text="Campus Puerto Peñasco"/></TextBlock>
+                Margin="0,518,0,0"
+                TextWrapping="Wrap" FontSize="48" Foreground="#FF00785C" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Height="58" Width="923" FontFamily="{DynamicResource SFUIDisplay}" LineHeight="20"><Run Language="es-mx" Text="Campus Puerto Peñasco"/></TextBlock>
 
             <!--Boton minimizar NOT IN USE-->
             <!--<Button
@@ -220,7 +226,7 @@
                 Background="Transparent"                
                 BorderBrush="Transparent" 
                 Click="btnClose_Click"
-                Margin="50,735,1050,50" 
+                Margin="50,783,1474,50" 
                 >
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -255,17 +261,23 @@
                         />
                 </StackPanel>
             </Button>
+
+            <!--Logo TECNM-->
+            <Image
+                    Source="/Images/img_Tecnm_Logo GIANT.png" Margin="0,0,1050,0">
+
+            </Image>
+
             <!--Stack Panel User Interactions Controls-->
             <StackPanel
-                        Width="417"
-                        Margin="10,112,0,98"
+                        Width="767"
                         HorizontalAlignment="Left"
                         Orientation="Vertical">
 
-                <Image
-                Width="226"
-                Height="255"
-                Source="/Images/userLogo.png"
+                    <Image
+                Width="450"
+                Margin="0,110,0,0"
+                Source="/Images/Img_LogoApp.png"
                 Stretch="Fill">
                     <Image.Effect>
                         <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="3" BlurRadius="15" />
@@ -288,7 +300,7 @@
                 <Grid
                     Margin="0,0,0,20">
                     <customcontrols:cdvEnterUser/>
-                    
+
                 </Grid>
 
                 <!--TEXTBOX and CARD for Password-->
