@@ -28,55 +28,70 @@
 
 
     <Border
-        CornerRadius="50"
+        x:Name="BorderMain"
+        Background="{StaticResource primaryGradientColor}"
         BorderBrush="Transparent"
-        Background="{StaticResource primaryGradientColor}">
+        CornerRadius="50">
 
-        <Grid x:Name="gridPrincipal">
-            <DockPanel x:Name="dockSideMenu"
-                Height="auto"
-                Width="auto"
-                HorizontalAlignment="Left">
-                <Border
-                    x:Name="borderMenuSelectedIndicator"
-                    Width="10"
-                    Height="60"
-                    Background="#016283">
-                </Border>
-                <StackPanel
-                    Margin="-10,0,0,0"
-                    Orientation="Vertical"
-                    Width="160">
-                    <!--btnUser-->
-                        <!--<customcontrols:btnUserPrefab
-                        Margin="50,30,30,30"/>-->
-                    <Border CornerRadius="20"
-                            Margin="30,30,30,80"
-                Background="Transparent">
-                        <Button           
-                    Background="Transparent"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-                            <Image Source="/Images/SideMenuImages/imgUser.png" />
-                        </Button>
-                    </Border>
-                    
-                    <!--btnInventarioLibros-->
-                    <Border CornerRadius="20"
-                            Margin="30,0,30,30"
-                Background="Transparent">
 
-                        <Button Style="{StaticResource menuButton}">
-                            <Image Source="/Images/SideMenuImages/imgInventarioLibros.png" />
-                        </Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <!--  Navigation Menu  -->
+                <ColumnDefinition Width="64" />
 
-                                <!--<Button            
-                    Background="Transparent"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-                            <Image Source="/Images/SideMenuImages/imgInventarioLibros.png" />
-                        </Button>-->
-                    </Border>
+                <!--  Content Menu  -->
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+
+            <!--  Navigation Menu  -->
+            <Border Grid.Column="0" CornerRadius="50,50,50,50">
+                <StackPanel>
+                    <!--  Logo  -->
+                    <StackPanel>
+                        <fa:IconImage
+                            Width="40"
+                            Height="40"
+                            Margin="0,42,0,137"
+                            Foreground="{StaticResource primaryBackColor1}"
+                            Icon="UserAlt" />
+                    </StackPanel>
+
+                    <!--  Menu Buttons  -->
+                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="BookOpen" Style="{StaticResource menuButtonIcon}" />
+                        </StackPanel>
+                        <!--  Menu Buttons  -->
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Portrait" Style="{StaticResource menuButtonIcon}" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="HomeAlt" Style="{StaticResource menuButtonIcon}" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="BookBookmark" Style="{StaticResource menuButtonIcon}" />
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+            </Border>
+            <!--  Main Section  -->
+            <Border
+                x:Name="BorderContent"
+                Grid.Column="1"
+                Background="{StaticResource primaryBackColor1}"
+                CornerRadius="50,50,50,50">
 
                 <Grid>
 
@@ -150,7 +165,7 @@
                             FontWeight="UltraLight"
                             Foreground="{StaticResource titleColor2}"
                             TextWrapping="Wrap"><Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora." /></TextBlock>
-                        
+
                         <!--  Testing TestBlocks for positions  -->
                         <!--<TextBlock x:Name="positionTop" Text="0" FontSize="30" Margin="10,0,10,0"/>
                         <TextBlock x:Name="positionLeft" Text="0" FontSize="30"/>-->
@@ -177,10 +192,10 @@
                             <TextBlock
                                 VerticalAlignment="Center"
                                 FontFamily="{StaticResource SFUIDisplay}"
+                                FontSize="20"
                                 FontWeight="Medium"
                                 Foreground="{StaticResource titleColor1}"
-                                Text="Dashboard"
-                                FontSize="20"/>
+                                Text="Dashboard" />
                         </StackPanel>
 
 

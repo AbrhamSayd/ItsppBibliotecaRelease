@@ -17,7 +17,7 @@ namespace WPFBiblioteca.Views
         {
             InitializeComponent();
             
-            //clase1();//SOLO PRUEBAS CAMBIARA LUEGO
+            //SOLO PRUEBAS CAMBIARA LUEGO
         }
         
 
