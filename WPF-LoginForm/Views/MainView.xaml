@@ -23,13 +23,8 @@
 
     <Border
         CornerRadius="50"
-        BorderBrush="Transparent">
-        <Border.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint=".5,.5">
-                <GradientStop Color="#7FD7AC" Offset="0.64" />
-                <GradientStop Color="#3AA499" Offset="0.14"/>
-            </LinearGradientBrush>
-        </Border.Background>
+        BorderBrush="Transparent"
+        Background="{StaticResource primaryGradientColor}">
 
         <Grid x:Name="gridPrincipal">
             <DockPanel x:Name="dockSideMenu"
@@ -64,12 +59,17 @@
                     <Border CornerRadius="20"
                             Margin="30,0,30,30"
                 Background="Transparent">
-                        <Button            
+
+                        <Button Style="{StaticResource menuButton}">
+                            <Image Source="/Images/SideMenuImages/imgInventarioLibros.png" />
+                        </Button>
+
+                                <!--<Button            
                     Background="Transparent"
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center">
                             <Image Source="/Images/SideMenuImages/imgInventarioLibros.png" />
-                        </Button>
+                        </Button>-->
                     </Border>
 
                     <!--btnPrestatarios-->

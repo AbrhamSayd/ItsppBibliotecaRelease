@@ -58,6 +58,7 @@
     <None Remove="Images\SideMenuImages\imgPrestamosPendientes.png" />
     <None Remove="Images\SideMenuImages\imgPrestatarios.png" />
     <None Remove="Images\SideMenuImages\imgUser.png" />
+    <None Remove="Images\SVG Logo ITSPP Completo White no bg.svg" />
     <None Remove="Images\tecnmLogo.png" />
     <None Remove="Images\user-icon.png" />
     <None Remove="Images\userLogo.png" />
@@ -102,6 +103,7 @@
     <Resource Include="Images\SideMenuImages\imgPrestamosPendientes.png" />
     <Resource Include="Images\SideMenuImages\imgPrestatarios.png" />
     <Resource Include="Images\SideMenuImages\imgUser.png" />
+    <Resource Include="Images\SVG Logo ITSPP Completo White no bg.svg" />
     <Resource Include="Images\tecnmLogo.png" />
     <Resource Include="Images\user-icon.png" />
     <Resource Include="Images\userLogo.png" />

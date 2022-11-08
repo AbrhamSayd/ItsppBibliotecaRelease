@@ -79,28 +79,16 @@
             <Border 
             CornerRadius="50,0,0,50"
             HorizontalAlignment="Left"
-            Width="452">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#FF7FD7AC" Offset="0.0" />
-                        <GradientStop Color="#7CE2C1" Offset="1.0" />
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
+            Width="452"
+            Background="{StaticResource BordersLoginGradient}"/>
             <!--segundo Border de hasta la izquierda-->
             <Border 
             CornerRadius="0,500,500,0"
             HorizontalAlignment="Left"
-            Width="320" Margin="452,0,0,0">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#FF7FD7AC" Offset="0.0" />
-                        <GradientStop Color="#7CE2C1" Offset="1.0" />
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
+            Width="320" Margin="452,0,0,0"
+            Background="#FF7FD7AC"/>
 
-            <!--Border decorativo derecho de capa de el fondo-->
+                <!--Border decorativo derecho de capa de el fondo-->
             <!--
             <Border 
             CornerRadius="5000,0,50,0"
