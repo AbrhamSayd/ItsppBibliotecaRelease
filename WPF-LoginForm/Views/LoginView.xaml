@@ -31,49 +31,66 @@
             Path="IsViewVisible" />
     </Window.Visibility>
 
-    <Border 
+    <Border
         Background="White"
-        CornerRadius="50"
-        BorderBrush="Transparent">
+        BorderBrush="Transparent"
+        CornerRadius="50">
         <Grid>
-            <!--Boton three dots-->
+            <!--  Boton three dots  -->
             <Border
                 x:Name="btnThreeDotsMinimize"
                 Margin="1156,22,24,788"
                 CornerRadius="12">
                 <Button
-                Height="25"
-                Background="Transparent"                
-                BorderBrush="Transparent" 
-                Click="btnThreeDotsMinimize_Click" Margin="282,0,-150,65">
+                    Height="25"
+                    Margin="282,0,-150,65"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="btnThreeDotsMinimize_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="12"/>
+                            <Setter Property="CornerRadius" Value="12" />
                         </Style>
                     </Button.Resources>
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                                    <Setter Property="Background" Value="DarkGoldenrod" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
-                    <Image
-                    Source="/Images/img_Three_Dots-removebg-preview.png">
-                    </Image>
+                    <Image Source="/Images/img_Three_Dots-removebg-preview.png" />
                 </Button>
             </Border>
             <TextBlock
-            Margin="1094,16,0,0"
-            TextWrapping="Wrap" FontSize="20" FontFamily="{DynamicResource SFUIUltraLight}" Foreground="#FF00785C" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="UltraLight"><Run Text="Puerto Peñasco"/><Run Language="es-mx" Text=", Sonora."/></TextBlock>
+                Margin="1094,16,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="{DynamicResource SFUIUltraLight}"
+                FontSize="20"
+                FontWeight="UltraLight"
+                Foreground="{StaticResource titleColor2}"
+                TextWrapping="Wrap"><Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora." /></TextBlock>
             <TextBlock
                 Margin="0,21,275,0"
-                TextWrapping="Wrap" FontSize="22" FontFamily="{DynamicResource SFUILight}" Foreground="#FF00785C" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Light" ><Run Language="es-mx" Text="10:40 PM"/></TextBlock>
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontFamily="{DynamicResource SFUILight}"
+                FontSize="22"
+                FontWeight="Light"
+                Foreground="{StaticResource titleColor2}"
+                TextWrapping="Wrap"><Run Language="es-mx" Text="10:40 PM" /></TextBlock>
             <TextBlock
                 Margin="0,21,134,0"
-                TextWrapping="Wrap" FontSize="22" FontFamily="{DynamicResource SFUIDisplay}" Foreground="#FF00785C" HorizontalAlignment="Right" VerticalAlignment="Top"  FontWeight="Bold"><Run Language="es-mx" Text="10/22/2022"/></TextBlock>
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontFamily="{DynamicResource SFUIDisplay}"
+                FontSize="22"
+                FontWeight="Bold"
+                Foreground="{StaticResource titleColor2}"
+                TextWrapping="Wrap"><Run Language="es-mx" Text="10/22/2022" /></TextBlock>
 
             <!--Border de hasta la izquierda-->
             <Border 
@@ -90,7 +107,7 @@
 
                 <!--Border decorativo derecho de capa de el fondo-->
             <!--
-            <Border 
+            <Border
             CornerRadius="5000,0,50,0"
             HorizontalAlignment="Left"
             Width="384" Margin="802,464,0,151" RenderTransformOrigin="0.5,0.5">
@@ -107,9 +124,9 @@
                 </Border.Background>
             </Border>
             -->
-            <!--Border decorativo derecho de capa de en medio-->
+            <!--  Border decorativo derecho de capa de en medio  -->
             <!--
-            <Border 
+            <Border
             CornerRadius="5000,0,50,0"
             HorizontalAlignment="Left"
             Width="568" Margin="678,480,0,0">
@@ -121,9 +138,9 @@
                 </Border.Background>
             </Border>
             -->
-            <!--Border decorativo derecho de capa frontal-->
+            <!--  Border decorativo derecho de capa frontal  -->
             <!--
-            <Border 
+            <Border
             CornerRadius="5000,0,50,0"
             HorizontalAlignment="Left"
             Width="476" Margin="770,480,0,0">
@@ -134,10 +151,10 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <Grid>
-                    <Image 
-                    x:Name="_imgDecorationLogin" 
-                    Source="/Images/img_Decoration_Login.gif" 
-                    Margin="78,25,10,10" 
+                    <Image
+                    x:Name="_imgDecorationLogin"
+                    Source="/Images/img_Decoration_Login.gif"
+                    Margin="78,25,10,10"
                     RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
@@ -153,26 +170,45 @@
                     </Image>
                 </Grid>
             </Border>-->
-            <!--Logo del TECNM-->
+            <!--  Logo del TECNM  -->
             <!--
             <Border
-                CornerRadius="75" 
+                CornerRadius="75"
                 Margin="572,170,420,425">
                 <Border.Background>
                     <ImageBrush
-                        Stretch="Fill" 
+                        Stretch="Fill"
                         ImageSource="/Images/img_Tecnm_Logo.png">
                     </ImageBrush>
                 </Border.Background>
             </Border>-->
             <TextBlock
+                Width="928"
+                Height="192"
                 Margin="0,286,0,0"
-                TextWrapping="Wrap" FontSize="85" Foreground="#00785C" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Height="192" Width="928" FontFamily="{DynamicResource Roboto Mono Regular}" LineHeight="20" FontWeight="Bold"><Run Text="Tec"/><Run Text="n"/><Run Text="ológico N"/><Run Text="acional de Mexico"/></TextBlock>
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontFamily="{DynamicResource Roboto Mono Regular}"
+                FontSize="85"
+                FontWeight="Bold"
+                Foreground="#00785C"
+                LineHeight="20"
+                TextAlignment="Center"
+                TextWrapping="Wrap"><Run Text="Tec" /><Run Text="n" /><Run Text="ológico N" /><Run Text="acional de Mexico" /></TextBlock>
             <TextBlock
+                Width="923"
+                Height="58"
                 Margin="0,518,0,0"
-                TextWrapping="Wrap" FontSize="48" Foreground="#FF00785C" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Height="58" Width="923" FontFamily="{DynamicResource SFUIDisplay}" LineHeight="20"><Run Language="es-mx" Text="Campus Puerto Peñasco"/></TextBlock>
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontFamily="{DynamicResource SFUIDisplay}"
+                FontSize="48"
+                Foreground="#FF00785C"
+                LineHeight="20"
+                TextAlignment="Center"
+                TextWrapping="Wrap"><Run Language="es-mx" Text="Campus Puerto Peñasco" /></TextBlock>
 
-            <!--Boton minimizar NOT IN USE-->
+            <!--  Boton minimizar NOT IN USE  -->
             <!--<Button
              x:Name="btnMinimize"
              BorderThickness="0"
@@ -207,18 +243,17 @@
                 </Button.Template>
             </Button>-->
 
-            <!--Boton cerrar-->
+            <!--  Boton cerrar  -->
 
             <Button
                 x:Name="btnClose"
-                Background="Transparent"                
-                BorderBrush="Transparent" 
-                Click="btnClose_Click"
-                Margin="50,783,1474,50" 
-                >
+                Margin="50,783,1474,50"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Click="btnClose_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"/>
+                        <Setter Property="CornerRadius" Value="15" />
                     </Style>
                 </Button.Resources>
                 <Button.Style>
@@ -226,111 +261,115 @@
                         <Setter Property="Background" Value="White" />
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="White" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
                 <StackPanel
                     HorizontalAlignment="Stretch"
-                    Orientation="Horizontal"
-                    Background="Transparent">
-                    <Image
-                    HorizontalAlignment="Left"
-                    Source="/Images/img_btnCerrar.png" 
-                    Height="45" Width="40">
-                    </Image>
-                    <TextBlock 
-                    Text="Cerrar"
                     Background="Transparent"
-                    VerticalAlignment="Center"
-                    Margin="5,0,0,0" FontFamily="SF Display" FontSize="30" Foreground="White"
-                        />
+                    Orientation="Horizontal">
+                    <Image
+                        Width="40"
+                        Height="45"
+                        HorizontalAlignment="Left"
+                        Source="/Images/img_btnCerrar.png" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        FontFamily="SF Display"
+                        FontSize="30"
+                        Foreground="White"
+                        Text="Cerrar" />
                 </StackPanel>
             </Button>
 
-            <!--Logo TECNM-->
-            <Image
-                    Source="/Images/img_Tecnm_Logo GIANT.png" Margin="0,0,1050,0">
+            <!--  Logo TECNM  -->
+            <Image Margin="0,0,1050,0" Source="/Images/img_Tecnm_Logo GIANT.png" />
 
-            </Image>
-
-            <!--Stack Panel User Interactions Controls-->
+            <!--  Stack Panel User Interactions Controls  -->
             <StackPanel
-                        Width="767"
-                        HorizontalAlignment="Left"
-                        Orientation="Vertical">
+                Width="767"
+                HorizontalAlignment="Left"
+                Orientation="Vertical">
 
-                    <Image
-                Width="450"
-                Margin="0,110,0,0"
-                Source="/Images/Img_LogoApp.png"
-                Stretch="Fill">
+                <Image
+                    Width="450"
+                    Margin="0,110,0,0"
+                    Source="/Images/Img_LogoApp.png"
+                    Stretch="Fill">
                     <Image.Effect>
-                        <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="3" BlurRadius="15" />
+                        <DropShadowEffect
+                            BlurRadius="15"
+                            Direction="255"
+                            ShadowDepth="3"
+                            Color="#FFB6C2CB" />
                     </Image.Effect>
                 </Image>
 
                 <TextBlock
-                            Width="225"
-                            Height="36"
+                    Width="225"
+                    Height="36"
                     Margin="0,0,0,30"
-                            HorizontalAlignment="Center"
-                            FontFamily="{StaticResource SFUIDisplay}"
-                            FontSize="30"
-                            FontStyle="Normal"
-                            Foreground="White"
-                            Text="Iniciar Sesión"
-                            TextAlignment="Center" />
+                    HorizontalAlignment="Center"
+                    FontFamily="{StaticResource SFUIDisplay}"
+                    FontSize="30"
+                    FontStyle="Normal"
+                    Foreground="White"
+                    Text="Iniciar Sesión"
+                    TextAlignment="Center" />
 
-                <!--TEXTBOX and CARD for User-->
-                <Grid
-                    Margin="0,0,0,20">
-                    <customcontrols:cdvEnterUser/>
+                <!--  TEXTBOX and CARD for User  -->
+                <Grid Margin="0,0,0,20">
+                    <customcontrols:cdvEnterUser />
 
                 </Grid>
 
-                <!--TEXTBOX and CARD for Password-->
+                <!--  TEXTBOX and CARD for Password  -->
                 <Grid>
-                    <customcontrols:BindablePasswordBox      
-                        Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                        Loaded="BindablePasswordBox_Loaded" />
+                    <customcontrols:BindablePasswordBox Loaded="BindablePasswordBox_Loaded" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
                 <TextBlock
+                    Width="310"
                     Margin="0,0,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     FontFamily="SF UI Text"
                     FontSize="16"
                     FontWeight="Medium"
-                    Foreground="White" 
-                    Width="310" 
-                    Text="{Binding ErrorMessage}" 
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" />
+                    Foreground="White"
+                    Text="{Binding ErrorMessage}" />
 
-                <!--Button -Siguiente- for Login-->
-                <Border
-                    Margin="0,0,0,5">
+                <!--  Button -Siguiente- for Login  -->
+                <Border Margin="0,0,0,5">
                     <Border.Effect>
-                        <DropShadowEffect Direction="255" Color="#FFB6C2CB" ShadowDepth="1" BlurRadius="10" />
+                        <DropShadowEffect
+                            BlurRadius="10"
+                            Direction="255"
+                            ShadowDepth="1"
+                            Color="#FFB6C2CB" />
                     </Border.Effect>
                     <Button
-                    x:Name="btnLogin1"
-                    BorderThickness="0"
-                    Command="{Binding LoginCommand}"
-                    Content="Siguiente"
-                    Cursor="Hand"
-                    FontFamily="{StaticResource SFUIDisplay}"
-                    FontSize="24" 
-                    Foreground="Gray" Width="156">
+                        x:Name="btnLogin1"
+                        Width="156"
+                        BorderThickness="0"
+                        Command="{Binding LoginCommand}"
+                        Content="Siguiente"
+                        Cursor="Hand"
+                        FontFamily="{StaticResource SFUIDisplay}"
+                        FontSize="24"
+                        Foreground="Gray">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="White" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#FF9EA79F"/>
-                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="Background" Value="#FF9EA79F" />
+                                        <Setter Property="Foreground" Value="White" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -339,10 +378,10 @@
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border
-                                        Width="150"
-                                        Height="40"
-                                        Background="{TemplateBinding Background}"
-                                        CornerRadius="20">
+                                    Width="150"
+                                    Height="40"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="20">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
@@ -350,25 +389,25 @@
                     </Button>
                 </Border>
                 <StackPanel
-                            Margin="0,15,0,0"
-                            HorizontalAlignment="Center"
-                            Orientation="Horizontal">
+                    Margin="0,15,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
 
                     <TextBlock
-                                FontFamily="Montserrat"
-                                FontSize="12"
-                                FontWeight="Medium"
-                                Foreground="White"
-                                Text="Forgot Password?" />
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        Text="Forgot Password?" />
 
                     <TextBlock
-                                Margin="8,0,0,0"
-                                Cursor="Hand"
-                                FontFamily="Montserrat"
-                                FontSize="12"
-                                FontWeight="Medium"
-                                Foreground="White"
-                                Text="Reset" />
+                        Margin="8,0,0,0"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        Text="Reset" />
 
                 </StackPanel>
 

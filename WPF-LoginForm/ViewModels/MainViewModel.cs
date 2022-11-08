@@ -15,6 +15,7 @@ namespace WPFBiblioteca.ViewModels
         //Fields
         private UserAccountModel _currentUserAccount;
         private IUserRepository userRepository;
+        
 
         public UserAccountModel CurrentUserAccount
         {
@@ -32,6 +33,7 @@ namespace WPFBiblioteca.ViewModels
 
         public MainViewModel()
         {
+           
             userRepository = new UserRepository();
             CurrentUserAccount = new UserAccountModel();
             LoadCurrentUserData();
@@ -52,5 +54,7 @@ namespace WPFBiblioteca.ViewModels
                 //Hide child views.
             }
         }
+        
+        
     }
 }

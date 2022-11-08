@@ -83,7 +83,6 @@
     <Resource Include="Fonts\SFUIDisplay-Semibold.woff" />
     <Resource Include="Fonts\SFUIText-Regular.woff" />
     <Resource Include="Fonts\SFUIText-Semibold.woff" />
-    <Resource Include="Images\back-image.jpg" />
     <Resource Include="Images\ElipseRightLogin.png" />
     <Resource Include="Images\ElipseLeftLogin.png" />
     <Resource Include="Images\img_btnCerrar.png" />
@@ -110,6 +109,7 @@
     <Resource Include="Images\User_Vector.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FontAwesome.Sharp" Version="6.1.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="MySql.Data" Version="8.0.30" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />

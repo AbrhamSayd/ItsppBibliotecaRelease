@@ -1,25 +1,31 @@
-﻿<Window x:Class="WPFBiblioteca.Views.MainView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFBiblioteca.Views"
-        xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
-        xmlns:customcontrols="clr-namespace:WPFBiblioteca.CustomControls"
-        mc:Ignorable="d"
-        Title="MainWindowView" Height="900" Width="1700"
-        ShowInTaskbar="False" 
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        AllowsTransparency="True"
-        Background="Transparent"
-        BorderBrush="Transparent">
-    
-    
+﻿<Window
+    x:Class="WPFBiblioteca.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:local="clr-namespace:WPFBiblioteca.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
+    Title="MainWindowView"
+    Width="1700"
+    Height="900"
+    AllowsTransparency="True"
+    Background="Transparent"
+    BorderBrush="Transparent"
+    ShowInTaskbar="True"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+
     <Window.DataContext>
-        <viewModel:MainViewModel/>
+        <viewModel:MainViewModel />
     </Window.DataContext>
+
+
+
 
     <Border
         CornerRadius="50"
@@ -72,95 +78,124 @@
                         </Button>-->
                     </Border>
 
-                    <!--btnPrestatarios-->
-                    <Border CornerRadius="20"
-                           Margin="30,0,30,30"
-                Background="Transparent">
-                        <Button           
-                    Background="Transparent"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-                            <Image Source="/Images/SideMenuImages/imgPrestatarios.png" />
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <!--  Control Bar  -->
+                        <RowDefinition Height="35" />
+                        <!--  Header / Caption  -->
+                        <RowDefinition Height="35" />
+                        <!--  Content section / Child views  -->
+                        <RowDefinition Height="*" />
+
+                    </Grid.RowDefinitions>
+                    <!--  control bar  -->
+                    <StackPanel
+                        x:Name="pnlcontrolBar"
+                        Grid.Row="0"
+                        Margin="0,0,15,0"
+                        Background="Transparent"
+                        FlowDirection="RightToLeft"
+                        MouseEnter="pnlcontrolBar_MouseEnter"
+                        MouseLeftButtonDown="pnlcontrolBar_MouseLeftButtonDown"
+                        Orientation="Horizontal">
+                        <Button
+                            x:Name="btnClose"
+                            Click="btnClose_Click"
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource color10}">
+                            <fa:IconImage
+                                Width="25"
+                                Height="25"
+                                Icon="CircleXmark"
+                                Style="{StaticResource controlButtonIcon}" />
                         </Button>
-                    </Border>
-
-                    <!--btnHome-->
-                    <Border CornerRadius="20"
-                            Margin="30,0,30,30"
-                Background="Transparent">
-                        <Button           
-                    Background="Transparent"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-                            <Image Source="/Images/SideMenuImages/imgHome.png" />
+                        <Button
+                            x:Name="btnMaximize"
+                            Click="btnMaximize_Click"
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource color9}">
+                            <fa:IconImage
+                                Width="25"
+                                Height="25"
+                                Icon="CircleUp"
+                                Style="{StaticResource controlButtonIcon}" />
                         </Button>
-                    </Border>
-
-                    <!--btnPrestamosPendientes-->
-                    <Border CornerRadius="20"
-                            Margin="30,0,30,30"
-                Background="Transparent">
-                        <Button           
-                    Background="Transparent"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-                            <Image Source="/Images/SideMenuImages/imgPrestamosPendientes.png" />
+                        <Button
+                            x:Name="btnMinimize"
+                            Click="btnMinimize_Click"
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource color9}">
+                            <fa:IconImage
+                                Width="25"
+                                Height="25"
+                                Icon="CircleDown"
+                                Style="{StaticResource controlButtonIcon}" />
                         </Button>
-                    </Border>
+                        <TextBlock
+                            Margin="30,0,0,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            FontFamily="{DynamicResource SFUIDisplay}"
+                            FontSize="22"
+                            FontWeight="Bold"
+                            Foreground="#FF00785C"
+                            TextWrapping="Wrap"><Run Language="es-mx" Text="10/22/2022" /></TextBlock>
+                        <TextBlock
+                            Margin="30,0,0,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            FontFamily="{DynamicResource SFUIUltraLight}"
+                            FontSize="20"
+                            FontWeight="UltraLight"
+                            Foreground="{StaticResource titleColor2}"
+                            TextWrapping="Wrap"><Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora." /></TextBlock>
+                        
+                        <!--  Testing TestBlocks for positions  -->
+                        <!--<TextBlock x:Name="positionTop" Text="0" FontSize="30" Margin="10,0,10,0"/>
+                        <TextBlock x:Name="positionLeft" Text="0" FontSize="30"/>-->
+                    </StackPanel>
 
-                    <!--btnGenerarInformes-->
-                    <Border CornerRadius="20"
-                            Margin="30,0,30,30"
-                Background="Transparent">
-                        <Button           
-                    Background="Transparent"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-                            <Image Source="/Images/SideMenuImages/imgGenerarInformes.png" />
-                        </Button>
-                    </Border>
+                    <!--  Header / Caption  -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Caption  -->
+                        <StackPanel
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <fa:IconImage
+                                Height="30"
+                                Margin="35,0,10,0"
+                                Foreground="{StaticResource hoverActionbuttons}"
+                                Icon="Home" />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontFamily="{StaticResource SFUIDisplay}"
+                                FontWeight="Medium"
+                                Foreground="{StaticResource titleColor1}"
+                                Text="Dashboard"
+                                FontSize="20"/>
+                        </StackPanel>
 
 
-                </StackPanel>
-            </DockPanel>
-            <DockPanel
-                Height="auto"
-                Width="auto"
-                HorizontalAlignment="Right">
-                <Border
-                    BorderThickness="1"
-                    BorderBrush="White"
-                    CornerRadius="50">
+                    </Grid>
+                </Grid>
+            </Border>
 
-                    <Border
-                    x:Name="borderContent"
-                    Height="900"
-                    Width="1540"
-                    Background="White"
-                    DockPanel.Dock="Right"
-                    CornerRadius="50">
-                        <Grid>
-                            <!--Blur effect future use-->
-
-                            <!--<Border.Effect>
-                        <BlurEffect Radius="50" KernelType="Gaussian"/>
-                    </Border.Effect>-->
-
-                            <customcontrols:searchBar_btnSearch
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Margin="50,50"/>
-
-                            <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"
-                           FontSize="30"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-                            
-                        </Grid>
-                    </Border>
-                </Border>
-            </DockPanel>
         </Grid>
+
+
+
+
+
+
+
     </Border>
 
 
