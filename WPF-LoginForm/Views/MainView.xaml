@@ -94,8 +94,6 @@
                     <Grid.RowDefinitions>
                         <!--  Control Bar  -->
                         <RowDefinition Height="35" />
-                        <!--  Header / Caption  -->
-                        <RowDefinition Height="35" />
                         <!--  Content section / Child views  -->
                         <RowDefinition Height="*" />
 
@@ -167,36 +165,9 @@
                         <TextBlock x:Name="positionLeft" Text="0" FontSize="30"/>-->
                     </StackPanel>
 
-                    <!--  Header / Caption  -->
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <!--  Caption  -->
-                        <StackPanel
-                            Grid.Column="0"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal">
-
-                            <fa:IconImage
-                                Height="30"
-                                Margin="35,0,10,0"
-                                Foreground="{StaticResource hoverActionbuttons}"
-                                Icon="Home" />
-                            <TextBlock
-                                VerticalAlignment="Center"
-                                FontFamily="{StaticResource SFUIDisplay}"
-                                FontSize="20"
-                                FontWeight="Medium"
-                                Foreground="{StaticResource titleColor1}"
-                                Text="Dashboard" />
-                        </StackPanel>
-                    </Grid>
                     <Grid 
-                        Grid.Row="2"
-                        Margin="20">
+                        Grid.Row="1"
+                        Margin="20,0,20,20">
                         <ContentControl
                             Background="DeepPink">
                             <Border Background="DeepPink"/>
