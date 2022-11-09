@@ -9,8 +9,8 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
     Title="MainWindowView"
-    Width="1700"
-    Height="900"
+    MinWidth="1700"
+    MinHeight="900"
     AllowsTransparency="True"
     Background="Transparent"
     BorderBrush="Transparent"
@@ -19,13 +19,9 @@
     WindowStyle="None"
     mc:Ignorable="d">
 
-
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
-
-
-
 
     <Border
         x:Name="BorderMain"
@@ -197,23 +193,22 @@
                                 Foreground="{StaticResource titleColor1}"
                                 Text="Dashboard" />
                         </StackPanel>
-
-
                     </Grid>
+                    <Grid 
+                        Grid.Row="2"
+                        Margin="20">
+                        <ContentControl
+                            Background="DeepPink">
+                            <Border Background="DeepPink"/>
+
+                        </ContentControl>
+                    </Grid>
+
                 </Grid>
             </Border>
 
         </Grid>
 
-
-
-
-
-
-
     </Border>
-
-
-
 
 </Window>
