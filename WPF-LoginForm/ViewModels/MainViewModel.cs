@@ -5,8 +5,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media.Media3D;
+using Windows.Networking;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WPFBiblioteca.ViewModels
 {
@@ -15,8 +19,69 @@ namespace WPFBiblioteca.ViewModels
         //Fields
         private UserAccountModel _currentUserAccount;
         private IUserRepository userRepository;
+        private UserModel _userModel;
+        private string _id;
+        private string _username;
+        private string _password;
+        private string _name;
+        private string _lastName;
+        private string _userType;
         
+        public string id
+        {
+            get => _id;
+            set 
+            {
+                _id = value;
+                OnPropertyChanged(nameof(id));
+            }
+        }
+        public string username
+        {
+            get => _username;
+            set
+            {
+                _username = value;
+                OnPropertyChanged(nameof(username));
+            }
+        }
+        public string password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged(nameof(password));
+            }
+        }
+        public string name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(name));
+            }
+        }
 
+        public string lastName
+        {
+            get => _lastName;
+            set
+            {
+                _lastName = value;
+                OnPropertyChanged(nameof(lastName));
+            }
+        }
+        public string userType
+        {
+            get => _userType;
+            set
+            {
+                _userType = value;
+                OnPropertyChanged(nameof(userType));
+            }
+        }
         public UserAccountModel CurrentUserAccount
         {
             get
@@ -37,7 +102,24 @@ namespace WPFBiblioteca.ViewModels
             userRepository = new UserRepository();
             CurrentUserAccount = new UserAccountModel();
             LoadCurrentUserData();
+            AddCommand = new ViewModelCommand(ExecuteAddCommand);
         }
+
+        private void ExecuteAddCommand(object obj)
+        {
+            var a = new UserModel
+            {
+                Id = _id,
+               Username = _username,
+               Password = _password,
+               Name = _name,
+               LastName = _lastName,
+               UserType = _userType
+            };
+            userRepository.Add(a);
+        }
+
+        public ICommand AddCommand { get; }
 
         private void LoadCurrentUserData()
         {
