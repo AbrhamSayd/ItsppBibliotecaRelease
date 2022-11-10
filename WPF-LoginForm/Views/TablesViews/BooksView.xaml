@@ -10,8 +10,8 @@
       d:DesignHeight="845" 
       Title="BooksView">
     <Border
-        Background="white"
-        CornerRadius="1">
+    Background="white"
+    CornerRadius="1">
         <Grid>
             <Grid.RowDefinitions>
                 <!--  Control Bar  -->
@@ -29,22 +29,22 @@
 
                 <!--  Caption  -->
                 <StackPanel
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
 
                     <fa:IconImage
-                        Height="30"
-                        Margin="15,0,10,0"
-                        Foreground="{StaticResource hoverActionbuttons}"
-                        Icon="Home" />
+                    Height="30"
+                    Margin="15,0,10,0"
+                    Foreground="{StaticResource hoverActionbuttons}"
+                    Icon="Home" />
                     <TextBlock
-                        VerticalAlignment="Center"
-                        FontFamily="{StaticResource SFUIDisplay}"
-                        FontSize="20"
-                        FontWeight="Medium"
-                        Foreground="{StaticResource titleColor1}"
-                        Text="Dashboard" />
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource SFUIDisplay}"
+                    FontSize="20"
+                    FontWeight="Medium"
+                    Foreground="{StaticResource titleColor1}"
+                    Text="Dashboard" />
                 </StackPanel>
             </Grid>
 

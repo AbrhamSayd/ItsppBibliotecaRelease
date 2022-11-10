@@ -7,19 +7,12 @@
         <GradientStop Color="#7CE2C1" Offset="1.0" />
     </LinearGradientBrush>
     <!--#endregion Login UI Color Region -->
-
     
     <!--  Background Colors  -->
     <LinearGradientBrush x:Key="primaryGradientColor" StartPoint="0,0" EndPoint=".5,.5">
         <GradientStop Color="#7FD7AC" Offset="0.64" />
         <GradientStop Color="#3AA499" Offset="0.14"/>
     </LinearGradientBrush>
-
-
-    <!--  Window Border Colors  -->
-    <Color x:Key="winBorderColor1">#6D2FFF</Color>
-    <Color x:Key="winBorderColor2">#FB539B</Color>
-    <Color x:Key="winBorderColor3">#836EFB</Color>
 
     <!--  Color Palette  -->
     <SolidColorBrush x:Key="primaryBackColor1">#FFFF</SolidColorBrush>
@@ -52,6 +45,7 @@
     <SolidColorBrush x:Key="actionButtons" Color="#B3B3B3" />
     <SolidColorBrush x:Key="hoverActionbuttons" Color="#07A37E" />
     <!--  TextBox Colors  -->
+
     <!--  Etc  -->
 
 </ResourceDictionary>
