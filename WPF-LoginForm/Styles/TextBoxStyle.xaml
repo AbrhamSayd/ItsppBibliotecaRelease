@@ -1,0 +1,73 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Customized Comcobox-->
+    <Style BasedOn="{StaticResource {x:Type ComboBox}}"
+           TargetType="ComboBox"
+           x:Key="CustomCardComboBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="15">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Background" Value="#d9d9d9" />
+        <Setter Property="Foreground" Value="#3f3f3f" />
+        <Setter Property="Padding" Value="15,2,15,2" />
+    </Style>
+
+    <!--Custom TextBox-->
+    <Style BasedOn="{StaticResource {x:Type TextBox}}"
+           TargetType="TextBox"
+           x:Key="CustomCardTextBox">
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="20" />
+            </Style>
+        </Style.Resources>
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Background" Value="#d9d9d9" />
+        <Setter Property="Foreground" Value="#3f3f3f" />
+        <Setter Property="Padding" Value="15,2,15,2" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!--Modern TextBox-->
+    <Style TargetType="{x:Type TextBox}" x:Key="ModernTextbox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border CornerRadius="10" Background="#353340" Width="200" Height="30">
+                        <Grid>
+                            <Rectangle StrokeThickness="1" />
+                            <TextBox Margin="1" BorderThickness="0" Background="Transparent"
+                                     VerticalContentAlignment="Center" Padding="5" Foreground="#CFCFCF"
+                                     x:Name="SearchBox" />
+                            <TextBlock IsHitTestVisible="False" Text="{TemplateBinding ToolTip}"
+                                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"
+                                       FontSize="11" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden" />
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

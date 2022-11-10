@@ -7,7 +7,115 @@
              mc:Ignorable="d"
              d:DesignWidth="1596"
              d:DesignHeight="845">
-    <Grid>
-            
-    </Grid>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock
+                Margin="20"
+                FontFamily="{StaticResource SFUIDisplay}"
+                FontSize="30"
+                FontWeight="SemiBold"
+                Foreground="#31579d"
+                TextAlignment="Left"
+                TextWrapping="Wrap">
+                <Run Language="es-mx"/>
+            </TextBlock>
+        </StackPanel>
+
+        <DockPanel DockPanel.Dock="Bottom">
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <StackPanel Margin="20,50,0,20">
+                            <TextBlock
+                                Padding="20,0,0,0"
+                                Text="Primer Nombre"
+                                Style="{StaticResource FieldsHeaders}" />
+                            <TextBox
+                                Margin="0,5,0,5"
+                                x:Name="TxtFirstName"
+                                Width="300"
+                                Style="{StaticResource CustomCardTextBox}" />
+                        </StackPanel>
+                        <StackPanel Margin="20,50,0,20">
+                            <TextBlock
+                                Padding="20,0,0,0"
+                                Text="Carrera/Academia"
+                                Style="{StaticResource FieldsHeaders}" />
+                            <TextBox
+                                Margin="0,5,0,5"
+                                x:Name="TxtCarrera"
+                                Width="300"
+                                Style="{StaticResource CustomCardTextBox}" />
+                        </StackPanel>
+                        <StackPanel Margin="20,50,0,20">
+                            <TextBlock
+                                Padding="20,0,0,0"
+                                Text="Área"
+                                Style="{StaticResource FieldsHeaders}" />
+                            <TextBox
+                                Margin="0,5,0,5"
+                                x:Name="TxtArea"
+                                Width="300"
+                                Style="{StaticResource CustomCardTextBox}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <StackPanel Margin="50,50,0,20">
+                            <TextBlock
+                                Padding="20,0,0,0"
+                                Text="Apellido"
+                                Style="{StaticResource FieldsHeaders}" />
+                            <TextBox
+                                Margin="0,5,0,5"
+                                x:Name="TxtLastName"
+                                Width="300"
+                                Style="{StaticResource CustomCardTextBox}" />
+                        </StackPanel>
+                        <StackPanel Margin="50,50,0,20">
+                            <TextBlock
+                                Padding="20,0,0,0"
+                                Text="Tipo de empleado"
+                                Style="{StaticResource FieldsHeaders}" />
+                            <TextBox
+                                Margin="0,5,0,5"
+                                x:Name="TxtPuesto"
+                                Width="300"
+                                Style="{StaticResource CustomCardTextBox}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <StackPanel Margin="50,189,0,20">
+                            <TextBlock
+                                Padding="20,0,0,0"
+                                Text="No. control/Emp"
+                                Style="{StaticResource FieldsHeaders}" />
+                            <TextBox
+                                Margin="0,5,0,5"
+                                x:Name="TxtNoControl"
+                                Width="200"
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource CustomCardTextBox}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Button Margin="20" Style="{StaticResource CardButton}">
+                        <TextBlock
+                            Margin="20,6,20,6"
+                            FontSize="20"
+                            Text="Cancelar" />
+                    </Button>
+                    <Button
+                        Margin="20"
+                        Command="{Binding AddCommand}"
+                        Style="{StaticResource CardButton}">
+                        <TextBlock
+                            Margin="20,6,20,6"
+                            FontSize="20"
+                            Text="Aceptar" />
+                    </Button>
+                </DockPanel>
+            </DockPanel>
+        </DockPanel>
+    </DockPanel>
 </UserControl>

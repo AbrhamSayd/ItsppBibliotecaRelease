@@ -18,7 +18,7 @@
                 <!--  Content section / Child views  -->
                 <RowDefinition Height="*" />
                 <!--  Action Buttons  -->
-                <RowDefinition Height="50" />
+                <RowDefinition Height="80" />
             </Grid.RowDefinitions>
 
             <!--  Header / Caption  -->
@@ -37,7 +37,7 @@
                     <fa:IconImage
                         Height="30"
                         Margin="15,0,10,0"
-                        Foreground="{StaticResource hoverActionbuttons}"
+                        Foreground="{StaticResource titleColor1}"
                         Icon="BookOpenReader" />
                     <TextBlock
                         VerticalAlignment="Center"
@@ -49,8 +49,47 @@
                 </StackPanel>
             </Grid>
             <DataGrid Grid.Row="1"/>
-            <Grid Grid.Row="2">
 
+            <Grid Grid.Row="2"
+                  HorizontalAlignment="Right">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!--  BOTON AGREGAR  -->
+                <Button
+                    Grid.Column="2"
+                    Margin="0,5,25,0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding ShowFieldsCommand}"
+                    Style="{StaticResource BtnAgregarStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Style="{StaticResource AddIconStyle}" />
+                        <TextBlock Style="{StaticResource TextBlockAddStyle}" />
+                    </StackPanel>
+                </Button>
+
+                <!--  BOTON Editar  -->
+                <Button Grid.Column="1"
+                    Width="60"
+                    Height="30"
+                    Margin="0,0,15,0"
+                    Style="{StaticResource GridEditButton}">
+                    <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
+                </Button>
+
+                <!--  BOTON Eliminar  -->
+                <Button Grid.Column="0"
+                    Width="60"
+                    Height="30"
+                    Margin="0,0,15,0"
+                    Command="{Binding RemoveCommand}"
+                    Style="{StaticResource GridDeleteButton}">
+                    <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
+                </Button>
 
             </Grid>
         </Grid>
