@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using WPFBiblioteca.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WPFBiblioteca.Repositories
 {
@@ -15,7 +16,20 @@ namespace WPFBiblioteca.Repositories
     {
         public void Add(UserModel userModel)
         {
-            throw new NotImplementedException();
+            using (var connection = GetConnection())
+            using (var command = new MySqlCommand())
+            {
+                connection.OpenAsync();
+                command.Connection = connection;
+                command.CommandText =
+                "insert into users(Username_ID,Username,Password,First_Name,User_Type) values (@username_id,@username,@password,@first_name,@user_type)";
+                command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = int.Parse(userModel.Id);
+                command.Parameters.Add("@username", MySqlDbType.VarChar).Value = userModel.Username;
+                command.Parameters.Add("@password", MySqlDbType.VarChar).Value = userModel.Password;
+                command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.Name;
+                command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
+                command.ExecuteScalar();
+            }
         }
 
         public bool AuthenticateUser(NetworkCredential credential)
@@ -24,7 +38,7 @@ namespace WPFBiblioteca.Repositories
             using (var connection = GetConnection())
             using (var command = new MySqlCommand())
             {
-                connection.Open();//abrimos la connecion con MySQL
+                connection.OpenAsync();//abrimos la connecion con MySQL
                 command.Connection = connection;//asignamos al comando la coneccion a mysql
                 command.CommandText = "select * from user where Username=@username and password=@password";//Query para evualar nuestro nombre de usuario y contraseñá
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = credential.UserName;//definimos parametro de username
