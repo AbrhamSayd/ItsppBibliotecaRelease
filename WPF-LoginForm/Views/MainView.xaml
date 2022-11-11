@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    xmlns:local="clr-namespace:WPFBiblioteca.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
+    xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
+    xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
     Title="MainWindowView"
     MinWidth="1700"
     MinHeight="900"
@@ -18,17 +18,20 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
-
-    <Window.DataContext>
-        <viewModel:MainViewModel />
-    </Window.DataContext>
+    <ContentControl.Resources>
+        <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
+            <tablesViews:UsersView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
+                <tablesViews:BooksView />
+            </DataTemplate>
+    </ContentControl.Resources>
 
     <Border
         x:Name="BorderMain"
         Background="{StaticResource primaryGradientColor}"
         BorderBrush="Transparent"
         CornerRadius="50">
-
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -149,7 +152,9 @@
                             FontSize="22"
                             FontWeight="Bold"
                             Foreground="#FF00785C"
-                            TextWrapping="Wrap"><Run Language="es-mx" Text="10/22/2022" /></TextBlock>
+                            TextWrapping="Wrap">
+                            <Run Language="es-mx" Text="10/22/2022" />
+                        </TextBlock>
                         <TextBlock
                             Margin="30,0,0,0"
                             HorizontalAlignment="Stretch"
@@ -158,21 +163,18 @@
                             FontSize="20"
                             FontWeight="UltraLight"
                             Foreground="{StaticResource titleColor2}"
-                            TextWrapping="Wrap"><Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora." /></TextBlock>
+                            TextWrapping="Wrap">
+                            <Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora." />
+                        </TextBlock>
 
                         <!--  Testing TestBlocks for positions  -->
                         <!--<TextBlock x:Name="positionTop" Text="0" FontSize="30" Margin="10,0,10,0"/>
                         <TextBlock x:Name="positionLeft" Text="0" FontSize="30"/>-->
                     </StackPanel>
 
-                    <Grid 
-                        Grid.Row="1"
-                        Margin="20,0,20,20">
-                        <ContentControl
-                            Background="DeepPink">
-                            <Border Background="DeepPink"/>
-
-                        </ContentControl>
+                    <!--  Content control  -->
+                    <Grid Grid.Row="1" Margin="20,0,20,20">
+                        <ContentControl Content="{Binding CurrentViewModel}" />
                     </Grid>
 
                 </Grid>

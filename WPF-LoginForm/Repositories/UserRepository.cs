@@ -40,7 +40,7 @@ namespace WPFBiblioteca.Repositories
             {
                 connection.OpenAsync();//abrimos la connecion con MySQL
                 command.Connection = connection;//asignamos al comando la coneccion a mysql
-                command.CommandText = "select * from user where Username=@username and password=@password";//Query para evualar nuestro nombre de usuario y contraseñá
+                command.CommandText = "select * from users where Username=@username and password=@password";//Query para evualar nuestro nombre de usuario y contraseñá
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = credential.UserName;//definimos parametro de username
                 command.Parameters.Add("@password", MySqlDbType.VarChar).Value = credential.Password;//definimos parametro de password
                 validUser = command.ExecuteScalar() == null ? false : true;
@@ -68,7 +68,7 @@ namespace WPFBiblioteca.Repositories
             {
                 connection.Open();//abrimos la connecion con MySQL
                 command.Connection = connection;//asignamos al comando la coneccion a mysql
-                command.CommandText = "select *from user where username=@username"; //definimos nuestro query
+                command.CommandText = "select *from users where username=@username"; //definimos nuestro query
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = username;//definimos parametro de username
                 using (var reader = command.ExecuteReader())
                 {
