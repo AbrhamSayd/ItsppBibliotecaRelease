@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
@@ -21,10 +22,10 @@
     <ContentControl.Resources>
         <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
             <tablesViews:UsersView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
-                <tablesViews:BooksView />
-            </DataTemplate>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
+            <tablesViews:BooksView />
+        </DataTemplate>
     </ContentControl.Resources>
 
     <Border
@@ -43,16 +44,23 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <!--  Navigation Menu  -->
                 <StackPanel Grid.Row="0" Margin="0,20,10,0">
                     <!--  CurrentUserSesion  -->
-                    <RadioButton Style="{StaticResource menuButtonStyleV2}" Tag="{StaticResource primarySolidColor}" BorderThickness="0">
+                    <RadioButton
+                        BorderThickness="0"
+                        Style="{StaticResource menuButtonStyleV2}"
+                        Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserAlt" Style="{StaticResource menuButtonIcon}" Width="65" Height="65"/>
+                            <fa:IconImage
+                                Width="65"
+                                Height="65"
+                                Icon="UserAlt"
+                                Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                     </RadioButton>
 
@@ -68,12 +76,18 @@
                             <fa:IconImage Icon="Portrait" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
+                    <RadioButton
+                        Command="{Binding}"
+                        Style="{StaticResource menuButtonStyle}"
+                        Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="HomeAlt" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
+                    <RadioButton
+                        Command="{Binding NavigateUsersCommand}"
+                        Style="{StaticResource menuButtonStyle}"
+                        Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
@@ -85,8 +99,12 @@
                     </RadioButton>
                 </StackPanel>
 
-                <RadioButton Grid.Row="1" Margin="0,0,0,0" Style="{StaticResource menuButtonStyleV2}" Tag="{StaticResource primarySolidColor}">
-                    <fa:IconImage Icon="ArrowRightFromBracket" Style="{StaticResource menuButtonIcon}"/>
+                <RadioButton
+                    Grid.Row="1"
+                    Margin="0,0,0,0"
+                    Style="{StaticResource menuButtonStyleV2}"
+                    Tag="{StaticResource primarySolidColor}">
+                    <fa:IconImage Icon="ArrowRightFromBracket" Style="{StaticResource menuButtonIcon}" />
                 </RadioButton>
             </Grid>
 
@@ -181,28 +199,7 @@
                                 Icon="CircleXmark"
                                 Style="{StaticResource controlButtonIcon}" />
                         </Button>
-                        <TextBlock
-                            Margin="30,0,0,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontFamily="{DynamicResource SFUIDisplay}"
-                            FontSize="22"
-                            FontWeight="Bold"
-                            Foreground="#FF00785C"
-                            TextWrapping="Wrap">
-                            <Run Language="es-mx" Text="10/22/2022" />
-                        </TextBlock>
-                        <TextBlock
-                            Margin="30,0,0,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontFamily="{DynamicResource SFUIUltraLight}"
-                            FontSize="20"
-                            FontWeight="UltraLight"
-                            Foreground="{StaticResource titleColor2}"
-                            TextWrapping="Wrap">
-                            <Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora." />
-                        </TextBlock>
+
 
                         <!--  Testing TestBlocks for positions  -->
                         <!--<TextBlock x:Name="positionTop" Text="0" FontSize="30" Margin="10,0,10,0"/>

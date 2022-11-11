@@ -5,6 +5,7 @@ using System.Windows;
 
 using System.Windows.Input;
 using System.Windows.Interop;
+using WPFBiblioteca.ViewModels;
 
 namespace WPFBiblioteca.Views
 {
@@ -16,7 +17,8 @@ namespace WPFBiblioteca.Views
         public MainView()
         {
             InitializeComponent();
-            
+            DataContext = new MainViewModel();
+
             //SOLO PRUEBAS CAMBIARA LUEGO
         }
         

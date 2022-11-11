@@ -8,8 +8,10 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using Windows.Networking;
+using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
+using WPFBiblioteca.Stores;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WPFBiblioteca.ViewModels
@@ -95,14 +97,18 @@ namespace WPFBiblioteca.ViewModels
                 OnPropertyChanged(nameof(CurrentUserAccount));
             }
         }
-
-        public MainViewModel()
-        {
-           
+        public MainViewModel(){
+            AddCommand = new ViewModelCommand(ExecuteAddCommand);
             userRepository = new UserRepository();
             CurrentUserAccount = new UserAccountModel();
             LoadCurrentUserData();
-            AddCommand = new ViewModelCommand(ExecuteAddCommand);
+        }
+        public MainViewModel(NavigationStore navigationStore)
+        {
+            
+            NavigateUsersCommand =
+                new NavigateCommand<UsersViewModel>(navigationStore, () => new UsersViewModel(navigationStore));
+            
         }
 
         private void ExecuteAddCommand(object obj)
@@ -120,6 +126,7 @@ namespace WPFBiblioteca.ViewModels
         }
 
         public ICommand AddCommand { get; }
+        public ICommand NavigateUsersCommand { get; }
 
         private void LoadCurrentUserData()
         {

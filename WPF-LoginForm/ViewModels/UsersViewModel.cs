@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
+using WPFBiblioteca.Stores;
 
 
 namespace WPFBiblioteca.ViewModels
@@ -21,7 +22,7 @@ namespace WPFBiblioteca.ViewModels
         //Icommands
         public ICommand AddCommand { get; }
         //constructor
-        public UsersViewModel( )
+        public UsersViewModel(NavigationStore navigationStore)
         {
             _userRepository = new UserRepository();
             AddCommand = new ViewModelCommand(ExecuteAddCommand);

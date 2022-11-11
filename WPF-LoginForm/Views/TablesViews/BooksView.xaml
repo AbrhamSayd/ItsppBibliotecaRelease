@@ -34,14 +34,14 @@
                     <fa:IconImage
                         Height="30"
                         Margin="15,0,10,0"
-                        Foreground="{StaticResource titleColor1}"
+                        Foreground="{StaticResource FieldsHeadersColor}"
                         Icon="Home" />
                     <TextBlock
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource SFUIDisplay}"
                         FontSize="20"
                         FontWeight="Medium"
-                        Foreground="{StaticResource titleColor1}"
+                        Foreground="{StaticResource FieldsHeadersColor}"
                         Text="Dashboard" />
                 </StackPanel>
             </Grid>
