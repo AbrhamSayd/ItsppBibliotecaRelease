@@ -25,26 +25,49 @@
         <DockPanel DockPanel.Dock="Bottom">
             <DockPanel>
                 <DockPanel DockPanel.Dock="Top">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                    <StackPanel Orientation="Vertical" Height="500">
                         <StackPanel Margin="20,50,0,20">
                             <TextBlock
                                 Padding="20,0,0,0"
-                                Text="Primer Nombre"
+                                Text="ID"
                                 Style="{StaticResource FieldsHeaders}" />
                             <TextBox
                                 Margin="0,5,0,5"
-                                x:Name="TxtFirstName"
+                                x:Name="TxtId"
                                 Width="300"
                                 Style="{StaticResource CustomCardTextBox}" />
                         </StackPanel>
-                        <StackPanel Margin="20,50,0,20">
+                        <StackPanel Margin="20,150,0,20">
                             <TextBlock
                                 Padding="20,0,0,0"
                                 Text="Carrera/Academia"
                                 Style="{StaticResource FieldsHeaders}" />
                             <TextBox
-                                Margin="0,5,0,5"
                                 x:Name="TxtCarrera"
+                                Width="300"
+                                Style="{StaticResource CustomCardTextBox}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <StackPanel Margin="50,50,0,20">
+                            <TextBlock
+                                Padding="20,0,0,0"
+                                Text="Nombre"
+                                Style="{StaticResource FieldsHeaders}" />
+                            <TextBox
+                                Margin="0,5,0,5"
+                                x:Name="TxtName"
+                                Width="300"
+                                Style="{StaticResource CustomCardTextBox}" />
+                        </StackPanel>
+                        <StackPanel Margin="50,150,0,20">
+                            <TextBlock
+                                Padding="20,0,0,0"
+                                Text="Tipo de usuario"
+                                Style="{StaticResource FieldsHeaders}" />
+                            <TextBox
+                                Margin="0,5,0,5"
+                                x:Name="TxtTipo"
                                 Width="300"
                                 Style="{StaticResource CustomCardTextBox}" />
                         </StackPanel>
@@ -57,24 +80,12 @@
                                 Style="{StaticResource FieldsHeaders}" />
                             <TextBox
                                 Margin="0,5,0,5"
-                                x:Name="TxtLastName"
-                                Width="300"
+                                x:Name="TxtAp"
+                                Width="200"
+                                HorizontalAlignment="Left"
                                 Style="{StaticResource CustomCardTextBox}" />
                         </StackPanel>
-                        <StackPanel Margin="50,50,0,20">
-                            <TextBlock
-                                Padding="20,0,0,0"
-                                Text="Tipo de usuario"
-                                Style="{StaticResource FieldsHeaders}" />
-                            <TextBox
-                                Margin="0,5,0,5"
-                                x:Name="TxtPuesto"
-                                Width="300"
-                                Style="{StaticResource CustomCardTextBox}" />
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                        <StackPanel Margin="50,189,0,20">
+                        <StackPanel Margin="50,150,0,20">
                             <TextBlock
                                 Padding="20,0,0,0"
                                 Text="No. control/empleado"
