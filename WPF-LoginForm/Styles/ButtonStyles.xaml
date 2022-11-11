@@ -2,19 +2,20 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
+
     <!--  Menu button  -->
-    <Style x:Key="menuButton" TargetType="RadioButton">
-
-
+    <Style x:Key="menuButtonStyle" TargetType="RadioButton">
+        <Setter Property="GroupName" Value="ViewsButtonGroup"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Template">
+        <Setter Property="Foreground" Value="{StaticResource MenuForegroundColor}"/>
+            <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Border
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="5,0,0,0"
+                        BorderThickness="10,0,0,0"
                         Margin="0,0,0,60">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
@@ -25,25 +26,39 @@
         <!--  Button Style on hover  -->
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Margin" Value="5,0,0,0" />
-                <Setter Property="BorderBrush" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Foreground" Value="{StaticResource OverMenuButtonBorderColor}"/>
             </Trigger>
-
 
             <!--  Activated button style  -->
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Margin" Value="5,0,0,0" />
-                <Setter Property="BorderBrush" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="BorderBrush" Value="{StaticResource OverMenuButtonBorderColor}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--  Menu button Style For CurrentUser and SignOut -->
+    <Style x:Key="menuButtonStyleV2" TargetType="RadioButton" BasedOn="{StaticResource menuButtonStyle}">
+        <!--  Button Style on hover  -->
+        <Style.Triggers>
+            <!--  Activated button style  -->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="BorderBrush" Value="Transparent" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <!--  Menu button icon  -->
     <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
-        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Margin" Value="20,0,20,0"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect  BlurRadius="4" ShadowDepth="2.5" Color="Gray" Opacity="25" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!--  Control bar button  -->
@@ -51,7 +66,7 @@
         <!--  Normal button style  -->
         <Setter Property="Width" Value="35" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{StaticResource actionButtons}" />
+        <Setter Property="Foreground" Value="{StaticResource actionButtonsColor}" />
         <Setter Property="Margin" Value="10,5,0,0" />
         <Setter Property="Template">
 
@@ -84,7 +99,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Width" Value="25" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{StaticResource actionButtons}" />
+        <Setter Property="Foreground" Value="{StaticResource actionButtonsColor}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -122,7 +137,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource SFUIDisplay}" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="Background" Value="#1e355e" />
+        <Setter Property="Background" Value="{StaticResource SecundarySolidColor}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -136,8 +151,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="#1e355e" />
-                <Setter Property="Background" Value="White" />
+                <Setter Property="Foreground" Value="{StaticResource SecundarySolidColor}" />
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderThickness" Value="5"/>
+                <Setter Property="BorderBrush" Value="{StaticResource primaryGradientColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -33,60 +33,65 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <!--  Navigation Menu  -->
-                <ColumnDefinition Width="64" />
+                <ColumnDefinition Width="Auto" />
 
                 <!--  Content Menu  -->
                 <ColumnDefinition Width="*" />
-
             </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <!--  Navigation Menu  -->
-            <Border Grid.Column="0" CornerRadius="50,50,50,50">
-                <StackPanel>
-                    <!--  Logo  -->
-                    <StackPanel>
-                        <fa:IconImage
-                            Width="40"
-                            Height="40"
-                            Margin="0,42,0,137"
-                            Foreground="{StaticResource primaryBackColor1}"
-                            Icon="UserAlt" />
-                    </StackPanel>
+                <!--  Navigation Menu  -->
+                <StackPanel Grid.Row="0" Margin="0,20,10,0">
+                    <!--  CurrentUserSesion  -->
+                    <RadioButton Style="{StaticResource menuButtonStyleV2}" Tag="{StaticResource primarySolidColor}" BorderThickness="0">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserAlt" Style="{StaticResource menuButtonIcon}" Width="65" Height="65"/>
+                        </StackPanel>
+                    </RadioButton>
 
                     <!--  Menu Buttons  -->
-                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BookOpen" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                         <!--  Menu Buttons  -->
                     </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Portrait" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="HomeAlt" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource primaryBackColor1}">
+                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BookBookmark" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                     </RadioButton>
                 </StackPanel>
-            </Border>
+
+                <RadioButton Grid.Row="1" Margin="0,0,0,0" Style="{StaticResource menuButtonStyleV2}" Tag="{StaticResource primarySolidColor}">
+                    <fa:IconImage Icon="ArrowRightFromBracket" Style="{StaticResource menuButtonIcon}"/>
+                </RadioButton>
+            </Grid>
+
             <!--  Main Section  -->
             <Border
                 x:Name="BorderContent"
                 Grid.Column="1"
-                Background="{StaticResource primaryBackColor1}"
+                Background="{StaticResource primarySolidColor}"
                 CornerRadius="50,50,50,50">
 
                 <Grid>
@@ -96,40 +101,48 @@
                         <RowDefinition Height="35" />
                         <!--  Content section / Child views  -->
                         <RowDefinition Height="*" />
-
                     </Grid.RowDefinitions>
+
                     <!--  control bar  -->
                     <StackPanel
                         x:Name="pnlcontrolBar"
                         Grid.Row="0"
-                        Margin="0,0,15,0"
+                        Margin="0,0,25,0"
+                        HorizontalAlignment="Right"
                         Background="Transparent"
-                        FlowDirection="RightToLeft"
                         MouseEnter="pnlcontrolBar_MouseEnter"
                         MouseLeftButtonDown="pnlcontrolBar_MouseLeftButtonDown"
                         Orientation="Horizontal">
-                        <Button
-                            x:Name="btnClose"
-                            Click="btnClose_Click"
-                            Style="{StaticResource controlButton}"
-                            Tag="{StaticResource color10}">
-                            <fa:IconImage
-                                Width="25"
-                                Height="25"
-                                Icon="CircleXmark"
-                                Style="{StaticResource controlButtonIcon}" />
-                        </Button>
-                        <Button
-                            x:Name="btnMaximize"
-                            Click="btnMaximize_Click"
-                            Style="{StaticResource controlButton}"
-                            Tag="{StaticResource color9}">
-                            <fa:IconImage
-                                Width="25"
-                                Height="25"
-                                Icon="CircleUp"
-                                Style="{StaticResource controlButtonIcon}" />
-                        </Button>
+
+                        <TextBlock
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            FontFamily="{DynamicResource SFUIUltraLight}"
+                            FontSize="20"
+                            FontWeight="UltraLight"
+                            Foreground="{StaticResource LocationTitleColor}"
+                            TextWrapping="Wrap"><Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora" /></TextBlock>
+                        <TextBlock
+                            Margin="40,0,0,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            FontFamily="{DynamicResource SFUIDisplay}"
+                            FontSize="22"
+                            FontWeight="Bold"
+                            Foreground="{StaticResource DateTextUIColor}"
+                            TextWrapping="Wrap"><Run Language="es-mx" Text="10:40 PM" /></TextBlock>
+
+                        <TextBlock
+                            Margin="15,0,50,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            FontFamily="{DynamicResource SFUIDisplay}"
+                            FontSize="22"
+                            FontWeight="Bold"
+                            Foreground="{StaticResource DateTextUIColor}"
+                            TextWrapping="Wrap"><Run Language="es-mx" Text="10/22/2022" /></TextBlock>
+
                         <Button
                             x:Name="btnMinimize"
                             Click="btnMinimize_Click"
@@ -141,24 +154,30 @@
                                 Icon="CircleDown"
                                 Style="{StaticResource controlButtonIcon}" />
                         </Button>
-                        <TextBlock
-                            Margin="30,0,0,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontFamily="{DynamicResource SFUIDisplay}"
-                            FontSize="22"
-                            FontWeight="Bold"
-                            Foreground="#FF00785C"
-                            TextWrapping="Wrap"><Run Language="es-mx" Text="10/22/2022" /></TextBlock>
-                        <TextBlock
-                            Margin="30,0,0,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontFamily="{DynamicResource SFUIUltraLight}"
-                            FontSize="20"
-                            FontWeight="UltraLight"
-                            Foreground="{StaticResource titleColor2}"
-                            TextWrapping="Wrap"><Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora." /></TextBlock>
+
+                        <Button
+                            x:Name="btnMaximize"
+                            Click="btnMaximize_Click"
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource color9}">
+                            <fa:IconImage
+                                Width="25"
+                                Height="25"
+                                Icon="CircleUp"
+                                Style="{StaticResource controlButtonIcon}" />
+                        </Button>
+
+                        <Button
+                            x:Name="btnClose"
+                            Click="btnClose_Click"
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource color10}">
+                            <fa:IconImage
+                                Width="25"
+                                Height="25"
+                                Icon="CircleXmark"
+                                Style="{StaticResource controlButtonIcon}" />
+                        </Button>
 
                         <!--  Testing TestBlocks for positions  -->
                         <!--<TextBlock x:Name="positionTop" Text="0" FontSize="30" Margin="10,0,10,0"/>

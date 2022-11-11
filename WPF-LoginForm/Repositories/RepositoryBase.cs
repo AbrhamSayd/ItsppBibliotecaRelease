@@ -20,10 +20,10 @@ namespace WPFBiblioteca.Repositories
             //password = "XgIn3rTTb4KH4I6wIQ5G";
             //BaseDeDatosItspp22.
             string server, database, uid, password;// se establece coneccion a base de datos externa,.
-            server = "localhost";
-            database = "newschema";
-            uid = "root";
-            password = "itspp";
+            server = "bjleh1b6zqctbrjujbr0-mysql.services.clever-cloud.com";
+            database = "bjleh1b6zqctbrjujbr0";
+            uid = "uapdgnuxdwlim1mi";
+            password = "XgIn3rTTb4KH4I6wIQ5G";
             _connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
             
         }

@@ -12,9 +12,10 @@
             <TextBlock
                 Margin="20"
                 FontFamily="{StaticResource SFUIDisplay}"
-                FontSize="30"
+                FontSize="48"
+                Text="Usuarios"
                 FontWeight="SemiBold"
-                Foreground="#31579d"
+                Foreground="{StaticResource ChildTitleColor}"
                 TextAlignment="Left"
                 TextWrapping="Wrap">
                 <Run Language="es-mx"/>
@@ -47,17 +48,6 @@
                                 Width="300"
                                 Style="{StaticResource CustomCardTextBox}" />
                         </StackPanel>
-                        <StackPanel Margin="20,50,0,20">
-                            <TextBlock
-                                Padding="20,0,0,0"
-                                Text="Área"
-                                Style="{StaticResource FieldsHeaders}" />
-                            <TextBox
-                                Margin="0,5,0,5"
-                                x:Name="TxtArea"
-                                Width="300"
-                                Style="{StaticResource CustomCardTextBox}" />
-                        </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                         <StackPanel Margin="50,50,0,20">
@@ -74,7 +64,7 @@
                         <StackPanel Margin="50,50,0,20">
                             <TextBlock
                                 Padding="20,0,0,0"
-                                Text="Tipo de empleado"
+                                Text="Tipo de usuario"
                                 Style="{StaticResource FieldsHeaders}" />
                             <TextBox
                                 Margin="0,5,0,5"
@@ -87,7 +77,7 @@
                         <StackPanel Margin="50,189,0,20">
                             <TextBlock
                                 Padding="20,0,0,0"
-                                Text="No. control/Emp"
+                                Text="No. control/empleado"
                                 Style="{StaticResource FieldsHeaders}" />
                             <TextBox
                                 Margin="0,5,0,5"
@@ -106,9 +96,9 @@
                             Text="Cancelar" />
                     </Button>
                     <Button
+                        Style="{StaticResource CardButton}"
                         Margin="20"
-                        Command="{Binding AddCommand}"
-                        Style="{StaticResource CardButton}">
+                        Command="{Binding AddCommand}">
                         <TextBlock
                             Margin="20,6,20,6"
                             FontSize="20"
