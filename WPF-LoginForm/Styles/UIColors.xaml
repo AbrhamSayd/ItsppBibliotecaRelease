@@ -1,22 +1,31 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--#region Login UI Color Region -->
+
     <!--  Background Colors  -->
     <LinearGradientBrush x:Key="BordersLoginGradient" StartPoint="0,0" EndPoint="1,1">
         <GradientStop Color="#FF7FD7AC" Offset="0.0" />
         <GradientStop Color="#7CE2C1" Offset="1.0" />
     </LinearGradientBrush>
+
+
+
+
+
+
     <!--#endregion Login UI Color Region -->
-    
-    <!--  Background Colors  -->
+
+
+    <!--#region Main UI Color Region -->
+
+    <!--  Color Palette  -->
     <LinearGradientBrush x:Key="primaryGradientColor" StartPoint="0,0" EndPoint=".5,.5">
         <GradientStop Color="#7FD7AC" Offset="0.64" />
         <GradientStop Color="#3AA499" Offset="0.14"/>
     </LinearGradientBrush>
 
-    <!--  Color Palette  -->
-    <SolidColorBrush x:Key="primaryBackColor1">#FFFF</SolidColorBrush>
-    <SolidColorBrush x:Key="color1" Color="#E285DE" />
+    <SolidColorBrush x:Key="primarySolidColor" Color="White"/>
+    <SolidColorBrush x:Key="SecundarySolidColor" Color="#00785C" />
     <SolidColorBrush x:Key="color2" Color="#784DFD" />
     <SolidColorBrush x:Key="color3" Color="#4ADAEC" />
     <SolidColorBrush x:Key="color4" Color="#FB539B" />
@@ -29,23 +38,28 @@
 
 
     <!--  Font Colors  -->
-    <SolidColorBrush x:Key="titleColor1" Color="#00785C" />
-    <SolidColorBrush x:Key="titleColor2" Color="#FF00785C" />
-    <SolidColorBrush x:Key="titleColor3" Color="#BCBEE0" />
-    <SolidColorBrush x:Key="plainTextColor1" Color="#07A37E" />
-    <SolidColorBrush x:Key="plainTextColor2" Color="#1E1E1E" />
-    <SolidColorBrush x:Key="plainTextColor3" Color="#7376BD" />
+    <SolidColorBrush x:Key="ChildTitleColor" Color="#00785C" />
+    <SolidColorBrush x:Key="FieldsHeadersColor" Color="#00785C" />
+    <SolidColorBrush x:Key="LocationTitleColor" Color="#00785C" />
+    <SolidColorBrush x:Key="DateTextUIColor" Color="#00785C" />
+    <SolidColorBrush x:Key="TimeTextUIColor" Color="#00785C" />
 
-    <!--  Panel Colors  -->
-    <SolidColorBrush x:Key="panelColor" Color="#200F53" />
-    <SolidColorBrush x:Key="panelOverColor" Color="#281269" />
-    <SolidColorBrush x:Key="panelActiveColor" Color="#2B1372" />
+    <!-- Side panel Button Colors  -->
+    <SolidColorBrush x:Key="MenuForegroundColor" Color="White" />
+    <SolidColorBrush x:Key="OverMenuButtonBorderColor" Color="#016283"/>
 
-    <!--  Button Colors  -->
-    <SolidColorBrush x:Key="actionButtons" Color="#B3B3B3" />
-    <SolidColorBrush x:Key="hoverActionbuttons" Color="#07A37E" />
+    <!-- Child Views Button Colors  -->
+    <SolidColorBrush x:Key="actionButtonsColor" Color="#00785C" />
+    <LinearGradientBrush x:Key="borderactionButtonsColor" StartPoint="0,0" EndPoint=".5,.5">
+        <GradientStop Color="#7FD7AC" Offset="0.64" />
+        <GradientStop Color="#3AA499" Offset="0.14"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="hoverActionbuttonsColor" Color="#07A37E" />
+    <SolidColorBrush x:Key="borderhoverActionbuttonsColor" Color="#07A37E" />
+
     <!--  TextBox Colors  -->
 
     <!--  Etc  -->
 
+    <!--#endregion Main UI Color Region -->
 </ResourceDictionary>
