@@ -40,10 +40,7 @@ namespace WPFBiblioteca.ViewModels
 
         public SecureString Password
         {
-            get
-            {
-                return _password;
-            }
+            get => _password;
 
             set
             {
@@ -54,10 +51,7 @@ namespace WPFBiblioteca.ViewModels
 
         public string ErrorMessage
         {
-            get
-            {
-                return _errorMessage;
-            }
+            get => _errorMessage;
 
             set
             {
@@ -68,10 +62,7 @@ namespace WPFBiblioteca.ViewModels
 
         public bool IsViewVisible
         {
-            get
-            {
-                return _isViewVisible;
-            }
+            get => _isViewVisible;
 
             set
             {

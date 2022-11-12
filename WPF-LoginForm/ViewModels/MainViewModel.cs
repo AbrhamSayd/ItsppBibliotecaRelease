@@ -8,8 +8,10 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using Windows.Networking;
+using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
+using WPFBiblioteca.Services;
 using WPFBiblioteca.Stores;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -22,7 +24,7 @@ namespace WPFBiblioteca.ViewModels
         private UserAccountModel _currentUserAccount;
         private IUserRepository userRepository;
         private UserModel _userModel;
-        private string _id;
+        private int _id;
         private string _username;
         private string _password;
         private string _name;
@@ -33,7 +35,7 @@ namespace WPFBiblioteca.ViewModels
 
         
         
-        public string id
+        public int id
         {
             get => _id;
             set 
@@ -106,44 +108,26 @@ namespace WPFBiblioteca.ViewModels
         
         public MainViewModel()
         {
+            
             _navigationStore = new NavigationStore();
             if (_navigationStore.CurrentViewModel != null) _navigationStore.CurrentViewModel = new MainViewModel();
-            NavigateUsersCommand = new ViewModelCommand(ExecuteNavigateUsersCommand);
-            AddCommand = new ViewModelCommand(ExecuteAddCommand);
             userRepository = new UserRepository();
             CurrentUserAccount = new UserAccountModel();
             LoadCurrentUserData();
+            NavigateUsersCommand = new NavigateCommand<UsersViewModel>(new NavigationService<UsersViewModel>(_navigationStore, () => new UsersViewModel(_navigationStore)));
+
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
 
         }
+
 
         private void OnCurrentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));
         }
 
-        private void ExecuteNavigateUsersCommand(object obj)
-        {
-            _navigationStore.CurrentViewModel = new UsersViewModel();
-        }
-
-
-        private void ExecuteAddCommand(object obj)
-        {
-            var a = new UserModel
-            {
-                Id = _id,
-               Username = _username,
-               Password = _password,
-               Name = _name,
-               LastName = _lastName,
-               UserType = _userType
-            };
-            userRepository.Add(a);
-        }
-
-        public ICommand AddCommand { get; }
+        
         public ICommand NavigateUsersCommand { get; }
         
 

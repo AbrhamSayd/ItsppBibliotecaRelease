@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,20 @@ namespace WPFBiblioteca.Views.FieldsViews
         public UsersFieldsView()
         {
             InitializeComponent();
+        }
+
+        private void TxtId_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+        private void TextStringOnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z]"))
+            {
+                MessageBox.Show("Solo caracteres alfanumericos","Error de input");
+                e.Handled = true;
+            }
+
         }
     }
 }

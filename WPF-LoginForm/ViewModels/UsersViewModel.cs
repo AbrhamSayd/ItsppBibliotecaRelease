@@ -1,6 +1,8 @@
 ﻿using System.Windows.Input;
+using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
+using WPFBiblioteca.Services;
 using WPFBiblioteca.Stores;
 using WPFBiblioteca.ViewModels.Fields;
 using WPFBiblioteca.Views.FieldsViews;
@@ -12,108 +14,22 @@ namespace WPFBiblioteca.ViewModels
     {
         //fields
         private readonly IUserRepository _userRepository;
-        private UserModel _userModel;
+        
         private readonly NavigationStore _navigationStore;
-        private string _id;
-        private string _username;
-        private string _password;
-        private string _name;
-        private string _lastName;
-        private string _userType;
+        
 
         //Icommands
-        public ICommand AddCommand { get; }
+        
         public ICommand NavigateAddCommand { get; }
         
-
         //constructor
-        public UsersViewModel()
+        public UsersViewModel(NavigationStore navigationStore)
         {
-            _navigationStore = new NavigationStore();
-            _userRepository = new UserRepository();
-            AddCommand = new ViewModelCommand(ExecuteAddCommand);
-            NavigateAddCommand = new ViewModelCommand(ExecuteNavigateAddCommand);
-            
-        }
-
-        
-        
-
-        private void ExecuteNavigateAddCommand(object obj)
-        {
-            _navigationStore.CurrentViewModel = new UserFieldsViewModel();
+            NavigateAddCommand = new NavigateCommand<UserFieldsViewModel>(new NavigationService<UserFieldsViewModel>(navigationStore, () => new UserFieldsViewModel(navigationStore)));
         }
 
         //methods
-        private void ExecuteAddCommand(object obj)
-        {
-            var user = new UserModel
-            {
-                Id = _id,
-                Username = _username,
-                Password = _password,
-                Name = _name,
-                LastName = _lastName,
-                UserType = _userType
-            };
-            _userRepository.Add(user);
-        }
 
-        //properties
-        public string Id
-        {
-            get => _id;
-            set
-            {
-                _id = value;
-                OnPropertyChanged(nameof(Id));
-            }
-        }
-        public string Username
-        {
-            get => _username;
-            set
-            {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
-            }
-        }
-        public string Password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
-            }
-        }
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
-
-        public string LastName
-        {
-            get => _lastName;
-            set
-            {
-                _lastName = value;
-                OnPropertyChanged(nameof(LastName));
-            }
-        }
-        public string UserType
-        {
-            get => _userType;
-            set
-            {
-                _userType = value;
-                OnPropertyChanged(nameof(UserType));
-            }
-        }
+        //Properties
     }
 }

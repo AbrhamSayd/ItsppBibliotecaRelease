@@ -23,7 +23,7 @@ namespace WPFBiblioteca.Repositories
                 command.Connection = connection;
                 command.CommandText =
                 "insert into users(Username_ID,Username,Password,First_Name,User_Type) values (@username_id,@username,@password,@first_name,@user_type)";
-                command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = int.Parse(userModel.Id);
+                command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = userModel.Id;
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = userModel.Username;
                 command.Parameters.Add("@password", MySqlDbType.VarChar).Value = userModel.Password;
                 command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.Name;
@@ -76,7 +76,7 @@ namespace WPFBiblioteca.Repositories
                     {
                         user = new UserModel()
                         {
-                            Id = reader[0].ToString(),
+                            Id = int.Parse(reader[0].ToString()),
                             Username = reader[1].ToString(),
                             Password = string.Empty,
                             Name = reader[3].ToString(),
