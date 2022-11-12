@@ -9,6 +9,8 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
+    xmlns:fields="clr-namespace:WPFBiblioteca.ViewModels.Fields"
+    xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     Title="MainWindowView"
     MinWidth="1700"
     MinHeight="900"
@@ -19,12 +21,18 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
     <ContentControl.Resources>
         <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
             <tablesViews:UsersView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
             <tablesViews:BooksView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type fields:UserFieldsViewModel}">
+            <fieldsViews:UsersFieldsView />
         </DataTemplate>
     </ContentControl.Resources>
 

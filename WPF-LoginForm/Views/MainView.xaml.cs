@@ -17,8 +17,6 @@ namespace WPFBiblioteca.Views
         public MainView()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
-
             //SOLO PRUEBAS CAMBIARA LUEGO
         }
         
@@ -54,10 +52,6 @@ namespace WPFBiblioteca.Views
             {
                 BorderContent.CornerRadius = new CornerRadius(50, 0, 0, 50);
             }
-
-
-
-
 
         }
         

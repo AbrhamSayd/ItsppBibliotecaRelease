@@ -2,6 +2,8 @@
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
 using WPFBiblioteca.Stores;
+using WPFBiblioteca.ViewModels.Fields;
+using WPFBiblioteca.Views.FieldsViews;
 
 
 namespace WPFBiblioteca.ViewModels
@@ -11,7 +13,7 @@ namespace WPFBiblioteca.ViewModels
         //fields
         private readonly IUserRepository _userRepository;
         private UserModel _userModel;
-
+        private readonly NavigationStore _navigationStore;
         private string _id;
         private string _username;
         private string _password;
@@ -21,12 +23,27 @@ namespace WPFBiblioteca.ViewModels
 
         //Icommands
         public ICommand AddCommand { get; }
+        public ICommand NavigateAddCommand { get; }
+        
+
         //constructor
-        public UsersViewModel(NavigationStore navigationStore)
+        public UsersViewModel()
         {
+            _navigationStore = new NavigationStore();
             _userRepository = new UserRepository();
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
+            NavigateAddCommand = new ViewModelCommand(ExecuteNavigateAddCommand);
+            
         }
+
+        
+        
+
+        private void ExecuteNavigateAddCommand(object obj)
+        {
+            _navigationStore.CurrentViewModel = new UserFieldsViewModel();
+        }
+
         //methods
         private void ExecuteAddCommand(object obj)
         {

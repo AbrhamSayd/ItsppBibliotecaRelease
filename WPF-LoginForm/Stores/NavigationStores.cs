@@ -7,20 +7,24 @@ using WPFBiblioteca.ViewModels;
 
 namespace WPFBiblioteca.Stores
 {
-    public class NavigationStore : ViewModelBase
+    public class NavigationStore
     {
         public event Action CurrentViewModelChanged;
 
         private ViewModelBase _currentViewModel;
-
         public ViewModelBase CurrentViewModel
         {
             get => _currentViewModel;
             set
             {
                 _currentViewModel = value;
-                OnPropertyChanged(nameof(CurrentViewModel));
+                OnCurrentViewModelChanged();
             }
+        }
+
+        private void OnCurrentViewModelChanged()
+        {
+            CurrentViewModelChanged?.Invoke();
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using WPFBiblioteca.Stores;
 using WPFBiblioteca.ViewModels;
 using WPFBiblioteca.Views;
 
@@ -18,7 +17,8 @@ namespace WPFBiblioteca
     {
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
-            NavigationStore navigationStore = new NavigationStore();
+
+
 
             var loginView = new LoginView();
             loginView.Show();
@@ -28,7 +28,7 @@ namespace WPFBiblioteca
                   {
                       var mainView = new MainView()
                       {
-                          DataContext = new MainViewModel(navigationStore)
+                          DataContext = new MainViewModel()
                       };
                       mainView.Show();
                       loginView.Close();

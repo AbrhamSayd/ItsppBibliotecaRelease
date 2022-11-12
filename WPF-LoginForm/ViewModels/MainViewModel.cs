@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using Windows.Networking;
-using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
 using WPFBiblioteca.Stores;
@@ -19,6 +18,7 @@ namespace WPFBiblioteca.ViewModels
     public class MainViewModel : ViewModelBase
     {
         //Fields
+        private readonly NavigationStore _navigationStore;
         private UserAccountModel _currentUserAccount;
         private IUserRepository userRepository;
         private UserModel _userModel;
@@ -28,6 +28,10 @@ namespace WPFBiblioteca.ViewModels
         private string _name;
         private string _lastName;
         private string _userType;
+
+        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+
+        
         
         public string id
         {
@@ -97,19 +101,33 @@ namespace WPFBiblioteca.ViewModels
                 OnPropertyChanged(nameof(CurrentUserAccount));
             }
         }
-        public MainViewModel(){
+
+        
+        
+        public MainViewModel()
+        {
+            _navigationStore = new NavigationStore();
+            if (_navigationStore.CurrentViewModel != null) _navigationStore.CurrentViewModel = new MainViewModel();
+            NavigateUsersCommand = new ViewModelCommand(ExecuteNavigateUsersCommand);
             AddCommand = new ViewModelCommand(ExecuteAddCommand);
             userRepository = new UserRepository();
             CurrentUserAccount = new UserAccountModel();
             LoadCurrentUserData();
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+
+
         }
-        public MainViewModel(NavigationStore navigationStore)
+
+        private void OnCurrentViewModelChanged()
         {
-            
-            NavigateUsersCommand =
-                new NavigateCommand<UsersViewModel>(navigationStore, () => new UsersViewModel(navigationStore));
-            
+            OnPropertyChanged(nameof(CurrentViewModel));
         }
+
+        private void ExecuteNavigateUsersCommand(object obj)
+        {
+            _navigationStore.CurrentViewModel = new UsersViewModel();
+        }
+
 
         private void ExecuteAddCommand(object obj)
         {
@@ -127,6 +145,7 @@ namespace WPFBiblioteca.ViewModels
 
         public ICommand AddCommand { get; }
         public ICommand NavigateUsersCommand { get; }
+        
 
         private void LoadCurrentUserData()
         {
