@@ -29,7 +29,7 @@ namespace WPFBiblioteca.ViewModels.Fields
         private int _id;
         private string _username;
         private SecureString _password;
-        private string _name;
+        private string _firstName;
         private string _lastName;
         private string _userType;
         private readonly IUserRepository _userRepository;
@@ -66,7 +66,7 @@ namespace WPFBiblioteca.ViewModels.Fields
                 Id = _id,
                 Username = _username,
                 Password = new NetworkCredential("",_password).Password,
-                Name = _name,
+                FirstName = _firstName,
                 LastName = _lastName,
                 UserType = _userType
             };
@@ -95,6 +95,7 @@ namespace WPFBiblioteca.ViewModels.Fields
             set
             {
                 _id = value;
+                _errorsViewModel.ClearErrors(nameof(Id));
                 if (Math.Floor(Math.Log10(_id) + 1)
                 is < 3 or > 8)
                 {
@@ -109,6 +110,7 @@ namespace WPFBiblioteca.ViewModels.Fields
             set
             {
                 _username = value;
+                _errorsViewModel.ClearErrors(nameof(Username));
                 if (string.IsNullOrWhiteSpace(_username) || _username.Length < 3)
                 {
                     _errorsViewModel.AddError(nameof(Username), "Nombre de usuario invalido");
@@ -122,6 +124,7 @@ namespace WPFBiblioteca.ViewModels.Fields
             set
             {
                 _password = value;
+                _errorsViewModel.ClearErrors(nameof(Password));
                 if (_password == null || _password.Length < 3)
                 {
                     _errorsViewModel.AddError(nameof(Password), "Contraseña incorrecta");
@@ -129,17 +132,18 @@ namespace WPFBiblioteca.ViewModels.Fields
                 OnPropertyChanged(nameof(Password));
             }
         }
-        public string Name
+        public string FirstName
         {
-            get => _name;
+            get => _firstName;
             set
             {
-                _name = value;
-                if (string.IsNullOrEmpty(_name) || Name.Length <= 1)
+                _firstName = value;
+                _errorsViewModel.ClearErrors(nameof(FirstName));
+                if (string.IsNullOrEmpty(_firstName) || _firstName.Length <= 1)
                 {
-                    _errorsViewModel.AddError(nameof(Name), "Nombre invalido");
+                    _errorsViewModel.AddError(nameof(FirstName), "Nombre invalido");
                 }
-                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged(nameof(FirstName));
             }
         }
 
@@ -149,18 +153,21 @@ namespace WPFBiblioteca.ViewModels.Fields
             set
             {
                 _lastName = value;
-                if (string.IsNullOrWhiteSpace(_lastName) || _lastName.Length < 3)
+                _errorsViewModel.ClearErrors(nameof(LastName));
+                if (string.IsNullOrEmpty(_lastName) || _lastName.Length < 3)
                     _errorsViewModel.AddError(nameof(LastName), "Apellido invalido");
                 
                 OnPropertyChanged(nameof(LastName));
             }
         }
+        
         public string UserType
         {
             get => _userType;
             set
             {
                 _userType = value;
+                _errorsViewModel.ClearErrors(nameof(UserType));
                 if (string.IsNullOrWhiteSpace(_userType))
                     _errorsViewModel.AddError(nameof(UserType), "Tipo de usuario invalido");
                 OnPropertyChanged(nameof(UserType));

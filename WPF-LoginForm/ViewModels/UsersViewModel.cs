@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
@@ -12,24 +13,59 @@ namespace WPFBiblioteca.ViewModels
 {
     public class UsersViewModel : ViewModelBase
     {
-        //fields
+        #region Fields
+        private ObservableCollection<UserModel> _collectionUsers;
+        private UserModel _usersModelRow;
         private readonly IUserRepository _userRepository;
-        
-        private readonly NavigationStore _navigationStore;
-        
 
-        //Icommands
-        
+        #endregion
+
+        #region ICommands
+        public ICommand GetByAllCommand { get; }
         public ICommand NavigateAddCommand { get; }
-        
-        //constructor
+        #endregion
+
+        #region constructor
         public UsersViewModel(NavigationStore navigationStore)
         {
+            _userRepository = new UserRepository();
             NavigateAddCommand = new NavigateCommand<UserFieldsViewModel>(new NavigationService<UserFieldsViewModel>(navigationStore, () => new UserFieldsViewModel(navigationStore)));
+            GetByAllCommand = new ViewModelCommand(ExecuteGetAllCommand);
+            ExecuteGetAllCommand(null);
         }
 
-        //methods
+        
 
-        //Properties
+        #endregion
+
+        #region Methods
+       
+        private void ExecuteGetAllCommand(object obj)
+        {
+            CollectionUser = new ObservableCollection<UserModel>(_userRepository.GetByAll());
+
+        }
+        #endregion
+
+        #region Properties
+        public ObservableCollection<UserModel> CollectionUser
+        {
+            get => _collectionUsers;
+            set
+            {
+                _collectionUsers = value;
+                OnPropertyChanged(nameof(CollectionUser));
+            }
+        }
+        public UserModel UsersModelRow
+        {
+            get => _usersModelRow;
+            set
+            {
+                _usersModelRow = value;
+                OnPropertyChanged(nameof(_usersModelRow));
+            }
+        }
+        #endregion
     }
 }

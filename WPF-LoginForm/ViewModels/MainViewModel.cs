@@ -137,7 +137,7 @@ namespace WPFBiblioteca.ViewModels
             if (user != null)
             {
                 CurrentUserAccount.Username = user.Username;
-                CurrentUserAccount.DisplayName = $"Bienvenido {user.Name} {user.LastName} ;)";
+                CurrentUserAccount.DisplayName = $"Bienvenido {user.FirstName} {user.LastName} ;)";
                 CurrentUserAccount.ProfilePicture = null;               
             }
             else

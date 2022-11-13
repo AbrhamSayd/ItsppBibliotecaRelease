@@ -49,7 +49,54 @@
                         Text="Usuarios" />
                 </StackPanel>
             </Grid>
-            <DataGrid Grid.Row="1" />
+            <DataGrid Grid.Row="1"
+                    CellStyle="{DynamicResource DataGridCellStyle}"
+                    ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+                    ItemsSource="{Binding CollectionUser}"
+                    RowStyle="{DynamicResource DataGridRowStyle}"
+                    SelectedItem="{Binding UsersModelRow}"
+                    Style="{DynamicResource DataGridStyle}">
+                <DataGrid.Columns>
+
+                    
+
+                    <!--  ID Column  -->
+                    <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding Id}"
+                            Header="ID"
+                            IsReadOnly="True" />
+
+                    <!--  Nombre Column  -->
+                    <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Username }"
+                            Header="Nombre de usuario"
+                            IsReadOnly="True" />
+                    <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Password}"
+                            Header="Contraseña"
+                            IsReadOnly="True" />
+                    <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding FirstName}"
+                            Header="Nombre"
+                            IsReadOnly="True" />
+                    <DataGridTextColumn
+                            Width="Auto"
+                            Binding="{Binding LastName}"
+                            Header="Apellido"
+                            IsReadOnly="True" />
+                    <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding UserType}"
+                            Header="Tipo de usuario"
+                            IsReadOnly="True" />
+                    
+
+                </DataGrid.Columns>
+            </DataGrid>
 
             <Grid Grid.Row="2" HorizontalAlignment="Right">
 

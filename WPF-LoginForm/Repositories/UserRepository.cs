@@ -22,11 +22,12 @@ namespace WPFBiblioteca.Repositories
                 connection.OpenAsync();
                 command.Connection = connection;
                 command.CommandText =
-                "insert into users(Username_ID,Username,Password,First_Name,User_Type) values (@username_id,@username,@password,@first_name,@user_type)";
+                "insert into users(Username_ID,Username,Password,First_Name,Last_Name,User_Type) values (@username_id,@username,@password,@first_name,@last_name,@user_type)";
                 command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = userModel.Id;
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = userModel.Username;
                 command.Parameters.Add("@password", MySqlDbType.VarChar).Value = userModel.Password;
-                command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.Name;
+                command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.FirstName;
+                command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
                 command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
                 command.ExecuteScalar();
             }
@@ -54,7 +55,32 @@ namespace WPFBiblioteca.Repositories
         }
         public IEnumerable<UserModel> GetByAll()
         {
-            throw new NotImplementedException();
+            var userList = new List<UserModel>();
+            using var connection = GetConnection();
+            using (var command = new MySqlCommand())
+            {
+                connection.OpenAsync();
+                command.Connection = connection;
+                command.CommandText = "SELECT * from users order by First_Name asc";
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var userModel = new UserModel
+                        {
+                            Id = int.Parse(reader[0].ToString() ?? string.Empty),
+                            Username = reader[1].ToString() ?? string.Empty,
+                            Password = reader[2].ToString() ?? string.Empty,
+                            FirstName = reader[3].ToString() ?? string.Empty,
+                            LastName = reader[4].ToString() ?? string.Empty,
+                            UserType = reader[5].ToString() ?? string.Empty,
+                        };
+                        userList.Add(userModel);
+                    }
+                }
+            }
+
+            return userList;
         }
         public UserModel GetById(int id)
         {
@@ -79,7 +105,7 @@ namespace WPFBiblioteca.Repositories
                             Id = int.Parse(reader[0].ToString()),
                             Username = reader[1].ToString(),
                             Password = string.Empty,
-                            Name = reader[3].ToString(),
+                            FirstName = reader[3].ToString(),
                             LastName = reader[4].ToString(),
                         };
                     }

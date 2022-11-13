@@ -62,12 +62,12 @@
                             <TextBlock
                                 Padding="20,0,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Username" />
+                                Text="Nombre de usuario" />
                             <TextBox
                                 x:Name="TxtuserName"
                                 Width="300"
                                 Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel Margin="50,150,0,20">
                             <TextBlock
