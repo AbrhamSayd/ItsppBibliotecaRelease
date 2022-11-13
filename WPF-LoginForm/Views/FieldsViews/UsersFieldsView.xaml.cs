@@ -34,7 +34,6 @@ namespace WPFBiblioteca.Views.FieldsViews
         {
             if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z]"))
             {
-                MessageBox.Show("Solo caracteres alfanumericos","Error de input");
                 e.Handled = true;
             }
 

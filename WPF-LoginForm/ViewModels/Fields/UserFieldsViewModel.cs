@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Security;
@@ -18,7 +20,9 @@ namespace WPFBiblioteca.ViewModels.Fields
 {
     public class UserFieldsViewModel :ViewModelBase
     {
-        //Fields
+        #region Fields
+
+        private readonly ErrorsViewModel _errorsViewModel;
         private readonly UsersViewModel _viewModel;
         private readonly NavigationService<UsersViewModel> _navigationService;
         private UserModel _userModel;
@@ -29,36 +33,31 @@ namespace WPFBiblioteca.ViewModels.Fields
         private string _lastName;
         private string _userType;
         private readonly IUserRepository _userRepository;
+        #endregion
 
-        //ICommands
+        #region Icommands
         public ICommand AddCommand { get; }
         public ICommand GoBackCommand {get; }
-        //constructor
+        #endregion
+
+        #region Constructor
         public UserFieldsViewModel(NavigationStore navigationStore)
         {
             GoBackCommand = new GoUsersCommand(_viewModel,
                 new NavigationService<UsersViewModel>(navigationStore,
                     () => new UsersViewModel(navigationStore)));
-
             _userRepository = new UserRepository();
-
             AddCommand = new ViewModelCommand(ExecuteAddCommand, CanExecuteAddCommand);
+            _errorsViewModel = new ErrorsViewModel();
+            _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
         }
+        #endregion
 
-
-
-        //methods
+        #region Methods
 
         private bool CanExecuteAddCommand(object obj)
         {
-            bool validData;
-            if (Id.ToString().Length < 3 || string.IsNullOrWhiteSpace(Username) || Username.Length < 3 || Password == null || Password.Length < 3 || string.IsNullOrWhiteSpace(Name) || Name.Length <= 1 || string.IsNullOrWhiteSpace(LastName) || LastName.Length < 3 || string.IsNullOrWhiteSpace(UserType))
-                validData = false;
-            else
-                validData = true;
-            return validData;
-
-
+            return CanCreate;
         }
         private void ExecuteAddCommand(object obj)
         {
@@ -73,17 +72,34 @@ namespace WPFBiblioteca.ViewModels.Fields
             };
             _userRepository.Add(_userModel);
             GoBackCommand.Execute(null);
-            
-            
+        }
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return _errorsViewModel.GetErrors(propertyName);
         }
 
-        //properties
+        private void ErrorsViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            ErrorsChanged?.Invoke(this, e);
+            OnPropertyChanged(nameof(CanCreate));
+        }
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        #endregion
+
+        #region Properties
         public int Id
         {
             get => _id;
             set
             {
                 _id = value;
+                if (Math.Floor(Math.Log10(_id) + 1)
+                is < 3 or > 8)
+                {
+                    _errorsViewModel.AddError(nameof(Id), "Numero de empleado invalido");
+                }
                 OnPropertyChanged(nameof(Id));
             }
         }
@@ -93,6 +109,10 @@ namespace WPFBiblioteca.ViewModels.Fields
             set
             {
                 _username = value;
+                if (string.IsNullOrWhiteSpace(_username) || _username.Length < 3)
+                {
+                    _errorsViewModel.AddError(nameof(Username), "Nombre de usuario invalido");
+                }
                 OnPropertyChanged(nameof(Username));
             }
         }
@@ -102,6 +122,10 @@ namespace WPFBiblioteca.ViewModels.Fields
             set
             {
                 _password = value;
+                if (_password == null || _password.Length < 3)
+                {
+                    _errorsViewModel.AddError(nameof(Password), "Contraseña incorrecta");
+                }
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -111,6 +135,10 @@ namespace WPFBiblioteca.ViewModels.Fields
             set
             {
                 _name = value;
+                if (string.IsNullOrEmpty(_name) || Name.Length <= 1)
+                {
+                    _errorsViewModel.AddError(nameof(Name), "Nombre invalido");
+                }
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -121,6 +149,9 @@ namespace WPFBiblioteca.ViewModels.Fields
             set
             {
                 _lastName = value;
+                if (string.IsNullOrWhiteSpace(_lastName) || _lastName.Length < 3)
+                    _errorsViewModel.AddError(nameof(LastName), "Apellido invalido");
+                
                 OnPropertyChanged(nameof(LastName));
             }
         }
@@ -130,9 +161,16 @@ namespace WPFBiblioteca.ViewModels.Fields
             set
             {
                 _userType = value;
+                if (string.IsNullOrWhiteSpace(_userType))
+                    _errorsViewModel.AddError(nameof(UserType), "Tipo de usuario invalido");
                 OnPropertyChanged(nameof(UserType));
             }
         }
-        
+        public bool CanCreate => !HasErrors;
+        public bool HasErrors => _errorsViewModel.HasErrors;
+        #endregion
+
+
+
     }
 }

@@ -2,11 +2,11 @@
     x:Class="WPFBiblioteca.Views.FieldsViews.UsersFieldsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:customControls="clr-namespace:WPFBiblioteca.CustomControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fields="clr-namespace:WPFBiblioteca.ViewModels.Fields"
     xmlns:local="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:customControls="clr-namespace:WPFBiblioteca.CustomControls"
     d:DesignHeight="845"
     d:DesignWidth="1596"
     mc:Ignorable="d">
@@ -27,8 +27,10 @@
 
         <DockPanel DockPanel.Dock="Bottom">
             <DockPanel>
-                
+
+
                 <DockPanel DockPanel.Dock="Top">
+
                     <StackPanel Height="500" Orientation="Vertical">
                         <StackPanel Margin="20,50,0,20">
                             <TextBlock
@@ -36,12 +38,11 @@
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Numero de empleado" />
                             <TextBox
-                                PreviewTextInput="TxtId_OnPreviewTextInput"
                                 x:Name="TxtId"
                                 Width="300"
-                                Margin="0,5,0,5"
+                                PreviewTextInput="TxtId_OnPreviewTextInput"
                                 Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding Id}" />
+                                Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel Margin="20,150,0,20">
                             <TextBlock
@@ -53,7 +54,7 @@
                                 Width="300"
                                 PreviewTextInput="TextStringOnPreviewTextInput"
                                 Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding Name}" />
+                                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Top" Orientation="Vertical">
@@ -65,9 +66,8 @@
                             <TextBox
                                 x:Name="TxtuserName"
                                 Width="300"
-                                Margin="0,5,0,5"
                                 Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding Username}" />
+                                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel Margin="50,150,0,20">
                             <TextBlock
@@ -78,22 +78,18 @@
                                 x:Name="TxtTipo"
                                 Width="300"
                                 PreviewTextInput="TextStringOnPreviewTextInput"
-                                Margin="0,5,0,5"
                                 Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding LastName}" />
+                                Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Top" Orientation="Vertical">
                         <StackPanel Margin="50,50,0,20">
                             <TextBlock
-                                
                                 Padding="20,0,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Contraseña" />
-                            <customControls:BindablePasswordBox
-                                HorizontalAlignment="Left"
-                                Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                />
+                            <customControls:BindablePasswordBox HorizontalAlignment="Left" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
                         </StackPanel>
                         <StackPanel Margin="50,150,0,20">
                             <TextBlock
@@ -103,16 +99,18 @@
                             <TextBox
                                 x:Name="TxtNoControl"
                                 Width="200"
-                                PreviewTextInput="TextStringOnPreviewTextInput"
-                                Margin="0,5,0,5"
                                 HorizontalAlignment="Left"
+                                PreviewTextInput="TextStringOnPreviewTextInput"
                                 Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding UserType}" />
+                                Text="{Binding UserType, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </StackPanel>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button Margin="20" Style="{StaticResource CardButton}">
+                    <Button
+                        Margin="20"
+                        Command="{Binding GoBackCommand}"
+                        Style="{StaticResource CardButton}">
                         <TextBlock
                             Margin="20,6,20,6"
                             FontSize="20"
