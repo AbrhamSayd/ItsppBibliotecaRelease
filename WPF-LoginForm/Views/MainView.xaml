@@ -32,7 +32,7 @@
             <fields:BooksView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type fields:BooksFieldsViewModel}">
-            <tablesViews:BooksFieldsView />
+            <fieldsViews:BooksFieldsView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type fields:UserFieldsViewModel}">
             <fieldsViews:UsersFieldsView />
