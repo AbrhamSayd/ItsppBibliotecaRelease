@@ -7,114 +7,129 @@
     xmlns:fields="clr-namespace:WPFBiblioteca.ViewModels.Fields"
     xmlns:local="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     d:DesignHeight="845"
     d:DesignWidth="1596"
     mc:Ignorable="d">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <TextBlock
-                Margin="20"
-                FontFamily="{StaticResource SFUIDisplay}"
-                FontSize="48"
-                FontWeight="SemiBold"
-                Foreground="{StaticResource ChildTitleColor}"
-                Text="Usuarios"
-                TextAlignment="Left"
-                TextWrapping="Wrap">
-                <Run Language="es-mx" />
-            </TextBlock>
-        </StackPanel>
+    <Border Background="white" CornerRadius="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--  Control Bar  -->
+                <RowDefinition Height="35" />
+                <!--  Content section / Child views  -->
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-        <DockPanel DockPanel.Dock="Bottom">
-            <DockPanel>
+                <!--  Caption  -->
+                <StackPanel
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
 
-
-                <DockPanel DockPanel.Dock="Top">
-
-                    <StackPanel Height="500" Orientation="Vertical">
-                        <StackPanel Margin="20,50,0,20">
-                            <TextBlock
-                                Padding="20,0,0,0"
-                                Style="{StaticResource FieldsHeaders}"
-                                Text="Numero de empleado" />
-                            <TextBox
-                                x:Name="TxtId"
-                                Width="300"
-                                PreviewTextInput="TxtId_OnPreviewTextInput"
-                                Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                        <StackPanel Margin="20,150,0,20">
-                            <TextBlock
-                                Padding="20,0,0,0"
-                                Style="{StaticResource FieldsHeaders}"
-                                Text="Nombre" />
-                            <TextBox
-                                x:Name="TxtName"
-                                Width="300"
-                                PreviewTextInput="TextStringOnPreviewTextInput"
-                                Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel VerticalAlignment="Top" Orientation="Vertical">
-                        <StackPanel Margin="50,50,0,20">
-                            <TextBlock
-                                Padding="20,0,0,0"
-                                Style="{StaticResource FieldsHeaders}"
-                                Text="Username" />
-                            <TextBox
-                                x:Name="TxtuserName"
-                                Width="300"
-                                Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                        <StackPanel Margin="50,150,0,20">
-                            <TextBlock
-                                Padding="20,0,0,0"
-                                Style="{StaticResource FieldsHeaders}"
-                                Text="Apellido" />
-                            <TextBox
-                                x:Name="TxtTipo"
-                                Width="300"
-                                PreviewTextInput="TextStringOnPreviewTextInput"
-                                Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel VerticalAlignment="Top" Orientation="Vertical">
-                        <StackPanel Margin="50,50,0,20">
-                            <TextBlock
-                                Padding="20,0,0,0"
-                                Style="{StaticResource FieldsHeaders}"
-                                Text="Contraseña" />
-                            <customControls:BindablePasswordBox HorizontalAlignment="Left" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                        </StackPanel>
-                        <StackPanel Margin="50,150,0,20">
-                            <TextBlock
-                                Padding="20,0,0,0"
-                                Style="{StaticResource FieldsHeaders}"
-                                Text="Tipo de usuario" />
-                            <TextBox
-                                x:Name="TxtNoControl"
-                                Width="200"
-                                HorizontalAlignment="Left"
-                                PreviewTextInput="TextStringOnPreviewTextInput"
-                                Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding UserType, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                    </StackPanel>
-                </DockPanel>
-                <DockPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button
-                        Margin="20"
-                        Command="{Binding GoBackCommand}"
-                        Style="{StaticResource CardButton}">
+                    <fa:IconImage
+                        Height="30"
+                        Margin="15,0,10,0"
+                        Foreground="{StaticResource FieldsHeadersColor}"
+                        Icon="Portrait" />
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource SFUIDisplay}"
+                        FontSize="20"
+                        FontWeight="Medium"
+                        Foreground="{StaticResource FieldsHeadersColor}"
+                        Text="Usuarios" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock
+                        Padding="20,60,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Nombre" />
+                    <TextBox
+                        x:Name="TxtName"
+                        Width="300"
+                        HorizontalAlignment="Left"
+                        PreviewTextInput="TextStringOnPreviewTextInput"
+                        Style="{StaticResource CustomCardTextBox}"
+                        Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Username" />
+                    <TextBox
+                        x:Name="TxtuserName"
+                        Width="300"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource CustomCardTextBox}"
+                        Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Numero de empleado" />
+                    <TextBox
+                        x:Name="TxtId"
+                        Width="300"
+                        HorizontalAlignment="Left"
+                        PreviewTextInput="TxtId_OnPreviewTextInput"
+                        Style="{StaticResource CustomCardTextBox}"
+                        Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1">
+                    <TextBlock
+                        Padding="20,60,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Apellido" />
+                    <TextBox
+                        Width="300"
+                        HorizontalAlignment="Left"
+                        PreviewTextInput="TextStringOnPreviewTextInput"
+                        Style="{StaticResource CustomCardTextBox}"
+                        Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Contraseña" />
+                    <customControls:BindablePasswordBox HorizontalAlignment="Left" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Tipo de usuario" />
+                    <TextBox
+                        Width="200"
+                        HorizontalAlignment="Left"
+                        PreviewTextInput="TextStringOnPreviewTextInput"
+                        Style="{StaticResource CustomCardTextBox}"
+                        Text="{Binding UserType, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Button Margin="20" Style="{StaticResource CardButton}">
                         <TextBlock
                             Margin="20,6,20,6"
                             FontSize="20"
-                            Text="Cancelar" />
+                            Text="Cancelar"
+                            Name="BtnCancelar"/>
                     </Button>
                     <Button
                         Margin="20"
@@ -123,10 +138,11 @@
                         <TextBlock
                             Margin="20,6,20,6"
                             FontSize="20"
-                            Text="Aceptar" />
+                            Text="Aceptar" 
+                            Name="BtnAceptar"/>
                     </Button>
                 </DockPanel>
-            </DockPanel>
-        </DockPanel>
-    </DockPanel>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>
