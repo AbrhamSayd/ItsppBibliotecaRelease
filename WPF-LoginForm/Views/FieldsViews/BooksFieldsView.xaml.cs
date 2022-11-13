@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFBiblioteca.Views.TablesViews
+namespace WPFBiblioteca.Views.FieldsViews
 {
     /// <summary>
     /// Interaction logic for BooksView.xaml
     /// </summary>
-    public partial class BooksView : UserControl
+    public partial class BooksFieldsView : UserControl
     {
-        public BooksView()
+        public BooksFieldsView()
         {
             InitializeComponent();
         }

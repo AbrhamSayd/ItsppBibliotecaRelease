@@ -29,7 +29,10 @@
             <tablesViews:UsersView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
-            <tablesViews:BooksView />
+            <fields:BooksView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type fields:BooksFieldsViewModel}">
+            <tablesViews:BooksFieldsView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type fields:UserFieldsViewModel}">
             <fieldsViews:UsersFieldsView />
