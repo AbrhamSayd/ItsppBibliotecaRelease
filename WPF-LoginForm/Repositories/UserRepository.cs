@@ -9,37 +9,32 @@ namespace WPFBiblioteca.Repositories
 {
     public class UserRepository : RepositoryBase, IUserRepository
     {
-        public async Task<bool> Add(UserModel userModel)
+        public async Task Add(UserModel userModel)
         {
 
             using (var connection = GetConnection())
             using (var command = new MySqlCommand())
             {
-               await connection.OpenAsync();
-                command.Connection = connection;
-                command.CommandText =
-                "insert into users(Username_ID,Username,Password,First_Name,Last_Name,User_Type) values (@username_id,@username,@password,@first_name,@last_name,@user_type)";
-                command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = userModel.Id;
-                command.Parameters.Add("@username", MySqlDbType.VarChar).Value = userModel.Username;
-                command.Parameters.Add("@password", MySqlDbType.VarChar).Value = userModel.Password;
-                command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.FirstName;
-                command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
-                command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
                 try
                 {
-                    await command.ExecuteScalarAsync();
-                    return true;
+                    await connection.OpenAsync();
+                    command.Connection = connection;
+                    command.CommandText =
+                        "insert into users(Username_ID,Username,Password,First_Name,Last_Name,User_Type) values (@username_id,@username,@password,@first_name,@last_name,@user_type)";
+                    command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = userModel.Id;
+                    command.Parameters.Add("@username", MySqlDbType.VarChar).Value = userModel.Username;
+                    command.Parameters.Add("@password", MySqlDbType.VarChar).Value = userModel.Password;
+                    command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.FirstName;
+                    command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
+                    command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
+                    object id = await command.ExecuteScalarAsync();
+                    
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine(e);
-                    throw;
-                    return false;
+                    Console.WriteLine(ex);
                 }
-                
             }
-
-            
         }
 
         public async Task<bool> AuthenticateUser(NetworkCredential credential)
@@ -122,9 +117,27 @@ namespace WPFBiblioteca.Repositories
             }
             return user;
         }
-        public void Remove(int id)
+        public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            using var connection = GetConnection();
+            using (var command = new MySqlCommand())
+            {
+               await connection.OpenAsync();
+                command.Connection = connection;
+                command.CommandText = "DELETE FROM users WHERE Username_ID=@username_id";
+                command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = id;
+
+                try
+                {
+                    command.ExecuteScalar();
+                    
+                }
+                catch (MySqlException e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
         }
     }
 }

@@ -10,9 +10,9 @@ namespace WPFBiblioteca.Models
     public interface IUserRepository
     {
         Task<bool> AuthenticateUser(NetworkCredential credential);
-        Task<bool> Add(UserModel userModel);
+        Task Add(UserModel userModel);
         void Edit(UserModel userModel);
-        void Remove(int id);
+        Task Remove(int id);
         UserModel GetById(int id);
         UserModel GetByUsername(string username);
         Task<IEnumerable<UserModel>> GetByAll();

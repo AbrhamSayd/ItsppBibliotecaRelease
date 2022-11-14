@@ -10,7 +10,7 @@
     d:DesignHeight="845"
     d:DesignWidth="1596"
     mc:Ignorable="d">
-    
+
     <Border Background="white" CornerRadius="1">
         <Grid>
             <Grid.RowDefinitions>
@@ -40,18 +40,17 @@
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
                         Icon="BookOpenReader" />
-                    <TextBlock
-                        Style="{StaticResource ViewsHeaders}"
-                        Text="Usuarios" />
+                    <TextBlock Style="{StaticResource ViewsHeaders}" Text="Usuarios" />
                 </StackPanel>
             </Grid>
-            <DataGrid Grid.Row="1"
-                    CellStyle="{DynamicResource DataGridCellStyle}"
-                    ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                    ItemsSource="{Binding CollectionUser}"
-                    RowStyle="{DynamicResource DataGridRowStyle}"
-                    SelectedItem="{Binding UsersModelRow}"
-                    Style="{DynamicResource DataGridStyle}">
+            <DataGrid
+                Grid.Row="1"
+                CellStyle="{DynamicResource DataGridCellStyle}"
+                ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+                ItemsSource="{Binding CollectionUser, UpdateSourceTrigger=PropertyChanged}"
+                RowStyle="{DynamicResource DataGridRowStyle}"
+                SelectedItem="{Binding UsersModelRow, UpdateSourceTrigger=PropertyChanged}"
+                Style="{DynamicResource DataGridStyle}">
                 <DataGrid.Columns>
                     <!--  ID Column  -->
                     <DataGridTextColumn
@@ -62,7 +61,7 @@
                     <!--  Username Column  -->
                     <DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding Username }"
+                        Binding="{Binding Username}"
                         Header="Nombre de usuario"
                         IsReadOnly="True" />
                     <!--  Password Column  -->
@@ -130,7 +129,7 @@
                     Width="60"
                     Height="30"
                     Margin="0,0,15,0"
-                    Command="{Binding }"
+                    Command="{Binding RemoveRowCommand}"
                     Style="{StaticResource GridDeleteButton}">
                     <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
                 </Button>

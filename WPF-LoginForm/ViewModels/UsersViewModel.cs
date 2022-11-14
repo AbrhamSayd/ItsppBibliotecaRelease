@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -17,25 +18,43 @@ namespace WPFBiblioteca.ViewModels
         private ObservableCollection<UserModel> _collectionUsers;
         private UserModel _usersModelRow;
         private readonly IUserRepository _userRepository;
+        private bool CanDelete;
         #endregion
 
         #region ICommands
         public ICommand GetByAllCommand { get; }
         public ICommand NavigateAddCommand { get; }
+        public ICommand RemoveRowCommand { get; }
         #endregion
 
         #region constructor
         public UsersViewModel(NavigationStore navigationStore)
         {
+            CanDelete = false;
             _userRepository = new UserRepository();
+            _usersModelRow = new UserModel();
             NavigateAddCommand = new NavigateCommand<UserFieldsViewModel>(new NavigationService<UserFieldsViewModel>(navigationStore, () => new UserFieldsViewModel(navigationStore)));
             GetByAllCommand = new ViewModelCommand(ExecuteGetAllCommand);
             ExecuteGetAllCommand(null);
+            RemoveRowCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
         }
+
+
+
         #endregion
 
         #region Methods
-       
+
+        private bool CanExecuteRemoveRowCommand(object obj)
+        {
+            return CanDelete;
+        }
+        private void ExecuteRemoveRowCommand(object obj)
+        {
+            
+            _userRepository.Remove(_usersModelRow.Id);
+            ExecuteGetAllCommand(null);
+        }
         private async void ExecuteGetAllCommand(object obj)
         {
              CollectionUser = new ObservableCollection<UserModel>(await _userRepository.GetByAll());
@@ -59,6 +78,9 @@ namespace WPFBiblioteca.ViewModels
             set
             {
                 _usersModelRow = value;
+                CanDelete = _usersModelRow != null;
+                
+                
                 OnPropertyChanged(nameof(_usersModelRow));
             }
         }
