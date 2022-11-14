@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="845"
-    d:DesignWidth="1596"
+    d:DesignWidth="1535"
     mc:Ignorable="d">
     <Border Background="white" CornerRadius="1">
         <Grid>
@@ -37,12 +37,8 @@
                         Foreground="{StaticResource FieldsHeadersColor}"
                         Icon="BookOpen" />
                     <TextBlock
-                        VerticalAlignment="Center"
-                        FontFamily="{StaticResource SFUIDisplay}"
-                        FontSize="20"
-                        FontWeight="Medium"
-                        Foreground="{StaticResource FieldsHeadersColor}"
-                        Text="Libros" />
+                        Style="{StaticResource ViewsHeaders}"
+                        Text="Libro" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">

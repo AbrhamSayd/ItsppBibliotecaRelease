@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPFBiblioteca.Stores;
 
 namespace WPFBiblioteca.ViewModels
 {
@@ -11,9 +12,9 @@ namespace WPFBiblioteca.ViewModels
         //Fields
         //Icommands
         //Constructor
-        public BooksViewModel()
+        public BooksViewModel(NavigationStore navigationStore)
         {
-            
+            throw new NotImplementedException();
         }
         //Methods
     }

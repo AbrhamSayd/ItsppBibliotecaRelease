@@ -38,20 +38,6 @@
         </Style.Triggers>
     </Style>
 
-    <!--  Menu button Style For CurrentUser and SignOut  -->
-    <Style
-        x:Key="menuButtonStyleV2"
-        BasedOn="{StaticResource menuButtonStyle}"
-        TargetType="RadioButton">
-        <!--  Button Style on hover  -->
-        <Style.Triggers>
-            <!--  Activated button style  -->
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="BorderBrush" Value="Transparent" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <!--  Menu button icon  -->
     <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
@@ -68,6 +54,30 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--  Menu button Style For CurrentUser and SignOut  -->
+    <Style
+        x:Key="menuButtonStyleV2"
+        BasedOn="{StaticResource menuButtonStyle}"
+        TargetType="RadioButton">
+        <Style.Triggers>
+
+            <!--  Button Style on hover  -->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Foreground" Value="{StaticResource OverMenuButtonBorderColor}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=BorderBrush, RelativeSource={RelativeSource Self}}" />
+            </Trigger>
+
+            <!--  Activated button style  -->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource OverMenuButtonBorderColor}" />
+            </Trigger>
+
+        </Style.Triggers>
+    </Style>
+
+
 
     <!--  Control bar button  -->
     <Style x:Key="controlButton" TargetType="Button">
@@ -139,17 +149,21 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <!--  Card Button  -->
+
+
+
+    <!--#region  Card Button  -->
     <Style x:Key="CardButton" TargetType="Button">
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{StaticResource SecundarySolidColor}" />
+        <Setter Property="BorderThickness" Value="5" />
         <Setter Property="FontFamily" Value="{DynamicResource SFUIDisplay}" />
-        <Setter Property="FontSize" Value="20" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="34" />
+        <Setter Property="Foreground" Value="{StaticResource primarySolidColor}" />
         <Setter Property="Background" Value="{StaticResource SecundarySolidColor}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="15">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="15" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
@@ -158,19 +172,27 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="{StaticResource SecundarySolidColor}" />
-                <Setter Property="Background" Value="White" />
-                <Setter Property="BorderThickness" Value="5" />
+                <Setter Property="Background" Value="{StaticResource primarySolidColor}" />
                 <Setter Property="BorderBrush" Value="{StaticResource primaryGradientColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!--#endregion  Card Button  -->
 
+    <!--#region  Text for Card Button  -->
+    <Style x:Key="TxtCardButton" TargetType="TextBlock">
+        <Setter Property="Margin" Value="20,6,20,6"/>
+        <Setter Property="FontFamily" Value="{Binding Path=FontFamily, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="FontSize" Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+    </Style>
+    <!--#endregion Text for Card Button  -->
 
     <!--#region Add Button-->
     <Style x:Key="BtnAgregarStyle" TargetType="Button">
         <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="#1e355e" />
-        <Setter Property="Foreground" Value="#1e355e" />
+        <Setter Property="BorderBrush" Value="{StaticResource primaryGradientColor}" />
+        <Setter Property="Foreground" Value="{StaticResource primaryGradientColor}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
@@ -189,8 +211,8 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="LightGray" />
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Background" Value="{StaticResource primaryGradientColor}" />
+                <Setter Property="Foreground" Value="{StaticResource primarySolidColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -198,7 +220,7 @@
     <!--  Icon add Style  -->
     <Style x:Key="AddIconStyle" TargetType="fa:IconImage">
         <Setter Property="Icon" Value="CirclePlus" />
-        <Setter Property="Foreground" Value="#1e355e" />
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Margin" Value="3" />
         <!--<Style.Triggers>
@@ -213,7 +235,7 @@
         <Setter Property="Text" Value="Agregar" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="Foreground" Value="#1e355e" />
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="VerticalAlignment" Value="center" />
         <Setter Property="Margin" Value="10,0,10,0" />
         <!--<Style.Triggers>
@@ -225,7 +247,6 @@
 
     <!--#endregion  Add Button-->
 
-
     <!--#region grid Edit Button-->
     <Style
         x:Key="GridEditButton"
@@ -233,27 +254,22 @@
         TargetType="Button">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#1e355e" />
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Background" Value="{StaticResource primaryGradientColor}" />
+                <Setter Property="Foreground" Value="{StaticResource primarySolidColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!--#endregion  grid Edit Button-->
 
-    <!--  grid Icon Style  -->
+    <!--#region grid Edit Icon Style  -->
     <Style x:Key="gridEditIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="#1e355e" />
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="Height" Value="16" />
         <Setter Property="Width" Value="16" />
         <Setter Property="Icon" Value="Trash" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="White" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
-    <!--#endregion grid Edit Button-->
-
+    <!--#endregion grid Edit Icon-->
 
     <!--#region grid Delete Button-->
     <Style
@@ -263,24 +279,38 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="Red" />
-                <Setter Property="Foreground" Value="White" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <!--  grid Delete Icon Style  -->
-    <Style x:Key="gridDeleteIcon" TargetType="fa:IconImage">
-        <Setter Property="Width" Value="16" />
-        <Setter Property="Height" Value="16" />
-        <Setter Property="Icon" Value="Trash" />
-        <Setter Property="Foreground" Value="#1e355e" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Foreground" Value="{StaticResource primarySolidColor}" />
+                <Setter Property="BorderBrush" Value="{Binding Path=Background, RelativeSource={RelativeSource Self}}" />
             </Trigger>
         </Style.Triggers>
     </Style>
     <!--#endregion grid Delete Button-->
 
+    <!--#region  grid Delete Icon Style  -->
+    <Style x:Key="gridDeleteIcon" TargetType="fa:IconImage">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Icon" Value="Trash" />
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <!--#endregion grid Delete Icon-->
+
+
+    <!--#region (Login)Close Button-->
+    <Style
+        x:Key="LoginCloseButton"
+        BasedOn="{StaticResource BtnAgregarStyle}"
+        TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource primarySolidColor}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+            <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="Gray" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--#endregion (Login)Close Button-->
 </ResourceDictionary>

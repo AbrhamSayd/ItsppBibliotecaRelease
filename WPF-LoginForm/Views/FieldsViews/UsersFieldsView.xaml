@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     d:DesignHeight="845"
-    d:DesignWidth="1596"
+    d:DesignWidth="1535"
     mc:Ignorable="d">
     <Border Background="white" CornerRadius="1">
         <Grid>
@@ -35,14 +35,10 @@
                         Height="30"
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
-                        Icon="Portrait" />
+                        Icon="BookOpenReader" />
                     <TextBlock
-                        VerticalAlignment="Center"
-                        FontFamily="{StaticResource SFUIDisplay}"
-                        FontSize="20"
-                        FontWeight="Medium"
-                        Foreground="{StaticResource FieldsHeadersColor}"
-                        Text="Usuarios" />
+                        Style="{StaticResource ViewsHeaders}"
+                        Text="Usuario" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
@@ -123,8 +119,7 @@
                 <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                     <Button Margin="20" Style="{StaticResource CardButton}" Command="{Binding GoBackCommand}"> 
                         <TextBlock
-                            Margin="20,6,20,6"
-                            FontSize="20"
+                            Style="{StaticResource TxtCardButton}"
                             Text="Cancelar"
                             Name="BtnCancelar"/>
                     </Button>
@@ -133,8 +128,7 @@
                         Command="{Binding AddCommand}"
                         Style="{StaticResource CardButton}">
                         <TextBlock
-                            Margin="20,6,20,6"
-                            FontSize="20"
+                            Style="{StaticResource TxtCardButton}"
                             Text="Aceptar" 
                             Name="BtnAceptar"/>
                     </Button>
