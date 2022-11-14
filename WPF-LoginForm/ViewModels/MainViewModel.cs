@@ -115,9 +115,9 @@ namespace WPFBiblioteca.ViewModels
             CurrentUserAccount = new UserAccountModel();
             LoadCurrentUserData();
             NavigateUsersCommand = new NavigateCommand<UsersViewModel>(new NavigationService<UsersViewModel>(_navigationStore, () => new UsersViewModel(_navigationStore)));
+            NavigateBooksCommand = new NavigateCommand<BooksViewModel>(new NavigationService<BooksViewModel>(_navigationStore, () => new BooksViewModel(_navigationStore)));
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
 
         }
 
@@ -129,7 +129,8 @@ namespace WPFBiblioteca.ViewModels
 
         
         public ICommand NavigateUsersCommand { get; }
-        
+        public ICommand NavigateBooksCommand { get; }
+
 
         private void LoadCurrentUserData()
         {

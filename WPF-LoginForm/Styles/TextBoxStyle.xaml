@@ -1,10 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- Customized Comcobox -->
-    <Style BasedOn="{StaticResource {x:Type ComboBox}}"
-           TargetType="ComboBox"
-           x:Key="CustomCardComboBox">
+    <!-- Customized Combobox -->
+    <Style x:Key="CustomCardComboBox" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
@@ -23,19 +21,18 @@
     </Style>
 
     <!--Custom TextBox-->
-    <Style BasedOn="{StaticResource {x:Type TextBox}}"
-           TargetType="TextBox"
-           x:Key="CustomCardTextBox">
+    <Style  x:Key="CustomCardTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Background" Value="#d9d9d9" />
+        <Setter Property="Foreground" Value="{StaticResource FieldsTextsColor}" />
+        <Setter Property="Padding" Value="15,2,15,2" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="12" />
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="20" />
             </Style>
         </Style.Resources>
-        <Setter Property="FontSize" Value="24" />
-        <Setter Property="Background" Value="#d9d9d9" />
-        <Setter Property="Foreground" Value="#3f3f3f" />
-        <Setter Property="Padding" Value="15,2,15,2" />
-        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <!--Modern TextBox-->

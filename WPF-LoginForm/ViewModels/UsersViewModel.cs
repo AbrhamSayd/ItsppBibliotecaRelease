@@ -17,7 +17,6 @@ namespace WPFBiblioteca.ViewModels
         private ObservableCollection<UserModel> _collectionUsers;
         private UserModel _usersModelRow;
         private readonly IUserRepository _userRepository;
-
         #endregion
 
         #region ICommands
@@ -33,9 +32,6 @@ namespace WPFBiblioteca.ViewModels
             GetByAllCommand = new ViewModelCommand(ExecuteGetAllCommand);
             ExecuteGetAllCommand(null);
         }
-
-        
-
         #endregion
 
         #region Methods

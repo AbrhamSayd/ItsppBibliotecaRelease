@@ -103,7 +103,9 @@
                             <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
+                    <RadioButton 
+                        Style="{StaticResource menuButtonStyle}" 
+                        Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BookBookmark" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>

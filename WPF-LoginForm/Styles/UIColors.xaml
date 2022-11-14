@@ -40,6 +40,7 @@
     <!--  Font Colors  -->
     <SolidColorBrush x:Key="ChildTitleColor" Color="#00785C" />
     <SolidColorBrush x:Key="FieldsHeadersColor" Color="#00785C" />
+    <SolidColorBrush x:Key="FieldsTextsColor" Color="Black" />
     <SolidColorBrush x:Key="LocationTitleColor" Color="#00785C" />
     <SolidColorBrush x:Key="DateTextUIColor" Color="#00785C" />
     <SolidColorBrush x:Key="TimeTextUIColor" Color="#00785C" />
