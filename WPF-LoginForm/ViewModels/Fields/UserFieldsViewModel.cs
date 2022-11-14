@@ -59,7 +59,7 @@ namespace WPFBiblioteca.ViewModels.Fields
         {
             return CanCreate;
         }
-        private void ExecuteAddCommand(object obj)
+        private async void ExecuteAddCommand(object obj)
         {
             _userModel = new UserModel()
             {
@@ -70,7 +70,7 @@ namespace WPFBiblioteca.ViewModels.Fields
                 LastName = _lastName,
                 UserType = _userType
             };
-            _userRepository.Add(_userModel);
+           await _userRepository.Add(_userModel);
             GoBackCommand.Execute(null);
         }
         public IEnumerable GetErrors(string propertyName)

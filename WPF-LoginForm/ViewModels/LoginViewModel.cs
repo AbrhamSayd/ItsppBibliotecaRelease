@@ -97,9 +97,9 @@ namespace WPFBiblioteca.ViewModels
             return validData;
         }
 
-        private void ExecuteLoginCommand(object obj)
+        private async void ExecuteLoginCommand(object obj)
         {
-            var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
+            var isValidUser = await userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
             if (isValidUser)
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(

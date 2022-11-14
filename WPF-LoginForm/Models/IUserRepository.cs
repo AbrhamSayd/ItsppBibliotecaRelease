@@ -9,13 +9,13 @@ namespace WPFBiblioteca.Models
 {
     public interface IUserRepository
     {
-        bool AuthenticateUser(NetworkCredential credential);
-        void Add(UserModel userModel);
+        Task<bool> AuthenticateUser(NetworkCredential credential);
+        Task<bool> Add(UserModel userModel);
         void Edit(UserModel userModel);
         void Remove(int id);
         UserModel GetById(int id);
         UserModel GetByUsername(string username);
-        IEnumerable<UserModel> GetByAll();
+        Task<IEnumerable<UserModel>> GetByAll();
         //...
     }
 }

@@ -1,25 +1,21 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MySqlConnector;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using WPFBiblioteca.Models;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WPFBiblioteca.Repositories
 {
     public class UserRepository : RepositoryBase, IUserRepository
     {
-        public void Add(UserModel userModel)
+        public async Task<bool> Add(UserModel userModel)
         {
+
             using (var connection = GetConnection())
             using (var command = new MySqlCommand())
             {
-                connection.OpenAsync();
+               await connection.OpenAsync();
                 command.Connection = connection;
                 command.CommandText =
                 "insert into users(Username_ID,Username,Password,First_Name,Last_Name,User_Type) values (@username_id,@username,@password,@first_name,@last_name,@user_type)";
@@ -29,22 +25,35 @@ namespace WPFBiblioteca.Repositories
                 command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.FirstName;
                 command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
                 command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
-                command.ExecuteScalar();
+                try
+                {
+                    await command.ExecuteScalarAsync();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                    return false;
+                }
+                
             }
+
+            
         }
 
-        public bool AuthenticateUser(NetworkCredential credential)
+        public async Task<bool> AuthenticateUser(NetworkCredential credential)
         {
             bool validUser;
             using (var connection = GetConnection())
             using (var command = new MySqlCommand())
             {
-                connection.OpenAsync();//abrimos la connecion con MySQL
+               await connection.OpenAsync();//abrimos la connecion con MySQL
                 command.Connection = connection;//asignamos al comando la coneccion a mysql
                 command.CommandText = "select * from users where Username=@username and password=@password";//Query para evualar nuestro nombre de usuario y contraseñá
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = credential.UserName;//definimos parametro de username
                 command.Parameters.Add("@password", MySqlDbType.VarChar).Value = credential.Password;//definimos parametro de password
-                validUser = command.ExecuteScalar() == null ? false : true;
+                 validUser = command.ExecuteScalar() == null ? false : true;
             }
             return validUser;//retorna si es que nuestro logeo fue correcto
         }
@@ -53,13 +62,13 @@ namespace WPFBiblioteca.Repositories
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<UserModel> GetByAll()
+        public async Task<IEnumerable<UserModel>> GetByAll()
         {
             var userList = new List<UserModel>();
             using var connection = GetConnection();
             using (var command = new MySqlCommand())
             {
-                connection.OpenAsync();
+               await connection.OpenAsync();
                 command.Connection = connection;
                 command.CommandText = "SELECT * from users order by First_Name asc";
                 using (var reader = command.ExecuteReader())

@@ -40,9 +40,9 @@ namespace WPFBiblioteca.ViewModels
 
         #region Methods
        
-        private void ExecuteGetAllCommand(object obj)
+        private async void ExecuteGetAllCommand(object obj)
         {
-            CollectionUser = new ObservableCollection<UserModel>(_userRepository.GetByAll());
+             CollectionUser = new ObservableCollection<UserModel>(await _userRepository.GetByAll());
 
         }
         #endregion
