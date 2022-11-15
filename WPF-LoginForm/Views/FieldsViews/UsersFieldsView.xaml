@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:customControls="clr-namespace:WPFBiblioteca.CustomControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:fields="clr-namespace:WPFBiblioteca.ViewModels.Fields"
     xmlns:local="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     d:DesignHeight="845"
     d:DesignWidth="1535"
     mc:Ignorable="d">
@@ -18,6 +18,7 @@
                 <RowDefinition Height="35" />
                 <!--  Content section / Child views  -->
                 <RowDefinition Height="*" />
+                <!--  Errors and Buttons  -->
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -36,9 +37,7 @@
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
                         Icon="BookOpenReader" />
-                    <TextBlock
-                        Style="{StaticResource ViewsHeaders}"
-                        Text="Usuario" />
+                    <TextBlock Style="{StaticResource ViewsHeaders}" Text="Usuario" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
@@ -98,7 +97,12 @@
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Contraseña" />
-                    <customControls:BindablePasswordBox HorizontalAlignment="Left" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox
+                        Width="200"
+                        HorizontalAlignment="Left"
+                        PreviewTextInput="TextStringOnPreviewTextInput"
+                        Style="{StaticResource CustomCardTextBox}"
+                        Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
@@ -116,21 +120,27 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button Margin="20" Style="{StaticResource CardButton}" Command="{Binding GoBackCommand}"> 
+                <DockPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+                    <Button
+                        Margin="20"
+                        Command="{Binding GoBackCommand}"
+                        Style="{StaticResource CardButton}">
                         <TextBlock
+                            Name="BtnCancelar"
                             Style="{StaticResource TxtCardButton}"
-                            Text="Cancelar"
-                            Name="BtnCancelar"/>
+                            Text="Cancelar" />
                     </Button>
                     <Button
                         Margin="20"
-                        Command="{Binding AddCommand}"
+                        Command="{Binding EditionCommand}"
                         Style="{StaticResource CardButton}">
                         <TextBlock
+                            Name="BtnAceptar"
                             Style="{StaticResource TxtCardButton}"
-                            Text="Aceptar" 
-                            Name="BtnAceptar"/>
+                            Text="Aceptar" />
                     </Button>
                 </DockPanel>
             </Grid>

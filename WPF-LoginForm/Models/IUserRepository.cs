@@ -11,7 +11,7 @@ namespace WPFBiblioteca.Models
     {
         Task<bool> AuthenticateUser(NetworkCredential credential);
         Task Add(UserModel userModel);
-        void Edit(UserModel userModel);
+        Task Edit(UserModel userModel, int id);
         Task Remove(int id);
         UserModel GetById(int id);
         UserModel GetByUsername(string username);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using WPFBiblioteca.Models;
+using WPFBiblioteca.ViewModels;
 
 namespace WPFBiblioteca.Repositories
 {
@@ -11,7 +12,7 @@ namespace WPFBiblioteca.Repositories
     {
         public async Task Add(UserModel userModel)
         {
-
+            
             using (var connection = GetConnection())
             using (var command = new MySqlCommand())
             {
@@ -28,11 +29,11 @@ namespace WPFBiblioteca.Repositories
                     command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
                     command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
                     object id = await command.ExecuteScalarAsync();
-                    
+                    _errorCode.ErrorCode = "Usuario " + userModel.FirstName + "Editado con Exito"; ;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    _errorCode.ErrorCode = ex.Message;
                 }
             }
         }
@@ -53,35 +54,54 @@ namespace WPFBiblioteca.Repositories
             return validUser;//retorna si es que nuestro logeo fue correcto
         }
 
-        public void Edit(UserModel userModel)
+        public async Task Edit(UserModel userModel, int id)
         {
-            throw new NotImplementedException();
+            
+            await using var connection = GetConnection();
+            await using var command = new MySqlCommand();
+            try
+            {
+                await connection.OpenAsync();
+                command.Connection = connection;
+                command.CommandText =
+                    "UPDATE users SET Username_ID = @username_id, Username = @username, Password = @password, First_Name = @first_name, Last_Name = @last_name, User_Type = @user_type WHERE Username_ID = @static_id";
+                command.Parameters.Add("@static_id", MySqlDbType.Int64).Value = id;
+                command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = userModel.Id;
+                command.Parameters.Add("@username", MySqlDbType.VarChar).Value = userModel.Username;
+                command.Parameters.Add("@password", MySqlDbType.VarChar).Value = userModel.Password;
+                command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.FirstName;
+                command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
+                command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
+                await command.ExecuteScalarAsync();
+                _errorCode.ErrorCode = "Usuario "+ userModel.FirstName + "Editado con Exito";
+            }
+            catch (Exception ex)
+            {
+                _errorCode.ErrorCode = ex.Message;
+            }
         }
         public async Task<IEnumerable<UserModel>> GetByAll()
         {
+            
             var userList = new List<UserModel>();
-            using var connection = GetConnection();
-            using (var command = new MySqlCommand())
+            await using var connection = GetConnection();
+            await using var command = new MySqlCommand();
+            await connection.OpenAsync();
+            command.Connection = connection;
+            command.CommandText = "SELECT * from users order by First_Name asc";
+            await using var reader = await command.ExecuteReaderAsync();
+            while (reader.Read())
             {
-               await connection.OpenAsync();
-                command.Connection = connection;
-                command.CommandText = "SELECT * from users order by First_Name asc";
-                using (var reader = command.ExecuteReader())
+                var userModel = new UserModel
                 {
-                    while (reader.Read())
-                    {
-                        var userModel = new UserModel
-                        {
-                            Id = int.Parse(reader[0].ToString() ?? string.Empty),
-                            Username = reader[1].ToString() ?? string.Empty,
-                            Password = reader[2].ToString() ?? string.Empty,
-                            FirstName = reader[3].ToString() ?? string.Empty,
-                            LastName = reader[4].ToString() ?? string.Empty,
-                            UserType = reader[5].ToString() ?? string.Empty,
-                        };
-                        userList.Add(userModel);
-                    }
-                }
+                    Id = int.Parse(reader[0].ToString() ?? string.Empty),
+                    Username = reader[1].ToString() ?? string.Empty,
+                    Password = reader[2].ToString() ?? string.Empty,
+                    FirstName = reader[3].ToString() ?? string.Empty,
+                    LastName = reader[4].ToString() ?? string.Empty,
+                    UserType = reader[5].ToString() ?? string.Empty,
+                };
+                userList.Add(userModel);
             }
 
             return userList;
@@ -119,6 +139,7 @@ namespace WPFBiblioteca.Repositories
         }
         public async Task Remove(int id)
         {
+            
             using var connection = GetConnection();
             using (var command = new MySqlCommand())
             {

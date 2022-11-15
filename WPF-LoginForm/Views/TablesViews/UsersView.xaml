@@ -92,47 +92,71 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Grid Grid.Row="2" HorizontalAlignment="Right">
+            <Grid Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <!--  Grid Buttons  -->
+                    <Grid Grid.Column="1">
+                        <Grid HorizontalAlignment="Right">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+                            <!--  BOTON AGREGAR  -->
+                            <Button
+                                Grid.Column="3"
+                                Margin="0,5,25,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding NavigateAddCommand}"
+                                Style="{StaticResource BtnAgregarStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Style="{StaticResource AddIconStyle}" />
+                                    <TextBlock Style="{StaticResource TextBlockAddStyle}" />
+                                </StackPanel>
+                            </Button>
 
-                <!--  BOTON AGREGAR  -->
-                <Button
-                    Grid.Column="2"
-                    Margin="0,5,25,0"
-                    HorizontalAlignment="Right"
-                    Command="{Binding NavigateAddCommand}"
-                    Style="{StaticResource BtnAgregarStyle}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Style="{StaticResource AddIconStyle}" />
-                        <TextBlock Style="{StaticResource TextBlockAddStyle}" />
-                    </StackPanel>
-                </Button>
+                            <!--  BOTON Editar  -->
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="30"
+                                Margin="0,0,15,0"
+                                Command="{Binding EditRowCommand}"
+                                IsEnabled="{Binding CanDelete}"
+                                Style="{StaticResource GridEditButton}">
+                                <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
+                            </Button>
 
-                <!--  BOTON Editar  -->
-                <Button
-                    Grid.Column="1"
-                    Width="60"
-                    Height="30"
-                    Margin="0,0,15,0"
-                    Style="{StaticResource GridEditButton}">
-                    <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
-                </Button>
+                            <!--  BOTON Eliminar  -->
+                            <Button
+                                Grid.Column="1"
+                                Width="60"
+                                Height="30"
+                                Margin="0,0,15,0"
+                                Command="{Binding RemoveRowCommand}"
+                                Style="{StaticResource GridDeleteButton}">
+                                <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
+                            </Button>
 
-                <!--  BOTON Eliminar  -->
-                <Button
-                    Grid.Column="0"
-                    Width="60"
-                    Height="30"
-                    Margin="0,0,15,0"
-                    Command="{Binding RemoveRowCommand}"
-                    Style="{StaticResource GridDeleteButton}">
-                    <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
-                </Button>
+                        </Grid>
+                    </Grid>
+                    <!--  Grid ErroHandler  -->
+                    <Grid Grid.Column="0" HorizontalAlignment="Center">
+                        <!--  TextBloc Errores  -->
+                        <TextBlock
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Text="Errores" />
+                    </Grid>
+                </Grid>
 
             </Grid>
         </Grid>
