@@ -28,12 +28,11 @@ namespace WPFBiblioteca.Repositories
                     command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.FirstName;
                     command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
                     command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
-                    object id = await command.ExecuteScalarAsync();
-                    _errorCode.ErrorCode = "Usuario " + userModel.FirstName + "Editado con Exito"; ;
+                    object id = await command.ExecuteScalarAsync(); ;
                 }
                 catch (Exception ex)
                 {
-                    _errorCode.ErrorCode = ex.Message;
+                    Console.WriteLine(ex.ToString());
                 }
             }
         }
@@ -73,11 +72,10 @@ namespace WPFBiblioteca.Repositories
                 command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
                 command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
                 await command.ExecuteScalarAsync();
-                _errorCode.ErrorCode = "Usuario "+ userModel.FirstName + "Editado con Exito";
             }
             catch (Exception ex)
             {
-                _errorCode.ErrorCode = ex.Message;
+                Console.WriteLine(ex.ToString());
             }
         }
         public async Task<IEnumerable<UserModel>> GetByAll()
