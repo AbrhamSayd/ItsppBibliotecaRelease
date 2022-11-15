@@ -57,15 +57,6 @@
                             FontWeight="UltraLight"
                             Foreground="{StaticResource LocationTitleColor}"
                             TextWrapping="Wrap"><Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora" /></TextBlock>
-                <TextBlock
-                            Margin="40,0,0,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontFamily="{DynamicResource SFUIDisplay}"
-                            FontSize="22"
-                            FontWeight="Bold"
-                            Foreground="{StaticResource DateTextUIColor}"
-                            TextWrapping="Wrap"><Run Language="es-mx" Text="10:40 PM" /></TextBlock>
 
                 <TextBlock
                             Margin="15,0,50,0"
@@ -73,7 +64,6 @@
                             VerticalAlignment="Bottom"
                             FontFamily="{DynamicResource SFUIDisplay}"
                             FontSize="22"
-                            FontWeight="Bold"
                             Foreground="{StaticResource DateTextUIColor}"
                             TextWrapping="Wrap"><Run Language="es-mx" Text="10/22/2022" /></TextBlock>
 

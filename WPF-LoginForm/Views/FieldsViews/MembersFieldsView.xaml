@@ -1,0 +1,168 @@
+﻿<UserControl x:Class="WPFBiblioteca.Views.FieldsViews.MembersFieldsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFBiblioteca.Views.FieldsViews"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+             d:DesignHeight="845"
+             d:DesignWidth="1535">
+    <Border Background="white" CornerRadius="1">
+        <Grid>
+            <Grid>
+            <Grid.RowDefinitions>
+                <!--  Control Bar  -->
+                <RowDefinition Height="35" />
+                <!--  Content section / Child views  -->
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <StackPanel
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+
+                <fa:IconImage
+                    Height="30"
+                    Margin="15,0,10,0"
+                    Foreground="{StaticResource FieldsHeadersColor}"
+                    Icon="Portrait" />
+                <TextBlock
+                    Style="{StaticResource ViewsHeaders}"
+                    Text="Miembros" />
+            </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock
+                        Padding="20,60,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Nombre(s)" />
+                    <TextBox
+                        Width="400"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource CustomCardTextBox}"/>
+
+
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Carrera" />
+                    <TextBox
+                        Width="400"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource CustomCardTextBox}"/>
+
+
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Numero de telefono" />
+                    <TextBox
+                        Width="400"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource CustomCardTextBox}"/>
+
+
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Deudor" />
+                    <TextBox
+                        Width="400"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource CustomCardTextBox}"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="2">
+                    <TextBlock
+                        Padding="20,60,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Apellido(s)" />
+                    <TextBox
+                        Width="400"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource CustomCardTextBox}"/>
+
+
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="ID" />
+                    <TextBox
+                        Width="400"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource CustomCardTextBox}"/>
+
+
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Gmail" />
+                    <TextBox
+                        Width="400"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource CustomCardTextBox}"/>
+
+
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Prestamo" />
+                    <TextBox
+                        Width="400"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource CustomCardTextBox}"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Button Margin="20" Style="{StaticResource CardButton}">
+                        <TextBlock
+                            Margin="20,6,20,6"
+                            FontSize="20"
+                            Text="Cancelar"
+                            Name="BtnCancelar"/>
+                    </Button>
+                    <Button
+                        Margin="20"
+                        Command="{Binding AddCommand}"
+                        Style="{StaticResource CardButton}">
+                        <TextBlock
+                            Margin="20,6,20,6"
+                            FontSize="20"
+                            Text="Aceptar" 
+                            Name="BtnAceptar"/>
+                    </Button>
+                </DockPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
