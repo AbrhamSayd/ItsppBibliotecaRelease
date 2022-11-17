@@ -32,10 +32,10 @@
                         Height="30"
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
-                        Icon="BookBookmark" />
+                        Icon="BookOpenReader" />
                     <TextBlock
                         Style="{StaticResource ViewsHeaders}"
-                        Text="Miembros" />
+                        Text="Prestamo" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">

@@ -26,7 +26,7 @@
 
     <SolidColorBrush x:Key="primarySolidColor" Color="White"/>
     <SolidColorBrush x:Key="SecundarySolidColor" Color="#00785C" />
-    <SolidColorBrush x:Key="color2" Color="#784DFD" />
+    <SolidColorBrush x:Key="tertiarySolidColor" Color="#00c496" />
     <SolidColorBrush x:Key="color3" Color="#4ADAEC" />
     <SolidColorBrush x:Key="color4" Color="#FB539B" />
     <SolidColorBrush x:Key="color5" Color="#7E82FC" />

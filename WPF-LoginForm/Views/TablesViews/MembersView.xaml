@@ -1,16 +1,14 @@
-﻿<UserControl
-    x:Class="WPFBiblioteca.Views.TablesViews.UsersView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    xmlns:local="clr-namespace:WPFBiblioteca.Views.TablesViews"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
-    d:DesignHeight="845"
-    d:DesignWidth="1596"
-    mc:Ignorable="d">
-
+﻿<UserControl x:Class="WPFBiblioteca.Views.TablesViews.MembersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFBiblioteca.Views.TablesViews"
+             xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             d:DesignHeight="845"
+             d:DesignWidth="1596"
+             mc:Ignorable="d">
     <Border Background="white" CornerRadius="1">
         <Grid>
             <Grid.RowDefinitions>
@@ -39,8 +37,8 @@
                         Height="30"
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
-                        Icon="BookOpenReader" />
-                    <TextBlock Style="{StaticResource ViewsHeaders}" Text="Usuarios" />
+                        Icon="Portrait" />
+                    <TextBlock Style="{StaticResource ViewsHeaders}" Text="Miembros" />
                 </StackPanel>
             </Grid>
             <DataGrid
@@ -55,38 +53,44 @@
                     <!--  ID Column  -->
                     <DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding Id}"
+                        Binding="{Binding Member_ID}"
                         Header="ID"
                         IsReadOnly="True" />
-                    <!--  Username Column  -->
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Username}"
-                        Header="Nombre de usuario"
-                        IsReadOnly="True" />
-                    <!--  Password Column  -->
-                    <DataGridTextColumn
-                        Width="0"
-                        Binding="{Binding Password}"
-                        Header="Contraseña"
-                        IsReadOnly="True" />
-                    <!--  Name Column  -->
+                    <!--  First Name Column  -->
                     <DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding FirstName}"
-                        Header="Nombre"
+                        Binding="{Binding First_Name}"
+                        Header="Nombre(s)"
                         IsReadOnly="True" />
-                    <!--  Last Name Column  -->
+                    <!--  Second Name Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding LastName}"
-                        Header="Apellido"
+                        Binding="{Binding Second_Name}"
+                        Header="Apellido(s)"
                         IsReadOnly="True" />
-                    <!--  UserType Column  -->
+                    <!--  Carrera Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding UserType}"
-                        Header="Tipo de usuario"
+                        Binding="{Binding Carrera}"
+                        Header="Carrera/Academia"
+                        IsReadOnly="True"/>
+                    <!--  Email Column  -->
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Email}"
+                        Header="Email"
+                        IsReadOnly="True" />
+                    <!--  Phone Number Column  -->
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Phone_Nummber}"
+                        Header="Número Celular"
+                        IsReadOnly="True" />
+                    <!--  IsDeptor? Column  -->
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Deudor}"
+                        Header="Deudor"
                         IsReadOnly="True" />
 
                 </DataGrid.Columns>
@@ -105,12 +109,11 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <!--  BOTON AGREGAR  -->
                             <Button
-                                Grid.Column="3"
+                                Grid.Column="2"
                                 Command="{Binding NavigateAddCommand}"
                                 Style="{StaticResource BtnAgregarStyle}">
                                 <StackPanel Orientation="Horizontal">
@@ -121,19 +124,19 @@
 
                             <!--  BOTON Editar  -->
                             <Button
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Command="{Binding EditRowCommand}"
                                 IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridEditButton}">
-                                <fa:IconImage Icon="Edit" Style="{StaticResource gridEditIcon}" />
+                                <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
                             </Button>
 
                             <!--  BOTON Eliminar  -->
                             <Button
-                                Grid.Column="1"
+                                Grid.Column="0"
                                 Command="{Binding RemoveRowCommand}"
                                 Style="{StaticResource GridDeleteButton}">
-                                <fa:IconImage Style="{StaticResource gridDeleteIcon}" />
+                                <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
                             </Button>
 
                         </Grid>
@@ -142,8 +145,7 @@
                     <Grid Grid.Column="0" HorizontalAlignment="Center">
                         <!--  TextBlock Errores  -->
                         <TextBlock
-                            Style="{StaticResource ErrorAddingTextStyle}"/>
-                        <!--Text="{Binding NotImplementedProperty}"-->
+                            Style="{StaticResource ErrorAddingTextStyle}"/>        <!--Text="{Binding NotImplementedProperty}"-->
                     </Grid>
                 </Grid>
 
