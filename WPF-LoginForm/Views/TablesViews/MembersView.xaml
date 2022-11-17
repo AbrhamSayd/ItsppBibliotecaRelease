@@ -142,7 +142,7 @@
                         </Grid>
                     </Grid>
                     <!--  Grid ErroHandler  -->
-                    <Grid Grid.Column="0" HorizontalAlignment="Center">
+                    <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <!--  TextBlock Errores  -->
                         <TextBlock
                             Style="{StaticResource ErrorAddingTextStyle}"/>        <!--Text="{Binding NotImplementedProperty}"-->

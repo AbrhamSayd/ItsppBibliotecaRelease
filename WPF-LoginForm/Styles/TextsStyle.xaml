@@ -20,7 +20,7 @@
     <!--Texto de error al agregar -->
     <Style x:Key="ErrorAddingTextStyle" TargetType="{x:Type TextBlock}">  
         <Setter Property="Text" Value="Mensaje de error"/>
-        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource tertiarySolidColor}" />

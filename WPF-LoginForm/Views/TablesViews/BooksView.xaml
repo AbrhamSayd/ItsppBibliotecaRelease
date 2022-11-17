@@ -123,40 +123,59 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Grid Grid.Row="2" HorizontalAlignment="Right">
+            <Grid Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <!--  Grid Buttons  -->
+                    <Grid Grid.Column="1">
+                        <Grid HorizontalAlignment="Right">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+                            <!--  BOTON AGREGAR  -->
+                            <Button
+                                Grid.Column="2"
+                                Command="{Binding NavigateAddCommand}"
+                                Style="{StaticResource BtnAgregarStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Style="{StaticResource AddIconStyle}" />
+                                    <TextBlock Style="{StaticResource TextBlockAddStyle}" />
+                                </StackPanel>
+                            </Button>
 
-                <!--  BOTON AGREGAR  -->
-                <Button
-                    Grid.Column="2"
-                    Command="{Binding NavigateAddCommand}"
-                    Style="{StaticResource BtnAgregarStyle}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Style="{StaticResource AddIconStyle}" />
-                        <TextBlock Style="{StaticResource TextBlockAddStyle}" />
-                    </StackPanel>
-                </Button>
+                            <!--  BOTON Editar  -->
+                            <Button
+                                Grid.Column="1"
+                                Command="{Binding EditRowCommand}"
+                                IsEnabled="{Binding CanDelete}"
+                                Style="{StaticResource GridEditButton}">
+                                <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
+                            </Button>
 
-                <!--  BOTON Editar  -->
-                <Button
-                    Grid.Column="1"
-                    Style="{StaticResource GridEditButton}">
-                    <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
-                </Button>
+                            <!--  BOTON Eliminar  -->
+                            <Button
+                                Grid.Column="0"
+                                Command="{Binding RemoveRowCommand}"
+                                Style="{StaticResource GridDeleteButton}">
+                                <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
+                            </Button>
 
-                <!--  BOTON Eliminar  -->
-                <Button
-                    Grid.Column="0"
-                    Command="{Binding }"
-                    Style="{StaticResource GridDeleteButton}">
-                    <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
-                </Button>
-
+                        </Grid>
+                    </Grid>
+                    <!--  Grid ErroHandler  -->
+                    <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!--  TextBlock Errores  -->
+                        <TextBlock
+                            Style="{StaticResource ErrorAddingTextStyle}"/>
+                        <!--Text="{Binding NotImplementedProperty}"-->
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     </Border>

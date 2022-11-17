@@ -12,8 +12,8 @@
     xmlns:fields="clr-namespace:WPFBiblioteca.ViewModels.Fields"
     xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     Title="MainWindowView"
-    MinWidth="1700"
-    MinHeight="900"
+    d:DesignWidth="1700"
+    d:DesignHeight="900"
     AllowsTransparency="True"
     Background="Transparent"
     BorderBrush="Transparent"
@@ -60,57 +60,64 @@
                 </Grid.RowDefinitions>
 
                 <!--  Navigation Menu  -->
-                <StackPanel Grid.Row="0" Margin="0,20,10,0">
-                    <!--  CurrentUserSesion  -->
-                    <RadioButton
+                <ScrollViewer Grid.Row="0"
+                              Margin="0,20,10,0"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Disabled"
+                              CanContentScroll="True">
+                    <StackPanel>
+                        <!--  CurrentUserSesion  -->
+                        <RadioButton
                         BorderThickness="0"
                         Style="{StaticResource menuButtonStyleV2}"
                         Tag="{StaticResource primarySolidColor}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage
                                 Width="65"
                                 Height="65"
                                 Icon="UserAlt"
                                 Style="{StaticResource menuButtonIcon}" />
-                        </StackPanel>
-                    </RadioButton>
+                            </StackPanel>
+                        </RadioButton>
 
-                    <!--  Menu Buttons  -->
-                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="BookOpen" Style="{StaticResource menuButtonIcon}" />
-                        </StackPanel>
                         <!--  Menu Buttons  -->
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Portrait" Style="{StaticResource menuButtonIcon}" />
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton
+                        <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="BookOpen" Style="{StaticResource menuButtonIcon}" />
+                            </StackPanel>
+                            <!--  Menu Buttons  -->
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Portrait" Style="{StaticResource menuButtonIcon}" />
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton
                         Command="{Binding}"
                         Style="{StaticResource menuButtonStyle}"
                         Tag="{StaticResource primarySolidColor}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="HomeAlt" Style="{StaticResource menuButtonIcon}" />
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="HomeAlt" Style="{StaticResource menuButtonIcon}" />
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton
                         Command="{Binding NavigateUsersCommand}"
                         Style="{StaticResource menuButtonStyle}"
                         Tag="{StaticResource primarySolidColor}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton 
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton 
                         Style="{StaticResource menuButtonStyle}" 
                         Tag="{StaticResource primarySolidColor}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="BookBookmark" Style="{StaticResource menuButtonIcon}" />
-                        </StackPanel>
-                    </RadioButton>
-                </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="BookBookmark" Style="{StaticResource menuButtonIcon}" />
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </ScrollViewer>
+                        
 
                 <RadioButton
                     Grid.Row="1"
