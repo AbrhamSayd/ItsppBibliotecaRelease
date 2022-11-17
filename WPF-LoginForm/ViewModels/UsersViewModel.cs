@@ -23,18 +23,6 @@ namespace WPFBiblioteca.ViewModels
         private string _errorCode;
 
         #endregion
-
-        #region ICommands
-
-        public ICommand GetByAllCommand { get; }
-        public ICommand NavigateAddCommand { get; }
-        public ICommand RemoveRowCommand { get; }
-        public ICommand EditRowCommand { get; }
-        
-       
-
-        #endregion
-
         #region constructor
 
         public UsersViewModel(NavigationStore navigationStore)
@@ -53,9 +41,23 @@ namespace WPFBiblioteca.ViewModels
                     new NavigationService<UserFieldsViewModel>(navigationStore,
                         () => new UserFieldsViewModel(_usersModelRow, "Edit", navigationStore)));
             RemoveRowCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
+                
         }
 
         #endregion
+
+        #region ICommands
+
+        public ICommand GetByAllCommand { get; }
+        public ICommand NavigateAddCommand { get; }
+        public ICommand RemoveRowCommand { get; }
+        public ICommand EditRowCommand { get; }
+        
+       
+
+        #endregion
+
+        
 
         #region Methods
 
@@ -72,7 +74,7 @@ namespace WPFBiblioteca.ViewModels
 
         private async void ExecuteGetAllCommand(object obj)
         {
-            CollectionUser = new ObservableCollection<UserModel>(await _userRepository.GetByAll());
+            CollectionUsers = new ObservableCollection<UserModel>(await _userRepository.GetByAll());
         }
 
         #endregion
@@ -98,13 +100,13 @@ namespace WPFBiblioteca.ViewModels
                 OnPropertyChanged(nameof(CanDelete));
             }
         }
-        public ObservableCollection<UserModel> CollectionUser
+        public ObservableCollection<UserModel> CollectionUsers
         {
             get => _collectionUsers;
             set
             {
                 _collectionUsers = value;
-                OnPropertyChanged(nameof(CollectionUser));
+                OnPropertyChanged(nameof(CollectionUsers));
             }
         }
 

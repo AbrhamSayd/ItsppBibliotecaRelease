@@ -22,8 +22,7 @@ namespace WPFBiblioteca.ViewModels
         //Fields
         private readonly NavigationStore _navigationStore;
         private UserAccountModel _currentUserAccount;
-        private IUserRepository userRepository;
-        private UserModel _userModel;
+        private readonly IUserRepository _userRepository;
         private int _id;
         private string _username;
         private string _password;
@@ -31,7 +30,7 @@ namespace WPFBiblioteca.ViewModels
         private string _lastName;
         private string _userType;
 
-        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+        public ViewModelBase CurrentViewModel=> _navigationStore.CurrentViewModel;
 
         
         
@@ -106,16 +105,19 @@ namespace WPFBiblioteca.ViewModels
 
         
         
-        public MainViewModel()
+        public MainViewModel(NavigationStore navigationStore)
         {
-            
-            _navigationStore = new NavigationStore();
-            if (_navigationStore.CurrentViewModel != null) _navigationStore.CurrentViewModel = new MainViewModel();
-            userRepository = new UserRepository();
+
+            _navigationStore = navigationStore ?? throw new ArgumentNullException(nameof(navigationStore));
+           // _navigationStore.CurrentViewModel 
+            _userRepository = new UserRepository();
             CurrentUserAccount = new UserAccountModel();
             LoadCurrentUserData();
-            NavigateUsersCommand = new NavigateCommand<UsersViewModel>(new NavigationService<UsersViewModel>(_navigationStore, () => new UsersViewModel(_navigationStore)));
-            NavigateBooksCommand = new NavigateCommand<BooksViewModel>(new NavigationService<BooksViewModel>(_navigationStore, () => new BooksViewModel(_navigationStore)));
+            
+            NavigateBooks = new GoBooksCommand(null,
+                new NavigationService<BooksViewModel>(navigationStore, (() => new BooksViewModel(navigationStore))));
+            NavigateUsers = new GoUsersCommand(null,new 
+                NavigationService<UsersViewModel>(navigationStore, () => new UsersViewModel(navigationStore)));
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
@@ -128,13 +130,13 @@ namespace WPFBiblioteca.ViewModels
         }
 
         
-        public ICommand NavigateUsersCommand { get; }
-        public ICommand NavigateBooksCommand { get; }
+        public ICommand NavigateUsers{ get; }
+        public ICommand NavigateBooks { get; }
 
 
         private void LoadCurrentUserData()
         {
-            var user = userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
+            var user = _userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)
             {
                 CurrentUserAccount.Username = user.Username;

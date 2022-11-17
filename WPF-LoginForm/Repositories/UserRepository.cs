@@ -12,9 +12,8 @@ namespace WPFBiblioteca.Repositories
     {
         public async Task Add(UserModel userModel)
         {
-            
-            using (var connection = GetConnection())
-            using (var command = new MySqlCommand())
+            await using (var connection = GetConnection())
+            await using (var command = new MySqlCommand())
             {
                 try
                 {
@@ -28,7 +27,7 @@ namespace WPFBiblioteca.Repositories
                     command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.FirstName;
                     command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
                     command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
-                    object id = await command.ExecuteScalarAsync(); ;
+                   await command.ExecuteScalarAsync();
                 }
                 catch (Exception ex)
                 {

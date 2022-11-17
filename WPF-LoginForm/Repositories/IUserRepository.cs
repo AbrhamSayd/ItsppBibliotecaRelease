@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
+using WPFBiblioteca.Models;
 
-namespace WPFBiblioteca.Models
+namespace WPFBiblioteca.Repositories
 {
     public interface IUserRepository
     {

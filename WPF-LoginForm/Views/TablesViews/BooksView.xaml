@@ -46,76 +46,76 @@
             <DataGrid Grid.Row="1"
                     CellStyle="{DynamicResource DataGridCellStyle}"
                     ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                    ItemsSource="{Binding CollectionUser}"
+                    ItemsSource="{Binding CollectionBooks}"
                     RowStyle="{DynamicResource DataGridRowStyle}"
-                    SelectedItem="{Binding UsersModelRow}"
+                    SelectedItem="{Binding CollectionBooks}"
                     Style="{DynamicResource DataGridStyle}">
                 <DataGrid.Columns>
 
                     <!--  ID Column  -->
                     <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding }"
+                            Binding="{Binding Id}"
                             Header="ID"
                             IsReadOnly="True" />
                     <!--  ISBN Column  -->
                     <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding }"
+                            Binding="{Binding Isbn}"
                             Header="ISBN"
                             IsReadOnly="True" />
                     <!--  Name Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
+                        Binding="{Binding Name}"
                         Header="Nombre del libro"
                         IsReadOnly="True" />
                     <!--  Author Column  -->
                     <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding }"
+                            Binding="{Binding Author}"
                             Header="Autor"
                             IsReadOnly="True" />
                     <!--  Editorial Column  -->
                     <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding }"
+                            Binding="{Binding Editorial}"
                             Header="Editorial"
                             IsReadOnly="True" />
                     <!--  Published_Year Name Column  -->
                     <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding }"
+                            Binding="{Binding PublishedYear}"
                             Header="Año"
                             IsReadOnly="True" />
                     <!--  stock Column  -->
                     <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding }"
+                            Binding="{Binding Stock}"
                             Header="Disponibles"
                             IsReadOnly="True" />
                     <!--  Color Column  -->
                     <DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding }"
+                        Binding="{Binding Color}"
                         Header="Color"
                         IsReadOnly="True" />
                     <!--  Category Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
+                        Binding="{Binding Category}"
                         Header="Categoría"
                         IsReadOnly="True" />
                     <!--  Location Column  -->
                     <DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding }"
+                        Binding="{Binding Location}"
                         Header="Ubicación"
                         IsReadOnly="True" />
                     <!--  Remarks Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
+                        Binding="{Binding Remarks}"
                         Header="Notas"
                         IsReadOnly="True" />
 
