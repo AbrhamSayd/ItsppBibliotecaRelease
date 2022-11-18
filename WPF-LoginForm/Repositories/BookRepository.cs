@@ -60,10 +60,10 @@ namespace WPFBiblioteca.Repositories
                     await connection.OpenAsync();
                     command.Connection = connection;
                     command.CommandText =
-                        "UPDATE books SET" + "(Book_Id = @book_Id," + "Isbn = @Isbn," + "Name = @name," +
-                        "Author = @author," + "Editoral = @editoral," + "Published_Year = @published_Year," +
-                        "Stock = @stock," + "Color = @color," + "Category = @category" + "Location = @location," +
-                        "Remarks = @remarks" + ";";
+                        "UPDATE books SET " + "(Book_Id = @book_Id," + "Isbn = @Isbn," + "Name = @name," +
+                        "Author = @author," + "Editorial = @editoral," + "Published_Year = @published_Year," +
+                        "Stock = @stock," + "Color = @color," + "Category = @category," + "Location = @location," +
+                        "Remarks = @remarks)" + ";";
                     command.Parameters.Add("@book_Id", MySqlDbType.Int64).Value = book.Id;
                     command.Parameters.Add("@isbn", MySqlDbType.Int64).Value = book.Isbn;
                     command.Parameters.Add("@name", MySqlDbType.VarChar).Value = book.Name;
@@ -75,7 +75,7 @@ namespace WPFBiblioteca.Repositories
                     command.Parameters.Add("@category", MySqlDbType.String).Value = book.Category;
                     command.Parameters.Add("@location", MySqlDbType.String).Value = book.Location;
                     command.Parameters.Add("@remarks", MySqlDbType.String).Value = book.Remarks;
-                    await command.ExecuteScalarAsync(CancellationToken.None);
+                     command.ExecuteScalar();
                     _errorCode = "400";
                 }
                 catch (Exception e)

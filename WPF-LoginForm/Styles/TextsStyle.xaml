@@ -1,7 +1,6 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--Tables TITLE-->
+    <!--  Tables TITLE  -->
     <Style x:Key="ViewsHeaders" TargetType="{x:Type TextBlock}">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="32" />
@@ -9,7 +8,7 @@
         <Setter Property="Foreground" Value="{StaticResource FieldsHeadersColor}" />
     </Style>
 
-    <!--Texto que va encima de los campos-->
+    <!--  Texto que va encima de los campos  -->
     <Style x:Key="FieldsHeaders" TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="28" />
         <Setter Property="FontWeight" Value="Medium" />
@@ -17,9 +16,9 @@
         <Setter Property="Foreground" Value="{StaticResource FieldsHeadersColor}" />
     </Style>
 
-    <!--Texto de error al agregar -->
-    <Style x:Key="ErrorAddingTextStyle" TargetType="{x:Type TextBlock}">  
-        <Setter Property="Text" Value="Mensaje de error"/>
+    <!--  Texto de error al agregar  -->
+    <Style x:Key="ErrorAddingTextStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Text" Value="Mensaje de error" />
         <Setter Property="FontSize" Value="28" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="Background" Value="Transparent" />

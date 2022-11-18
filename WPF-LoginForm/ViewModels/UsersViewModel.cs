@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -7,7 +6,6 @@ using WPFBiblioteca.Repositories;
 using WPFBiblioteca.Services;
 using WPFBiblioteca.Stores;
 using WPFBiblioteca.ViewModels.Fields;
-using WPFBiblioteca.Views.FieldsViews;
 
 
 namespace WPFBiblioteca.ViewModels

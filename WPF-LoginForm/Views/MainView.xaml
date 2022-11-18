@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:fields="clr-namespace:WPFBiblioteca.ViewModels.Fields"
+    xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
-    xmlns:fields="clr-namespace:WPFBiblioteca.ViewModels.Fields"
-    xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     Title="MainWindowView"
     MinWidth="1700"
     MinHeight="900"
@@ -61,7 +61,6 @@
                     <!--  CurrentUserSesion  -->
                     <RadioButton
                         BorderThickness="0"
-                        Command="{Binding NavigateBooksCommand}"
                         Style="{StaticResource menuButtonStyleV2}"
                         Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
@@ -101,9 +100,9 @@
                             <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton 
+                    <RadioButton
                         Command="{Binding NavigateBooks}"
-                        Style="{StaticResource menuButtonStyle}" 
+                        Style="{StaticResource menuButtonStyle}"
                         Tag="{StaticResource primarySolidColor}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BookBookmark" Style="{StaticResource menuButtonIcon}" />

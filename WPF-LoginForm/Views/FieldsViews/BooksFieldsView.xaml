@@ -54,6 +54,7 @@
                     <TextBox
                         x:Name="TxtName"
                         Width="400"
+                        Text="{Binding Name}"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
                         Style="{StaticResource CustomCardTextBox}"/>
@@ -68,6 +69,7 @@
                         Width="400"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
+                        Text="{Binding Editorial}"
                         Style="{StaticResource CustomCardTextBox}"/>
 
 
@@ -78,6 +80,7 @@
                     <TextBox
                         x:Name="TxtIsbn"
                         Width="400"
+                        Text="{Binding Isbn}"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
                         Style="{StaticResource CustomCardTextBox}"/>
@@ -92,9 +95,8 @@
                         Width="400"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
+                        Text="{Binding Color}"
                         Style="{StaticResource CustomCardTextBox}"/>
-
-
                     <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
@@ -102,6 +104,7 @@
                     <TextBox
                         x:Name="TxtNota"
                         Width="400"
+                        Text="{Binding Remarks}"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
                         Style="{StaticResource CustomCardTextBox}"/>
@@ -120,6 +123,7 @@
                     <TextBox
                         x:Name="TxtAutor"
                         Width="400"
+                        Text="{Binding Author}"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
                         Style="{StaticResource CustomCardTextBox}"/>
@@ -132,6 +136,7 @@
                     <TextBox
                         x:Name="TxtAñoPubli"
                         Width="400"
+                        Text="{Binding PublishedYear}"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
                         Style="{StaticResource CustomCardTextBox}"/>
@@ -144,6 +149,7 @@
                     <TextBox
                         x:Name="TxtCategoria"
                         Width="400"
+                        Text="{Binding Category}"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
                         Style="{StaticResource CustomCardTextBox}"/>
@@ -155,6 +161,7 @@
                         Text="Existencia" />
                     <TextBox
                         x:Name="TxtExistencia"
+                        Text="{Binding Stock}"
                         Width="400"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
@@ -167,7 +174,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button Margin="20" Style="{StaticResource CardButton}">
+                    <Button Margin="20" Style="{StaticResource CardButton}" Command="{Binding GoBackCommand}">
                         <TextBlock
                             Margin="20,6,20,6"
                             FontSize="20"
@@ -176,7 +183,7 @@
                     </Button>
                     <Button
                         Margin="20"
-                        Command="{Binding AddCommand}"
+                        Command="{Binding EditionCommand}"
                         Style="{StaticResource CardButton}">
                         <TextBlock
                             Margin="20,6,20,6"
