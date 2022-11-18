@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:fields="clr-namespace:WPFBiblioteca.ViewModels.Fields"
+    xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
-    xmlns:fields="clr-namespace:WPFBiblioteca.ViewModels.Fields"
-    xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     Title="MainWindowView"
     d:DesignWidth="1700"
     d:DesignHeight="900"
@@ -21,15 +21,12 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Window.DataContext>
-        <viewModels:MainViewModel />
-    </Window.DataContext>
     <ContentControl.Resources>
         <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
             <tablesViews:UsersView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
-            <fields:BooksView />
+            <tablesViews:BooksView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type fields:BooksFieldsViewModel}">
             <fieldsViews:BooksFieldsView />
@@ -96,20 +93,21 @@
                         Command="{Binding}"
                         Style="{StaticResource menuButtonStyle}"
                         Tag="{StaticResource primarySolidColor}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="HomeAlt" Style="{StaticResource menuButtonIcon}" />
-                            </StackPanel>
-                        </RadioButton>
-                        <RadioButton
-                        Command="{Binding NavigateUsersCommand}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="HomeAlt" Style="{StaticResource menuButtonIcon}" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton
+                        Command="{Binding NavigateUsers}"
                         Style="{StaticResource menuButtonStyle}"
                         Tag="{StaticResource primarySolidColor}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
-                            </StackPanel>
-                        </RadioButton>
-                        <RadioButton 
-                        Style="{StaticResource menuButtonStyle}" 
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton
+                        Command="{Binding NavigateBooks}"
+                        Style="{StaticResource menuButtonStyle}"
                         Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="BookBookmark" Style="{StaticResource menuButtonIcon}" />

@@ -48,18 +48,21 @@ namespace WPFBiblioteca.ViewModels.Fields
         public UserFieldsViewModel(UserModel editUser, string mode, NavigationStore navigationStore)
         {
             _mode = mode;
-            _userModel = editUser;
+            _userModel = editUser ?? new UserModel();
+            
             GoBackCommand = new GoUsersCommand(null,
                 new NavigationService<UsersViewModel>(navigationStore,
                     () => new UsersViewModel(navigationStore)));
             _userRepository = new UserRepository();
-            EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
+            EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEditionCommand);
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
 
             if (mode == "Edit")
                 FillModel();
         }
+
+        
 
         private void FillModel()
         {
@@ -76,7 +79,7 @@ namespace WPFBiblioteca.ViewModels.Fields
 
         #region Methods
 
-        private bool CanExecuteAddCommand(object obj)
+        private bool CanExecuteEditionCommand(object obj)
         {
             return CanCreate;
         }

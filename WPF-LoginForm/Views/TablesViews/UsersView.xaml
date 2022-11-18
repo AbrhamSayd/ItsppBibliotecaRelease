@@ -47,7 +47,7 @@
                 Grid.Row="1"
                 CellStyle="{DynamicResource DataGridCellStyle}"
                 ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                ItemsSource="{Binding CollectionUser, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding CollectionUsers, UpdateSourceTrigger=PropertyChanged}"
                 RowStyle="{DynamicResource DataGridRowStyle}"
                 SelectedItem="{Binding UsersModelRow, UpdateSourceTrigger=PropertyChanged}"
                 Style="{DynamicResource DataGridStyle}">
@@ -141,9 +141,8 @@
                     <!--  Grid ErroHandler  -->
                     <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <!--  TextBlock Errores  -->
-                        <TextBlock
-                            Style="{StaticResource ErrorAddingTextStyle}"/>
-                        <!--Text="{Binding NotImplementedProperty}"-->
+                        <TextBlock Style="{StaticResource ErrorAddingTextStyle}" />
+                        <!--  Text="{Binding NotImplementedProperty}"  -->
                     </Grid>
                 </Grid>
 
