@@ -6,7 +6,7 @@ namespace WPFBiblioteca.Repositories
 {
     public interface IBookRepository
     {
-        Task<string>Add(BookModel book);
+        Task<string>Add(BookModel book, int categoryId);
         Task<string> Edit(BookModel user, int id);
         Task<string> Delete(int id);
         Task<BookModel> GetById(int id);

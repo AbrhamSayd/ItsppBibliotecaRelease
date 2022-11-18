@@ -103,7 +103,7 @@
                     <!--  Category Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Category}"
+                        Binding="{Binding CategoryDescription}"
                         Header="Categoría"
                         IsReadOnly="True" />
                     <!--  Location Column  -->

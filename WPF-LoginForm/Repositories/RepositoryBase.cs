@@ -6,19 +6,15 @@ namespace WPFBiblioteca.Repositories
     {
         
         private readonly string _connectionString;
-        public RepositoryBase()
+
+        protected RepositoryBase()
         {
-            //string server, database, uid, password;// se establece coneccion a base de datos externa,.
-            //server = "bjleh1b6zqctbrjujbr0-mysql.services.clever-cloud.com";
-            //database = "bjleh1b6zqctbrjujbr0";
-            //uid = "uapdgnuxdwlim1mi";
-            //password = "XgIn3rTTb4KH4I6wIQ5G";
+            
             //BaseDeDatosItspp22.
-            string server, database, uid, password;// se establece coneccion a base de datos externa,.
-            server = "localhost";
-            database = "bjleh1b6zqctbrjujbr0";
-            uid = "root";
-            password = "itspp";
+            const string server = "bjleh1b6zqctbrjujbr0-mysql.services.clever-cloud.com";
+            const string database = "bjleh1b6zqctbrjujbr0";
+            const string uid = "uapdgnuxdwlim1mi";
+            const string password = "XgIn3rTTb4KH4I6wIQ5G"; // se establece coneccion a base de datos externa,.
             _connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
             
         }

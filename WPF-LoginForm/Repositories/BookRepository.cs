@@ -13,9 +13,10 @@ namespace WPFBiblioteca.Repositories
     {
         private string _errorCode;
 
-
-        public async Task<string> Add(BookModel book)
+        
+        public async Task<string> Add(BookModel book,int categoryId)
         {
+            
             try
             {
                 await using var connection = GetConnection();
@@ -24,16 +25,15 @@ namespace WPFBiblioteca.Repositories
                     await connection.OpenAsync();
                     command.Connection = connection;
                     command.CommandText =
-                        "INSERT INTO books (@book_Id,@Isbn,@Name,@Author,@Editoral,@Published_Year,@Stock,@Color,@Category_Id,@Location,@Remarks)";
-                    command.Parameters.Add("@book_Id", MySqlDbType.Int64).Value = book.Id;
-                    command.Parameters.Add("@isbn", MySqlDbType.Int64).Value = book.Isbn;
+                        "INSERT INTO books(Isbn, Name, Author, Editorial, Published_Year, stock, Color, Category_Id, Location, Remarks) VALUES(@Isbn,@Name,@Author,@Editoral,@Published_Year,@Stock,@Color,@Category_Id,@Location,@Remarks)";
+                    command.Parameters.Add("@isbn", MySqlDbType.VarChar).Value = book.Isbn;
                     command.Parameters.Add("@name", MySqlDbType.VarChar).Value = book.Name;
                     command.Parameters.Add("@author", MySqlDbType.VarChar).Value = book.Author;
                     command.Parameters.Add("@editoral", MySqlDbType.VarChar).Value = book.Editorial;
                     command.Parameters.Add("@published_Year", MySqlDbType.DateTime).Value = book.PublishedYear;
                     command.Parameters.Add("@stock", MySqlDbType.Int64).Value = book.Stock;
                     command.Parameters.Add("@color", MySqlDbType.String).Value = book.Color;
-                    command.Parameters.Add("@category", MySqlDbType.String).Value = book.Category;
+                    command.Parameters.Add("@category_Id", MySqlDbType.Int64).Value = book.CategoryId;
                     command.Parameters.Add("@location", MySqlDbType.String).Value = book.Location;
                     command.Parameters.Add("@remarks", MySqlDbType.String).Value = book.Remarks;
                     await command.ExecuteScalarAsync(CancellationToken.None);
@@ -60,22 +60,33 @@ namespace WPFBiblioteca.Repositories
                     await connection.OpenAsync();
                     command.Connection = connection;
                     command.CommandText =
-                        "UPDATE books SET " + "(Book_Id = @book_Id," + "Isbn = @Isbn," + "Name = @name," +
-                        "Author = @author," + "Editorial = @editoral," + "Published_Year = @published_Year," +
-                        "Stock = @stock," + "Color = @color," + "Category = @category," + "Location = @location," +
-                        "Remarks = @remarks)" + ";";
+                        "UPDATE"+
+                    " books"+
+                   " SET"+
+                       " Isbn = @isbn,"+
+                       " NAME = @name," +
+                       " Author = @author,"+
+                       " Editorial = @editorial,"+
+                       " Published_Year = @published_Year,"+
+                       " Stock = @stock,"+
+                       " Color = @color,"+
+                       " Category_Id = @category_Id,"+
+                       " Location = @location,"+
+                       " Remarks = @remarks"+ 
+                   " WHERE"+
+                       " Book_Id = @book_Id;";
                     command.Parameters.Add("@book_Id", MySqlDbType.Int64).Value = book.Id;
-                    command.Parameters.Add("@isbn", MySqlDbType.Int64).Value = book.Isbn;
+                    command.Parameters.Add("@isbn", MySqlDbType.VarChar).Value = book.Isbn;
                     command.Parameters.Add("@name", MySqlDbType.VarChar).Value = book.Name;
                     command.Parameters.Add("@author", MySqlDbType.VarChar).Value = book.Author;
-                    command.Parameters.Add("@editoral", MySqlDbType.VarChar).Value = book.Editorial;
+                    command.Parameters.Add("@editorial", MySqlDbType.VarChar).Value = book.Editorial;
                     command.Parameters.Add("@published_Year", MySqlDbType.DateTime).Value = book.PublishedYear;
                     command.Parameters.Add("@stock", MySqlDbType.Int64).Value = book.Stock;
                     command.Parameters.Add("@color", MySqlDbType.String).Value = book.Color;
-                    command.Parameters.Add("@category", MySqlDbType.String).Value = book.Category;
+                    command.Parameters.Add("@category_Id", MySqlDbType.Int64).Value = book.CategoryId;
                     command.Parameters.Add("@location", MySqlDbType.String).Value = book.Location;
                     command.Parameters.Add("@remarks", MySqlDbType.String).Value = book.Remarks;
-                     command.ExecuteScalar();
+                    command.ExecuteScalar();
                     _errorCode = "400";
                 }
                 catch (Exception e)
@@ -145,7 +156,7 @@ namespace WPFBiblioteca.Repositories
                         PublishedYear = reader[5].ToString(),
                         Stock = int.Parse(reader[6].ToString() ?? string.Empty),
                         Color = reader[7].ToString(),
-                        Category = reader[8].ToString(),
+                        CategoryId = int.Parse(reader[8].ToString() ?? string.Empty),
                         Location = reader[9].ToString(),
                         Remarks = reader[10].ToString()
                     };
@@ -188,7 +199,7 @@ namespace WPFBiblioteca.Repositories
                         PublishedYear = reader[5].ToString(),
                         Stock = int.Parse(reader[6].ToString() ?? string.Empty),
                         Color = reader[7].ToString(),
-                        Category = reader[8].ToString(),
+                        CategoryId = int.Parse(reader[8].ToString() ?? string.Empty),
                         Location = reader[9].ToString(),
                         Remarks = reader[10].ToString()
                     };
@@ -217,7 +228,7 @@ namespace WPFBiblioteca.Repositories
             {
                 await connection.OpenAsync();
                 command.Connection = connection;
-                command.CommandText = "SELECT * from books order by Name asc";
+                command.CommandText = "select * from books left join categories on categories.Category_Id = books.Category_Id";
                 await using var reader = await command.ExecuteReaderAsync();
                 while (reader.Read())
                 {
@@ -231,9 +242,10 @@ namespace WPFBiblioteca.Repositories
                         PublishedYear = reader[5].ToString(),
                         Stock = int.Parse(reader[6].ToString() ?? string.Empty),
                         Color = reader[7].ToString(),
-                        Category = reader[8].ToString(),
+                        CategoryId = int.Parse(reader[8].ToString() ?? string.Empty),
                         Location = reader[9].ToString(),
-                        Remarks = reader[10].ToString()
+                        Remarks = reader[10].ToString(),
+                        CategoryDescription = reader[12].ToString()
                     };
                     bookList.Add(book);
                     _errorCode = "400";

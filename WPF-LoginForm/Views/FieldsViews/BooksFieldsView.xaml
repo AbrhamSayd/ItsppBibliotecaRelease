@@ -133,27 +133,29 @@
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Año de publicación" />
-                    <TextBox
-                        x:Name="TxtAñoPubli"
-                        Width="400"
-                        Text="{Binding PublishedYear}"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        Style="{StaticResource CustomCardTextBox}"/>
+                    <Calendar />
+
 
 
                     <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Categoria" />
-                    <TextBox
-                        x:Name="TxtCategoria"
+                    <ComboBox
+                        x:Name="ComboBoxCategory"
+                        Text="{Binding Stock}"
                         Width="400"
-                        Text="{Binding Category}"
+                        ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding Category}"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
-                        Style="{StaticResource CustomCardTextBox}"/>
-
+                        >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Description}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
                     <TextBlock
                         Padding="20,40,0,0"
@@ -162,6 +164,17 @@
                     <TextBox
                         x:Name="TxtExistencia"
                         Text="{Binding Stock}"
+                        Width="400"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,5"
+                        Style="{StaticResource CustomCardTextBox}"/>
+                    <TextBlock
+                        Padding="20,40,0,0"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Ubicacion" />
+                    <TextBox
+                        x:Name="TxtLocacion"
+                        Text="{Binding Location}"
                         Width="400"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"

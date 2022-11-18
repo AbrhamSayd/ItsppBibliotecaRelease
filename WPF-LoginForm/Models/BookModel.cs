@@ -17,8 +17,9 @@ using System.Threading.Tasks;
         public string PublishedYear { get; set; }
         public int Stock { get; set; }
         public string Color { get; set; }
-        public string Category { get; set; }//category id inside DB, Use Inner Joint on Category Id
+        public int CategoryId { get; set; }//category id inside DB, Use Inner Joint on CategoryId Id
         public string Location { get; set; }
         public string Remarks { get; set; }
+        public string CategoryDescription { get; set; }
     }
 }

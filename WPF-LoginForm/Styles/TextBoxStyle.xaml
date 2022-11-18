@@ -19,6 +19,10 @@
         <Setter Property="Foreground" Value="#3f3f3f" />
         <Setter Property="Padding" Value="15,2,15,2" />
     </Style>
+    <!--  Posible ayuda  -->
+    <!--  https://www.eidias.com/Blog/2012/2/20/customizing-wpf-combo-box-style  -->
+
+
 
     <!--  Custom TextBox  -->
     <Style

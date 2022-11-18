@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace WPFBiblioteca.ViewModels.Fields
 
         private readonly ErrorsViewModel _errorsViewModel;
         private BookModel _book;
+        private CategoryModel _category;
         private int _id;
         private string _isbn;
         private int _staticId;
@@ -29,11 +31,13 @@ namespace WPFBiblioteca.ViewModels.Fields
         private string _publishedYear;
         private int _stock;
         private string _color;
-        private string _category;
         private string _location;
         private string _remarks;
         private readonly string _mode;
+        private int _categoryId;
         private readonly IBookRepository _bookRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private ObservableCollection<CategoryModel> _categories;
 
         #endregion
 
@@ -49,15 +53,17 @@ namespace WPFBiblioteca.ViewModels.Fields
         public BooksFieldsViewModel(BookModel book, string mode, NavigationStore navigationStore)
         {
             _mode = mode;
-            _book = book;
+            _book = book ?? new BookModel();
+            
             GoBackCommand = new GoBooksCommand(null,
                 new NavigationService<BooksViewModel>(navigationStore,
                     () => new BooksViewModel(navigationStore)));
             _bookRepository = new BookRepository();
+            _categoryRepository = new CategoryRepository();
             EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
-
+            ExecuteGetCategories(null);
             if (mode == "Edit")
                 FillModel();
         }
@@ -73,7 +79,7 @@ namespace WPFBiblioteca.ViewModels.Fields
             _publishedYear = _book.PublishedYear;
             _stock = _book.Stock;
             _color = _book.Color;
-            _category = _book.Category;
+            _categoryId = _book.CategoryId;
             _location = _book.Location;
             _remarks = _book.Remarks;
         }
@@ -89,12 +95,25 @@ namespace WPFBiblioteca.ViewModels.Fields
 
         private async void ExecuteEditionCommand(object obj)
         {
+            
             if (_mode == "Add")
             {
-                _book = new BookModel()
+                _book = new BookModel
                 {
+                    Id = _id,
+                    Isbn = _isbn,
+                    Name = _name,
+                    Author = _author,
+                    Editorial = _editorial,
+                    PublishedYear = _publishedYear,
+                    Stock = _stock,
+                    Color = _color,
+                    CategoryId = _categoryId,
+                    Location = _location,
+                    Remarks = _remarks
                 };
-                await _bookRepository.Add(_book);
+
+                await _bookRepository.Add(_book,_categoryId);
                 GoBackCommand.Execute(null);
             }
             else
@@ -102,6 +121,10 @@ namespace WPFBiblioteca.ViewModels.Fields
                 await _bookRepository.Edit(_book, _staticId);
                 GoBackCommand.Execute(null);
             }
+        }
+        private async void ExecuteGetCategories(object obj)
+        {
+            Categories = new ObservableCollection<CategoryModel>(await _categoryRepository.GetByAll());
         }
 
 
@@ -260,19 +283,13 @@ namespace WPFBiblioteca.ViewModels.Fields
             }
         }
 
-        public string Category
+        public CategoryModel Category
         {
             get => _category;
             set
             {
                 _category = value;
-                _book.Category = value;
-                _errorsViewModel.ClearErrors(nameof(Category));
-                if (String.IsNullOrEmpty(_category) || _category.Length < 6)
-                {
-                    _errorsViewModel.AddError(nameof(Category), "Fecha invalida");
-                }
-
+                _book.CategoryId = _category.CategoryId;
                 OnPropertyChanged(nameof(Category));
             }
         }
@@ -308,6 +325,26 @@ namespace WPFBiblioteca.ViewModels.Fields
                 }
 
                 OnPropertyChanged(nameof(Location));
+            }
+        }
+
+        public int CategoryId
+        {
+            get => _categoryId;
+            set
+            {
+                _categoryId = value;
+                OnPropertyChanged(nameof(CategoryId));
+            }
+        }
+
+        public ObservableCollection<CategoryModel> Categories
+        {
+            get => _categories;
+            set
+            {
+                _categories = value;
+                OnPropertyChanged(nameof(Categories));
             }
         }
 
