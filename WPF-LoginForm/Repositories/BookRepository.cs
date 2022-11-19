@@ -256,7 +256,6 @@ namespace WPFBiblioteca.Repositories
                 _errorCode = e.ToString();
                 throw;
             }
-            
 
             return bookList;
         }

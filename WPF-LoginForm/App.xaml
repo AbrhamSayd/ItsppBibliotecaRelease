@@ -16,6 +16,8 @@
                 <ResourceDictionary Source="/Styles/TextBoxStyle.xaml" />
                 <ResourceDictionary Source="/Styles/TextsStyle.xaml" />
                 <ResourceDictionary Source="/Styles/DataGridStyle.xaml" />
+                <ResourceDictionary Source="/Styles/CalendarStyle.xaml" />
+                <ResourceDictionary Source="/Styles/ScrollbarStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

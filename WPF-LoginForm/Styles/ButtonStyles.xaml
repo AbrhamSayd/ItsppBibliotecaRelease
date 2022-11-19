@@ -100,7 +100,7 @@
 
             <!--  Button Style on hover  -->
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
+                <Setter Property="Foreground" Value="{Binding Tag, RelativeSource={RelativeSource Self}}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -287,7 +287,7 @@
         TargetType="Button">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Red" />
+                <Setter Property="Background" Value="{StaticResource CloseOrDeleteColor}" />
                 <Setter Property="Foreground" Value="{StaticResource primarySolidColor}" />
                 <Setter Property="BorderBrush" Value="{Binding Path=Background, RelativeSource={RelativeSource Self}}" />
             </Trigger>

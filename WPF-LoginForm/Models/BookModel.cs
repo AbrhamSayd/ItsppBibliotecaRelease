@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-        using Windows.Globalization.DateTimeFormatting;
+using Windows.Globalization.DateTimeFormatting;
 
-        namespace WPFBiblioteca.Models
+namespace WPFBiblioteca.Models
 {
     public class BookModel
     {

@@ -40,81 +40,85 @@
                     <TextBlock Style="{StaticResource ViewsHeaders}" Text="Usuario" />
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <TextBlock
+            <ScrollViewer Grid.Row="1" Margin="0,0,0,20">
+                <Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock
                         Padding="20,60,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Nombre" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         PreviewTextInput="TextStringOnPreviewTextInput"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Nombre de usuario" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Numero de empleado" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         PreviewTextInput="TxtId_OnPreviewTextInput"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1">
-                    <TextBlock
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock
                         Padding="20,60,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Apellido" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         PreviewTextInput="TextStringOnPreviewTextInput"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Contraseña" />
-                    <TextBox
+                            <TextBox
                         Width="200"
                         HorizontalAlignment="Left"
                         PreviewTextInput="TextStringOnPreviewTextInput"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Tipo de usuario" />
-                    <TextBox
+                            <TextBox
                         Width="200"
                         HorizontalAlignment="Left"
                         PreviewTextInput="TextStringOnPreviewTextInput"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding UserType, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />

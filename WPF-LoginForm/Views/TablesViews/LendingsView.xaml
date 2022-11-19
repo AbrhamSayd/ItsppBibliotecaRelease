@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WPFBiblioteca.Views.TablesViews.MembersView"
+﻿<UserControl x:Class="WPFBiblioteca.Views.TablesViews.LendingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -37,61 +37,87 @@
                         Height="30"
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
-                        Icon="Portrait" />
-                    <TextBlock Style="{StaticResource ViewsHeaders}" Text="Miembros" />
+                        Icon="BookOpen" />
+                    <TextBlock Style="{StaticResource ViewsHeaders}" Text="Inventario de libros" />
                 </StackPanel>
             </Grid>
             <DataGrid
                 Grid.Row="1"
                 CellStyle="{DynamicResource DataGridCellStyle}"
                 ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                ItemsSource="{Binding CollectionUser, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding CollectionBooks}"
                 RowStyle="{DynamicResource DataGridRowStyle}"
-                SelectedItem="{Binding UsersModelRow, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding BookModel}"
                 Style="{DynamicResource DataGridStyle}">
                 <DataGrid.Columns>
+
                     <!--  ID Column  -->
                     <DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding Member_ID}"
+                        Binding="{Binding Id}"
                         Header="ID"
                         IsReadOnly="True" />
-                    <!--  First Name Column  -->
+                    <!--  ISBN Column  -->
                     <DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding First_Name}"
-                        Header="Nombre(s)"
+                        Binding="{Binding Isbn}"
+                        Header="ISBN"
                         IsReadOnly="True" />
-                    <!--  Second Name Column  -->
+                    <!--  Name Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Second_Name}"
-                        Header="Apellido(s)"
+                        Binding="{Binding Name}"
+                        Header="Nombre del libro"
                         IsReadOnly="True" />
-                    <!--  Carrera Column  -->
+                    <!--  Author Column  -->
+                    <DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Author}"
+                        Header="Autor"
+                        IsReadOnly="True" />
+                    <!--  Editorial Column  -->
+                    <DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Editorial}"
+                        Header="Editorial"
+                        IsReadOnly="True" />
+                    <!--  Published_Year Name Column  -->
+                    <DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding PublishedYear}"
+                        Header="Año"
+                        IsReadOnly="True" />
+                    <!--  stock Column  -->
+                    <DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Stock}"
+                        Header="Disponibles"
+                        IsReadOnly="True" />
+                    <!--  Color Column  -->
+                    <DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Color}"
+                        Header="Color"
+                        IsReadOnly="True" />
+                    <!--  Category Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Carrera}"
-                        Header="Carrera/Academia"
-                        IsReadOnly="True"/>
-                    <!--  Email Column  -->
+                        Binding="{Binding CategoryDescription}"
+                        Header="Categoría"
+                        IsReadOnly="True" />
+                    <!--  Location Column  -->
+                    <DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Location}"
+                        Header="Ubicación"
+                        IsReadOnly="True" />
+                    <!--  Remarks Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Email}"
-                        Header="Email"
+                        Binding="{Binding Remarks}"
+                        Header="Notas"
                         IsReadOnly="True" />
-                    <!--  Phone Number Column  -->
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Phone_Nummber}"
-                        Header="Número Celular"
-                        IsReadOnly="True" />
-                    <!--  IsDeptor? Column  -->
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Deudor}"
-                        Header="Deudor"
-                        IsReadOnly="True" />
+
 
                 </DataGrid.Columns>
             </DataGrid>
@@ -124,18 +150,17 @@
 
                             <!--  BOTON Editar  -->
                             <Button
-                                Grid.Column="1"
-                                Command="{Binding EditRowCommand}"
-                                IsEnabled="{Binding CanDelete}"
-                                Style="{StaticResource GridEditButton}">
+                    Grid.Column="1"
+                    Command="{Binding EditCommand}"
+                    Style="{StaticResource GridEditButton}">
                                 <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
                             </Button>
 
                             <!--  BOTON Eliminar  -->
                             <Button
-                                Grid.Column="0"
-                                Command="{Binding RemoveRowCommand}"
-                                Style="{StaticResource GridDeleteButton}">
+                    Grid.Column="0"
+                    Command="{Binding}"
+                    Style="{StaticResource GridDeleteButton}">
                                 <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
                             </Button>
 
@@ -145,10 +170,10 @@
                     <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <!--  TextBlock Errores  -->
                         <TextBlock
-                            Style="{StaticResource ErrorAddingTextStyle}"/>        <!--Text="{Binding NotImplementedProperty}"-->
+                            Style="{StaticResource ErrorAddingTextStyle}"/>
+                        <!--Text="{Binding NotImplementedProperty}"-->
                     </Grid>
                 </Grid>
-
             </Grid>
         </Grid>
     </Border>

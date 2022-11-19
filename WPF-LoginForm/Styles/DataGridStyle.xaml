@@ -174,17 +174,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{StaticResource SecundarySolidColor}" />
-        <Setter Property="Margin" Value="15,0,15,0" />
-        <Setter Property="BorderThickness" Value=".3,0,0,3" />
-        <Setter Property="BorderBrush" Value="{StaticResource tertiarySolidColor}" />
-        <Setter Property="Padding" Value="10,0,0,10" />
+    <Style x:Key="DataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource ColumnHeaders}">
         <Setter Property="Template">
-
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
                     <Grid>
@@ -276,11 +267,11 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#1e355e" />
+                <Setter Property="Background" Value="{StaticResource SecundarySolidColor}" />
                 <Setter Property="Foreground" Value="White" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#1e355e" />
+                <Setter Property="Background" Value="{StaticResource SecundarySolidColor}" />
                 <Setter Property="Foreground" Value="White" />
             </Trigger>
             <MultiTrigger>
