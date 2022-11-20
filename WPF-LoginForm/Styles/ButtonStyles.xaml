@@ -40,7 +40,8 @@
 
     <!--  Menu button icon  -->
     <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Margin" Value="20,0,20,0" />
@@ -78,7 +79,6 @@
     </Style>
 
 
-
     <!--  Control bar button  -->
     <Style x:Key="controlButton" TargetType="Button">
         <!--  Normal button style  -->
@@ -106,7 +106,8 @@
     </Style>
     <!--  Menu button icon  -->
     <Style x:Key="controlButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="Width" Value="15" />
         <Setter Property="Height" Value="15" />
 
@@ -136,20 +137,20 @@
     </Style>
     <!--  Menu button icon  -->
     <Style x:Key="iconButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="Width" Value="16" />
         <Setter Property="Height" Value="16" />
     </Style>
     <!--  Menu button text  -->
     <Style x:Key="menuButtonText" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
         <Setter Property="FontFamily" Value="Montserrat" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="FontSize" Value="13.5" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-
-
 
 
     <!--#region  Card Button-->
@@ -186,9 +187,12 @@
     <!--#region  Text for Card Button-->
     <Style x:Key="TxtCardButton" TargetType="TextBlock">
         <Setter Property="Margin" Value="20,6,20,6" />
-        <Setter Property="FontFamily" Value="{Binding Path=FontFamily, RelativeSource={RelativeSource AncestorType=Button}}" />
-        <Setter Property="FontSize" Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=Button}}" />
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="FontFamily"
+                Value="{Binding Path=FontFamily, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="FontSize"
+                Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
     </Style>
     <!--#endregion Text for Card Button-->
 
@@ -227,7 +231,8 @@
     <!--  Icon add Style  -->
     <Style x:Key="AddIconStyle" TargetType="fa:IconImage">
         <Setter Property="Icon" Value="CirclePlus" />
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
 
         <Setter Property="Margin" Value="3" />
         <!--<Style.Triggers>
@@ -242,7 +247,8 @@
         <Setter Property="Text" Value="Agregar" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="VerticalAlignment" Value="center" />
         <Setter Property="Margin" Value="10,0,10,0" />
         <!--<Style.Triggers>
@@ -273,7 +279,8 @@
 
     <!--#region grid Edit Icon Style-->
     <Style x:Key="gridEditIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Icon" Value="Trash" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -299,7 +306,8 @@
     <Style x:Key="gridDeleteIcon" TargetType="fa:IconImage">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Icon" Value="Trash" />
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <!--#endregion grid Delete Icon-->

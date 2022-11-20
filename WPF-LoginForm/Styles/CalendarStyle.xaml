@@ -4,7 +4,7 @@
 
     <!-- Year Picker Calendar Style-->
     <Style x:Key="OnlyYearPickerStyle" TargetType="Calendar">
-        <Setter Property="DisplayMode" Value="Decade"/>
+        <Setter Property="DisplayMode" Value="Decade" />
 
 
     </Style>

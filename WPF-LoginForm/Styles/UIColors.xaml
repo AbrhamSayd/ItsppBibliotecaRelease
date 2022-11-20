@@ -1,4 +1,5 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--#region Login UI Color Region-->
 
@@ -7,10 +8,6 @@
         <GradientStop Offset="0.0" Color="#FF7FD7AC" />
         <GradientStop Offset="1.0" Color="#7CE2C1" />
     </LinearGradientBrush>
-
-
-
-
 
 
     <!--#endregion Login UI Color Region-->

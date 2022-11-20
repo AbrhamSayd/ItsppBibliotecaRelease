@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    xmlns:local="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="845"
     d:DesignWidth="1535"
@@ -50,139 +49,138 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
                             <TextBlock
-                        Padding="20,60,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="Nombre" />
+                                Padding="20,60,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="Nombre" />
                             <TextBox
-                        x:Name="TxtName"
-                        Width="400"
-                        Text="{Binding Name}"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        Style="{StaticResource CustomCardTextBox}"/>
+                                x:Name="TxtName"
+                                Width="400"
+                                Text="{Binding Name}"
+                                HorizontalAlignment="Left"
+                                Margin="0,5,0,5"
+                                Style="{StaticResource CustomCardTextBox}" />
 
 
                             <TextBlock
-                        Padding="20,40,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="Editorial" />
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="Editorial" />
                             <TextBox
-                        x:Name="TxtEditorial"
-                        Width="400"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        Text="{Binding Editorial}"
-                        Style="{StaticResource CustomCardTextBox}"/>
+                                x:Name="TxtEditorial"
+                                Width="400"
+                                HorizontalAlignment="Left"
+                                Margin="0,5,0,5"
+                                Text="{Binding Editorial}"
+                                Style="{StaticResource CustomCardTextBox}" />
 
 
                             <TextBlock
-                        Padding="20,40,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="ISBN" />
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="ISBN" />
                             <TextBox
-                        x:Name="TxtIsbn"
-                        Width="400"
-                        Text="{Binding Isbn}"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        Style="{StaticResource CustomCardTextBox}"/>
+                                x:Name="TxtIsbn"
+                                Width="400"
+                                Text="{Binding Isbn}"
+                                HorizontalAlignment="Left"
+                                Margin="0,5,0,5"
+                                Style="{StaticResource CustomCardTextBox}" />
 
 
                             <TextBlock
-                        Padding="20,40,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="Color" />
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="Color" />
                             <TextBox
-                        x:Name="TxtColor"
-                        Width="400"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        Text="{Binding Color}"
-                        Style="{StaticResource CustomCardTextBox}"/>
+                                x:Name="TxtColor"
+                                Width="400"
+                                HorizontalAlignment="Left"
+                                Margin="0,5,0,5"
+                                Text="{Binding Color}"
+                                Style="{StaticResource CustomCardTextBox}" />
                             <TextBlock
-                        Padding="20,40,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="NOTA" />
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="NOTA" />
                             <TextBox
-                        x:Name="TxtNota"
-                        Width="400"
-                        Text="{Binding Remarks}"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        Style="{StaticResource CustomCardTextBox}"/>
+                                x:Name="TxtNota"
+                                Width="400"
+                                Text="{Binding Remarks}"
+                                HorizontalAlignment="Left"
+                                Margin="0,5,0,5"
+                                Style="{StaticResource CustomCardTextBox}" />
                         </StackPanel>
                     </Grid>
 
-                    <Grid >
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="2">
                             <TextBlock
-                        Padding="20,60,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="Autor" />
+                                Padding="20,60,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="Autor" />
                             <TextBox
-                        x:Name="TxtAutor"
-                        Width="400"
-                        Text="{Binding Author}"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        Style="{StaticResource CustomCardTextBox}"/>
+                                x:Name="TxtAutor"
+                                Width="400"
+                                Text="{Binding Author}"
+                                HorizontalAlignment="Left"
+                                Margin="0,5,0,5"
+                                Style="{StaticResource CustomCardTextBox}" />
 
                             <TextBlock
-                        Padding="20,40,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="Año de publicación" />
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="Año de publicación" />
                             <DatePicker
-                        CalendarStyle="{StaticResource OnlyYearPickerStyle}"
-                        HorizontalAlignment="Left"/>
+                                CalendarStyle="{StaticResource OnlyYearPickerStyle}"
+                                HorizontalAlignment="Left" />
 
-                            <Calendar Style="{StaticResource OnlyYearPickerStyle}"/>
+                            <Calendar Style="{StaticResource OnlyYearPickerStyle}" />
 
                             <TextBlock
-                        Padding="20,40,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="Categoria" />
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="Categoria" />
                             <ComboBox
-                        x:Name="ComboBoxCategory"
-                        Text="{Binding Stock}"
-                        Width="400"
-                        ItemsSource="{Binding Categories}"
-                        SelectedItem="{Binding Category}"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        >
+                                x:Name="ComboBoxCategory"
+                                Text="{Binding Stock}"
+                                Width="400"
+                                ItemsSource="{Binding Categories}"
+                                SelectedItem="{Binding Category}"
+                                HorizontalAlignment="Left"
+                                Margin="0,5,0,5">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Description}"></TextBlock>
+                                        <TextBlock Text="{Binding Description}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
 
                             <TextBlock
-                        Padding="20,40,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="Existencia" />
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="Existencia" />
                             <TextBox
-                        x:Name="TxtExistencia"
-                        Text="{Binding Stock}"
-                        Width="400"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        Style="{StaticResource CustomCardTextBox}"/>
+                                x:Name="TxtExistencia"
+                                Text="{Binding Stock}"
+                                Width="400"
+                                HorizontalAlignment="Left"
+                                Margin="0,5,0,5"
+                                Style="{StaticResource CustomCardTextBox}" />
                             <TextBlock
-                        Padding="20,40,0,0"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="Ubicacion" />
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="Ubicacion" />
                             <TextBox
-                        x:Name="TxtLocacion"
-                        Text="{Binding Location}"
-                        Width="400"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,5"
-                        Style="{StaticResource CustomCardTextBox}"/>
+                                x:Name="TxtLocacion"
+                                Text="{Binding Location}"
+                                Width="400"
+                                HorizontalAlignment="Left"
+                                Margin="0,5,0,5"
+                                Style="{StaticResource CustomCardTextBox}" />
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -198,7 +196,7 @@
                             Margin="20,6,20,6"
                             FontSize="20"
                             Text="Cancelar"
-                            Name="BtnCancelar"/>
+                            Name="BtnCancelar" />
                     </Button>
                     <Button
                         Margin="20"
@@ -207,8 +205,8 @@
                         <TextBlock
                             Margin="20,6,20,6"
                             FontSize="20"
-                            Text="Aceptar" 
-                            Name="BtnAceptar"/>
+                            Text="Aceptar"
+                            Name="BtnAceptar" />
                     </Button>
                 </DockPanel>
             </Grid>

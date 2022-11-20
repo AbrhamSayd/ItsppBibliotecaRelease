@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:customcontrols="clr-namespace:WPFBiblioteca.CustomControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:WPFBiblioteca.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
@@ -40,53 +39,57 @@
         <Grid>
             <StackPanel
                 VerticalAlignment="Top"
-                        x:Name="pnlcontrolBar"
-                        Margin="0,0,25,0"
-                        HorizontalAlignment="Right"
-                        Background="Transparent"
-                        MouseEnter="pnlcontrolBar_MouseEnter"
-                        MouseLeftButtonDown="pnlcontrolBar_MouseLeftButtonDown"
-                        Orientation="Horizontal">
+                x:Name="pnlcontrolBar"
+                Margin="0,0,25,0"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                MouseEnter="pnlcontrolBar_MouseEnter"
+                MouseLeftButtonDown="pnlcontrolBar_MouseLeftButtonDown"
+                Orientation="Horizontal">
 
                 <TextBlock
-                            Margin="0,0,0,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontFamily="{DynamicResource SFUIUltraLight}"
-                            FontSize="20"
-                            FontWeight="UltraLight"
-                            Foreground="{StaticResource LocationTitleColor}"
-                            TextWrapping="Wrap"><Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora" /></TextBlock>
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom"
+                    FontFamily="{DynamicResource SFUIUltraLight}"
+                    FontSize="20"
+                    FontWeight="UltraLight"
+                    Foreground="{StaticResource LocationTitleColor}"
+                    TextWrapping="Wrap">
+                    <Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora" />
+                </TextBlock>
 
                 <TextBlock
-                            Margin="15,0,50,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontFamily="{DynamicResource SFUIDisplay}"
-                            FontSize="22"
-                            Foreground="{StaticResource DateTextUIColor}"
-                            TextWrapping="Wrap"><Run Language="es-mx" Text="10/22/2022" /></TextBlock>
+                    Margin="15,0,50,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom"
+                    FontFamily="{DynamicResource SFUIDisplay}"
+                    FontSize="22"
+                    Foreground="{StaticResource DateTextUIColor}"
+                    TextWrapping="Wrap">
+                    <Run Language="es-mx" Text="10/22/2022" />
+                </TextBlock>
 
                 <Button
-                            x:Name="btnMinimize"
-                            Click="btnMinimize_Click"
-                            Style="{StaticResource controlButton}">
+                    x:Name="btnMinimize"
+                    Click="btnMinimize_Click"
+                    Style="{StaticResource controlButton}">
                     <fa:IconImage
-                                Width="25"
-                                Height="25"
-                                Icon="CircleDown"
-                                Style="{StaticResource controlButtonIcon}" />
+                        Width="25"
+                        Height="25"
+                        Icon="CircleDown"
+                        Style="{StaticResource controlButtonIcon}" />
                 </Button>
 
                 <Button
-                            x:Name="btnMaximize"
-                            Click="btnMaximize_Click"
-                            Style="{StaticResource controlButton}">
+                    x:Name="btnMaximize"
+                    Click="btnMaximize_Click"
+                    Style="{StaticResource controlButton}">
                     <fa:IconImage
-                                Width="25"
-                                Height="25"
-                                Icon="CircleUp"
-                                Style="{StaticResource controlButtonIcon}" />
+                        Width="25"
+                        Height="25"
+                        Icon="CircleUp"
+                        Style="{StaticResource controlButtonIcon}" />
                 </Button>
                 <!--  Testing TestBlocks for positions  -->
                 <!--<TextBlock x:Name="positionTop" Text="0" FontSize="30" Margin="10,0,10,0"/>
@@ -95,19 +98,19 @@
 
 
             <!--Border de hasta la izquierda-->
-            <Border 
-            CornerRadius="50,0,0,50"
-            HorizontalAlignment="Left"
-            Width="452"
-            Background="{StaticResource BordersLoginGradient}"/>
+            <Border
+                CornerRadius="50,0,0,50"
+                HorizontalAlignment="Left"
+                Width="452"
+                Background="{StaticResource BordersLoginGradient}" />
             <!--segundo Border de hasta la izquierda-->
-            <Border 
-            CornerRadius="0,500,500,0"
-            HorizontalAlignment="Left"
-            Width="320" Margin="452,0,0,0"
-            Background="#FF7FD7AC"/>
+            <Border
+                CornerRadius="0,500,500,0"
+                HorizontalAlignment="Left"
+                Width="320" Margin="452,0,0,0"
+                Background="#FF7FD7AC" />
 
-                <!--Border decorativo derecho de capa de el fondo--><!--
+            <!--Border decorativo derecho de capa de el fondo--><!--
             
             <Border
             CornerRadius="5000,0,50,0"
@@ -198,7 +201,9 @@
                 Foreground="#00785C"
                 LineHeight="20"
                 TextAlignment="Center"
-                TextWrapping="Wrap"><Run Text="Tec" /><Run Text="n" /><Run Text="ológico N" /><Run Text="acional de Mexico" /></TextBlock>
+                TextWrapping="Wrap">
+                <Run Text="Tec" /><Run Text="n" /><Run Text="ológico N" /><Run Text="acional de Mexico" />
+            </TextBlock>
             <TextBlock
                 Width="923"
                 Height="58"
@@ -210,7 +215,9 @@
                 Foreground="#FF00785C"
                 LineHeight="20"
                 TextAlignment="Center"
-                TextWrapping="Wrap"><Run Language="es-mx" Text="Campus Puerto Peñasco" /></TextBlock>
+                TextWrapping="Wrap">
+                <Run Language="es-mx" Text="Campus Puerto Peñasco" />
+            </TextBlock>
 
             <!--  Logo TECNM  -->
             <Image Margin="0,0,1050,0" Source="/Images/img_Tecnm_Logo GIANT.png" />
@@ -254,7 +261,8 @@
 
                 <!--  TEXTBOX and CARD for Password  -->
                 <Grid>
-                    <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <customcontrols:BindablePasswordBox
+                        Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
                 <TextBlock
@@ -337,9 +345,7 @@
                 <StackPanel
                     Margin="0,15,0,0"
                     VerticalAlignment="Bottom"
-                    Orientation="Horizontal">
-
-                </StackPanel>
+                    Orientation="Horizontal" />
             </StackPanel>
             <StackPanel
                 VerticalAlignment="Bottom"
@@ -347,21 +353,21 @@
                 Margin="90,0,0,60">
                 <Button
                     x:Name="btnClose"
-                    Click="btnClose_Click" 
+                    Click="btnClose_Click"
                     Margin="0,0,0,0"
                     Style="{StaticResource LoginCloseButton}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <fa:IconImage Grid.Column="0"
                                       Width="40"
                                       Height="45"
                                       Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
                                       HorizontalAlignment="Left"
-                                      Icon="ArrowRightFromBracket" 
-                                      FlowDirection="RightToLeft"/>
+                                      Icon="ArrowRightFromBracket"
+                                      FlowDirection="RightToLeft" />
                         <TextBlock Grid.Column="1"
                                    Margin="10,0,0,0"
                                    VerticalAlignment="Center"

@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WPFBiblioteca.Services;
+﻿using WPFBiblioteca.Services;
 using WPFBiblioteca.ViewModels;
 
-namespace WPFBiblioteca.Commands
+namespace WPFBiblioteca.Commands;
+
+public class GoBooksCommand : CommandBase
 {
-    public class GoBooksCommand : CommandBase
+    private readonly NavigationService<BooksViewModel> _navigationService;
+    private readonly BooksViewModel _viewModel;
+
+    public GoBooksCommand(BooksViewModel viewModel, NavigationService<BooksViewModel> navigationService)
     {
-        private readonly BooksViewModel _viewModel;
-        private readonly NavigationService<BooksViewModel> _navigationService;
+        _viewModel = viewModel;
+        _navigationService = navigationService;
+    }
 
-        public GoBooksCommand(BooksViewModel viewModel, NavigationService<BooksViewModel> navigationService)
-        {
-            _viewModel = viewModel;
-            _navigationService = navigationService;
-        }
-
-        public override void Execute(object parameter)
-        {
-            _navigationService.Navigate();
-        }
+    public override void Execute(object parameter)
+    {
+        _navigationService.Navigate();
     }
 }

@@ -8,7 +8,6 @@
     xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
     Title="MainWindowView"
     d:DesignHeight="900"
@@ -21,7 +20,7 @@
     WindowStyle="None"
     mc:Ignorable="d">
     <ContentControl.Resources>
-        
+
         <!--<DataTemplate DataType="{x:Type viewModels:MembersViewModel}">
             <tablesViews:BooksView />
         </DataTemplate>
@@ -173,67 +172,71 @@
                           MouseEnter="pnlcontrolBar_MouseEnter"
                           MouseLeftButtonDown="pnlcontrolBar_MouseLeftButtonDown">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="1"
-                        Grid.Row="0"
-                        Orientation="Horizontal">
+                                    Grid.Row="0"
+                                    Orientation="Horizontal">
 
                             <TextBlock
-                            Margin="0,0,0,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontFamily="{DynamicResource SFUIUltraLight}"
-                            FontSize="20"
-                            FontWeight="UltraLight"
-                            Foreground="{StaticResource LocationTitleColor}"
-                            TextWrapping="Wrap"><Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora" /></TextBlock>
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                FontFamily="{DynamicResource SFUIUltraLight}"
+                                FontSize="20"
+                                FontWeight="UltraLight"
+                                Foreground="{StaticResource LocationTitleColor}"
+                                TextWrapping="Wrap">
+                                <Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora" />
+                            </TextBlock>
 
                             <TextBlock
-                            Margin="15,0,50,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            FontFamily="{DynamicResource SFUIDisplay}"
-                            FontSize="22"
-                            Foreground="{StaticResource DateTextUIColor}"
-                            TextWrapping="Wrap"><Run Language="es-mx" Text="10/22/2022" /></TextBlock>
+                                Margin="15,0,50,0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                FontFamily="{DynamicResource SFUIDisplay}"
+                                FontSize="22"
+                                Foreground="{StaticResource DateTextUIColor}"
+                                TextWrapping="Wrap">
+                                <Run Language="es-mx" Text="10/22/2022" />
+                            </TextBlock>
 
                             <Button
-                            x:Name="btnMinimize"
-                            Click="btnMinimize_Click"
-                            Tag="primaryGradientColor"
-                            Style="{StaticResource controlButton}">
+                                x:Name="btnMinimize"
+                                Click="btnMinimize_Click"
+                                Tag="primaryGradientColor"
+                                Style="{StaticResource controlButton}">
                                 <fa:IconImage
-                                Width="25"
-                                Height="25"
-                                Icon="CircleDown"
-                                Style="{StaticResource controlButtonIcon}" />
+                                    Width="25"
+                                    Height="25"
+                                    Icon="CircleDown"
+                                    Style="{StaticResource controlButtonIcon}" />
                             </Button>
 
                             <Button
-                            x:Name="btnMaximize"
-                            Click="btnMaximize_Click"
-                            Tag="primaryGradientColor"
-                            Style="{StaticResource controlButton}">
+                                x:Name="btnMaximize"
+                                Click="btnMaximize_Click"
+                                Tag="primaryGradientColor"
+                                Style="{StaticResource controlButton}">
                                 <fa:IconImage
-                                Width="25"
-                                Height="25"
-                                Icon="CircleUp"
-                                Style="{StaticResource controlButtonIcon}" />
+                                    Width="25"
+                                    Height="25"
+                                    Icon="CircleUp"
+                                    Style="{StaticResource controlButtonIcon}" />
                             </Button>
 
                             <Button
-                            x:Name="btnClose"
-                            Click="btnClose_Click"
-                            Tag="CloseOrDeleteColor"
-                            Style="{StaticResource controlButton}">
+                                x:Name="btnClose"
+                                Click="btnClose_Click"
+                                Tag="CloseOrDeleteColor"
+                                Style="{StaticResource controlButton}">
                                 <fa:IconImage
-                                Width="25"
-                                Height="25"
-                                Icon="CircleXmark"
-                                Style="{StaticResource controlButtonIcon}" />
+                                    Width="25"
+                                    Height="25"
+                                    Icon="CircleXmark"
+                                    Style="{StaticResource controlButtonIcon}" />
                             </Button>
 
 
@@ -243,7 +246,6 @@
                         </StackPanel>
                     </Grid>
 
-                    
 
                     <!--  Content control  -->
                     <Grid Grid.Row="1" Margin="20,0,20,20">

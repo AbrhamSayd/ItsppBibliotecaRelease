@@ -1,24 +1,21 @@
-﻿using System;
-using WPFBiblioteca.Services;
-using WPFBiblioteca.Stores;
+﻿using WPFBiblioteca.Services;
 using WPFBiblioteca.ViewModels;
 
-namespace WPFBiblioteca.Commands
+namespace WPFBiblioteca.Commands;
+
+public class NavigateCommand<TViewModel> : CommandBase
+    where TViewModel : ViewModelBase
 {
-    public class NavigateCommand<TViewModel> : CommandBase
-        where TViewModel : ViewModelBase
+    private readonly NavigationService<TViewModel> _navigationStore;
+
+    public NavigateCommand(NavigationService<TViewModel> navigationStore)
     {
-        private readonly NavigationService<TViewModel> _navigationStore;
-
-        public NavigateCommand(NavigationService<TViewModel> navigationStore)
-        {
-            _navigationStore = navigationStore;
-        }
+        _navigationStore = navigationStore;
+    }
 
 
-        public override void Execute(object parameter)
-        {
-            _navigationStore.Navigate();
-        }
+    public override void Execute(object parameter)
+    {
+        _navigationStore.Navigate();
     }
 }
