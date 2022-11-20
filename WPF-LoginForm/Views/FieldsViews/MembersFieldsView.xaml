@@ -156,7 +156,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button Margin="20" Style="{StaticResource CardButton}">
+                    <Button Margin="20" Style="{StaticResource CardButton}" Command="{Binding GoBackCommand}">
                         <TextBlock
                             Margin="20,6,20,6"
                             FontSize="20"

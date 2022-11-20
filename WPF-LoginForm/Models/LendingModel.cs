@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFBiblioteca.Models
 {
-    class LendingModel
+    public class LendingModel
     {
     }
 }

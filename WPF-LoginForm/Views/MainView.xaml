@@ -44,10 +44,10 @@
         <DataTemplate DataType="{x:Type fieldsModels:UserFieldsViewModel}">
             <fieldsViews:UsersFieldsView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type fields:BooksFieldsViewModel}">
+        <DataTemplate DataType="{x:Type fieldsModels:BooksFieldsViewModel}">
             <fieldsViews:BooksFieldsView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type fields:MembersFieldsViewModel}">
+        <DataTemplate DataType="{x:Type fieldsModels:MembersFieldsViewModel}">
             <fieldsViews:MembersFieldsView />
         </DataTemplate>
     </ContentControl.Resources>
