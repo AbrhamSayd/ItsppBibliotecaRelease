@@ -38,86 +38,90 @@
                         Text="Prestamo" />
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <TextBlock
+            <ScrollViewer Grid.Row="1" Margin="0,0,0,20">
+                <Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock
                         Padding="20,60,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="ID Prestamo" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Prestamista entrega" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Fecha entrega" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="ISBN Libro" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1">
-                    <TextBlock
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock
                         Padding="20,60,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="ID Miembro" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Prestamista devolución" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding UserType, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Fecha devolución" />
-                    <TextBox
+                            <TextBox
                         Width="300"
                         HorizontalAlignment="Left"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding UserType, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1">
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />

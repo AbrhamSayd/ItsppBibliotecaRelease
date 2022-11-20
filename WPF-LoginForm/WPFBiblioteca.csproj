@@ -8,6 +8,12 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Views\PopUpMenus\**" />
+    <EmbeddedResource Remove="Views\PopUpMenus\**" />
+    <None Remove="Views\PopUpMenus\**" />
+    <Page Remove="Views\PopUpMenus\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Fonts\SF-Compact-Display-Regular.ttf" />
     <None Remove="Fonts\SF-Compact-Display-Regular.woff" />
     <None Remove="Fonts\SF-Compact-Display-Semibold.ttf" />
@@ -133,5 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\" />
+    <Folder Include="Views\MenusPopUp\" />
   </ItemGroup>
 </Project>

@@ -70,8 +70,7 @@
                 <Button
                             x:Name="btnMinimize"
                             Click="btnMinimize_Click"
-                            Style="{StaticResource controlButton}"
-                            Tag="{StaticResource color9}">
+                            Style="{StaticResource controlButton}">
                     <fa:IconImage
                                 Width="25"
                                 Height="25"
@@ -82,8 +81,7 @@
                 <Button
                             x:Name="btnMaximize"
                             Click="btnMaximize_Click"
-                            Style="{StaticResource controlButton}"
-                            Tag="{StaticResource color9}">
+                            Style="{StaticResource controlButton}">
                     <fa:IconImage
                                 Width="25"
                                 Height="25"

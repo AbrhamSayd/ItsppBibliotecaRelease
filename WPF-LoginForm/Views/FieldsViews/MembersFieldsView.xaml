@@ -23,7 +23,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
             </Grid>
-            <StackPanel
+            <StackPanel Grid.Row="0"
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 Orientation="Horizontal">
@@ -38,17 +38,19 @@
                     Text="Miembros" />
             </StackPanel>
             </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <TextBlock
+            <ScrollViewer Grid.Row="1" Margin="0,0,0,20">
+                <Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock
                         Padding="20,60,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Nombre(s)" />
-                    <TextBox
+                            <TextBox
                         Width="400"
                         HorizontalAlignment="Left"
                         Text="{Binding FirstName}"
@@ -56,7 +58,7 @@
                         Style="{StaticResource CustomCardTextBox}"/>
 
 
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Carrera" />
@@ -68,11 +70,11 @@
                         Style="{StaticResource CustomCardTextBox}"/>
 
 
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Numero de telefono" />
-                    <TextBox
+                            <TextBox
                         Width="400"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
@@ -80,29 +82,29 @@
                         Style="{StaticResource CustomCardTextBox}"/>
 
 
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Deudor" />
-                    <TextBox
+                            <TextBox
                         Width="400"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
                         Text="{Binding Deudor}"
                         Style="{StaticResource CustomCardTextBox}"/>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="2">
-                    <TextBlock
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock
                         Padding="20,60,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Apellido(s)" />
-                    <TextBox
+                            <TextBox
                         Width="400"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
@@ -110,11 +112,11 @@
                         Style="{StaticResource CustomCardTextBox}"/>
 
 
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="ID" />
-                    <TextBox
+                            <TextBox
                         Width="400"
                         HorizontalAlignment="Left"
                         Text="{Binding MemberId}"
@@ -122,11 +124,11 @@
                         Style="{StaticResource CustomCardTextBox}"/>
 
 
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Gmail" />
-                    <TextBox
+                            <TextBox
                         Width="400"
                         HorizontalAlignment="Left"
                         Margin="0,5,0,5"
@@ -134,19 +136,21 @@
                         Style="{StaticResource CustomCardTextBox}"/>
 
 
-                    <TextBlock
+                            <TextBlock
                         Padding="20,40,0,0"
                         Style="{StaticResource FieldsHeaders}"
                         Text="Prestamo" />
-                    <TextBox
+                            <TextBox
                         Width="400"
                         HorizontalAlignment="Left"
                         Text="{Binding Prestamos}"
                         Margin="0,5,0,5"
                         Style="{StaticResource CustomCardTextBox}"/>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1">
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />

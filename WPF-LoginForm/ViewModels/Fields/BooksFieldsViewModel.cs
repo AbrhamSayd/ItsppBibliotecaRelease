@@ -157,7 +157,7 @@ namespace WPFBiblioteca.ViewModels.Fields
                 if (Math.Floor(Math.Log10(_id) + 1)
                     is < 3 or > 8)
                 {
-                    _errorsViewModel.AddError(nameof(Id), "Numero de empleado invalido");
+                    _errorsViewModel.AddError(nameof(Id), "ID Invalido?");
                 }
 
                 OnPropertyChanged(nameof(Id));
@@ -174,7 +174,7 @@ namespace WPFBiblioteca.ViewModels.Fields
                 _errorsViewModel.ClearErrors(nameof(Isbn));
                 if (_isbn.Length is <= 9 or > 14)
                 {
-                    _errorsViewModel.AddError(nameof(Isbn), "Isbn invalido");
+                    _errorsViewModel.AddError(nameof(Isbn), "ISBN invalido");
                 }
 
                 OnPropertyChanged(nameof(Isbn));
@@ -194,7 +194,7 @@ namespace WPFBiblioteca.ViewModels.Fields
                     _errorsViewModel.AddError(nameof(Name), "Nombre de libro invalido o muy corto");
                 }
 
-                OnPropertyChanged(nameof(Isbn));
+                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -211,7 +211,7 @@ namespace WPFBiblioteca.ViewModels.Fields
                     _errorsViewModel.AddError(nameof(Author), "Nombre de Autor invalido o muy corto");
                 }
 
-                OnPropertyChanged(nameof(Isbn));
+                OnPropertyChanged(nameof(Author));
             }
         }
 
@@ -223,12 +223,12 @@ namespace WPFBiblioteca.ViewModels.Fields
                 _editorial = value;
                 _book.Editorial = value;
                 _errorsViewModel.ClearErrors(nameof(Editorial));
-                if (String.IsNullOrEmpty(_editorial) || _editorial.Length < 6)
+                if (String.IsNullOrEmpty(_editorial) || _editorial.Length < 2)
                 {
                     _errorsViewModel.AddError(nameof(Editorial), "Nombre de editorial invalido o muy corto");
                 }
 
-                OnPropertyChanged(nameof(Isbn));
+                OnPropertyChanged(nameof(Editorial));
             }
         }
 
@@ -240,12 +240,12 @@ namespace WPFBiblioteca.ViewModels.Fields
                 _publishedYear = value;
                 _book.PublishedYear = value;
                 _errorsViewModel.ClearErrors(nameof(PublishedYear));
-                if (String.IsNullOrEmpty(_publishedYear) || _publishedYear.Length < 6)
+                if (String.IsNullOrEmpty(_publishedYear) || _publishedYear.Length < 4)
                 {
                     _errorsViewModel.AddError(nameof(Name), "Fecha invalida");
                 }
 
-                OnPropertyChanged(nameof(Isbn));
+                OnPropertyChanged(nameof(PublishedYear));
             }
         }
 
@@ -263,7 +263,7 @@ namespace WPFBiblioteca.ViewModels.Fields
                     _errorsViewModel.AddError(nameof(Name), "Existencia invalida");
                 }
 
-                OnPropertyChanged(nameof(Isbn));
+                OnPropertyChanged(nameof(Stock));
             }
         }
 
@@ -325,7 +325,7 @@ namespace WPFBiblioteca.ViewModels.Fields
                     _errorsViewModel.AddError(nameof(Remarks), "Notas invalidas, intente denuevo");
                 }
 
-                OnPropertyChanged(nameof(Location));
+                OnPropertyChanged(nameof(Remarks));
             }
         }
 
