@@ -70,6 +70,7 @@
                         Style="{StaticResource FieldsHeaders}"
                         Text="Numero de empleado" />
                     <TextBox
+                        x:Name="TxtId"
                         Width="300"
                         HorizontalAlignment="Left"
                         PreviewTextInput="TxtId_OnPreviewTextInput"
@@ -100,7 +101,6 @@
                     <TextBox
                         Width="200"
                         HorizontalAlignment="Left"
-                        PreviewTextInput="TextStringOnPreviewTextInput"
                         Style="{StaticResource CustomCardTextBox}"
                         Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock

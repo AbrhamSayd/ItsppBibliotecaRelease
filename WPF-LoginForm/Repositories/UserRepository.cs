@@ -10,6 +10,7 @@ namespace WPFBiblioteca.Repositories
 {
     public class UserRepository : RepositoryBase, IUserRepository
     {
+        private MySqlException _errorCode;
         public async Task Add(UserModel userModel)
         {
             await using (var connection = GetConnection())
@@ -28,10 +29,12 @@ namespace WPFBiblioteca.Repositories
                     command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
                     command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
                    await command.ExecuteScalarAsync();
+                   
+
                 }
-                catch (Exception ex)
+                catch (MySqlException ex)
                 {
-                    Console.WriteLine(ex.ToString());
+                    _errorCode = ex;
                 }
             }
         }
@@ -71,10 +74,11 @@ namespace WPFBiblioteca.Repositories
                 command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
                 command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
                 await command.ExecuteScalarAsync();
+
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
-                Console.WriteLine(ex.ToString());
+                _errorCode = ex;
             }
         }
         public async Task<IEnumerable<UserModel>> GetByAll()
@@ -103,6 +107,12 @@ namespace WPFBiblioteca.Repositories
 
             return userList;
         }
+
+        public MySqlException GetError()
+        {
+            return _errorCode;
+        }
+
         public UserModel GetById(int id)
         {
             throw new NotImplementedException();
@@ -149,10 +159,11 @@ namespace WPFBiblioteca.Repositories
                 {
                     command.ExecuteScalar();
                     
+
                 }
                 catch (MySqlException e)
                 {
-                    Console.WriteLine(e);
+                    _errorCode = e;
                     throw;
                 }
             }

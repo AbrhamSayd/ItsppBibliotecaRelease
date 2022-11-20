@@ -1,15 +1,17 @@
-﻿<UserControl x:Class="WPFBiblioteca.Views.TablesViews.MembersView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPFBiblioteca.Views.TablesViews"
-             xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             d:DesignHeight="845"
-             d:DesignWidth="1596"
-             mc:Ignorable="d">
+﻿<UserControl
+    x:Class="WPFBiblioteca.Views.TablesViews.MembersView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:local="clr-namespace:WPFBiblioteca.Views.TablesViews"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
+    d:DesignHeight="845"
+    d:DesignWidth="1596"
+    mc:Ignorable="d">
     <Border Background="white" CornerRadius="1">
+
         <Grid>
             <Grid.RowDefinitions>
                 <!--  Control Bar  -->
@@ -45,27 +47,27 @@
                 Grid.Row="1"
                 CellStyle="{DynamicResource DataGridCellStyle}"
                 ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                ItemsSource="{Binding CollectionUser, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding CollectionMembers}"
                 RowStyle="{DynamicResource DataGridRowStyle}"
-                SelectedItem="{Binding UsersModelRow, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding Member, UpdateSourceTrigger=PropertyChanged}"
                 Style="{DynamicResource DataGridStyle}">
                 <DataGrid.Columns>
                     <!--  ID Column  -->
                     <DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding Member_ID}"
+                        Binding="{Binding MemberId}"
                         Header="ID"
                         IsReadOnly="True" />
                     <!--  First Name Column  -->
                     <DataGridTextColumn
                         Width="Auto"
-                        Binding="{Binding First_Name}"
+                        Binding="{Binding FirstName}"
                         Header="Nombre(s)"
                         IsReadOnly="True" />
                     <!--  Second Name Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Second_Name}"
+                        Binding="{Binding LastName}"
                         Header="Apellido(s)"
                         IsReadOnly="True" />
                     <!--  Carrera Column  -->
@@ -73,7 +75,7 @@
                         Width="*"
                         Binding="{Binding Carrera}"
                         Header="Carrera/Academia"
-                        IsReadOnly="True"/>
+                        IsReadOnly="True" />
                     <!--  Email Column  -->
                     <DataGridTextColumn
                         Width="*"
@@ -83,13 +85,19 @@
                     <!--  Phone Number Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Phone_Nummber}"
+                        Binding="{Binding PhoneNumber}"
                         Header="Número Celular"
                         IsReadOnly="True" />
                     <!--  IsDeptor? Column  -->
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Deudor}"
+                        Header="Deudor"
+                        IsReadOnly="True" />
+                    <!--  Lendings number? Column  -->
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Prestamos}"
                         Header="Deudor"
                         IsReadOnly="True" />
 
@@ -114,7 +122,7 @@
                             <!--  BOTON AGREGAR  -->
                             <Button
                                 Grid.Column="2"
-                                Command="{Binding NavigateAddCommand}"
+                                Command="{Binding AddCommand}"
                                 Style="{StaticResource BtnAgregarStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Style="{StaticResource AddIconStyle}" />
@@ -125,7 +133,7 @@
                             <!--  BOTON Editar  -->
                             <Button
                                 Grid.Column="1"
-                                Command="{Binding EditRowCommand}"
+                                Command="{Binding EditCommand}"
                                 IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridEditButton}">
                                 <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
@@ -134,7 +142,8 @@
                             <!--  BOTON Eliminar  -->
                             <Button
                                 Grid.Column="0"
-                                Command="{Binding RemoveRowCommand}"
+                                Command="{Binding RemoveCommand}"
+                                IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridDeleteButton}">
                                 <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
                             </Button>
@@ -142,10 +151,13 @@
                         </Grid>
                     </Grid>
                     <!--  Grid ErroHandler  -->
-                    <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
                         <!--  TextBlock Errores  -->
-                        <TextBlock
-                            Style="{StaticResource ErrorAddingTextStyle}"/>        <!--Text="{Binding NotImplementedProperty}"-->
+                        <TextBlock Style="{StaticResource ErrorAddingTextStyle}" />        
+                        <!--  Text="{Binding NotImplementedProperty}"  -->
                     </Grid>
                 </Grid>
 

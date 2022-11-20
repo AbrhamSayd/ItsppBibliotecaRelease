@@ -86,10 +86,10 @@ namespace WPFBiblioteca.Repositories
                     command.Parameters.Add("@category_Id", MySqlDbType.Int64).Value = book.CategoryId;
                     command.Parameters.Add("@location", MySqlDbType.String).Value = book.Location;
                     command.Parameters.Add("@remarks", MySqlDbType.String).Value = book.Remarks;
-                    command.ExecuteScalar();
+                    await command.ExecuteScalarAsync(CancellationToken.None);
                     _errorCode = "400";
                 }
-                catch (Exception e)
+                catch (MySqlException e)
                 {
                     _errorCode = e.ToString();
                     throw;
@@ -113,7 +113,7 @@ namespace WPFBiblioteca.Repositories
                     await connection.OpenAsync();
                     command.Connection = connection;
                     command.CommandText =
-                        "UPDATE FROM books WHERE Book_Id = @book_Id;";
+                        "DELETE FROM books WHERE Book_Id = @book_Id;";
                     command.Parameters.Add("@book_Id", MySqlDbType.Int64).Value = id;
 
                     await command.ExecuteScalarAsync(CancellationToken.None);
@@ -142,7 +142,7 @@ namespace WPFBiblioteca.Repositories
             {
                 await connection.OpenAsync();
                 command.Connection = connection;
-                command.CommandText = "SELECT * FROM users Where Book_Id = @book_Id;";
+                command.CommandText = "SELECT * FROM books Where Book_Id = @book_Id;";
                 await using var reader = await command.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {

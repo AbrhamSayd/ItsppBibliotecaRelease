@@ -26,7 +26,7 @@ namespace WPFBiblioteca.ViewModels
         #region ICommands
 
         public ICommand NavigateAddCommand { get; }
-        public ICommand RemoveRowCommand { get; }
+        public ICommand RemoveCommand { get; }
         public ICommand EditCommand { get; }
 
         #endregion
@@ -47,6 +47,7 @@ namespace WPFBiblioteca.ViewModels
             EditCommand = new NavigateCommand<BooksFieldsViewModel>(
                 new NavigationService<BooksFieldsViewModel>(navigationStore,
                     () => new BooksFieldsViewModel(_bookModel, "Edit", navigationStore)));
+            RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand,CanExecuteRemoveRowCommand);
             ExecuteGetAllCommand(null);
         }
 
@@ -62,7 +63,8 @@ namespace WPFBiblioteca.ViewModels
 
         private bool CanExecuteRemoveRowCommand(object obj)
         {
-            return _canDelete;
+            return (_bookModel != null) ;
+
         }
 
         private void ExecuteRemoveRowCommand(object obj)

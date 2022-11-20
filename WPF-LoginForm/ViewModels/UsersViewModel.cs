@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using MySqlConnector;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
@@ -18,28 +19,32 @@ namespace WPFBiblioteca.ViewModels
         private UserModel _usersModelRow;
         private readonly IUserRepository _userRepository;
         private bool _canDelete;
-        private string _errorCode;
+        private MySqlException _errorCode;
+        private string _errorMessage;
 
         #endregion
         #region constructor
 
-        public UsersViewModel(NavigationStore navigationStore)
+        public UsersViewModel(NavigationStore navigationStore,MySqlException errorCode)
         {
-            _errorCode = string.Empty;
+            _errorCode = errorCode;
             _canDelete = false;
             _userRepository = new UserRepository();
             _usersModelRow = new UserModel();
             NavigateAddCommand = new NavigateCommand<UserFieldsViewModel>(
                 new NavigationService<UserFieldsViewModel>(navigationStore,
                     () => new UserFieldsViewModel(null,"Add", navigationStore)));
-            GetByAllCommand = new ViewModelCommand(ExecuteGetAllCommand);
+            
 
             ExecuteGetAllCommand(null);
+            _errorCode = _userRepository.GetError();
+            GetByAllCommand = new ViewModelCommand(ExecuteGetAllCommand);
             EditRowCommand = new NavigateCommand<UserFieldsViewModel>(
                     new NavigationService<UserFieldsViewModel>(navigationStore,
                         () => new UserFieldsViewModel(_usersModelRow, "Edit", navigationStore)));
             RemoveRowCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
-                
+            
+
         }
 
         #endregion
@@ -61,6 +66,7 @@ namespace WPFBiblioteca.ViewModels
 
         private bool CanExecuteRemoveRowCommand(object obj)
         {
+            _errorCode = _userRepository.GetError();
             return _canDelete;
         }
 
@@ -68,23 +74,36 @@ namespace WPFBiblioteca.ViewModels
         {
             _userRepository.Remove(_usersModelRow.Id);
             ExecuteGetAllCommand(null);
+            
         }
 
         private async void ExecuteGetAllCommand(object obj)
         {
             CollectionUsers = new ObservableCollection<UserModel>(await _userRepository.GetByAll());
+            
         }
 
         #endregion
 
         #region Properties
 
-        public string ErrorCode
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+
+        }
+        public MySqlException ErrorCode
         {
             get => _errorCode;
             set
             {
                 _errorCode = value;
+                if (_errorCode.SqlState != null) ErrorMessage = _errorCode.SqlState.ToString();
                 OnPropertyChanged(nameof(ErrorCode));
             }
 

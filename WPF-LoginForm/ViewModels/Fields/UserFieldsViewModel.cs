@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.System;
+using MySqlConnector;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
@@ -33,6 +34,7 @@ namespace WPFBiblioteca.ViewModels.Fields
         private string _userType;
         private readonly string _mode;
         private readonly IUserRepository _userRepository;
+        private MySqlException _errorCode;
 
         #endregion
 
@@ -49,14 +51,15 @@ namespace WPFBiblioteca.ViewModels.Fields
         {
             _mode = mode;
             _userModel = editUser ?? new UserModel();
-            
+            _userRepository = new UserRepository();
+            _errorCode = _userRepository.GetError();
             GoBackCommand = new GoUsersCommand(null,
                 new NavigationService<UsersViewModel>(navigationStore,
-                    () => new UsersViewModel(navigationStore)));
-            _userRepository = new UserRepository();
+                    () => new UsersViewModel(navigationStore, _errorCode)));
+            
             EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEditionCommand);
             _errorsViewModel = new ErrorsViewModel();
-            _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
+            
 
             if (mode == "Edit")
                 FillModel();
@@ -105,6 +108,8 @@ namespace WPFBiblioteca.ViewModels.Fields
                 await _userRepository.Edit(_userModel, _staticId);
                 GoBackCommand.Execute(null);
             }
+
+            _errorCode = _userRepository.GetError();
         }
 
         

@@ -149,30 +149,32 @@
                                 </StackPanel>
                             </Button>
 
-                <!--  BOTON Editar  -->
-                <Button
-                    Grid.Column="1"
-                    Command="{Binding EditCommand}"
-                    Style="{StaticResource GridEditButton}">
-                    <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
-                </Button>
+                            <!--  BOTON Editar  -->
+                            <Button
+                                Grid.Column="1"
+                                Command="{Binding EditCommand}"
+                                Style="{StaticResource GridEditButton}">
+                                <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
+                            </Button>
 
-                <!--  BOTON Eliminar  -->
-                <Button
-                    Grid.Column="0"
-                    Command="{Binding}"
-                    Style="{StaticResource GridDeleteButton}">
-                    <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
-                </Button>
+                            <!--  BOTON Eliminar  -->
+                            <Button
+                                Grid.Column="0"
+                                Command="{Binding RemoveCommand}"
+                                Style="{StaticResource GridDeleteButton}">
+                                <fa:IconImage Icon="Trash" Style="{StaticResource gridDeleteIcon}" />
+                            </Button>
 
                         </Grid>
                     </Grid>
                     <!--  Grid ErroHandler  -->
-                    <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
                         <!--  TextBlock Errores  -->
-                        <TextBlock
-                            Style="{StaticResource ErrorAddingTextStyle}"/>
-                        <!--Text="{Binding NotImplementedProperty}"-->
+                        <TextBlock Style="{StaticResource ErrorAddingTextStyle}" />
+                        <!--  Text="{Binding NotImplementedProperty}"  -->
                     </Grid>
                 </Grid>
             </Grid>

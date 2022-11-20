@@ -68,6 +68,12 @@ namespace WPFBiblioteca.ViewModels.Fields
                 FillModel();
         }
 
+
+
+        #endregion
+
+        #region Methods
+
         private void FillModel()
         {
             _staticId = Id;
@@ -83,11 +89,6 @@ namespace WPFBiblioteca.ViewModels.Fields
             _location = _book.Location;
             _remarks = _book.Remarks;
         }
-
-        #endregion
-
-        #region Methods
-
         private bool CanExecuteAddCommand(object obj)
         {
             return CanCreate;
