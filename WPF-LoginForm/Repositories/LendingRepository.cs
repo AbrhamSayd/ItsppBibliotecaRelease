@@ -232,6 +232,8 @@ public class LendingRepository : RepositoryBase, ILendingRepository
 
     public async Task<IEnumerable<LendingModel>> GetByAll()
     {
+        DateTime dateValue;
+        int tempInt;
         var lendingList = new List<LendingModel>();
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();
@@ -241,6 +243,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
             command.Connection = connection;
             command.CommandText =
                 @"SELECT
+            lendings.Lending_Id,
             lendings.Book_Id,
             CONCAT(members.First_Name, ' ', members.Last_Name) AS Member_Name,
                 books.Name AS Book_Name,
@@ -260,20 +263,26 @@ public class LendingRepository : RepositoryBase, ILendingRepository
             await using var reader = await command.ExecuteReaderAsync();
             while (reader.Read())
             {
-                var lending = new LendingModel
-                {
-                    LendingId = Convert.ToInt32(reader[0].ToString()),
-                    BookId = Convert.ToInt32(reader[1].ToString()),
-                    MemberId = Convert.ToInt32(reader[2].ToString()),
-                    DateTimeBorrowed = DateTime.Parse(reader[3].ToString() ?? string.Empty),
-                    UsernameLent = reader[4].ToString(),
-                    DateTimeReturned = DateTime.Parse(reader[5].ToString() ?? string.Empty),
-                    UsernameReturned = reader[6].ToString(),
-                    FinedAmount = Convert.ToInt32(reader[7].ToString()),
-                    Remarks = reader[8].ToString(),
-                    MemberName = reader[9].ToString(),
-                    BookName = reader[10].ToString(),
-                };
+                var lending = new LendingModel();
+
+                lending.LendingId = Convert.ToInt32(reader[0].ToString());
+                if (int.TryParse(reader[1].ToString(), out tempInt))
+                    lending.BookId = tempInt;
+                lending.MemberName = reader[2].ToString();
+                lending.BookName = reader[3].ToString();
+                if (int.TryParse(reader[4].ToString(), out tempInt))
+                    lending.MemberId = tempInt;
+                //lending.DateTimeBorrowed = DateTime.Parse(reader[5].ToString() ?? string.Empty);
+                if (DateTime.TryParse(reader[5].ToString(), out dateValue))
+                    lending.DateTimeBorrowed = dateValue;
+                lending.UsernameLent = reader[6].ToString();
+                if (DateTime.TryParse(reader[7].ToString(), out dateValue))
+                    lending.DateTimeReturned = dateValue;
+                lending.UsernameReturned = reader[8].ToString();
+                if (int.TryParse(reader[9].ToString(), out tempInt))
+                    lending.FinedAmount = tempInt;
+                lending.Remarks = reader[10].ToString();
+
 
                 lendingList.Add(lending);
                 _errorCode = "400";
@@ -293,3 +302,15 @@ public class LendingRepository : RepositoryBase, ILendingRepository
         return _errorCode;
     }
 }
+
+//lending.LendingId = Convert.ToInt32(reader[0].ToString());
+//lending.BookId = Convert.ToInt32(reader[1].ToString());
+//MemberId = Convert.ToInt32(reader[2].ToString()),
+//DateTimeBorrowed = DateTime.Parse(reader[3].ToString() ?? string.Empty),
+//UsernameLent = reader[4].ToString(),
+//DateTimeReturned = DateTime.Parse(reader[5].ToString() ?? string.Empty),
+//UsernameReturned = reader[6].ToString(),
+//FinedAmount = Convert.ToInt32(reader[7].ToString()),
+//Remarks = reader[8].ToString(),
+//MemberName = reader[9].ToString(),
+//BookName = reader[10].ToString(),

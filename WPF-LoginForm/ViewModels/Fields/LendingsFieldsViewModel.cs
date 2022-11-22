@@ -15,13 +15,15 @@ namespace WPFBiblioteca.ViewModels.Fields
     {
         #region Constructor
 
-        public LendingsFieldsViewModel(LendingModel lending, string mode, NavigationStore navigationStore)
+        public LendingsFieldsViewModel(LendingModel lending, string mode, NavigationStore navigationStore, UserModel currentModel)
         {
             _mode = mode;
             _lending = lending ?? new LendingModel();
+            _currentUser = new UserModel();
+            _currentUser = currentModel;
             GoBackCommand = new GoLendingsCommand(null,
                 new NavigationService<LendingsViewModel>(navigationStore,
-                    () => new LendingsViewModel(navigationStore)));
+                    () => new LendingsViewModel(navigationStore, _currentUser)));
             _lendingRepository = new LendingRepository();
             EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
             _errorsViewModel = new ErrorsViewModel();
@@ -36,10 +38,12 @@ namespace WPFBiblioteca.ViewModels.Fields
 
         private readonly string _mode;
         private readonly ErrorsViewModel _errorsViewModel;
+        private LendingModel _lending;
+        private UserModel _currentUser;
 
         private readonly ILendingRepository _lendingRepository;
         private ObservableCollection<CategoryModel> _lendings;
-        private LendingModel _lending;
+        
 
         private int _lendingId;
         private int _bookId;
@@ -99,7 +103,7 @@ namespace WPFBiblioteca.ViewModels.Fields
                 };
 
 
-                await _lendingRepository.Add(_lending);
+                await _lendingRepository.Add(_lending,_currentUser);
                 GoBackCommand.Execute(null);
             }
             else

@@ -20,28 +20,20 @@
     WindowStyle="None"
     mc:Ignorable="d">
     <ContentControl.Resources>
-        <!--<DataTemplate DataType="{x:Type viewModels:MembersViewModel}">
+        <DataTemplate DataType="{x:Type viewModels:MembersViewModel}">
             <tablesViews:BooksView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type fieldsModels:MembersFieldsViewModel}">
             <fieldsViews:BooksFieldsView />
-        </DataTemplate>-->
-
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:LendingsViewModel}">
             <tablesViews:LendingsView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:MembersViewModel}">
-            <tablesViews:MembersView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
             <tablesViews:UsersView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
             <tablesViews:BooksView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type fieldsModels:MembersFieldsViewModel}">
-            <fieldsViews:MembersFieldsView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type fieldsModels:UserFieldsViewModel}">
             <fieldsViews:UsersFieldsView />

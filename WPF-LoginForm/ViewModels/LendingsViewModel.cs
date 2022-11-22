@@ -13,8 +13,9 @@ namespace WPFBiblioteca.ViewModels
     {
         #region Constructor
 
-        public LendingsViewModel(NavigationStore navigationStore)
+        public LendingsViewModel(NavigationStore navigationStore, UserModel currentUser)
         {
+            _currentUser = currentUser;
             _canDelete = false;
             _errorCode = string.Empty;
             _navigationStore = navigationStore;
@@ -23,10 +24,11 @@ namespace WPFBiblioteca.ViewModels
             _collectionLendings = new ObservableCollection<LendingModel>();
             NavigateAddCommand = new NavigateCommand<LendingsFieldsViewModel>(
                 new NavigationService<LendingsFieldsViewModel>(navigationStore,
-                    () => new LendingsFieldsViewModel(null, "Add", navigationStore)));
+                    () => new LendingsFieldsViewModel(null, "Add", navigationStore, _currentUser)));
+
             EditCommand = new NavigateCommand<LendingsFieldsViewModel>(
                 new NavigationService<LendingsFieldsViewModel>(navigationStore,
-                    () => new LendingsFieldsViewModel(_lendingModel, "Edit", navigationStore)));
+                    () => new LendingsFieldsViewModel(_lendingModel, "Edit", navigationStore, _currentUser)));
             RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
             ExecuteGetAllCommand(null);
         }
@@ -41,6 +43,7 @@ namespace WPFBiblioteca.ViewModels
         private NavigationStore _navigationStore;
         private string _errorCode;
         private bool _canDelete;
+        private UserModel _currentUser;
 
         #endregion
 
@@ -56,7 +59,7 @@ namespace WPFBiblioteca.ViewModels
 
         private async void ExecuteGetAllCommand(object o)
         {
-            CollectionBooks = new ObservableCollection<LendingModel>(await _lendingRepository.GetByAll());
+            CollectionLendings = new ObservableCollection<LendingModel>(await _lendingRepository.GetByAll());
             _errorCode = _lendingRepository.GetError();
         }
 
@@ -75,13 +78,13 @@ namespace WPFBiblioteca.ViewModels
 
         #region Properties
 
-        public ObservableCollection<LendingModel> CollectionBooks
+        public ObservableCollection<LendingModel> CollectionLendings
         {
             get => _collectionLendings;
             set
             {
                 _collectionLendings = value;
-                OnPropertyChanged(nameof(_collectionLendings));
+                OnPropertyChanged(nameof(CollectionLendings));
             }
         }
 
