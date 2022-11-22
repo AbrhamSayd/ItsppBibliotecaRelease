@@ -13,7 +13,6 @@ public class NavigateCommand<TViewModel> : CommandBase
         _navigationStore = navigationStore;
     }
 
-
     public override void Execute(object parameter)
     {
         _navigationStore.Navigate();

@@ -16,9 +16,9 @@ public class NavigationService<TViewModel>
         _createViewModel = createViewModel;
     }
 
-    public NavigationService(NavigationStore navigationStore, Func<LendingsViewModel> createViewModel)
-    {
-    }
+    //public NavigationService(NavigationStore navigationStore, Func<LendingsViewModel> createViewModel)
+    //{
+    //}
 
     public void Navigate()
     {
