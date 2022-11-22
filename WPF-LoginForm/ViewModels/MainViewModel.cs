@@ -21,6 +21,8 @@ public class MainViewModel : ViewModelBase
         CurrentUserAccount = new UserAccountModel();
         LoadCurrentUserData();
 
+        NavigateLendings = new GoLendingsCommand(null,
+            new NavigationService<LendingsViewModel>(navigationStore, () => new LendingsViewModel(navigationStore)));
         NavigateBooks = new GoBooksCommand(null,
             new NavigationService<BooksViewModel>(navigationStore, () => new BooksViewModel(navigationStore)));
         NavigateUsers = new GoUsersCommand(null, new
@@ -28,6 +30,7 @@ public class MainViewModel : ViewModelBase
         NavigateMembers = new GoMembersCommand(null,
             new NavigationService<MembersViewModel>(navigationStore,
                 () => new MembersViewModel(navigationStore)));
+
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
 
@@ -50,6 +53,7 @@ public class MainViewModel : ViewModelBase
 
     #region ICommands
 
+    public ICommand NavigateLendings { get; }
     public ICommand NavigateUsers { get; }
     public ICommand NavigateBooks { get; }
     public ICommand NavigateMembers { get; }

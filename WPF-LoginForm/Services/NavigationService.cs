@@ -18,6 +18,6 @@ public class NavigationService<TViewModel>
 
     public void Navigate()
     {
-        _navigationStore.CurrentViewModel = _createViewModel();
+         _navigationStore.CurrentViewModel = _createViewModel();
     }
 }

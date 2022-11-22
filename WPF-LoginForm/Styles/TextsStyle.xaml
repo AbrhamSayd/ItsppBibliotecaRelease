@@ -10,11 +10,11 @@
     </Style>
 
     <!--  Tables Columns Headers  -->
-    <Style x:Key="ColumnHeaders" TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="ColumnHeadersStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Margin" Value="15,0,15,0" />
+        <Setter Property="Margin" Value="0,0,5,0" />
         <Setter Property="BorderThickness" Value=".3,0,0,3" />
         <Setter Property="BorderBrush" Value="{StaticResource tertiarySolidColor}" />
         <Setter Property="Padding" Value="10,0,0,10" />
@@ -22,7 +22,15 @@
         <Setter Property="FontWeight" Value="Light" />
         <Setter Property="Foreground" Value="{StaticResource SecundarySolidColor}" />
     </Style>
-
+    
+    <!--  Tables Cells Texts  -->
+    <Style x:Key="DataGridCellStyle" TargetType="{x:Type DataGridCell}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        </Style>
 
     <!--  Texto que va encima de los campos  -->
     <Style x:Key="FieldsHeaders" TargetType="{x:Type TextBlock}">

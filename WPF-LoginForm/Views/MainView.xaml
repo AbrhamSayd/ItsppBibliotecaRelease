@@ -20,7 +20,6 @@
     WindowStyle="None"
     mc:Ignorable="d">
     <ContentControl.Resources>
-
         <!--<DataTemplate DataType="{x:Type viewModels:MembersViewModel}">
             <tablesViews:BooksView />
         </DataTemplate>
@@ -28,17 +27,21 @@
             <fieldsViews:BooksFieldsView />
         </DataTemplate>-->
 
-
-        <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
-            <tablesViews:BooksView />
+        <DataTemplate DataType="{x:Type viewModels:LendingsViewModel}">
+            <tablesViews:LendingsView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:MembersViewModel}">
             <tablesViews:MembersView />
         </DataTemplate>
-
-
         <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
             <tablesViews:UsersView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
+            <tablesViews:BooksView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type fieldsModels:MembersFieldsViewModel}">
+            <fieldsViews:MembersFieldsView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type fieldsModels:UserFieldsViewModel}">
             <fieldsViews:UsersFieldsView />
@@ -46,9 +49,7 @@
         <DataTemplate DataType="{x:Type fieldsModels:BooksFieldsViewModel}">
             <fieldsViews:BooksFieldsView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type fieldsModels:MembersFieldsViewModel}">
-            <fieldsViews:MembersFieldsView />
-        </DataTemplate>
+
     </ContentControl.Resources>
 
     <Border
@@ -94,7 +95,8 @@
                         </RadioButton>
 
                         <!--  booksButton  -->
-                        <RadioButton Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
+                        <RadioButton Command="{Binding NavigateLendings}"
+                                     Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="BookOpen" Style="{StaticResource menuButtonIcon}" />
                             </StackPanel>
@@ -105,7 +107,7 @@
                             Style="{StaticResource menuButtonStyle}"
                             Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="Portrait" Style="{StaticResource menuButtonIcon}" />
+                                <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
                             </StackPanel>
                         </RadioButton>
                         <!--  HomeButton  -->
@@ -123,7 +125,7 @@
                             Style="{StaticResource menuButtonStyle}"
                             Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="BookOpenReader" Style="{StaticResource menuButtonIcon}" />
+                                <fa:IconImage Icon="Portrait" Style="{StaticResource menuButtonIcon}" />
                             </StackPanel>
                         </RadioButton>
                         <RadioButton

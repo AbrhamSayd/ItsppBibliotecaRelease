@@ -50,6 +50,8 @@ public class MembersViewModel : ViewModelBase
         ExecuteGetAllCommand(null);
     }
 
+    #endregion
+
     #region Methods
 
     private bool CanExecuteRemove(object obj)
@@ -69,8 +71,6 @@ public class MembersViewModel : ViewModelBase
 
         _errorCode = _membersRepository.GetError();
     }
-
-    #endregion
 
     #endregion
 
