@@ -15,5 +15,7 @@ public class LendingModel
     public string UsernameReturned { get; set; }
     public int? FinedAmount { get; set; }
     public string Remarks { get; set; }
+    public string MemberName { get; set; }
+    public string BookName {get; set; }
 
 }
