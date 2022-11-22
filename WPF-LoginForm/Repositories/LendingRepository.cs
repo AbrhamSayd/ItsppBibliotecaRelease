@@ -11,37 +11,6 @@ public class LendingRepository : RepositoryBase, ILendingRepository
 {
     private string _errorCode;
 
-
-    public async Task<string> Add(LendingModel lending, UserModel currentUser)
-    {
-        try
-        {
-            await using var connection = GetConnection();
-            await using (var command = new MySqlCommand())
-            {
-                await connection.OpenAsync();
-                command.Connection = connection;
-                command.CommandText =
-                    "INSERT INTO lendings (Book_Id, Member_Id, Date_Time_Borrowed, Username_Lent, Date_Time_Returned, Username_Returned, Fined_Amount, Remarks) VALUES (@book_Id, @member_Id, NOW(), @username, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
-                command.Parameters.Add("@book_Id", MySqlDbType.Int64).Value = lending.BookId;
-                command.Parameters.Add("@member_Id", MySqlDbType.Int64).Value = lending.MemberId;
-                command.Parameters.Add("@username", MySqlDbType.String).Value = currentUser.Username;
-                command.Parameters.Add("@remarks", MySqlDbType.String).Value = lending.Remarks;
-
-                await command.ExecuteScalarAsync(CancellationToken.None);
-                _errorCode = "400";
-            }
-        }
-        catch (Exception e)
-        {
-            _errorCode = e.ToString();
-            throw;
-        }
-
-
-        return _errorCode;
-    }
-
     public async Task<string> Edit(LendingModel lending, int lendingId)
     {
         try
