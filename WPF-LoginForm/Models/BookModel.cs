@@ -1,4 +1,6 @@
-﻿namespace WPFBiblioteca.Models; 
+﻿using System;
+
+namespace WPFBiblioteca.Models; 
 
 public class BookModel
 {
@@ -7,7 +9,7 @@ public class BookModel
     public string Name { get; set; }
     public string Author { get; set; }
     public string Editorial { get; set; }
-    public string PublishedYear { get; set; }
+    public int? PublishedYear { get; set; }
     public int Stock { get; set; }
     public string Color { get; set; }
     public int CategoryId { get; set; } //category id inside DB, Use Inner Joint on CategoryId Id

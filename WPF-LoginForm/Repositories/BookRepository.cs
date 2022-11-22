@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using MySqlConnector;
@@ -149,7 +150,7 @@ public class BookRepository : RepositoryBase, IBookRepository
                     Name = reader[2].ToString(),
                     Author = reader[3].ToString(),
                     Editorial = reader[4].ToString(),
-                    PublishedYear = reader[5].ToString(),
+                    PublishedYear = int.Parse(reader[5].ToString() ?? string.Empty),
                     Stock = int.Parse(reader[6].ToString() ?? string.Empty),
                     Color = reader[7].ToString(),
                     CategoryId = int.Parse(reader[8].ToString() ?? string.Empty),
@@ -190,7 +191,7 @@ public class BookRepository : RepositoryBase, IBookRepository
                     Name = reader[2].ToString(),
                     Author = reader[3].ToString(),
                     Editorial = reader[4].ToString(),
-                    PublishedYear = reader[5].ToString(),
+                    PublishedYear = int.Parse(reader[5].ToString() ?? string.Empty),
                     Stock = int.Parse(reader[6].ToString() ?? string.Empty),
                     Color = reader[7].ToString(),
                     CategoryId = int.Parse(reader[8].ToString() ?? string.Empty),
@@ -233,7 +234,7 @@ public class BookRepository : RepositoryBase, IBookRepository
                     Name = reader[2].ToString(),
                     Author = reader[3].ToString(),
                     Editorial = reader[4].ToString(),
-                    PublishedYear = reader[5].ToString(),
+                    PublishedYear = int.Parse(reader[5].ToString()),
                     Stock = int.Parse(reader[6].ToString() ?? string.Empty),
                     Color = reader[7].ToString(),
                     CategoryId = int.Parse(reader[8].ToString() ?? string.Empty),

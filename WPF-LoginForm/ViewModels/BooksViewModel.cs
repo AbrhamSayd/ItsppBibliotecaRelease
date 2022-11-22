@@ -112,7 +112,6 @@ public class BooksViewModel : ViewModelBase
         {
             _bookModel = value;
             CanDelete = _bookModel != null;
-
             OnPropertyChanged(nameof(BookModel));
         }
     }

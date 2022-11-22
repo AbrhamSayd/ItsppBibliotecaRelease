@@ -136,7 +136,8 @@
                                 Text="Año de publicación" />
                             <DatePicker
                                 CalendarStyle="{StaticResource OnlyYearPickerStyle}"
-                                HorizontalAlignment="Left" />
+                                HorizontalAlignment="Left"
+                                SelectedDate="{Binding SelectedDate, Mode= OneWayToSource}"/>
 
                             <Calendar Style="{StaticResource OnlyYearPickerStyle}" />
 

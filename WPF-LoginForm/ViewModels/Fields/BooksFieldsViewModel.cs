@@ -19,7 +19,8 @@ public class BooksFieldsViewModel : ViewModelBase
     {
         _mode = mode;
         _book = book ?? new BookModel();
-
+        _date = new DateTime();
+        _date = DateTime.Now;
         GoBackCommand = new GoBooksCommand(null,
             new NavigationService<BooksViewModel>(navigationStore,
                 () => new BooksViewModel(navigationStore)));
@@ -46,13 +47,15 @@ public class BooksFieldsViewModel : ViewModelBase
     private string _name;
     private string _author;
     private string _editorial;
-    private string _publishedYear;
+    private int _publishedYear; 
     private int _stock;
     private string _color;
     private string _location;
     private string _remarks;
     private readonly string _mode;
     private int _categoryId;
+    private DateTime _date;
+    private DateTime _selectedDate;
     private readonly IBookRepository _bookRepository;
     private readonly ICategoryRepository _categoryRepository;
     private ObservableCollection<CategoryModel> _categories;
@@ -76,7 +79,7 @@ public class BooksFieldsViewModel : ViewModelBase
         _name = _book.Name;
         _author = _book.Author;
         _editorial = _book.Editorial;
-        _publishedYear = _book.PublishedYear;
+        _publishedYear = (int)_book.PublishedYear;
         _stock = _book.Stock;
         _color = _book.Color;
         _categoryId = _book.CategoryId;
@@ -140,6 +143,19 @@ public class BooksFieldsViewModel : ViewModelBase
     #endregion
 
     #region Properties
+
+    public DateTime SelectedDate
+    {
+        get => _selectedDate;
+        set
+        {
+            
+            _selectedDate = value;
+            _publishedYear = value.Year;
+            _book.PublishedYear = value.Year;
+            OnPropertyChanged(nameof(SelectedDate));
+        }
+    }
 
     public int Id
     {
@@ -216,15 +232,14 @@ public class BooksFieldsViewModel : ViewModelBase
         }
     }
 
-    public string PublishedYear
+    public int PublishedYear
     {
         get => _publishedYear;
         set
         {
             _publishedYear = value;
-            _book.PublishedYear = value;
             _errorsViewModel.ClearErrors(nameof(PublishedYear));
-            if (string.IsNullOrEmpty(_publishedYear) || _publishedYear.Length < 4)
+            if (_publishedYear<1500 || _publishedYear > _date.Year)
                 _errorsViewModel.AddError(nameof(Name), "Fecha invalida");
 
             OnPropertyChanged(nameof(PublishedYear));
@@ -268,7 +283,6 @@ public class BooksFieldsViewModel : ViewModelBase
         set
         {
             _category = value;
-            _book.CategoryId = _category.CategoryId;
             OnPropertyChanged(nameof(Category));
         }
     }
