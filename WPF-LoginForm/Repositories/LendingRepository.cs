@@ -11,6 +11,39 @@ public class LendingRepository : RepositoryBase, ILendingRepository
 {
     private string _errorCode;
 
+    public async Task<string> Add(LendingModel lending)
+    {
+        try
+        {
+            await using var connection = GetConnection();
+            await using (var command = new MySqlCommand())
+            {
+                await connection.OpenAsync();
+                command.Connection = connection;
+                command.CommandText =
+                    @"INSERT INTO lendings(Lending_ID, Book_ID, Member_ID, Date_Time_Barrowed, Username_Lent, Date_Time_Returned, Username_Returned, Fined_Aumount, Remarks) 
+                       Values(@Lending_ID, @Book_ID, @Member_ID, @Date_Time_Barrowed, @Username_Lent, @Fined_Aumount, @Remarks)";
+                command.Parameters.Add("@Lending_ID", MySqlDbType.Int64).Value = lending.LendingId;
+                command.Parameters.Add("@Book_ID", MySqlDbType.Int64).Value = lending.BookId;
+                command.Parameters.Add("@Member_ID", MySqlDbType.Int64).Value = lending.MemberId;
+                command.Parameters.Add("@date_time_Barrowed", MySqlDbType.DateTime).Value = lending.DateTimeBorrowed;
+                command.Parameters.Add("@username_Lent", MySqlDbType.String).Value = lending.UsernameLent;
+                command.Parameters.Add("@fined_Amount", MySqlDbType.Int64).Value = lending.FinedAmount;
+                command.Parameters.Add("@remarks", MySqlDbType.String).Value = lending.Remarks;
+                await command.ExecuteScalarAsync(CancellationToken.None);
+                _errorCode = "400";
+            }
+        }
+        catch (Exception e)
+        {
+            _errorCode = e.ToString();
+            throw;
+        }
+
+
+        return _errorCode;
+    }
+
     public async Task<string> Edit(LendingModel lending, int lendingId)
     {
         try
