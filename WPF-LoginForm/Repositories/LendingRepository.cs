@@ -22,12 +22,12 @@ public class LendingRepository : RepositoryBase, ILendingRepository
         throw new NotImplementedException();
     }
 
-    public async Task<MemberModel> GetById(int lendingId)
+    public async Task<LendingModel> GetById(int lendingId)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<MemberModel> GetByName(string firstName)
+    public async Task<LendingModel> GetByName(string firstName)
     {
         throw new NotImplementedException();
     }

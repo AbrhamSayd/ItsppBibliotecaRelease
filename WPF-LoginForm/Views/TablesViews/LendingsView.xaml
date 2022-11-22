@@ -43,9 +43,9 @@
                 Grid.Row="1"
                 CellStyle="{DynamicResource DataGridCellStyle}"
                 ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                ItemsSource="{Binding CollectionBooks}"
+                ItemsSource="{Binding CollectionLendings, UpdateSourceTrigger=PropertyChanged}"
                 RowStyle="{DynamicResource DataGridRowStyle}"
-                SelectedItem="{Binding BookModel}"
+                SelectedItem="{Binding LendingModel, UpdateSourceTrigger=PropertyChanged}"
                 Style="{DynamicResource DataGridStyle}">
                 <DataGrid.Columns>
 
