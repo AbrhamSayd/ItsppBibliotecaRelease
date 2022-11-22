@@ -6,11 +6,11 @@ namespace WPFBiblioteca.Repositories;
 
 public interface ILendingRepository
 {
-    Task<string> Add(LendingModel lending);
+    Task<string> Add(LendingModel lending, UserModel currentUser);
     Task<string> Edit(LendingModel lending, int lendingId);
     Task<string> Delete(int lendingId);
-    Task<MemberModel> GetById(int lendingId);
-    Task<MemberModel> GetByName(string firstName);
+    Task<MemberModel> GetByMemberId(int memberId);
+    Task<MemberModel> GetByBook(int bookId);
     Task<IEnumerable<LendingModel>> GetByAll();
     string GetError();
 }

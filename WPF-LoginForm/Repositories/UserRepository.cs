@@ -126,7 +126,7 @@ public class UserRepository : RepositoryBase, IUserRepository
         {
             connection.Open(); //abrimos la connecion con MySQL
             command.Connection = connection; //asignamos al comando la coneccion a mysql
-            command.CommandText = "select *from users where username=@username"; //definimos nuestro query
+            command.CommandText = "select * from users where username=@username"; //definimos nuestro query
             command.Parameters.Add("@username", MySqlDbType.VarChar).Value = username; //definimos parametro de username
             using (var reader = command.ExecuteReader())
             {

@@ -138,13 +138,13 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public string userType
+    public string UserType
     {
         get => _userType;
         set
         {
             _userType = value;
-            OnPropertyChanged(nameof(userType));
+            OnPropertyChanged(nameof(UserType));
         }
     }
 
