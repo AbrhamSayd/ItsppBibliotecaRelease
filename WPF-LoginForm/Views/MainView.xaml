@@ -180,7 +180,7 @@
                                 VerticalAlignment="Bottom"
                                 FontFamily="{DynamicResource SFUIUltraLight}"
                                 FontSize="20"
-                                FontWeight="UltraLight"
+                                FontWeight="Bold"
                                 Foreground="{StaticResource LocationTitleColor}"
                                 TextWrapping="Wrap">
                                 <Run Text="Puerto Peñasco" /><Run Language="es-mx" Text=", Sonora" />
@@ -192,6 +192,7 @@
                                 VerticalAlignment="Bottom"
                                 FontFamily="{DynamicResource SFUIDisplay}"
                                 FontSize="22"
+                                FontWeight="Bold"
                                 Foreground="{StaticResource DateTextUIColor}"
                                 TextWrapping="Wrap">
                                 <Run Language="es-mx" Text="10/22/2022" />
@@ -243,7 +244,11 @@
 
                     <!--  Content control  -->
                     <Grid Grid.Row="1" Margin="20,0,20,20">
-                        <ContentControl Content="{Binding CurrentViewModel}" />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1082*"/>
+                            <ColumnDefinition Width="453*"/>
+                        </Grid.ColumnDefinitions>
+                        <ContentControl Content="{Binding CurrentViewModel}" Grid.ColumnSpan="2" />
                     </Grid>
 
                 </Grid>
