@@ -134,12 +134,12 @@
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Año de publicación" />
-                            <DatePicker
-                                CalendarStyle="{StaticResource OnlyYearPickerStyle}"
+                            <TextBox
+                                Width="400"
+                                Text="{Binding Author}"
                                 HorizontalAlignment="Left"
-                                SelectedDate="{Binding SelectedDate, Mode= OneWayToSource}"/>
-
-                            <Calendar Style="{StaticResource OnlyYearPickerStyle}" />
+                                Margin="0,5,0,5"
+                                Style="{StaticResource CustomCardTextBox}" />
 
                             <TextBlock
                                 Padding="20,40,0,0"
@@ -175,14 +175,30 @@
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Ubicacion" />
-                            <TextBox
-                                x:Name="TxtLocacion"
-                                Text="{Binding Location}"
-                                Width="400"
-                                HorizontalAlignment="Left"
-                                Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
                         </StackPanel>
+                        <DockPanel Grid.Column="1">
+                            <TextBox
+                                Text="{Binding Location}"
+                                Width="120"
+                                Height="50"
+                                HorizontalAlignment="Left"
+                                Margin="0,485,0,5"
+                                Style="{StaticResource CustomCardTextBox}" />
+                            <TextBlock
+                                Margin="20,485,0,0"
+                                Width="13"
+                                Height="50"
+                                FontWeight="Black"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="-" />
+                            <TextBox
+                                Text="{Binding Location}"
+                                Width="120"
+                                Height="50"
+                                HorizontalAlignment="Left"
+                                Margin="20,485,0,5"
+                                Style="{StaticResource CustomCardTextBox}" />
+                        </DockPanel>
                     </Grid>
                 </Grid>
             </ScrollViewer>
