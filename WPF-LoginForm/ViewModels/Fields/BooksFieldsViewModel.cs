@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -17,7 +18,6 @@ public class BooksFieldsViewModel : ViewModelBase
 {
     #region Fields
 
-    private readonly ErrorsViewModel _errorsViewModel;
     private BookModel _book;
     private CategoryModel _category;
     private ColorModel _color;
@@ -31,15 +31,16 @@ public class BooksFieldsViewModel : ViewModelBase
     private int _publishedYear;
     private int _stock;
     private string _location;
+    private string _locationA;
+    private string _locationB;
     private string _remarks;
     private readonly string _mode;
     private int _categoryId;
-    private DateTime _date;
-    private DateTime _selectedDate;
     private readonly IBookRepository _bookRepository;
     private readonly ICategoryRepository _categoryRepository;
     private readonly IColorRepository _colorRepository;
     private ObservableCollection<CategoryModel> _categories;
+    private ObservableCollection<ColorModel> _colors;
 
     #endregion
     #region Constructor
@@ -48,20 +49,30 @@ public class BooksFieldsViewModel : ViewModelBase
     {
         _mode = mode;
         _book = book ?? new BookModel();
-        _date = new DateTime();
-        _date = DateTime.Now;
+        
         GoBackCommand = new GoBooksCommand(null,
             new NavigationService<BooksViewModel>(navigationStore,
                 () => new BooksViewModel(navigationStore)));
         _bookRepository = new BookRepository();
         _categoryRepository = new CategoryRepository();
         _colorRepository = new ColorRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
-        _errorsViewModel = new ErrorsViewModel();
-        _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand,CanExecuteEdition);
         ExecuteGetCategories(null);
+        ExecuteGetColors(null);
         if (mode == "Edit")
+        {
             FillModel();
+        }
+           
+    }
+
+    private bool CanExecuteEdition(object obj)
+    {
+        if (Category == null || Color == null || string.IsNullOrEmpty(LocationA) || string.IsNullOrEmpty(LocationB))
+        {
+            return false;
+        }
+        return true;
     }
 
     #endregion
@@ -91,12 +102,9 @@ public class BooksFieldsViewModel : ViewModelBase
         _categoryId = _book.CategoryId;
         _location = _book.Location;
         _remarks = _book.Remarks;
+        
     }
 
-    private bool CanExecuteAddCommand(object obj)
-    {
-        return CanCreate;
-    }
 
     private async void ExecuteEditionCommand(object obj)
     {
@@ -111,8 +119,8 @@ public class BooksFieldsViewModel : ViewModelBase
                 Editorial = _editorial,
                 PublishedYear = _publishedYear,
                 Stock = _stock,
-                ColorId = _colorId,
-                CategoryId = _categoryId,
+                ColorId = Color.ColorId,
+                CategoryId = Category.CategoryId,
                 Location = _location,
                 Remarks = _remarks
             };
@@ -122,6 +130,20 @@ public class BooksFieldsViewModel : ViewModelBase
         }
         else
         {
+            _book = new BookModel
+            {
+                Id = _id,
+                Isbn = _isbn,
+                Name = _name,
+                Author = _author,
+                Editorial = _editorial,
+                PublishedYear = _publishedYear,
+                Stock = _stock,
+                ColorId = Color.ColorId,
+                CategoryId = Category.CategoryId,
+                Location = _location,
+                Remarks = _remarks
+            };
             await _bookRepository.Edit(_book, _staticId);
             GoBackCommand.Execute(null);
         }
@@ -132,36 +154,19 @@ public class BooksFieldsViewModel : ViewModelBase
         Categories = new ObservableCollection<CategoryModel>(await _categoryRepository.GetByAll());
     }
 
-
-    public IEnumerable GetErrors(string propertyName)
+    private async void ExecuteGetColors(object obj)
     {
-        return _errorsViewModel.GetErrors(propertyName);
+        Colors = new ObservableCollection<ColorModel>(await _colorRepository.GetByAll());
     }
 
-    private void ErrorsViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
-    {
-        ErrorsChanged?.Invoke(this, e);
-        OnPropertyChanged(nameof(CanCreate));
-    }
 
-    public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
 
     #endregion
 
     #region Properties
 
-    public DateTime SelectedDate
-    {
-        get => _selectedDate;
-        set
-        {
-            
-            _selectedDate = value;
-            _publishedYear = value.Year;
-            _book.PublishedYear = value.Year;
-            OnPropertyChanged(nameof(SelectedDate));
-        }
-    }
+    
 
     public int Id
     {
@@ -170,10 +175,6 @@ public class BooksFieldsViewModel : ViewModelBase
         {
             _id = value;
             _book.Id = value;
-            _errorsViewModel.ClearErrors(nameof(Id));
-            if (Math.Floor(Math.Log10(_id) + 1)
-                is < 3 or > 8)
-                _errorsViewModel.AddError(nameof(Id), "ID Invalido?");
 
             OnPropertyChanged(nameof(Id));
         }
@@ -186,8 +187,6 @@ public class BooksFieldsViewModel : ViewModelBase
         {
             _isbn = value;
             _book.Isbn = value;
-            _errorsViewModel.ClearErrors(nameof(Isbn));
-            if (_isbn.Length is <= 9 or > 14) _errorsViewModel.AddError(nameof(Isbn), "ISBN invalido");
 
             OnPropertyChanged(nameof(Isbn));
         }
@@ -200,10 +199,6 @@ public class BooksFieldsViewModel : ViewModelBase
         {
             _name = value;
             _book.Name = value;
-            _errorsViewModel.ClearErrors(nameof(Name));
-            if (string.IsNullOrEmpty(_name) || _name.Length < 6)
-                _errorsViewModel.AddError(nameof(Name), "Nombre de libro invalido o muy corto");
-
             OnPropertyChanged(nameof(Name));
         }
     }
@@ -215,10 +210,6 @@ public class BooksFieldsViewModel : ViewModelBase
         {
             _author = value;
             _book.Author = value;
-            _errorsViewModel.ClearErrors(nameof(Author));
-            if (string.IsNullOrEmpty(_author) || _author.Length < 6)
-                _errorsViewModel.AddError(nameof(Author), "Nombre de Autor invalido o muy corto");
-
             OnPropertyChanged(nameof(Author));
         }
     }
@@ -230,10 +221,6 @@ public class BooksFieldsViewModel : ViewModelBase
         {
             _editorial = value;
             _book.Editorial = value;
-            _errorsViewModel.ClearErrors(nameof(Editorial));
-            if (string.IsNullOrEmpty(_editorial) || _editorial.Length < 2)
-                _errorsViewModel.AddError(nameof(Editorial), "Nombre de editorial invalido o muy corto");
-
             OnPropertyChanged(nameof(Editorial));
         }
     }
@@ -244,10 +231,6 @@ public class BooksFieldsViewModel : ViewModelBase
         set
         {
             _publishedYear = value;
-            _errorsViewModel.ClearErrors(nameof(PublishedYear));
-            if (_publishedYear<1500 || _publishedYear > _date.Year)
-                _errorsViewModel.AddError(nameof(Name), "Fecha invalida");
-
             OnPropertyChanged(nameof(PublishedYear));
         }
     }
@@ -259,11 +242,6 @@ public class BooksFieldsViewModel : ViewModelBase
         {
             _stock = value;
             _book.Stock = value;
-            _errorsViewModel.ClearErrors(nameof(Stock));
-            if (Math.Floor(Math.Log10(_id) + 1)
-                is < 1 or > 3)
-                _errorsViewModel.AddError(nameof(Name), "Existencia invalida");
-
             OnPropertyChanged(nameof(Stock));
         }
     }
@@ -287,7 +265,7 @@ public class BooksFieldsViewModel : ViewModelBase
             OnPropertyChanged(nameof(Color));
         }
     }
-
+    
     public CategoryModel Category
     {
         get => _category;
@@ -303,12 +281,10 @@ public class BooksFieldsViewModel : ViewModelBase
         get => _location;
         set
         {
-            _location = value;
-            _book.Location = value;
-            _errorsViewModel.ClearErrors(nameof(Location));
-            if (string.IsNullOrEmpty(_location) || _location.Length < 4)
-                _errorsViewModel.AddError(nameof(Location), "Locacion invalida");
-
+            _location = _locationA + "-" + _locationB;
+            _book.Location = _location;
+            //if (string.IsNullOrEmpty(_location) || _location.Length < 4)
+            //    _errorsViewModel.AddError(nameof(Location), "Locacion invalida");
             OnPropertyChanged(nameof(Location));
         }
     }
@@ -320,21 +296,33 @@ public class BooksFieldsViewModel : ViewModelBase
         {
             _remarks = value;
             _book.Remarks = value;
-            _errorsViewModel.ClearErrors(nameof(Remarks));
-            if (string.IsNullOrEmpty(_remarks))
-                _errorsViewModel.AddError(nameof(Remarks), "Notas invalidas, intente denuevo");
+            //if (string.IsNullOrEmpty(_remarks))
+            //    _errorsViewModel.AddError(nameof(Remarks), "Notas invalidas, intente denuevo");
 
             OnPropertyChanged(nameof(Remarks));
         }
     }
 
-    public int CategoryId
+    public string LocationA
     {
-        get => _categoryId;
+        get => _locationA;
         set
         {
-            _categoryId = value;
-            OnPropertyChanged(nameof(CategoryId));
+            _locationA = value;
+            _location = value + "-" + _locationB;
+            OnPropertyChanged(nameof(LocationA));
+        }
+    }
+
+    public string LocationB
+    {
+        get => _locationB;
+        set
+        {
+
+            _locationB = value;
+            _location = _locationA + '-' + _locationB;
+            OnPropertyChanged(nameof(LocationB));
         }
     }
 
@@ -348,8 +336,16 @@ public class BooksFieldsViewModel : ViewModelBase
         }
     }
 
-    public bool CanCreate => !HasErrors;
-    public bool HasErrors => _errorsViewModel.HasErrors;
+    public ObservableCollection<ColorModel> Colors
+    {
+        get => _colors;
+        set
+        {
+            _colors = value;
+            OnPropertyChanged(nameof(Colors));
+        }
+    }
+
 
     #endregion
 }

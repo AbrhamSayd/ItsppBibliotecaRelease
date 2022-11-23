@@ -26,8 +26,6 @@ namespace WPFBiblioteca.ViewModels.Fields
                     () => new LendingsViewModel(navigationStore, _currentUser)));
             _lendingRepository = new LendingRepository();
             EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
-            _errorsViewModel = new ErrorsViewModel();
-            _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
             if (mode == "Edit")
                 FillModel();
         }
@@ -37,7 +35,6 @@ namespace WPFBiblioteca.ViewModels.Fields
         #region Fields
 
         private readonly string _mode;
-        private readonly ErrorsViewModel _errorsViewModel;
         private LendingModel _lending;
         private UserModel _currentUser;
 
@@ -113,18 +110,6 @@ namespace WPFBiblioteca.ViewModels.Fields
             }
         }
 
-        public IEnumerable GetErrors(string propertyName)
-        {
-            return _errorsViewModel.GetErrors(propertyName);
-        }
-
-        private void ErrorsViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
-        {
-            ErrorsChanged?.Invoke(this, e);
-            OnPropertyChanged(nameof(CanCreate));
-        }
-
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         #endregion
 
@@ -259,8 +244,6 @@ namespace WPFBiblioteca.ViewModels.Fields
             }
         }
 
-        public bool CanCreate => !HasErrors;
-        public bool HasErrors => _errorsViewModel.HasErrors;
 
         #endregion
     }

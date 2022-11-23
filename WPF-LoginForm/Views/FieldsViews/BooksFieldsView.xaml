@@ -35,9 +35,7 @@
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
                         Icon="BookOpen" />
-                    <TextBlock
-                        Style="{StaticResource ViewsHeaders}"
-                        Text="Libro" />
+                    <TextBlock Style="{StaticResource ViewsHeaders}" Text="Libro" />
                 </StackPanel>
             </Grid>
             <ScrollViewer Grid.Row="1" Margin="0,0,0,0">
@@ -55,10 +53,10 @@
                             <TextBox
                                 x:Name="TxtName"
                                 Width="400"
-                                Text="{Binding Name}"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Name}" />
 
 
                             <TextBlock
@@ -68,10 +66,10 @@
                             <TextBox
                                 x:Name="TxtEditorial"
                                 Width="400"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Text="{Binding Editorial}"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Editorial}" />
 
 
                             <TextBlock
@@ -81,10 +79,13 @@
                             <TextBox
                                 x:Name="TxtIsbn"
                                 Width="400"
-                                Text="{Binding Isbn}"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                PreviewTextInput="IntScanInput"
+                                MaxLength="13"
+                                PreviewKeyDown="TxtIsbn_OnPreviewKeyDown"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Isbn}" />
 
 
                             <TextBlock
@@ -94,17 +95,17 @@
                             <ComboBox
                                 x:Name="ComboBoxColor"
                                 Width="400"
+                                Margin="0,5,0,5"
+                                Padding="15,2,15,2"
+                                HorizontalAlignment="Left"
                                 FontFamily="{StaticResource SFUIBold}"
                                 FontSize="30"
                                 Foreground="{StaticResource FieldsTextsColor}"
-                                ItemsSource="{Binding Categories}"
-                                SelectedItem="{Binding Category}"
-                                Padding="15,2,15,2"
-                                HorizontalAlignment="Left"
-                                Margin="0,5,0,5">
+                                ItemsSource="{Binding Colors}"
+                                SelectedItem="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=Default, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Description}" />
+                                        <TextBlock Text="{Binding ColorName}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
@@ -115,10 +116,10 @@
                             <TextBox
                                 x:Name="TxtNota"
                                 Width="400"
-                                Text="{Binding Remarks}"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Remarks}" />
                         </StackPanel>
                     </Grid>
 
@@ -127,7 +128,7 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="2">
+                        <StackPanel Grid.Column="1">
                             <TextBlock
                                 Padding="20,60,0,0"
                                 Style="{StaticResource FieldsHeaders}"
@@ -135,23 +136,24 @@
                             <TextBox
                                 x:Name="TxtAutor"
                                 Width="400"
-                                Text="{Binding Author}"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Author}" />
 
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Año de publicación" />
-                            <DatePicker
-                                CalendarStyle="{StaticResource OnlyYearPickerStyle}"
-                                HorizontalAlignment="left"
-                                FontSize="30"
-                                UseLayoutRounding="True"
-                                FontFamily="{StaticResource SFUIBold}"
-                                
-                                SelectedDate="{Binding SelectedDate, Mode= OneWayToSource}"/>
+                            <TextBox
+                                x:Name="TxTDate"
+                                Width="400"
+                                Margin="0,5,0,5"
+                                HorizontalAlignment="Left"
+                                MaxLength="4"
+                                PreviewTextInput="IntInput"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding PublishedYear}" />
 
                             <TextBlock
                                 Padding="20,40,0,0"
@@ -160,14 +162,14 @@
                             <ComboBox
                                 x:Name="ComboBoxCategory"
                                 Width="400"
+                                Margin="0,5,0,5"
+                                Padding="15,2,15,2"
+                                HorizontalAlignment="Left"
                                 FontFamily="{StaticResource SFUIBold}"
                                 FontSize="30"
                                 Foreground="{StaticResource FieldsTextsColor}"
                                 ItemsSource="{Binding Categories}"
-                                SelectedItem="{Binding Category}"
-                                Padding="15,2,15,2"
-                                HorizontalAlignment="Left"
-                                Margin="0,5,0,5">
+                                SelectedItem="{Binding Category, Mode=TwoWay, IsAsync=True}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Description}" />
@@ -181,39 +183,43 @@
                                 Text="Existencia" />
                             <TextBox
                                 x:Name="TxtExistencia"
-                                Text="{Binding Stock}"
                                 Width="400"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                PreviewTextInput="IntInput"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Stock}" />
                             <TextBlock
-                                Padding="20,40,0,0"
+                                Padding="20,40,0,5"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Ubicacion" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox
+                                    Width="120"
+                                    Height="50"
+                                    Margin="0,0,0,5"
+                                    HorizontalAlignment="Left"
+                                    Style="{StaticResource CustomCardTextBox}"
+                                    Text="{Binding LocationA}" 
+                                    MaxLength="3"/>
+                                <TextBlock
+                                    Width="13"
+                                    Height="50"
+                                    Margin="20,0,0,0"
+                                    FontWeight="Black"
+                                    Style="{StaticResource FieldsHeaders}"
+                                    Text="-" />
+                                <TextBox
+                                    Width="120"
+                                    Height="50"
+                                    Margin="20,0,0,5"
+                                    HorizontalAlignment="Left"
+                                    Style="{StaticResource CustomCardTextBox}"
+                                    Text="{Binding LocationB}" 
+                                    PreviewTextInput="IntInput"
+                                    MaxLength="2"/>
+                            </StackPanel>
                         </StackPanel>
-                        <DockPanel Grid.Column="1">
-                            <TextBox
-                                Text="{Binding Location}"
-                                Width="120"
-                                Height="50"
-                                HorizontalAlignment="Left"
-                                Margin="0,485,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
-                            <TextBlock
-                                Margin="20,485,0,0"
-                                Width="13"
-                                Height="50"
-                                FontWeight="Black"
-                                Style="{StaticResource FieldsHeaders}"
-                                Text="-" />
-                            <TextBox
-                                Text="{Binding Location}"
-                                Width="120"
-                                Height="50"
-                                HorizontalAlignment="Left"
-                                Margin="20,485,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
-                        </DockPanel>
                     </Grid>
                 </Grid>
             </ScrollViewer>
@@ -222,23 +228,29 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button Margin="20" Style="{StaticResource CardButton}" Command="{Binding GoBackCommand}">
+                <DockPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+                    <Button
+                        Margin="20"
+                        Command="{Binding GoBackCommand}"
+                        Style="{StaticResource CardButton}">
                         <TextBlock
+                            Name="BtnCancelar"
                             Margin="20,6,20,6"
                             FontSize="20"
-                            Text="Cancelar"
-                            Name="BtnCancelar" />
+                            Text="Cancelar" />
                     </Button>
                     <Button
                         Margin="20"
                         Command="{Binding EditionCommand}"
                         Style="{StaticResource CardButton}">
                         <TextBlock
+                            Name="BtnAceptar"
                             Margin="20,6,20,6"
                             FontSize="20"
-                            Text="Aceptar"
-                            Name="BtnAceptar" />
+                            Text="Aceptar" />
                     </Button>
                 </DockPanel>
             </Grid>

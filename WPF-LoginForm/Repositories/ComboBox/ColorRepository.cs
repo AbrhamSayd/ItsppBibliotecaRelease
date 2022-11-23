@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ABI.Windows.UI;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Models.ComboBoxModels;
 
@@ -29,16 +30,51 @@ namespace WPFBiblioteca.Repositories.ComboBox
 
         public async Task<ColorModel> GetById(int id)
         {
-            throw new NotImplementedException();
+            int tempInt;
+
+            ColorModel color = null;
+            await using var connection = GetConnection();
+            await using var command = new MySqlCommand();
+            try
+            {
+                await connection.OpenAsync();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM colors Where Color_Id = @color_Id;";
+                command.Parameters.Add("@color_Id", MySqlDbType.Int64).Value = id;
+                await using var reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    color = new ColorModel();
+                    if (int.TryParse(reader[0].ToString(), out tempInt))
+                        color.ColorId = tempInt;
+                    color.ColorName = reader[1].ToString();
+
+                }
+
+
+
+                _errorCode = "400";
+            }
+            catch (MySqlException ex)
+            {
+                _errorCode = ex.ToString();
+            }
+            finally
+            {
+                await connection.CloseAsync();
+            }
+
+            return color;
         }
 
         public async Task<IEnumerable<ColorModel>> GetByAll()
         {
             var colorList = new List<ColorModel>();
-            await using var connection = GetConnection();
-            await using var command = new MySqlCommand();
             try
             {
+                
+                await using var connection = GetConnection();
+                await using var command = new MySqlCommand();
                 await connection.OpenAsync();
                 command.Connection = connection;
                 command.CommandText = "SELECT * from colors order by Color_Id asc";

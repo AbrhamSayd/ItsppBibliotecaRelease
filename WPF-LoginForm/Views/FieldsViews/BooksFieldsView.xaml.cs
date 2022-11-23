@@ -1,4 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace WPFBiblioteca.Views.FieldsViews;
 
@@ -7,8 +11,47 @@ namespace WPFBiblioteca.Views.FieldsViews;
 /// </summary>
 public partial class BooksFieldsView : UserControl
 {
+    private bool max = false;
+    private bool runtime = false;
     public BooksFieldsView()
     {
         InitializeComponent();
+
+    }
+    private void IntInput(object sender, TextCompositionEventArgs e)
+    {
+        Regex regex = new Regex("[^0-9]+");
+        e.Handled = regex.IsMatch(e.Text);
+    }
+    private void IntScanInput(object sender, TextCompositionEventArgs e)
+    {
+
+        Regex regex = new Regex("[^0-9]+");
+        e.Handled = regex.IsMatch(e.Text);
+        
+        
+    }
+
+
+    private void TxtIsbn_OnPreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        
+
+        if (max || runtime)
+        {
+            var a = (TextBox)sender;
+            a.Text = String.Empty;
+            runtime = false;
+            max = false;
+
+        }
+        if (((TextBox)sender).MaxLength == ((TextBox)sender).Text.Length) 
+        {
+            max = true;
+            runtime = true;
+            e.Handled = true;
+        }
+        
+
     }
 }

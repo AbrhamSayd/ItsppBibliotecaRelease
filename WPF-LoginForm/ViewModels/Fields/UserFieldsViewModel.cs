@@ -15,7 +15,6 @@ public class UserFieldsViewModel : ViewModelBase
 {
     #region Fields
 
-    private readonly ErrorsViewModel _errorsViewModel;
     private UserModel _userModel;
     private int _id;
     private int _staticId;
@@ -49,8 +48,7 @@ public class UserFieldsViewModel : ViewModelBase
             new NavigationService<UsersViewModel>(navigationStore,
                 () => new UsersViewModel(navigationStore, _errorCode)));
 
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEditionCommand);
-        _errorsViewModel = new ErrorsViewModel();
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
 
 
         if (mode == "Edit")
@@ -73,10 +71,6 @@ public class UserFieldsViewModel : ViewModelBase
 
     #region Methods
 
-    private bool CanExecuteEditionCommand(object obj)
-    {
-        return CanCreate;
-    }
 
     private async void ExecuteEditionCommand(object obj)
     {
@@ -104,18 +98,6 @@ public class UserFieldsViewModel : ViewModelBase
     }
 
 
-    public IEnumerable GetErrors(string propertyName)
-    {
-        return _errorsViewModel.GetErrors(propertyName);
-    }
-
-    private void ErrorsViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
-    {
-        ErrorsChanged?.Invoke(this, e);
-        OnPropertyChanged(nameof(CanCreate));
-    }
-
-    public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
     #endregion
 
@@ -128,11 +110,6 @@ public class UserFieldsViewModel : ViewModelBase
         {
             _id = value;
             _userModel.Id = value;
-            _errorsViewModel.ClearErrors(nameof(Id));
-            if (Math.Floor(Math.Log10(_id) + 1)
-                is < 3 or > 8)
-                _errorsViewModel.AddError(nameof(Id), "Numero de empleado invalido");
-
             OnPropertyChanged(nameof(Id));
         }
     }
@@ -144,10 +121,6 @@ public class UserFieldsViewModel : ViewModelBase
         {
             _username = value;
             _userModel.Username = value;
-            _errorsViewModel.ClearErrors(nameof(Username));
-            if (string.IsNullOrWhiteSpace(_username) || _username.Length < 3)
-                _errorsViewModel.AddError(nameof(Username), "Nombre de usuario invalido");
-
             OnPropertyChanged(nameof(Username));
         }
     }
@@ -159,10 +132,6 @@ public class UserFieldsViewModel : ViewModelBase
         {
             _password = value;
             _userModel.Password = value;
-            _errorsViewModel.ClearErrors(nameof(Password));
-            if (_password == null || _password.Length < 3)
-                _errorsViewModel.AddError(nameof(Password), "Contraseña incorrecta");
-
             OnPropertyChanged(nameof(Password));
         }
     }
@@ -174,10 +143,6 @@ public class UserFieldsViewModel : ViewModelBase
         {
             _firstName = value;
             _userModel.FirstName = value;
-            _errorsViewModel.ClearErrors(nameof(FirstName));
-            if (string.IsNullOrEmpty(_firstName) || _firstName.Length <= 1)
-                _errorsViewModel.AddError(nameof(FirstName), "Nombre invalido");
-
             OnPropertyChanged(nameof(FirstName));
         }
     }
@@ -189,10 +154,6 @@ public class UserFieldsViewModel : ViewModelBase
         {
             _lastName = value;
             _userModel.LastName = value;
-            _errorsViewModel.ClearErrors(nameof(LastName));
-            if (string.IsNullOrEmpty(_lastName) || _lastName.Length < 3)
-                _errorsViewModel.AddError(nameof(LastName), "Apellido invalido");
-
             OnPropertyChanged(nameof(LastName));
         }
     }
@@ -204,16 +165,11 @@ public class UserFieldsViewModel : ViewModelBase
         {
             _userType = value;
             _userModel.UserType = value;
-            _errorsViewModel.ClearErrors(nameof(UserType));
-            if (string.IsNullOrWhiteSpace(_userType))
-                _errorsViewModel.AddError(nameof(UserType), "Tipo de usuario invalido");
             OnPropertyChanged(nameof(UserType));
         }
     }
 
 
-    public bool CanCreate => !HasErrors;
-    public bool HasErrors => _errorsViewModel.HasErrors;
 
     #endregion
 }

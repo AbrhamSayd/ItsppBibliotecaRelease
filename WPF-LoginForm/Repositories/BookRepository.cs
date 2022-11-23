@@ -23,14 +23,14 @@ public class BookRepository : RepositoryBase, IBookRepository
                 await connection.OpenAsync();
                 command.Connection = connection;
                 command.CommandText =
-                    "INSERT INTO books(Isbn, Name, Author, Editorial, Published_Year, stock, ColorId, Category_Id, Location, Remarks) VALUES(@Isbn,@Name,@Author,@Editoral,@Published_Year,@Stock,@ColorId,@Category_Id,@Location,@Remarks)";
+                    "INSERT INTO books(Isbn, Name, Author, Editorial, Published_Year, stock, Color_Id, Category_Id, Location, Remarks) VALUES(@isbn,@name,@author,@editoral,@published_Year,@stock,@colorId,@category_Id,@location,@remarks)";
                 command.Parameters.Add("@isbn", MySqlDbType.VarChar).Value = book.Isbn;
                 command.Parameters.Add("@name", MySqlDbType.VarChar).Value = book.Name;
                 command.Parameters.Add("@author", MySqlDbType.VarChar).Value = book.Author;
                 command.Parameters.Add("@editoral", MySqlDbType.VarChar).Value = book.Editorial;
                 command.Parameters.Add("@published_Year", MySqlDbType.DateTime).Value = book.PublishedYear;
                 command.Parameters.Add("@stock", MySqlDbType.Int64).Value = book.Stock;
-                command.Parameters.Add("@color", MySqlDbType.String).Value = book.ColorId;
+                command.Parameters.Add("@colorId", MySqlDbType.Int16).Value = book.ColorId;
                 command.Parameters.Add("@category_Id", MySqlDbType.Int64).Value = book.CategoryId;
                 command.Parameters.Add("@location", MySqlDbType.String).Value = book.Location;
                 command.Parameters.Add("@remarks", MySqlDbType.String).Value = book.Remarks;
@@ -67,7 +67,7 @@ public class BookRepository : RepositoryBase, IBookRepository
                     " Editorial = @editorial," +
                     " Published_Year = @published_Year," +
                     " Stock = @stock," +
-                    " ColorId = @color," +
+                    " Color_Id = @colorId," +
                     " Category_Id = @category_Id," +
                     " Location = @location," +
                     " Remarks = @remarks" +
@@ -80,10 +80,11 @@ public class BookRepository : RepositoryBase, IBookRepository
                 command.Parameters.Add("@editorial", MySqlDbType.VarChar).Value = book.Editorial;
                 command.Parameters.Add("@published_Year", MySqlDbType.DateTime).Value = book.PublishedYear;
                 command.Parameters.Add("@stock", MySqlDbType.Int64).Value = book.Stock;
-                command.Parameters.Add("@color", MySqlDbType.String).Value = book.ColorId;
+                command.Parameters.Add("@colorId", MySqlDbType.Int16).Value = book.ColorId;
                 command.Parameters.Add("@category_Id", MySqlDbType.Int64).Value = book.CategoryId;
                 command.Parameters.Add("@location", MySqlDbType.String).Value = book.Location;
                 command.Parameters.Add("@remarks", MySqlDbType.String).Value = book.Remarks;
+                await command.ExecuteScalarAsync(CancellationToken.None);
                 await command.ExecuteScalarAsync(CancellationToken.None);
                 _errorCode = "400";
             }
@@ -236,7 +237,15 @@ public class BookRepository : RepositoryBase, IBookRepository
             await connection.OpenAsync();
             command.Connection = connection;
             command.CommandText =
-                "select * from books left join categories on categories.Category_Id = books.Category_Id";
+                @"SELECT
+            books.*,
+            categories.Description,
+            colors.Color_Name
+                FROM books
+                LEFT OUTER JOIN  colors
+                ON books.Color_Id = colors.Color_Id
+            LEFT OUTER  JOIN categories
+            ON books.Category_Id = categories.Category_Id";
             await using var reader = await command.ExecuteReaderAsync();
             while (reader.Read())
             {
@@ -255,6 +264,8 @@ public class BookRepository : RepositoryBase, IBookRepository
                 book.CategoryId = int.Parse(reader[8].ToString() ?? string.Empty);
                 book.Location = reader[9].ToString();
                 book.Remarks = reader[10].ToString();
+                book.Category = reader[11].ToString() ?? "No asignado";
+                book.Color = reader[12].ToString() ?? "No asignado";
                 bookList.Add(book);
                 _errorCode = "400";
             }
