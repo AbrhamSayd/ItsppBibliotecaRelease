@@ -126,7 +126,7 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Gmail" />
+                                Text="Email" />
                             <TextBox
                                 Width="400"
                                 HorizontalAlignment="Left"
