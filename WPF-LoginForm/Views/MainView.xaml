@@ -201,7 +201,7 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Bottom"
                                 FontFamily="{DynamicResource SFUIDisplay}"
-                                FontSize="22"
+                                FontSize="20"
                                 FontWeight="Bold"
                                 Foreground="{StaticResource DateTextUIColor}"
                                 TextWrapping="Wrap">

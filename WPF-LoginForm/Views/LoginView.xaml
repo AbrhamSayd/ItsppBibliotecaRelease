@@ -65,7 +65,7 @@
                     VerticalAlignment="Bottom"
                     FontWeight="Bold"
                     FontFamily="{DynamicResource SFUIDisplay}"
-                    FontSize="22"
+                    FontSize="20"
                     Foreground="{StaticResource DateTextUIColor}"
                     TextWrapping="Wrap">
                     <Run Language="es-mx" Text="10/22/2022" />
