@@ -102,34 +102,29 @@
 
                             <!--  BOTON AGREGAR  -->
                             <Button
-                                Width="68.4"
-                                Height="30"
-                                Grid.Column="3"
+                                Grid.Column="2"
                                 Command="{Binding NavigateAddCommand}"
                                 Style="{StaticResource BtnAgregarStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Style="{StaticResource AddIconStyle}" />
-                                    <TextBlock Style="{StaticResource TextBlockAddStyle}" FontSize="10" Margin="0,0,0,0"/>
+                                    <TextBlock Style="{StaticResource TextBlockAddStyle}" />
                                 </StackPanel>
                             </Button>
 
                             <!--  BOTON Editar  -->
                             <Button
-                                Width="68.4"
-                                Height="30"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Command="{Binding EditRowCommand}"
                                 IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridEditButton}">
-                                <fa:IconImage Icon="Edit" Style="{StaticResource gridEditIcon}" />
+                                <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
                             </Button>
 
                             <!--  BOTON Eliminar  -->
                             <Button
-                                Width="68.4"
-                                Height="30"
-                                Grid.Column="1"
+                                Grid.Column="0"
                                 Command="{Binding RemoveRowCommand}"
+                                IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridDeleteButton}">
                                 <fa:IconImage Style="{StaticResource gridDeleteIcon}" />
                             </Button>

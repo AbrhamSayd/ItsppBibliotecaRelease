@@ -138,21 +138,17 @@
 
                             <!--  BOTON AGREGAR  -->
                             <Button
-                                Width="68.4"
-                                Height="30"
                                 Grid.Column="2"
                                 Command="{Binding NavigateAddCommand}"
                                 Style="{StaticResource BtnAgregarStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Style="{StaticResource AddIconStyle}" />
-                                    <TextBlock Style="{StaticResource TextBlockAddStyle}" FontSize="10" Margin="0,0,0,0" />
+                                    <TextBlock Style="{StaticResource TextBlockAddStyle}" />
                                 </StackPanel>
                             </Button>
 
                             <!--  BOTON Editar  -->
                             <Button
-                                Width="68.4"
-                                Height="30"
                                 Grid.Column="1"
                                 Command="{Binding EditCommand}"
                                 IsEnabled="{Binding CanDelete}"
@@ -162,8 +158,6 @@
 
                             <!--  BOTON Eliminar  -->
                             <Button
-                                Width="68.4"
-                                Height="30"
                                 Grid.Column="0"
                                 Command="{Binding RemoveCommand}"
                                 IsEnabled="{Binding CanDelete}"
