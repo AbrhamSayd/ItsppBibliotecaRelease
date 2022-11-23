@@ -22,7 +22,7 @@ public class MainViewModel : ViewModelBase
         LoadCurrentUserData();
 
         NavigateLendings = new GoLendingsCommand(null,
-            new NavigationService<LendingsViewModel>(navigationStore, () => new LendingsViewModel(navigationStore)));
+            new NavigationService<LendingsViewModel>(navigationStore, () => new LendingsViewModel(navigationStore, _currentUser)));
         NavigateBooks = new GoBooksCommand(null,
             new NavigationService<BooksViewModel>(navigationStore, () => new BooksViewModel(navigationStore)));
         NavigateUsers = new GoUsersCommand(null, new
@@ -47,6 +47,7 @@ public class MainViewModel : ViewModelBase
     private string _name;
     private string _lastName;
     private string _userType;
+    private UserModel _currentUser;
 
     #endregion
 
@@ -74,6 +75,7 @@ public class MainViewModel : ViewModelBase
             var user = _userRepository.GetByUsername(Thread.CurrentPrincipal.Identity!.Name);
             if (user != null)
             {
+                _currentUser = user;
                 CurrentUserAccount.Username = user.Username;
                 CurrentUserAccount.DisplayName = $"Bienvenido {user.FirstName} {user.LastName} ;)";
                 CurrentUserAccount.ProfilePicture = null;

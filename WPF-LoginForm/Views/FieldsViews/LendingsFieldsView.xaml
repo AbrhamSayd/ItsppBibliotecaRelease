@@ -48,7 +48,7 @@
                             <TextBlock
                                 Padding="20,60,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="ID Prestamo" />
+                                Text="ISBN Libro" />
                             <TextBox
                                 Width="300"
                                 HorizontalAlignment="Left"
@@ -57,9 +57,10 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Prestamista entrega" />
+                                Text="Usuario de entrega" />
                             <TextBox
                                 Width="300"
+                                IsReadOnly="True"
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
@@ -69,13 +70,14 @@
                                 Text="Fecha entrega" />
                             <TextBox
                                 Width="300"
+                                IsReadOnly="True"
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="ISBN Libro" />
+                                Text="Fianza" />
                             <TextBox
                                 Width="300"
                                 HorizontalAlignment="Left"
@@ -101,9 +103,10 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Prestamista devolución" />
+                                Text="Usuario de devolución" />
                             <TextBox
                                 Width="300"
+                                IsReadOnly="True"
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding UserType, UpdateSourceTrigger=PropertyChanged}" />
@@ -111,6 +114,17 @@
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Fecha devolución" />
+                            <TextBox
+                                Width="300"
+                                IsReadOnly="True"
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding UserType, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <TextBlock
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="NOTA" />
                             <TextBox
                                 Width="300"
                                 HorizontalAlignment="Left"
