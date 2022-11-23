@@ -36,7 +36,7 @@
                         Height="30"
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
-                        Icon="BookOpen" />
+                        Icon="BookBookmark" />
                     <TextBlock Style="{StaticResource ViewsHeaders}" Text="Inventario de libros" />
                 </StackPanel>
             </Grid>
@@ -96,7 +96,7 @@
                     <DataGridTextColumn
                         Width="Auto"
                         Binding="{Binding Color}"
-                        Header="Color"
+                        Header="ColorId"
                         IsReadOnly="True" />
                     <!--  Category Column  -->
                     <DataGridTextColumn

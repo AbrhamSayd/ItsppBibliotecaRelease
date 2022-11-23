@@ -11,6 +11,27 @@ namespace WPFBiblioteca.ViewModels;
 
 public class BooksViewModel : ViewModelBase
 {
+    
+
+    #region fields
+
+    private ObservableCollection<BookModel> _collectionBooks;
+    private BookModel _bookModel;
+    private readonly IBookRepository _bookRepository;
+    private NavigationStore _navigationStore;
+    private string _errorCode;
+    private bool _canDelete;
+
+    #endregion
+
+    #region ICommands
+
+    public ICommand NavigateAddCommand { get; }
+    public ICommand RemoveCommand { get; }
+    public ICommand EditCommand { get; }
+
+    #endregion
+
     #region Constructor
 
     public BooksViewModel(NavigationStore navigationStore)
@@ -32,26 +53,6 @@ public class BooksViewModel : ViewModelBase
     }
 
     #endregion
-
-    #region fields
-
-    private ObservableCollection<BookModel> _collectionBooks;
-    private BookModel _bookModel;
-    private readonly IBookRepository _bookRepository;
-    private NavigationStore _navigationStore;
-    private string _errorCode;
-    private bool _canDelete;
-
-    #endregion
-
-    #region ICommands
-
-    public ICommand NavigateAddCommand { get; }
-    public ICommand RemoveCommand { get; }
-    public ICommand EditCommand { get; }
-
-    #endregion
-
     #region Methods
 
     private async void ExecuteGetAllCommand(object o)

@@ -11,6 +11,17 @@ namespace WPFBiblioteca.ViewModels
 {
     public class LendingsViewModel : ViewModelBase
     {
+        #region fields
+
+        private ObservableCollection<LendingModel> _collectionLendings;
+        private LendingModel _lendingModel;
+        private readonly ILendingRepository _lendingRepository;
+        private NavigationStore _navigationStore;
+        private string _errorCode;
+        private bool _canDelete;
+        private UserModel _currentUser;
+
+        #endregion
         #region Constructor
 
         public LendingsViewModel(NavigationStore navigationStore, UserModel currentUser)
@@ -35,18 +46,7 @@ namespace WPFBiblioteca.ViewModels
 
         #endregion
 
-        #region fields
-
-        private ObservableCollection<LendingModel> _collectionLendings;
-        private LendingModel _lendingModel;
-        private readonly ILendingRepository _lendingRepository;
-        private NavigationStore _navigationStore;
-        private string _errorCode;
-        private bool _canDelete;
-        private UserModel _currentUser;
-
-        #endregion
-
+        
         #region ICommands
 
         public ICommand NavigateAddCommand { get; }

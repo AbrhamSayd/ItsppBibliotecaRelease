@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MySqlConnector;
 using WPFBiblioteca.Models;
 
-namespace WPFBiblioteca.Repositories;
+namespace WPFBiblioteca.Repositories.ComboBox;
 
 public class CategoryRepository : RepositoryBase, ICategoryRepository
 {

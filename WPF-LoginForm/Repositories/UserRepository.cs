@@ -46,7 +46,7 @@ public class UserRepository : RepositoryBase, IUserRepository
             await connection.OpenAsync(); //abrimos la connecion con MySQL
             command.Connection = connection; //asignamos al comando la coneccion a mysql
             command.CommandText =
-                "select * from users where Username=@username and password=@password"; //Query para evualar nuestro nombre de usuario y contraseñá
+                "select * from users WHERE BINARY `Username` = @username and `password` = @password"; //Query para evualar nuestro nombre de usuario y contraseñá
             command.Parameters.Add("@username", MySqlDbType.VarChar).Value =
                 credential.UserName; //definimos parametro de username
             command.Parameters.Add("@password", MySqlDbType.VarChar).Value =

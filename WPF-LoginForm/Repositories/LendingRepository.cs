@@ -94,7 +94,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                     @"DELETE
                 FROM lendings
                 WHERE Lending_Id = @lending_Id";
-                command.Parameters.Add("@book_Id", MySqlDbType.Int64).Value = lendingId;
+                command.Parameters.Add("@lending_Id", MySqlDbType.Int64).Value = lendingId;
                 await command.ExecuteScalarAsync(CancellationToken.None);
                 _errorCode = "400";
             }
@@ -243,7 +243,6 @@ public class LendingRepository : RepositoryBase, ILendingRepository
     public async Task<IEnumerable<LendingModel>> GetByAll()
     {
         DateTime dateValue;
-        int tempInt;
         var lendingList = new List<LendingModel>();
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();
@@ -271,6 +270,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
             LEFT OUTER JOIN members
             ON lendings.Member_Id = members.Member_Id";
             await using var reader = await command.ExecuteReaderAsync();
+            int tempInt;
             while (reader.Read())
             {
                 var lending = new LendingModel();
@@ -278,11 +278,11 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                 lending.LendingId = Convert.ToInt32(reader[0].ToString());
                 if (int.TryParse(reader[1].ToString(), out tempInt))
                     lending.BookId = tempInt;
+
                 lending.MemberName = reader[2].ToString();
                 lending.BookName = reader[3].ToString();
                 if (int.TryParse(reader[4].ToString(), out tempInt))
                     lending.MemberId = tempInt;
-                //lending.DateTimeBorrowed = DateTime.Parse(reader[5].ToString() ?? string.Empty);
                 if (DateTime.TryParse(reader[5].ToString(), out dateValue))
                     lending.DateTimeBorrowed = dateValue;
                 lending.UsernameLent = reader[6].ToString();

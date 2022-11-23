@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WPFBiblioteca.Models;
 
-namespace WPFBiblioteca.Repositories;
+namespace WPFBiblioteca.Repositories.ComboBox;
 
 public interface ICategoryRepository
 {

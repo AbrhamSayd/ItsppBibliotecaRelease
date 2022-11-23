@@ -5,7 +5,9 @@ using System.ComponentModel;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
+using WPFBiblioteca.Models.ComboBoxModels;
 using WPFBiblioteca.Repositories;
+using WPFBiblioteca.Repositories.ComboBox;
 using WPFBiblioteca.Services;
 using WPFBiblioteca.Stores;
 
@@ -13,6 +15,33 @@ namespace WPFBiblioteca.ViewModels.Fields;
 
 public class BooksFieldsViewModel : ViewModelBase
 {
+    #region Fields
+
+    private readonly ErrorsViewModel _errorsViewModel;
+    private BookModel _book;
+    private CategoryModel _category;
+    private ColorModel _color;
+    private int _colorId;
+    private int _id;
+    private string _isbn;
+    private int _staticId;
+    private string _name;
+    private string _author;
+    private string _editorial;
+    private int _publishedYear;
+    private int _stock;
+    private string _location;
+    private string _remarks;
+    private readonly string _mode;
+    private int _categoryId;
+    private DateTime _date;
+    private DateTime _selectedDate;
+    private readonly IBookRepository _bookRepository;
+    private readonly ICategoryRepository _categoryRepository;
+    private readonly IColorRepository _colorRepository;
+    private ObservableCollection<CategoryModel> _categories;
+
+    #endregion
     #region Constructor
 
     public BooksFieldsViewModel(BookModel book, string mode, NavigationStore navigationStore)
@@ -26,6 +55,7 @@ public class BooksFieldsViewModel : ViewModelBase
                 () => new BooksViewModel(navigationStore)));
         _bookRepository = new BookRepository();
         _categoryRepository = new CategoryRepository();
+        _colorRepository = new ColorRepository();
         EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
         _errorsViewModel = new ErrorsViewModel();
         _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
@@ -36,31 +66,7 @@ public class BooksFieldsViewModel : ViewModelBase
 
     #endregion
 
-    #region Fields
-
-    private readonly ErrorsViewModel _errorsViewModel;
-    private BookModel _book;
-    private CategoryModel _category;
-    private int _id;
-    private string _isbn;
-    private int _staticId;
-    private string _name;
-    private string _author;
-    private string _editorial;
-    private int _publishedYear; 
-    private int _stock;
-    private string _color;
-    private string _location;
-    private string _remarks;
-    private readonly string _mode;
-    private int _categoryId;
-    private DateTime _date;
-    private DateTime _selectedDate;
-    private readonly IBookRepository _bookRepository;
-    private readonly ICategoryRepository _categoryRepository;
-    private ObservableCollection<CategoryModel> _categories;
-
-    #endregion
+    
 
     #region Icommands
 
@@ -79,9 +85,9 @@ public class BooksFieldsViewModel : ViewModelBase
         _name = _book.Name;
         _author = _book.Author;
         _editorial = _book.Editorial;
-        _publishedYear = (int)_book.PublishedYear;
+        if (_book.PublishedYear != null) _publishedYear = (int)_book.PublishedYear;
         _stock = _book.Stock;
-        _color = _book.Color;
+        _colorId = _book.ColorId;
         _categoryId = _book.CategoryId;
         _location = _book.Location;
         _remarks = _book.Remarks;
@@ -105,7 +111,7 @@ public class BooksFieldsViewModel : ViewModelBase
                 Editorial = _editorial,
                 PublishedYear = _publishedYear,
                 Stock = _stock,
-                Color = _color,
+                ColorId = _colorId,
                 CategoryId = _categoryId,
                 Location = _location,
                 Remarks = _remarks
@@ -262,17 +268,22 @@ public class BooksFieldsViewModel : ViewModelBase
         }
     }
 
-    public string Color
+    public int ColorId
+    {
+        get => _colorId;
+        set
+        {
+            _colorId = value;
+            _book.ColorId = value;
+            OnPropertyChanged(nameof(ColorId));
+        }
+    }
+    public ColorModel Color
     {
         get => _color;
         set
         {
             _color = value;
-            _book.Color = value;
-            _errorsViewModel.ClearErrors(nameof(Color));
-            if (string.IsNullOrEmpty(_color) || _color.Length < 4)
-                _errorsViewModel.AddError(nameof(Name), "Color invalido, intente denuevo");
-
             OnPropertyChanged(nameof(Color));
         }
     }

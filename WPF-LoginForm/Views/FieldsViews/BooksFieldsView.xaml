@@ -40,7 +40,7 @@
                         Text="Libro" />
                 </StackPanel>
             </Grid>
-            <ScrollViewer Grid.Row="1" Margin="0,0,0,20">
+            <ScrollViewer Grid.Row="1" Margin="0,0,0,0">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -91,13 +91,23 @@
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Color" />
-                            <TextBox
-                                x:Name="TxtColor"
+                            <ComboBox
+                                x:Name="ComboBoxColor"
                                 Width="400"
+                                FontFamily="{StaticResource SFUIBold}"
+                                FontSize="30"
+                                Foreground="{StaticResource FieldsTextsColor}"
+                                ItemsSource="{Binding Categories}"
+                                SelectedItem="{Binding Category}"
+                                Padding="15,2,15,2"
                                 HorizontalAlignment="Left"
-                                Margin="0,5,0,5"
-                                Text="{Binding Color}"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                Margin="0,5,0,5">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Description}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
@@ -134,12 +144,14 @@
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Año de publicación" />
-                            <TextBox
-                                Width="400"
-                                Text="{Binding Author}"
-                                HorizontalAlignment="Left"
-                                Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                            <DatePicker
+                                CalendarStyle="{StaticResource OnlyYearPickerStyle}"
+                                HorizontalAlignment="left"
+                                FontSize="30"
+                                UseLayoutRounding="True"
+                                FontFamily="{StaticResource SFUIBold}"
+                                
+                                SelectedDate="{Binding SelectedDate, Mode= OneWayToSource}"/>
 
                             <TextBlock
                                 Padding="20,40,0,0"
@@ -147,10 +159,13 @@
                                 Text="Categoria" />
                             <ComboBox
                                 x:Name="ComboBoxCategory"
-                                Text="{Binding Stock}"
                                 Width="400"
+                                FontFamily="{StaticResource SFUIBold}"
+                                FontSize="30"
+                                Foreground="{StaticResource FieldsTextsColor}"
                                 ItemsSource="{Binding Categories}"
                                 SelectedItem="{Binding Category}"
+                                Padding="15,2,15,2"
                                 HorizontalAlignment="Left"
                                 Margin="0,5,0,5">
                                 <ComboBox.ItemTemplate>
