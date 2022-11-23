@@ -172,7 +172,7 @@ public class BookRepository : RepositoryBase, IBookRepository
         return book;
     }
 
-    public async Task<BookModel> GetByName(string isbn)
+    public async Task<BookModel> GetByIsbn(string isbn)
     {
         BookModel book = null;
         await using var connection = GetConnection();
@@ -246,7 +246,7 @@ public class BookRepository : RepositoryBase, IBookRepository
                 _errorCode = "400";
             }
         }
-        catch (Exception e)
+        catch (MySqlException e)
         {
             _errorCode = e.ToString();
             throw;

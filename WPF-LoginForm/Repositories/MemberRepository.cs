@@ -34,7 +34,7 @@ public class MemberRepository : RepositoryBase, IMemberRepository
                 _errorCode = "400";
             }
         }
-        catch (Exception e)
+        catch (MySqlException e)
         {
             _errorCode = e.ToString();
             throw;

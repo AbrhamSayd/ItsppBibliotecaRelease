@@ -114,6 +114,16 @@ public class LendingRepository : RepositoryBase, ILendingRepository
         return _errorCode;
     }
 
+    public Task<LendingModel> GetById(int lendingId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<LendingModel> GetByBook(string firstName)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<IEnumerable<LendingModel>> GetByMemberId(int memberId)
     {
         var lendingList = new List<LendingModel>();

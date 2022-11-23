@@ -139,6 +139,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\" />
-    <Folder Include="Views\MenusPopUp\" />
   </ItemGroup>
 </Project>
