@@ -102,7 +102,7 @@
 
                             <!--  BOTON AGREGAR  -->
                             <Button
-                                Grid.Column="3"
+                                Grid.Column="2"
                                 Command="{Binding NavigateAddCommand}"
                                 Style="{StaticResource BtnAgregarStyle}">
                                 <StackPanel Orientation="Horizontal">
@@ -113,17 +113,18 @@
 
                             <!--  BOTON Editar  -->
                             <Button
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Command="{Binding EditRowCommand}"
                                 IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridEditButton}">
-                                <fa:IconImage Icon="Edit" Style="{StaticResource gridEditIcon}" />
+                                <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
                             </Button>
 
                             <!--  BOTON Eliminar  -->
                             <Button
-                                Grid.Column="1"
+                                Grid.Column="0"
                                 Command="{Binding RemoveRowCommand}"
+                                IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridDeleteButton}">
                                 <fa:IconImage Style="{StaticResource gridDeleteIcon}" />
                             </Button>

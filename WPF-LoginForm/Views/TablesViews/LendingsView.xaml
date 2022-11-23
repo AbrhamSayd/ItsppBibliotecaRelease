@@ -66,7 +66,7 @@
                         IsReadOnly="True" />
                     <!--  Name Column  -->
                     <DataGridTextColumn
-                        Width="auto"
+                        Width="*"
                         Binding="{Binding MemberName}"
                         Header="Nombre"
                         IsReadOnly="True" />
@@ -80,7 +80,7 @@
                     <DataGridTextColumn
                         Width="Auto"
                         Binding="{Binding UsernameLent}"
-                        Header="Usuario prestamista"
+                        Header="Entregó"
                         IsReadOnly="True" />
                     <!--  Published_Year Name Column  -->
                     <DataGridTextColumn
@@ -92,17 +92,17 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding UsernameReturned}"
-                        Header="Usuario devolucion"
+                        Header="Recibió"
                         IsReadOnly="True" />
                     <!--  Color Column  -->
                     <DataGridTextColumn
-                        Width="*"
+                        Width="Auto"
                         Binding="{Binding FinedAmount}"
                         Header="Fianza"
                         IsReadOnly="True" />
                     <!--  Category Column  -->
                     <DataGridTextColumn
-                        Width="auto"
+                        Width="*"
                         Binding="{Binding Remarks}"
                         Header="Notas"
                         IsReadOnly="True" />
@@ -142,6 +142,7 @@
                             <Button
                                 Grid.Column="1"
                                 Command="{Binding EditCommand}"
+                                IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridEditButton}">
                                 <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
                             </Button>
@@ -150,6 +151,7 @@
                             <Button
                                 Grid.Column="0"
                                 Command="{Binding RemoveCommand}"
+                                IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridDeleteButton}">
                                 <fa:IconImage Style="{StaticResource gridDeleteIcon}" />
                             </Button>

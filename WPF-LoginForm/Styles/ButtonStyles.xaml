@@ -156,7 +156,7 @@
     <!--#region  Card Button-->
     <Style x:Key="CardButton" TargetType="Button">
         <Setter Property="BorderBrush" Value="{StaticResource SecundarySolidColor}" />
-        <Setter Property="BorderThickness" Value="5" />
+        <Setter Property="BorderThickness" Value="3" />
         <Setter Property="FontFamily" Value="{DynamicResource SFUIDisplay}" />
         <Setter Property="FontSize" Value="34" />
         <Setter Property="Foreground" Value="{StaticResource primarySolidColor}" />
@@ -199,13 +199,14 @@
     <!--#region Add Button-->
     <Style x:Key="BtnAgregarStyle" TargetType="Button">
         <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="{StaticResource primaryGradientColor}" />
-        <Setter Property="Foreground" Value="{StaticResource primaryGradientColor}" />
+        <Setter Property="BorderBrush" Value="{StaticResource SecundarySolidColor}" />
+        <Setter Property="Foreground" Value="{StaticResource SecundarySolidColor}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,0,25,0" />
         <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="Auto" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -222,7 +223,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource primaryGradientColor}" />
+                <Setter Property="Background" Value="{StaticResource SecundarySolidColor}" />
                 <Setter Property="Foreground" Value="{StaticResource primarySolidColor}" />
             </Trigger>
         </Style.Triggers>
@@ -231,10 +232,8 @@
     <!--  Icon add Style  -->
     <Style x:Key="AddIconStyle" TargetType="fa:IconImage">
         <Setter Property="Icon" Value="CirclePlus" />
-        <Setter Property="Foreground"
-                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
-
-        <Setter Property="Margin" Value="3" />
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Margin" Value="0,0,20,0" />
         <!--<Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="White" />
@@ -245,12 +244,12 @@
     <!--  TextBlock add Style  -->
     <Style x:Key="TextBlockAddStyle" TargetType="TextBlock">
         <Setter Property="Text" Value="Agregar" />
-        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="Foreground"
-                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
-        <Setter Property="VerticalAlignment" Value="center" />
-        <Setter Property="Margin" Value="10,0,10,0" />
+        <Setter Property="Margin" Value="0,0,20,0" />
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <!--<Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="White" />
@@ -270,7 +269,7 @@
         <Setter Property="Margin" Value="0,0,15,0" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource primaryGradientColor}" />
+                <Setter Property="Background" Value="{StaticResource SecundarySolidColor}" />
                 <Setter Property="Foreground" Value="{StaticResource primarySolidColor}" />
             </Trigger>
         </Style.Triggers>
