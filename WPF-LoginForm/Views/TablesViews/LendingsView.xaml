@@ -129,6 +129,8 @@
 
                             <!--  BOTON AGREGAR  -->
                             <Button
+                                Width="68.4"
+                                Height="30"
                                 Grid.Column="2"
                                 Command="{Binding NavigateAddCommand}"
                                 Style="{StaticResource BtnAgregarStyle}">
@@ -140,6 +142,8 @@
 
                             <!--  BOTON Editar  -->
                             <Button
+                                Width="68.4"
+                                Height="30"
                                 Grid.Column="1"
                                 Command="{Binding EditCommand}"
                                 Style="{StaticResource GridEditButton}">
@@ -148,6 +152,8 @@
 
                             <!--  BOTON Eliminar  -->
                             <Button
+                                Width="68.4"
+                                Height="30"
                                 Grid.Column="0"
                                 Command="{Binding RemoveCommand}"
                                 Style="{StaticResource GridDeleteButton}">
