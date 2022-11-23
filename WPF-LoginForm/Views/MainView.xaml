@@ -5,10 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:fieldsModels="clr-namespace:WPFBiblioteca.ViewModels.Fields"
-    xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
+    xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
     Title="MainWindowView"
     d:DesignHeight="900"
     d:DesignWidth="1700"
@@ -20,20 +20,26 @@
     WindowStyle="None"
     mc:Ignorable="d">
     <ContentControl.Resources>
+        <!--Views-->
         <DataTemplate DataType="{x:Type viewModels:MembersViewModel}">
-            <tablesViews:BooksView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type fieldsModels:MembersFieldsViewModel}">
-            <fieldsViews:BooksFieldsView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:LendingsViewModel}">
-            <tablesViews:LendingsView />
+            <tablesViews:MembersView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
             <tablesViews:UsersView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:BooksViewModel}">
             <tablesViews:BooksView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:LendingsViewModel}">
+            <tablesViews:LendingsView />
+        </DataTemplate>
+
+        <!--Fields-->
+        <DataTemplate DataType="{x:Type fieldsModels:LendingsFieldsViewModel}">
+            <fieldsViews:LendingsFieldsView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type fieldsModels:MembersFieldsViewModel}">
+            <fieldsViews:MembersFieldsView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type fieldsModels:UserFieldsViewModel}">
             <fieldsViews:UsersFieldsView />
@@ -87,8 +93,10 @@
                         </RadioButton>
 
                         <!--  booksButton  -->
-                        <RadioButton Command="{Binding NavigateLendings}"
-                                     Style="{StaticResource menuButtonStyle}" Tag="{StaticResource primarySolidColor}">
+                        <RadioButton
+                            Command="{Binding NavigateLendings}"
+                            Style="{StaticResource menuButtonStyle}"
+                            Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="BookOpen" Style="{StaticResource menuButtonIcon}" />
                             </StackPanel>
@@ -159,20 +167,22 @@
 
                     <!--  control bar  -->
 
-                    <Grid Grid.Row="0"
-                          Margin="0,0,25,0"
-                          Background="Transparent"
-                          x:Name="pnlcontrolBar"
-                          MouseEnter="pnlcontrolBar_MouseEnter"
-                          MouseLeftButtonDown="pnlcontrolBar_MouseLeftButtonDown">
+                    <Grid
+                        x:Name="pnlcontrolBar"
+                        Grid.Row="0"
+                        Margin="0,0,25,0"
+                        Background="Transparent"
+                        MouseEnter="pnlcontrolBar_MouseEnter"
+                        MouseLeftButtonDown="pnlcontrolBar_MouseLeftButtonDown">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="1"
-                                    Grid.Row="0"
-                                    Orientation="Horizontal">
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
 
                             <TextBlock
                                 Margin="0,0,0,0"
@@ -201,8 +211,8 @@
                             <Button
                                 x:Name="btnMinimize"
                                 Click="btnMinimize_Click"
-                                Tag="primaryGradientColor"
-                                Style="{StaticResource controlButton}">
+                                Style="{StaticResource controlButton}"
+                                Tag="primaryGradientColor">
                                 <fa:IconImage
                                     Width="25"
                                     Height="25"
@@ -213,8 +223,8 @@
                             <Button
                                 x:Name="btnMaximize"
                                 Click="btnMaximize_Click"
-                                Tag="primaryGradientColor"
-                                Style="{StaticResource controlButton}">
+                                Style="{StaticResource controlButton}"
+                                Tag="primaryGradientColor">
                                 <fa:IconImage
                                     Width="25"
                                     Height="25"
@@ -225,8 +235,8 @@
                             <Button
                                 x:Name="btnClose"
                                 Click="btnClose_Click"
-                                Tag="CloseOrDeleteColor"
-                                Style="{StaticResource controlButton}">
+                                Style="{StaticResource controlButton}"
+                                Tag="CloseOrDeleteColor">
                                 <fa:IconImage
                                     Width="25"
                                     Height="25"

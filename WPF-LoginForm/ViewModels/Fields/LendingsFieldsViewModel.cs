@@ -79,7 +79,7 @@ namespace WPFBiblioteca.ViewModels.Fields
             _usernameLent = _lending.UsernameLent;
             _dateTimeReturned = _lending.DateTimeReturned;
             _usernameReturned = _lending.UsernameReturned;
-            _finedAmount = (int)_lending.FinedAmount;
+            if (_lending.FinedAmount != null) _finedAmount = (int)_lending.FinedAmount;
             _remarks = _lending.Remarks;
         }
 

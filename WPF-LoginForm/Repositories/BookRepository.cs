@@ -23,14 +23,14 @@ public class BookRepository : RepositoryBase, IBookRepository
                 await connection.OpenAsync();
                 command.Connection = connection;
                 command.CommandText =
-                    "INSERT INTO books(Isbn, Name, Author, Editorial, Published_Year, stock, Color, Category_Id, Location, Remarks) VALUES(@Isbn,@Name,@Author,@Editoral,@Published_Year,@Stock,@Color,@Category_Id,@Location,@Remarks)";
+                    "INSERT INTO books(Isbn, Name, Author, Editorial, Published_Year, stock, ColorId, Category_Id, Location, Remarks) VALUES(@Isbn,@Name,@Author,@Editoral,@Published_Year,@Stock,@ColorId,@Category_Id,@Location,@Remarks)";
                 command.Parameters.Add("@isbn", MySqlDbType.VarChar).Value = book.Isbn;
                 command.Parameters.Add("@name", MySqlDbType.VarChar).Value = book.Name;
                 command.Parameters.Add("@author", MySqlDbType.VarChar).Value = book.Author;
                 command.Parameters.Add("@editoral", MySqlDbType.VarChar).Value = book.Editorial;
                 command.Parameters.Add("@published_Year", MySqlDbType.DateTime).Value = book.PublishedYear;
                 command.Parameters.Add("@stock", MySqlDbType.Int64).Value = book.Stock;
-                command.Parameters.Add("@color", MySqlDbType.String).Value = book.Color;
+                command.Parameters.Add("@color", MySqlDbType.String).Value = book.ColorId;
                 command.Parameters.Add("@category_Id", MySqlDbType.Int64).Value = book.CategoryId;
                 command.Parameters.Add("@location", MySqlDbType.String).Value = book.Location;
                 command.Parameters.Add("@remarks", MySqlDbType.String).Value = book.Remarks;
@@ -67,7 +67,7 @@ public class BookRepository : RepositoryBase, IBookRepository
                     " Editorial = @editorial," +
                     " Published_Year = @published_Year," +
                     " Stock = @stock," +
-                    " Color = @color," +
+                    " ColorId = @color," +
                     " Category_Id = @category_Id," +
                     " Location = @location," +
                     " Remarks = @remarks" +
@@ -80,7 +80,7 @@ public class BookRepository : RepositoryBase, IBookRepository
                 command.Parameters.Add("@editorial", MySqlDbType.VarChar).Value = book.Editorial;
                 command.Parameters.Add("@published_Year", MySqlDbType.DateTime).Value = book.PublishedYear;
                 command.Parameters.Add("@stock", MySqlDbType.Int64).Value = book.Stock;
-                command.Parameters.Add("@color", MySqlDbType.String).Value = book.Color;
+                command.Parameters.Add("@color", MySqlDbType.String).Value = book.ColorId;
                 command.Parameters.Add("@category_Id", MySqlDbType.Int64).Value = book.CategoryId;
                 command.Parameters.Add("@location", MySqlDbType.String).Value = book.Location;
                 command.Parameters.Add("@remarks", MySqlDbType.String).Value = book.Remarks;
@@ -133,6 +133,8 @@ public class BookRepository : RepositoryBase, IBookRepository
 
     public async Task<BookModel> GetById(int id)
     {
+        int tempInt;
+        
         BookModel book = null;
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();
@@ -142,22 +144,28 @@ public class BookRepository : RepositoryBase, IBookRepository
             command.Connection = connection;
             command.CommandText = "SELECT * FROM books Where Book_Id = @book_Id;";
             await using var reader = await command.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-                book = new BookModel
-                {
-                    Id = int.Parse(reader[0].ToString() ?? string.Empty),
-                    Isbn = reader[1].ToString(),
-                    Name = reader[2].ToString(),
-                    Author = reader[3].ToString(),
-                    Editorial = reader[4].ToString(),
-                    PublishedYear = int.Parse(reader[5].ToString() ?? string.Empty),
-                    Stock = int.Parse(reader[6].ToString() ?? string.Empty),
-                    Color = reader[7].ToString(),
-                    CategoryId = int.Parse(reader[8].ToString() ?? string.Empty),
-                    Location = reader[9].ToString(),
-                    Remarks = reader[10].ToString()
-                };
 
+            while (await reader.ReadAsync())
+            {
+                book = new BookModel();
+                if (int.TryParse(reader[0].ToString(), out tempInt))
+                    book.Id = tempInt;
+                book.Isbn = reader[1].ToString();
+                book.Name = reader[2].ToString();
+                book.Author = reader[3].ToString();
+                book.Editorial = reader[4].ToString();
+                if (int.TryParse(reader[5].ToString(), out tempInt))
+                    book.PublishedYear = tempInt;
+                book.Stock = int.Parse(reader[6].ToString() ?? string.Empty);
+                if (int.TryParse(reader[7].ToString(), out tempInt))
+                    book.ColorId = tempInt;
+                book.CategoryId = int.Parse(reader[8].ToString() ?? string.Empty);
+                book.Location = reader[9].ToString();
+                book.Remarks = reader[10].ToString();
+            }
+
+                
+                
             _errorCode = "400";
         }
         catch (MySqlException ex)
@@ -174,6 +182,7 @@ public class BookRepository : RepositoryBase, IBookRepository
 
     public async Task<BookModel> GetByIsbn(string isbn)
     {
+        int tempInt;
         BookModel book = null;
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();
@@ -184,20 +193,23 @@ public class BookRepository : RepositoryBase, IBookRepository
             command.CommandText = "SELECT * FROM users Where Isbn = @isbn;";
             await using var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
-                book = new BookModel
-                {
-                    Id = int.Parse(reader[0].ToString() ?? string.Empty),
-                    Isbn = reader[1].ToString(),
-                    Name = reader[2].ToString(),
-                    Author = reader[3].ToString(),
-                    Editorial = reader[4].ToString(),
-                    PublishedYear = int.Parse(reader[5].ToString() ?? string.Empty),
-                    Stock = int.Parse(reader[6].ToString() ?? string.Empty),
-                    Color = reader[7].ToString(),
-                    CategoryId = int.Parse(reader[8].ToString() ?? string.Empty),
-                    Location = reader[9].ToString(),
-                    Remarks = reader[10].ToString()
-                };
+            {
+                book = new BookModel();
+                if (int.TryParse(reader[0].ToString(), out tempInt))
+                    book.Id = tempInt;
+                book.Isbn = reader[1].ToString();
+                book.Name = reader[2].ToString();
+                book.Author = reader[3].ToString();
+                book.Editorial = reader[4].ToString();
+                if (int.TryParse(reader[5].ToString(), out tempInt))
+                    book.PublishedYear = tempInt;
+                book.Stock = int.Parse(reader[6].ToString() ?? string.Empty);
+                if (int.TryParse(reader[7].ToString(), out tempInt))
+                    book.ColorId = tempInt;
+                book.CategoryId = int.Parse(reader[8].ToString() ?? string.Empty);
+                book.Location = reader[9].ToString();
+                book.Remarks = reader[10].ToString();
+            }
 
             _errorCode = "400";
         }
@@ -215,6 +227,7 @@ public class BookRepository : RepositoryBase, IBookRepository
 
     public async Task<IEnumerable<BookModel>> GetByAll()
     {
+        int tempInt;
         var bookList = new List<BookModel>();
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();
@@ -227,21 +240,21 @@ public class BookRepository : RepositoryBase, IBookRepository
             await using var reader = await command.ExecuteReaderAsync();
             while (reader.Read())
             {
-                var book = new BookModel
-                {
-                    Id = int.Parse(reader[0].ToString() ?? string.Empty),
-                    Isbn = reader[1].ToString(),
-                    Name = reader[2].ToString(),
-                    Author = reader[3].ToString(),
-                    Editorial = reader[4].ToString(),
-                    PublishedYear = int.Parse(reader[5].ToString()),
-                    Stock = int.Parse(reader[6].ToString() ?? string.Empty),
-                    Color = reader[7].ToString(),
-                    CategoryId = int.Parse(reader[8].ToString() ?? string.Empty),
-                    Location = reader[9].ToString(),
-                    Remarks = reader[10].ToString(),
-                    CategoryDescription = reader[12].ToString()
-                };
+               var book = new BookModel();
+                if (int.TryParse(reader[0].ToString(), out tempInt))
+                    book.Id = tempInt;
+                book.Isbn = reader[1].ToString();
+                book.Name = reader[2].ToString();
+                book.Author = reader[3].ToString();
+                book.Editorial = reader[4].ToString();
+                if (int.TryParse(reader[5].ToString(), out tempInt))
+                    book.PublishedYear = tempInt;
+                book.Stock = int.Parse(reader[6].ToString() ?? string.Empty);
+                if (int.TryParse(reader[7].ToString(), out tempInt))
+                    book.ColorId = tempInt;
+                book.CategoryId = int.Parse(reader[8].ToString() ?? string.Empty);
+                book.Location = reader[9].ToString();
+                book.Remarks = reader[10].ToString();
                 bookList.Add(book);
                 _errorCode = "400";
             }
