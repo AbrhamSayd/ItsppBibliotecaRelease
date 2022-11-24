@@ -11,27 +11,6 @@ namespace WPFBiblioteca.ViewModels;
 
 public class BooksViewModel : ViewModelBase
 {
-    
-
-    #region fields
-
-    private ObservableCollection<BookModel> _collectionBooks;
-    private BookModel _bookModel;
-    private readonly IBookRepository _bookRepository;
-    private NavigationStore _navigationStore;
-    private string _errorCode;
-    private bool _canDelete;
-
-    #endregion
-
-    #region ICommands
-
-    public ICommand NavigateAddCommand { get; }
-    public ICommand RemoveCommand { get; }
-    public ICommand EditCommand { get; }
-
-    #endregion
-
     #region Constructor
 
     public BooksViewModel(NavigationStore navigationStore)
@@ -42,6 +21,9 @@ public class BooksViewModel : ViewModelBase
         _bookRepository = new BookRepository();
         _bookModel = new BookModel();
         _collectionBooks = new ObservableCollection<BookModel>();
+        _title = "Eliminar libro";
+        _element = null;
+        _visibility = false;
         NavigateAddCommand = new NavigateCommand<BooksFieldsViewModel>(
             new NavigationService<BooksFieldsViewModel>(navigationStore,
                 () => new BooksFieldsViewModel(null, "Add", navigationStore)));
@@ -49,10 +31,37 @@ public class BooksViewModel : ViewModelBase
             new NavigationService<BooksFieldsViewModel>(navigationStore,
                 () => new BooksFieldsViewModel(_bookModel, "Edit", navigationStore)));
         RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
+        AcceptRemoveCommand = new ViewModelCommand(ExecuteRemove);
+        CancelRemoveCommand = new ViewModelCommand(CancelRemove);
         ExecuteGetAllCommand(null);
     }
 
     #endregion
+
+    #region fields
+
+    private ObservableCollection<BookModel> _collectionBooks;
+    private BookModel _bookModel;
+    private readonly IBookRepository _bookRepository;
+    private NavigationStore _navigationStore;
+    private string _errorCode;
+    private bool _canDelete;
+    private string _title;
+    private string _element;
+    private bool _visibility;
+
+    #endregion
+
+    #region ICommands
+
+    public ICommand NavigateAddCommand { get; }
+    public ICommand RemoveCommand { get; }
+    public ICommand EditCommand { get; }
+    public ICommand AcceptRemoveCommand { get; }
+    public ICommand CancelRemoveCommand { get; }
+
+    #endregion
+
     #region Methods
 
     private async void ExecuteGetAllCommand(object o)
@@ -68,8 +77,20 @@ public class BooksViewModel : ViewModelBase
 
     private void ExecuteRemoveRowCommand(object obj)
     {
+        Element = "¿Estas seguro de borra este " + _bookModel.Name + " libro";
+        Visibility = true;
+    }
+
+    private void ExecuteRemove(object obj)
+    {
+        Visibility = false;
         _bookRepository.Delete(_bookModel.Id);
-        ExecuteGetAllCommand(null);
+        CollectionBooks.Remove(_bookModel);
+    }
+
+    private void CancelRemove(object obj)
+    {
+        Visibility = false;
     }
 
     #endregion
@@ -114,6 +135,39 @@ public class BooksViewModel : ViewModelBase
             _bookModel = value;
             CanDelete = _bookModel != null;
             OnPropertyChanged(nameof(BookModel));
+        }
+    }
+
+    public string Title
+    {
+        get => _title;
+        set
+        {
+            if (value == _title) return;
+            _title = value;
+            OnPropertyChanged(nameof(Title));
+        }
+    }
+
+    public string Element
+    {
+        get => _element;
+        set
+        {
+            if (value == _element) return;
+            _element = value;
+            OnPropertyChanged(nameof(Element));
+        }
+    }
+
+    public bool Visibility
+    {
+        get => _visibility;
+        set
+        {
+            if (value == _visibility) return;
+            _visibility = value;
+            OnPropertyChanged(nameof(Visibility));
         }
     }
 

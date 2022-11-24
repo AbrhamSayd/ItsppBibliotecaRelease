@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using WPFBiblioteca.Models;
+using WPFBiblioteca.Models.ComboBoxModels;
 
 namespace WPFBiblioteca.Repositories.ComboBox;
 

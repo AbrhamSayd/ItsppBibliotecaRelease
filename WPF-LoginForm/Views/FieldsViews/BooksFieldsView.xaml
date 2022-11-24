@@ -200,8 +200,8 @@
                                     Margin="0,0,0,5"
                                     HorizontalAlignment="Left"
                                     Style="{StaticResource CustomCardTextBox}"
-                                    Text="{Binding LocationA}" 
-                                    MaxLength="3"/>
+                                    Text="{Binding LocationA}"
+                                    MaxLength="3" />
                                 <TextBlock
                                     Width="13"
                                     Height="50"
@@ -215,9 +215,9 @@
                                     Margin="20,0,0,5"
                                     HorizontalAlignment="Left"
                                     Style="{StaticResource CustomCardTextBox}"
-                                    Text="{Binding LocationB}" 
+                                    Text="{Binding LocationB}"
                                     PreviewTextInput="IntInput"
-                                    MaxLength="2"/>
+                                    MaxLength="2" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -43,41 +39,35 @@ public class BooksFieldsViewModel : ViewModelBase
     private ObservableCollection<ColorModel> _colors;
 
     #endregion
+
     #region Constructor
 
     public BooksFieldsViewModel(BookModel book, string mode, NavigationStore navigationStore)
     {
         _mode = mode;
         _book = book ?? new BookModel();
-        
+
         GoBackCommand = new GoBooksCommand(null,
             new NavigationService<BooksViewModel>(navigationStore,
                 () => new BooksViewModel(navigationStore)));
         _bookRepository = new BookRepository();
         _categoryRepository = new CategoryRepository();
         _colorRepository = new ColorRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand,CanExecuteEdition);
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
         ExecuteGetCategories(null);
         ExecuteGetColors(null);
-        if (mode == "Edit")
-        {
-            FillModel();
-        }
-           
+        if (mode == "Edit") FillModel();
     }
 
     private bool CanExecuteEdition(object obj)
     {
-        if (Category == null || Color == null || string.IsNullOrEmpty(LocationA) || string.IsNullOrEmpty(LocationB))
-        {
-            return false;
-        }
+        if (Category == null || Color == null || string.IsNullOrEmpty(LocationA) ||
+            string.IsNullOrEmpty(LocationB)) return false;
         return true;
     }
 
     #endregion
 
-    
 
     #region Icommands
 
@@ -102,7 +92,6 @@ public class BooksFieldsViewModel : ViewModelBase
         _categoryId = _book.CategoryId;
         _location = _book.Location;
         _remarks = _book.Remarks;
-        
     }
 
 
@@ -159,14 +148,9 @@ public class BooksFieldsViewModel : ViewModelBase
         Colors = new ObservableCollection<ColorModel>(await _colorRepository.GetByAll());
     }
 
-
-
-
     #endregion
 
     #region Properties
-
-    
 
     public int Id
     {
@@ -256,6 +240,7 @@ public class BooksFieldsViewModel : ViewModelBase
             OnPropertyChanged(nameof(ColorId));
         }
     }
+
     public ColorModel Color
     {
         get => _color;
@@ -265,7 +250,7 @@ public class BooksFieldsViewModel : ViewModelBase
             OnPropertyChanged(nameof(Color));
         }
     }
-    
+
     public CategoryModel Category
     {
         get => _category;
@@ -319,7 +304,6 @@ public class BooksFieldsViewModel : ViewModelBase
         get => _locationB;
         set
         {
-
             _locationB = value;
             _location = _locationA + '-' + _locationB;
             OnPropertyChanged(nameof(LocationB));
@@ -345,7 +329,6 @@ public class BooksFieldsViewModel : ViewModelBase
             OnPropertyChanged(nameof(Colors));
         }
     }
-
 
     #endregion
 }

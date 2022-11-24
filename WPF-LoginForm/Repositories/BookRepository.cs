@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using MySqlConnector;
@@ -135,7 +134,7 @@ public class BookRepository : RepositoryBase, IBookRepository
     public async Task<BookModel> GetById(int id)
     {
         int tempInt;
-        
+
         BookModel book = null;
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();
@@ -165,8 +164,7 @@ public class BookRepository : RepositoryBase, IBookRepository
                 book.Remarks = reader[10].ToString();
             }
 
-                
-                
+
             _errorCode = "400";
         }
         catch (MySqlException ex)
@@ -249,7 +247,7 @@ public class BookRepository : RepositoryBase, IBookRepository
             await using var reader = await command.ExecuteReaderAsync();
             while (reader.Read())
             {
-               var book = new BookModel();
+                var book = new BookModel();
                 if (int.TryParse(reader[0].ToString(), out tempInt))
                     book.Id = tempInt;
                 book.Isbn = reader[1].ToString();

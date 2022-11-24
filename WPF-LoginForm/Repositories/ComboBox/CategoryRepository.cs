@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MySqlConnector;
-using WPFBiblioteca.Models;
+using WPFBiblioteca.Models.ComboBoxModels;
 
 namespace WPFBiblioteca.Repositories.ComboBox;
 

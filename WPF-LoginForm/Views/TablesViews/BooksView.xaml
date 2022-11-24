@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menusPopUp="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
     d:DesignHeight="845"
     d:DesignWidth="1596"
     mc:Ignorable="d">
@@ -41,6 +42,7 @@
                 </StackPanel>
             </Grid>
             <DataGrid
+                x:Name="dgBooks"
                 Grid.Row="1"
                 CellStyle="{DynamicResource DataGridCellStyle}"
                 ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
@@ -158,14 +160,22 @@
 
                             <!--  BOTON Eliminar  -->
                             <Button
+                                x:Name="BtnDelete"
                                 Grid.Column="0"
+                                Click="BtnDelete_OnClick"
                                 Command="{Binding RemoveCommand}"
                                 IsEnabled="{Binding CanDelete}"
                                 Style="{StaticResource GridDeleteButton}">
                                 <fa:IconImage Style="{StaticResource gridDeleteIcon}" />
                             </Button>
-
                         </Grid>
+                        <Popup
+                            IsOpen="{Binding Visibility}"
+                            Placement="Center"
+                            PlacementTarget="{Binding ElementName=dgBooks, UpdateSourceTrigger=Default}"
+                            StaysOpen="False">
+                            <menusPopUp:ConfirmDeleteView />
+                        </Popup>
                     </Grid>
                     <!--  Grid ErroHandler  -->
                     <Grid

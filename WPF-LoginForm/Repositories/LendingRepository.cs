@@ -1,8 +1,8 @@
-﻿using MySqlConnector;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using MySqlConnector;
 using WPFBiblioteca.Models;
 
 namespace WPFBiblioteca.Repositories;
@@ -112,16 +112,6 @@ public class LendingRepository : RepositoryBase, ILendingRepository
         return _errorCode;
     }
 
-    public Task<LendingModel> GetById(int lendingId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<LendingModel> GetByBook(string firstName)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<IEnumerable<LendingModel>> GetByMemberId(int memberId)
     {
         var lendingList = new List<LendingModel>();
@@ -165,7 +155,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                     FinedAmount = Convert.ToInt32(reader[7].ToString()),
                     Remarks = reader[8].ToString(),
                     MemberName = reader[9].ToString(),
-                    BookName = reader[10].ToString(),
+                    BookName = reader[10].ToString()
                 };
 
                 lendingList.Add(lending);
@@ -224,7 +214,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                     FinedAmount = Convert.ToInt32(reader[7].ToString()),
                     Remarks = reader[8].ToString(),
                     MemberName = reader[9].ToString(),
-                    BookName = reader[10].ToString(),
+                    BookName = reader[10].ToString()
                 };
 
                 lendingList.Add(lending);
@@ -310,6 +300,16 @@ public class LendingRepository : RepositoryBase, ILendingRepository
     public string GetError()
     {
         return _errorCode;
+    }
+
+    public Task<LendingModel> GetById(int lendingId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<LendingModel> GetByBook(string firstName)
+    {
+        throw new NotImplementedException();
     }
 }
 

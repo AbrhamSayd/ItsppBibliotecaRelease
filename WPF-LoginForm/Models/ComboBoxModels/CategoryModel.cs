@@ -1,4 +1,4 @@
-﻿namespace WPFBiblioteca.Models;
+﻿namespace WPFBiblioteca.Models.ComboBoxModels;
 
 public class CategoryModel
 {

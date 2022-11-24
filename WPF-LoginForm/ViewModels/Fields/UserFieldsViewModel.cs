@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MySqlConnector;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -13,6 +10,35 @@ namespace WPFBiblioteca.ViewModels.Fields;
 
 public class UserFieldsViewModel : ViewModelBase
 {
+    #region Methods
+
+    private async void ExecuteEditionCommand(object obj)
+    {
+        if (_mode == "Add")
+        {
+            _userModel = new UserModel
+            {
+                Id = _id,
+                Username = _username,
+                Password = _password,
+                FirstName = _firstName,
+                LastName = _lastName,
+                UserType = _userType
+            };
+            await _userRepository.Add(_userModel);
+            GoBackCommand.Execute(null);
+        }
+        else
+        {
+            await _userRepository.Edit(_userModel, _staticId);
+            GoBackCommand.Execute(null);
+        }
+
+        _errorCode = _userRepository.GetError();
+    }
+
+    #endregion
+
     #region Fields
 
     private UserModel _userModel;
@@ -66,38 +92,6 @@ public class UserFieldsViewModel : ViewModelBase
         LastName = _userModel.LastName;
         UserType = _userModel.UserType;
     }
-
-    #endregion
-
-    #region Methods
-
-
-    private async void ExecuteEditionCommand(object obj)
-    {
-        if (_mode == "Add")
-        {
-            _userModel = new UserModel
-            {
-                Id = _id,
-                Username = _username,
-                Password = _password,
-                FirstName = _firstName,
-                LastName = _lastName,
-                UserType = _userType
-            };
-            await _userRepository.Add(_userModel);
-            GoBackCommand.Execute(null);
-        }
-        else
-        {
-            await _userRepository.Edit(_userModel, _staticId);
-            GoBackCommand.Execute(null);
-        }
-
-        _errorCode = _userRepository.GetError();
-    }
-
-
 
     #endregion
 
@@ -168,8 +162,6 @@ public class UserFieldsViewModel : ViewModelBase
             OnPropertyChanged(nameof(UserType));
         }
     }
-
-
 
     #endregion
 }

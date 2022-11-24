@@ -1,66 +1,75 @@
-﻿<UserControl x:Class="WPFBiblioteca.Views.MenusPopUp.ConfirmDeleteView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
-             mc:Ignorable="d" 
-             Background="Transparent"
-             Width="{Binding RelativeSource={RelativeSource FindAncestor, 
-    AncestorType={x:Type Window}},Path=ActualWidth}"
-             Height="{Binding RelativeSource={RelativeSource FindAncestor, 
-    AncestorType={x:Type Window}},Path=ActualHeight}">
-    
-    <Border 
-        BorderBrush="Black" 
-        BorderThickness=".5" 
-        CornerRadius="50" 
-        Background="{StaticResource primarySolidColor}" 
-        Height="300" Width="680">
+﻿<UserControl
+    x:Class="WPFBiblioteca.Views.MenusPopUp.ConfirmDeleteView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="680"
+    Height="300"
+    Background="Transparent"
+    mc:Ignorable="d">
+
+    <Border
+        Width="680"
+        Height="300"
+        Background="{StaticResource primarySolidColor}"
+        BorderBrush="Black"
+        BorderThickness=".5"
+        CornerRadius="50">
         <Border.Effect>
-            <DropShadowEffect ShadowDepth="8" BlurRadius="20" Opacity="0.5"/>
+            <DropShadowEffect
+                BlurRadius="2"
+                Opacity="0."
+                ShadowDepth="8" />
         </Border.Effect>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Margin="80,50,0,0" HorizontalAlignment="Left">
-                <TextBlock 
+            <StackPanel
+                Grid.Row="0"
+                Margin="80,50,0,0"
+                HorizontalAlignment="Left">
+                <TextBlock
+                    Margin="0,0,0,20"
                     Style="{StaticResource ViewsHeaders}"
-                    Text="Eliminar (ElementName)"
-                    TextAlignment="Left"
-                    Margin="0,0,0,20"/>
-                <TextBlock 
-                    Style="{StaticResource FieldsHeaders}"
-                    Foreground="Black"
+                    Text="{Binding Title}"
+                    TextAlignment="Left" />
+                <TextBlock
                     FontSize="26"
-                    Text="¿Estas seguro de borrar a este (ElementName)?"
-                    TextAlignment="Center"/>
+                    Foreground="Black"
+                    Style="{StaticResource FieldsHeaders}"
+                    Text="{Binding Element}"
+                    TextAlignment="Center" />
             </StackPanel>
             <Grid Grid.Row="1" Margin="50,0,50,30">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" 
-                    Style="{StaticResource CardButton}"
-                    FontSize="28"
-                    Foreground="Black"
-                    VerticalContentAlignment="Center"
-                    Content="Cancelar"
+                <Button
+                    Grid.Column="0"
                     Margin="30,10,30,5"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
                     BorderBrush="Black"
                     BorderThickness="1"
-                    Background="Transparent"/>
-                <Button Grid.Column="1"  
-                   Style="{StaticResource CardButton}"
-                   FontSize="28"
-                   VerticalContentAlignment="Center"
-                   Content="Aceptar"
-                   Margin="30,10,30,5"
-                   BorderThickness="1"/>
+                    Command="{Binding CancelRemoveCommand}"
+                    Content="Cancelar"
+                    FontSize="28"
+                    Foreground="Black"
+                    Style="{StaticResource CardButton}" />
+                <Button
+                    Grid.Column="1"
+                    Margin="30,10,30,5"
+                    VerticalContentAlignment="Center"
+                    BorderThickness="1"
+                    Command="{Binding AcceptRemoveCommand}"
+                    Content="Aceptar"
+                    FontSize="28"
+                    Style="{StaticResource CardButton}" />
             </Grid>
 
 

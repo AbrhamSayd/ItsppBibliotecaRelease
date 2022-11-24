@@ -10,6 +10,7 @@ namespace WPFBiblioteca.ViewModels;
 
 public class LoginViewModel : ViewModelBase
 {
+    private readonly IUserRepository userRepository; // interface de usuario
     private string _errorMessage;
     private bool _isViewVisible = true;
 
@@ -17,8 +18,6 @@ public class LoginViewModel : ViewModelBase
 
     //Fields
     private string _username;
-
-    private readonly IUserRepository userRepository; // interface de usuario
 
     //Constructor
     public LoginViewModel()

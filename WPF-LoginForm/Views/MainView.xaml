@@ -48,6 +48,7 @@
             <fieldsViews:BooksFieldsView />
         </DataTemplate>
 
+
     </ContentControl.Resources>
 
     <Border
@@ -253,7 +254,7 @@
 
                     <!--  Content control  -->
                     <Grid Grid.Row="1" Margin="20,0,20,20">
-                        <ContentControl Content="{Binding CurrentViewModel}"/>
+                        <ContentControl Content="{Binding CurrentViewModel}" />
                     </Grid>
                 </Grid>
             </Border>

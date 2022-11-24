@@ -1,8 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Security.RightsManagement;
-
-namespace WPFBiblioteca.Models;
+﻿namespace WPFBiblioteca.Models;
 
 public class BookModel
 {
@@ -19,6 +15,4 @@ public class BookModel
     public string Remarks { get; set; }
     public string Category { get; set; }
     public string Color { get; set; }
-
-
 }
