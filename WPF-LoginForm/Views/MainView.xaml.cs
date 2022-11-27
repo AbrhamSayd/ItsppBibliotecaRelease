@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Threading;
+using System.Windows.Controls.Primitives;
 
 namespace WPFBiblioteca.Views;
 
@@ -11,11 +15,52 @@ namespace WPFBiblioteca.Views;
 /// </summary>
 public partial class MainView : Window
 {
+    //DispatcherTimer timer;
+
+    //double panelWidth;
+    //bool hidden;
+
     public MainView()
     {
         InitializeComponent();
         //SOLO PRUEBAS CAMBIARA LUEGO
+
+        //timer = new DispatcherTimer();
+        //timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+        //timer.Tick += Timer_Tick;
+
+        ////grdContentMenu.Width = new GridLength(ActualWidth);
+
+        //panelWidth = Convert.ToDouble(grdContentMenu.Width);
     }
+
+    //private void Timer_Tick(object sender, EventArgs e)
+    //{
+    //    GridLengthConverter myLengthConverter = new GridLengthConverter();
+    //    if (hidden)
+    //    {
+    //        grdContentMenu.Width = new GridLength(ActualWidth + 1);
+    //        if (Convert.ToDouble(grdContentMenu.Width) >= panelWidth)
+    //        {
+    //            timer.Stop();
+    //            hidden = false;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        grdContentMenu.Width = new GridLength(ActualWidth - 1);
+    //        if (Convert.ToDouble(grdContentMenu.Width) <= 35)
+    //        {
+    //            timer.Stop();
+    //            hidden = true;
+    //        }
+    //    }
+    //}
+
+    //private void Button_Click(object sender, RoutedEventArgs e)
+    //{
+    //    timer.Start();
+    //}
 
 
     [DllImport("user32.dll")]
@@ -69,10 +114,99 @@ public partial class MainView : Window
             WindowState = WindowState.Maximized;
         else WindowState = WindowState.Normal;
     }
-    //public void clase1()
-    //{
-    //    CustomControls.customRows obj = new CustomControls.customRows();
-    //    obj.Margin = new Thickness(465, 372, 0, 0);
-    //    gridPrincipal.Children.Add(obj);
-    //}
+
+    #region PopUpRegion
+
+    void ShowPopUpMethod(UIElement variable, string buttonText)
+    {
+        popUpMenunButtons.PlacementTarget = variable;
+        popUpMenunButtons.Placement = PlacementMode.Right;
+        popUpMenunButtons.IsOpen = true;
+        Header.txtPopUpMenuNavigation.Text = buttonText;
+    }
+
+    void HidePopUpMethod()
+    {
+        popUpMenunButtons.Visibility = Visibility.Collapsed;
+        popUpMenunButtons.IsOpen = false;
+    }
+
+    private void btnCurrentUser_MouseEnter(object sender, MouseEventArgs e)
+    {
+        popUpMenunButtons.PlacementTarget = btnCurrentUser;
+        popUpMenunButtons.Placement = PlacementMode.Right;
+        popUpMenunButtons.VerticalOffset = 0;
+        popUpMenunButtons.IsOpen = true;
+        Header.txtPopUpMenuNavigation.Text = "Usuario Actual";
+        //ShowPopUpMethod(btnCurrentUser, "Usuario Actual");
+    }
+
+    private void btnCurrentUser_MouseLeave(object sender, MouseEventArgs e)
+    {
+        //popUpMenunButtons.Visibility = Visibility.Collapsed;
+        //popUpMenunButtons.IsOpen = false;
+        HidePopUpMethod();
+    }
+
+    private void btnNavigateLendings_MouseEnter(object sender, MouseEventArgs e)
+    {
+        ShowPopUpMethod(btnNavigateLendings, "Prestamos");
+    }
+
+    private void btnNavigateLendings_MouseLeave(object sender, MouseEventArgs e)
+    {
+        HidePopUpMethod();
+    }
+
+    #endregion
+
+    private void btnNavigateMembers_MouseEnter(object sender, MouseEventArgs e)
+    {
+        ShowPopUpMethod(btnNavigateMembers, "Miembros");
+    }
+
+    private void btnNavigateMembers_MouseLeave(object sender, MouseEventArgs e)
+    {
+        HidePopUpMethod();
+    }
+
+    private void btnNavigateHome_MouseEnter(object sender, MouseEventArgs e)
+    {
+        ShowPopUpMethod(btnNavigateHome, "Home");
+    }
+
+    private void btnNavigateHome_MouseLeave(object sender, MouseEventArgs e)
+    {
+        HidePopUpMethod();
+    }
+
+    private void btnNavigateUsers_MouseEnter(object sender, MouseEventArgs e)
+    {
+        ShowPopUpMethod(btnNavigateUsers, "Usuarios");
+    }
+
+    private void btnNavigateUsers_MouseLeave(object sender, MouseEventArgs e)
+    {
+        HidePopUpMethod();
+    }
+
+    private void btnNavigateBooks_MouseEnter(object sender, MouseEventArgs e)
+    {
+        ShowPopUpMethod(btnNavigateBooks, "Libros");
+    }
+
+    private void btnNavigateBooks_MouseLeave(object sender, MouseEventArgs e)
+    {
+        HidePopUpMethod();
+    }
+
+    private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
+    {
+        ShowPopUpMethod(btnLogOut, "Cerrar Sesión");
+    }
+
+    private void btnLogOut_MouseLeave(object sender, MouseEventArgs e)
+    {
+        HidePopUpMethod();
+    }
 }

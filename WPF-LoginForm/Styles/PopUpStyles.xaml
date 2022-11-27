@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="PopUpStyle" TargetType="Popup">
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="Child">
+            <Setter.Value>
+                <ContentControl>
+                    <Border
+                        CornerRadius="5" 
+                        Background="White" 
+                        BorderBrush="LightGray" 
+                        BorderThickness="1"
+                        Panel.ZIndex="10">
+                        <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" Direction="270" ShadowDepth="7" Opacity="0.5" />
+                        </Border.Effect>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ContentControl>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsMouseOver}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsOpen" FillBehavior="HoldEnd">
+                                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0" />
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsOpen" FillBehavior="HoldEnd">
+                                <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:05" />
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

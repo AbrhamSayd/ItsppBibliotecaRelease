@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="WPFBiblioteca.Views.MenusPopUp.ToolTipNavigationButtons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+         
+        <!-- Draw the popUp UserControl -->
+        <Path
+            x:Name="PopUpMenuNavigation"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Data="M0,0
+                    L10,-10 10,-27
+                    C10,-27 10,-32 18,-32
+              
+                    L198,-32
+                    C208,-31 208,-25 208,-15
+              
+                    L208,0 208,20
+                    C208,30 205,33 195,33
+              
+                    L20,33
+                    C15,33 10,33 10,25
+              
+                    L10,10
+                    z"
+            Fill="{StaticResource SecundarySolidColor}"
+            Stroke="{StaticResource SecundarySolidColor}"
+            Stretch="Fill">
+              
+        </Path>
+        <TextBlock 
+            x:Name="txtPopUpMenuNavigation"
+            Style="{StaticResource FieldsHeaders}"
+            Foreground="{StaticResource primarySolidColor}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Panel.ZIndex="1">
+
+        </TextBlock>
+    </Grid>
+
+    <!-- Animate the popup -->
+    <UserControl.Style>
+        <Style>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:2" From="0" To="1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <Trigger Property="FrameworkElement.Visibility" Value="Collapsed">
+                    <Setter Property="FrameworkElement.Opacity" Value="0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
+</UserControl>
