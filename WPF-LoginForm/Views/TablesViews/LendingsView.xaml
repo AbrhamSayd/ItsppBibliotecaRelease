@@ -106,7 +106,6 @@
                         Binding="{Binding Remarks}"
                         Header="Notas"
                         IsReadOnly="True" />
-                    
 
 
                 </DataGrid.Columns>

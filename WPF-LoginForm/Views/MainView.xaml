@@ -49,6 +49,7 @@
             <fieldsViews:BooksFieldsView />
         </DataTemplate>
 
+
     </ContentControl.Resources>
 
     <Border

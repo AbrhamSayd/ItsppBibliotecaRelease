@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MySqlConnector;
-using WPFBiblioteca.Models;
+using WPFBiblioteca.Models.ComboBoxModels;
 
 namespace WPFBiblioteca.Repositories.ComboBox;
 
@@ -27,7 +27,45 @@ public class CategoryRepository : RepositoryBase, ICategoryRepository
 
     public async Task<CategoryModel> GetById(int id)
     {
-        throw new NotImplementedException();
+        int tempInt;
+
+        CategoryModel category = null;
+        await using var connection = GetConnection();
+        await using var command = new MySqlCommand();
+        var connectionTask = connection.OpenAsync();
+
+        Task.WaitAll(connectionTask); //make sure the task is completed
+        if (connectionTask.IsFaulted) // in case of failure
+            throw new Exception("Connection failure", connectionTask.Exception);
+        command.Connection = connection;
+        try
+        {
+            await connection.OpenAsync();
+            command.Connection = connection;
+            command.CommandText = "SELECT * FROM categories Where Category_Id = @category_Id;";
+            command.Parameters.Add("@category_Id", MySqlDbType.Int64).Value = id;
+            await using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                category = new CategoryModel();
+                if (int.TryParse(reader[0].ToString(), out tempInt))
+                    category.CategoryId = tempInt;
+                category.Description = reader[1].ToString();
+            }
+
+            await connection.CloseAsync();
+            _errorCode = "400";
+        }
+        catch (MySqlException ex)
+        {
+            _errorCode = ex.ToString();
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+
+        return category;
     }
 
     public async Task<CategoryModel> GetByName(string isbn)
@@ -38,11 +76,16 @@ public class CategoryRepository : RepositoryBase, ICategoryRepository
     public async Task<IEnumerable<CategoryModel>> GetByAll()
     {
         var categoryList = new List<CategoryModel>();
-        await using var connection = GetConnection();
-        await using var command = new MySqlCommand();
         try
         {
-            await connection.OpenAsync();
+            await using var connection = GetConnection();
+            await using var command = new MySqlCommand();
+            var connectionTask = connection.OpenAsync();
+
+            Task.WaitAll(connectionTask); //make sure the task is completed
+            if (connectionTask.IsFaulted) // in case of failure
+                throw new Exception("Connection failure", connectionTask.Exception);
+            command.Connection = connection;
             command.Connection = connection;
             command.CommandText = "SELECT * from categories order by Category_ID asc";
             await using var reader = await command.ExecuteReaderAsync();
@@ -57,7 +100,7 @@ public class CategoryRepository : RepositoryBase, ICategoryRepository
                 _errorCode = "400";
             }
         }
-        catch (Exception e)
+        catch (MySqlException e)
         {
             _errorCode = e.ToString();
             throw;

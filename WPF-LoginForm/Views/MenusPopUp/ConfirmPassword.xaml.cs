@@ -5,9 +5,9 @@ namespace WPFBiblioteca.Views.MenusPopUp;
 /// <summary>
 ///     Interaction logic for ConfirmDeleteView.xaml
 /// </summary>
-public partial class ConfirmDeleteView : UserControl
+public partial class ConfirmPassword : UserControl
 {
-    public ConfirmDeleteView()
+    public ConfirmPassword()
     {
         InitializeComponent();
     }

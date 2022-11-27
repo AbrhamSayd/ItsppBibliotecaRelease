@@ -11,25 +11,6 @@ namespace WPFBiblioteca.ViewModels;
 
 public class MembersViewModel : ViewModelBase
 {
-    #region Fields
-
-    private ObservableCollection<MemberModel> _collectionMembers;
-    private MemberModel _member;
-    private readonly IMemberRepository _membersRepository;
-    private NavigationStore _navigationStore;
-    private string _errorCode;
-    private bool _canDelete;
-
-    #endregion
-
-    #region ICommands
-
-    public ICommand AddCommand { get; }
-    public ICommand RemoveCommand { get; }
-    public ICommand EditCommand { get; }
-
-    #endregion
-
     #region Constructor
 
     public MembersViewModel(NavigationStore navigationStore)
@@ -49,6 +30,25 @@ public class MembersViewModel : ViewModelBase
                 () => new MembersFieldsViewModel(_member, "Edit", navigationStore)));
         ExecuteGetAllCommand(null);
     }
+
+    #endregion
+
+    #region Fields
+
+    private ObservableCollection<MemberModel> _collectionMembers;
+    private MemberModel _member;
+    private readonly IMemberRepository _membersRepository;
+    private NavigationStore _navigationStore;
+    private string _errorCode;
+    private bool _canDelete;
+
+    #endregion
+
+    #region ICommands
+
+    public ICommand AddCommand { get; }
+    public ICommand RemoveCommand { get; }
+    public ICommand EditCommand { get; }
 
     #endregion
 
