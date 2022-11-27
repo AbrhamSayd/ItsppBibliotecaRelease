@@ -145,7 +145,7 @@ public class UserRepository : RepositoryBase, IUserRepository
         return user;
     }
 
-    public async Task Remove(int id)
+    public async Task Delete(int id)
     {
         using var connection = GetConnection();
         using (var command = new MySqlCommand())

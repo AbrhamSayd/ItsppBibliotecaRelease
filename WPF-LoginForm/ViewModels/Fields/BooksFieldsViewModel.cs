@@ -12,6 +12,27 @@ namespace WPFBiblioteca.ViewModels.Fields;
 
 public class BooksFieldsViewModel : ViewModelBase
 {
+    #region Constructor
+
+    public BooksFieldsViewModel(BookModel book, string mode, NavigationStore navigationStore)
+    {
+        _mode = mode;
+        _book = book ?? new BookModel();
+
+        GoBackCommand = new GoBooksCommand(null,
+            new NavigationService<BooksViewModel>(navigationStore,
+                () => new BooksViewModel(navigationStore)));
+        _bookRepository = new BookRepository();
+        _categoryRepository = new CategoryRepository();
+        _colorRepository = new ColorRepository();
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
+        ExecuteGetCategories(null);
+        ExecuteGetColors(null);
+        if (mode == "Edit") FillModel();
+    }
+
+    #endregion
+
     #region Fields
 
     private BookModel _book;
@@ -40,35 +61,6 @@ public class BooksFieldsViewModel : ViewModelBase
 
     #endregion
 
-    #region Constructor
-
-    public BooksFieldsViewModel(BookModel book, string mode, NavigationStore navigationStore)
-    {
-        _mode = mode;
-        _book = book ?? new BookModel();
-
-        GoBackCommand = new GoBooksCommand(null,
-            new NavigationService<BooksViewModel>(navigationStore,
-                () => new BooksViewModel(navigationStore)));
-        _bookRepository = new BookRepository();
-        _categoryRepository = new CategoryRepository();
-        _colorRepository = new ColorRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
-        ExecuteGetCategories(null);
-        ExecuteGetColors(null);
-        if (mode == "Edit") FillModel();
-    }
-
-    private bool CanExecuteEdition(object obj)
-    {
-        if (Category == null || Color == null || string.IsNullOrEmpty(LocationA) ||
-            string.IsNullOrEmpty(LocationB)) return false;
-        return true;
-    }
-
-    #endregion
-
-
     #region Icommands
 
     public ICommand EditionCommand { get; }
@@ -80,7 +72,7 @@ public class BooksFieldsViewModel : ViewModelBase
 
     private void FillModel()
     {
-        _staticId = Id;
+        _staticId = _book.Id;
         _id = _book.Id;
         _isbn = _book.Isbn;
         _name = _book.Name;
@@ -92,10 +84,12 @@ public class BooksFieldsViewModel : ViewModelBase
         _categoryId = _book.CategoryId;
         _location = _book.Location;
         _remarks = _book.Remarks;
+        _locationA = _book.Location.Split("-")[0];
+        _locationB = _book.Location.Split("-")[1];
     }
 
 
-    private async void ExecuteEditionCommand(object obj)
+    private void ExecuteEditionCommand(object obj)
     {
         if (_mode == "Add")
         {
@@ -108,13 +102,13 @@ public class BooksFieldsViewModel : ViewModelBase
                 Editorial = _editorial,
                 PublishedYear = _publishedYear,
                 Stock = _stock,
-                ColorId = Color.ColorId,
-                CategoryId = Category.CategoryId,
+                ColorId = _colorId,
+                CategoryId = _categoryId,
                 Location = _location,
                 Remarks = _remarks
             };
 
-            await _bookRepository.Add(_book, _categoryId);
+            _bookRepository.Add(_book, _categoryId);
             GoBackCommand.Execute(null);
         }
         else
@@ -133,7 +127,7 @@ public class BooksFieldsViewModel : ViewModelBase
                 Location = _location,
                 Remarks = _remarks
             };
-            await _bookRepository.Edit(_book, _staticId);
+            _bookRepository.Edit(_book, _staticId);
             GoBackCommand.Execute(null);
         }
     }
@@ -141,11 +135,20 @@ public class BooksFieldsViewModel : ViewModelBase
     private async void ExecuteGetCategories(object obj)
     {
         Categories = new ObservableCollection<CategoryModel>(await _categoryRepository.GetByAll());
+        Category = _categories[CategoryId - 1];
     }
 
     private async void ExecuteGetColors(object obj)
     {
         Colors = new ObservableCollection<ColorModel>(await _colorRepository.GetByAll());
+        Color = _colors[ColorId - 1];
+    }
+
+    private bool CanExecuteEdition(object obj)
+    {
+        if (Category == null || Color == null || string.IsNullOrEmpty(LocationA) ||
+            string.IsNullOrEmpty(LocationB)) return false;
+        return true;
     }
 
     #endregion
@@ -238,6 +241,17 @@ public class BooksFieldsViewModel : ViewModelBase
             _colorId = value;
             _book.ColorId = value;
             OnPropertyChanged(nameof(ColorId));
+        }
+    }
+
+    public int CategoryId
+    {
+        get => _categoryId;
+        set
+        {
+            if (value == _categoryId) return;
+            _categoryId = value;
+            OnPropertyChanged(nameof(CategoryId));
         }
     }
 

@@ -33,7 +33,7 @@ public class ViewModelCommand : ICommand
     //Methods
     public bool CanExecute(object parameter)
     {
-        return _canExecuteAction == null ? true : _canExecuteAction(parameter);
+        return _canExecuteAction?.Invoke(parameter) ?? true;
     }
 
     public void Execute(object parameter)

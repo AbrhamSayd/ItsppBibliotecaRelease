@@ -69,10 +69,9 @@ public class UserFieldsViewModel : ViewModelBase
         _mode = mode;
         _userModel = editUser ?? new UserModel();
         _userRepository = new UserRepository();
-        _errorCode = _userRepository.GetError();
         GoBackCommand = new GoUsersCommand(null,
             new NavigationService<UsersViewModel>(navigationStore,
-                () => new UsersViewModel(navigationStore, _errorCode)));
+                () => new UsersViewModel(navigationStore)));
 
         EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
 

@@ -12,6 +12,26 @@ namespace WPFBiblioteca.ViewModels.Fields;
 
 public class LendingsFieldsViewModel : ViewModelBase
 {
+    #region Constructor
+
+    public LendingsFieldsViewModel(LendingModel lending, string mode, NavigationStore navigationStore,
+        UserModel currentModel)
+    {
+        _mode = mode;
+        _lending = lending ?? new LendingModel();
+        _currentUser = new UserModel();
+        _currentUser = currentModel;
+        GoBackCommand = new GoLendingsCommand(null,
+            new NavigationService<LendingsViewModel>(navigationStore,
+                () => new LendingsViewModel(navigationStore, _currentUser)));
+        _lendingRepository = new LendingRepository();
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
+
+        if (mode == "Edit")
+            FillModel();
+    }
+
+    #endregion
 
     #region Properties
 
@@ -39,8 +59,6 @@ public class LendingsFieldsViewModel : ViewModelBase
         }
     }
 
-     
-    
 
     public int MemberId
     {
@@ -213,29 +231,6 @@ public class LendingsFieldsViewModel : ViewModelBase
             await _lendingRepository.Edit(_lending, _lendingId);
             GoBackCommand.Execute(null);
         }
-    }
-
-     
-    
-    #endregion
-
-    
-    #region Constructor
-    public LendingsFieldsViewModel(LendingModel lending, string mode, NavigationStore navigationStore,
-        UserModel currentModel)
-    {
-        _mode = mode;
-        _lending = lending ?? new LendingModel();
-        _currentUser = new UserModel();
-        _currentUser = currentModel;
-        GoBackCommand = new GoLendingsCommand(null,
-            new NavigationService<LendingsViewModel>(navigationStore,
-                () => new LendingsViewModel(navigationStore, _currentUser)));
-        _lendingRepository = new LendingRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
-
-        if (mode == "Edit")
-            FillModel();
     }
 
     #endregion

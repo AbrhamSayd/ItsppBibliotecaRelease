@@ -134,7 +134,6 @@ public class BookRepository : RepositoryBase, IBookRepository
     public async Task<BookModel> GetById(int id)
     {
         int tempInt;
-
         BookModel book = null;
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();

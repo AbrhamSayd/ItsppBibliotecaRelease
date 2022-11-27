@@ -32,6 +32,12 @@ internal class ColorRepository : RepositoryBase, IColorRepository
         ColorModel color = null;
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();
+        var connectionTask = connection.OpenAsync();
+
+        Task.WaitAll(connectionTask); //make sure the task is completed
+        if (connectionTask.IsFaulted) // in case of failure
+            throw new Exception("Connection failure", connectionTask.Exception);
+        command.Connection = connection;
         try
         {
             await connection.OpenAsync();
@@ -49,6 +55,7 @@ internal class ColorRepository : RepositoryBase, IColorRepository
 
 
             _errorCode = "400";
+            await connection.CloseAsync();
         }
         catch (MySqlException ex)
         {
@@ -69,7 +76,11 @@ internal class ColorRepository : RepositoryBase, IColorRepository
         {
             await using var connection = GetConnection();
             await using var command = new MySqlCommand();
-            await connection.OpenAsync();
+            var connectionTask = connection.OpenAsync();
+
+            Task.WaitAll(connectionTask); //make sure the task is completed
+            if (connectionTask.IsFaulted) // in case of failure
+                throw new Exception("Connection failure", connectionTask.Exception);
             command.Connection = connection;
             command.CommandText = "SELECT * from colors order by Color_Id asc";
             await using var reader = await command.ExecuteReaderAsync();

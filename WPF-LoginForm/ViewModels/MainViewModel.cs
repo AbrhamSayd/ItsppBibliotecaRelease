@@ -27,7 +27,7 @@ public class MainViewModel : ViewModelBase
         NavigateBooks = new GoBooksCommand(null,
             new NavigationService<BooksViewModel>(navigationStore, () => new BooksViewModel(navigationStore)));
         NavigateUsers = new GoUsersCommand(null, new
-            NavigationService<UsersViewModel>(navigationStore, () => new UsersViewModel(navigationStore, null)));
+            NavigationService<UsersViewModel>(navigationStore, () => new UsersViewModel(navigationStore)));
         NavigateMembers = new GoMembersCommand(null,
             new NavigationService<MembersViewModel>(navigationStore,
                 () => new MembersViewModel(navigationStore)));
@@ -36,6 +36,7 @@ public class MainViewModel : ViewModelBase
     }
 
     #endregion
+
 
     #region Fields
 
@@ -51,7 +52,6 @@ public class MainViewModel : ViewModelBase
     private UserModel _currentUser;
 
     #endregion
-
 
     #region ICommands
 
