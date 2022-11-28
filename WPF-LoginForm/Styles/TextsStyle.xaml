@@ -50,5 +50,13 @@
         <Setter Property="Foreground" Value="{StaticResource tertiarySolidColor}" />
     </Style>
 
+    <!--  Home  lend&return text  -->
+    <Style x:Key="LendReturnTextStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Foreground" Value="{StaticResource primarySolidColor}" />
+    </Style>
+
 
 </ResourceDictionary>

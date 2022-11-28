@@ -202,7 +202,11 @@ public partial class MainView : Window
 
     private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
     {
-        ShowPopUpMethod(btnLogOut, "Cerrar Sesión");
+        popUpMenunButtons.PlacementTarget = btnCurrentUser;
+        popUpMenunButtons.Placement = PlacementMode.Right;
+        popUpMenunButtons.VerticalOffset = 0;
+        popUpMenunButtons.IsOpen = true;
+        Header.txtPopUpMenuNavigation.Text = "Cerrar Sesión";
     }
 
     private void btnLogOut_MouseLeave(object sender, MouseEventArgs e)

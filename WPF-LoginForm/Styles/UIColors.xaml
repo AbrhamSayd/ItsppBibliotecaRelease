@@ -8,6 +8,12 @@
         <GradientStop Offset="1.0" Color="#7CE2C1" />
     </LinearGradientBrush>
 
+    <!--  Gradient for Home Lending and return book buttons  -->
+    <LinearGradientBrush x:Key="HomeLendReturnGradient" StartPoint="0,1" EndPoint="0,0">
+        <GradientStop Offset="0" Color="Black" />
+        <GradientStop Offset="1" Color="Transparent" />
+    </LinearGradientBrush>
+
 
     <!--#endregion Login UI Color Region-->
 
@@ -23,6 +29,7 @@
     <SolidColorBrush x:Key="primarySolidColor" Color="White" />
     <SolidColorBrush x:Key="SecundarySolidColor" Color="#00785C" />
     <SolidColorBrush x:Key="tertiarySolidColor" Color="#00c496" />
+    <SolidColorBrush x:Key="quaternarySolidColor" Color="#e3e3e3" />
 
     <SolidColorBrush x:Key="CloseOrDeleteColor" Color="Crimson" />
 

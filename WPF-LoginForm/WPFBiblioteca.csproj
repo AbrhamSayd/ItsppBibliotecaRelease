@@ -55,9 +55,11 @@
     <None Remove="Images\img_Tecnm_Logo.png" />
     <None Remove="Images\img_Three_Dots-removebg-preview.png" />
     <None Remove="Images\img_Three_Dots.png" />
+    <None Remove="Images\lend-a-book.jpg" />
     <None Remove="Images\Logo Group.png" />
     <None Remove="Images\logo.png" />
     <None Remove="Images\Pass_Vector.png" />
+    <None Remove="Images\return-a-book.jpg" />
     <None Remove="Images\SideMenuImages\imgGenerarInformes.png" />
     <None Remove="Images\SideMenuImages\imgHome.png" />
     <None Remove="Images\SideMenuImages\imgInventarioLibros.png" />
@@ -99,9 +101,11 @@
     <Resource Include="Images\img_Three_Dots-removebg-preview.png" />
     <Resource Include="Images\img_Three_Dots.png" />
     <Resource Include="Images\key-icon.png" />
+    <Resource Include="Images\lend-a-book.jpg" />
     <Resource Include="Images\Logo Group.png" />
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\Pass_Vector.png" />
+    <Resource Include="Images\return-a-book.jpg" />
     <Resource Include="Images\SideMenuImages\imgGenerarInformes.png" />
     <Resource Include="Images\SideMenuImages\imgHome.png" />
     <Resource Include="Images\SideMenuImages\imgInventarioLibros.png" />

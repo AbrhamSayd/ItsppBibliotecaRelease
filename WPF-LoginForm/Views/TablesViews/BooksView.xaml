@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:menusPopUp="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
     d:DesignHeight="845"
-    d:DesignWidth="1596"
+    d:DesignWidth="1535"
     mc:Ignorable="d">
     <Border Background="white" CornerRadius="1">
         <Grid>
