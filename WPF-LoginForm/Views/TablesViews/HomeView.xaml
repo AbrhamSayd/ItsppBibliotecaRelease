@@ -18,6 +18,8 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <TextBox Style="{StaticResource ModernTextbox}"
+                         Padding="20,0,0,0"
+                         Text="Buscar"
                          Margin="25,25,25,25"
                          Width="auto"
                          HorizontalAlignment="Left"/>
@@ -35,10 +37,13 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
                     <StackPanel Orientation="Vertical">
+
+                        <!-- #region Make a lend Button -->
                         <Button
                             Margin="50,15,50,10"
                             HorizontalAlignment="Stretch"
@@ -60,9 +65,9 @@
                                             </Border.Background>
                                             <Border.Effect>
                                                 <DropShadowEffect 
-                                                    BlurRadius="10"
+                                                    BlurRadius="25"
                                                     Opacity=".5"
-                                                    ShadowDepth="10"
+                                                    ShadowDepth="15"
                                                     Color="Gray" />
                                             </Border.Effect>
                                         </Border>
@@ -102,7 +107,9 @@
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
+                        <!-- #endregion Make a lend Button -->
 
+                        <!-- #region register a return Button -->
                         <Button
                             Margin="50,10,50,50"
                             HorizontalAlignment="Stretch"
@@ -124,9 +131,9 @@
                                             </Border.Background>
                                             <Border.Effect>
                                                 <DropShadowEffect 
-                                                    BlurRadius="10"
-                                                  Opacity=".5"
-                                                  ShadowDepth="10"
+                                                    BlurRadius="25"
+                                                    Opacity=".5"
+                                                    ShadowDepth="15"
                                                   Color="Gray" />
                                             </Border.Effect>
                                         </Border>
@@ -166,10 +173,11 @@
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-
+                        <!-- #endregion register a return Button -->
 
                     </StackPanel>
                 </Grid>
+
                 <Grid Grid.Column="1">
                     <Border Background="Gray"
                             CornerRadius="50"
@@ -177,6 +185,69 @@
 
 
                     </Border>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Button 
+                    Margin="25"
+                    Width="300">
+
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Border 
+                                    BorderThickness="2"
+                                    CornerRadius="50">
+                                        <Border.Background>
+                                            <ImageBrush Stretch="UniformToFill" ImageSource="/Images/no-adeudo.jpg"/>
+                                        </Border.Background>
+                                        <Border.Effect>
+                                            <DropShadowEffect 
+                                            BlurRadius="25"
+                                            Opacity=".5"
+                                            ShadowDepth="15"
+                                            Color="Gray" />
+                                        </Border.Effect>
+                                    </Border>
+                                    <Border Background="{StaticResource HomeLendReturnGradient}" CornerRadius="50"/>
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0"
+                                              VerticalAlignment="Bottom">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock 
+                                                    Grid.Row="0"
+                                                    Padding="15"
+                                                    Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                   Style="{StaticResource LendReturnTextStyle}"
+                                                   FontSize="46"
+                                                   Text="Proxima Función"
+                                                    TextWrapping="Wrap"/>
+                                            <TextBlock 
+                                                    Grid.Row="1"
+                                                    Padding="25,0,20,25"
+                                                   FontWeight="Light"
+                                                   FontSize="16"
+                                                    Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                    Style="{StaticResource LendReturnTextStyle}"
+                                                   Text=" (Enviar Formato de no adeudo)"
+                                                    TextWrapping="Wrap"/>
+                                        </Grid>
+                                        <fa:IconImage
+                                                Grid.Column="1"
+                                                VerticalAlignment="Top"
+                                                Icon="plus" 
+                                                Foreground="{StaticResource primarySolidColor}" />
+                                    </Grid>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>

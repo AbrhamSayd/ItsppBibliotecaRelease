@@ -83,10 +83,11 @@
                                 Margin="10,0,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
-                                FontSize="11"
+                                FontSize="32"
+                                Padding="{Binding Padding, RelativeSource={RelativeSource AncestorType=TextBox}}"
                                 Foreground="DarkGray"
                                 IsHitTestVisible="False"
-                                Text="{TemplateBinding ToolTip}">
+                                Text="{Binding Text, RelativeSource={RelativeSource AncestorType=TextBox}}">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
