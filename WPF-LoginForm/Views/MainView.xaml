@@ -34,6 +34,9 @@
         <DataTemplate DataType="{x:Type viewModels:LendingsViewModel}">
             <tablesViews:LendingsView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+            <tablesViews:HomeView />
+        </DataTemplate>
 
         <!--Fields-->
         <DataTemplate DataType="{x:Type fieldsModels:LendingsFieldsViewModel}">
@@ -121,7 +124,7 @@
                         </RadioButton>
                         <!--  HomeButton  -->
                         <RadioButton
-                            Command="{Binding}"
+                            Command="{Binding NavigateHome}"
                             Style="{StaticResource menuButtonStyle}"
                             Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
