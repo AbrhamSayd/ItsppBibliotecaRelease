@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
@@ -9,22 +10,6 @@ namespace WPFBiblioteca.ViewModels.Fields;
 
 public class MembersFieldsViewModel : ViewModelBase
 {
-    #region Constructor
-
-    public MembersFieldsViewModel(MemberModel member, string mode, NavigationStore navigationStore)
-    {
-        _mode = mode;
-        _member = member ?? new MemberModel();
-
-        GoBackCommand = new GoMembersCommand(null,
-            new NavigationService<MembersViewModel>(navigationStore, () => new MembersViewModel(navigationStore)));
-        _memberRepository = new MemberRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
-        if (mode == "Edit") FillModel();
-    }
-
-    #endregion
-
     #region Fields
 
     private MemberModel _member;
@@ -37,8 +22,10 @@ public class MembersFieldsViewModel : ViewModelBase
     private bool _deudor;
     private int _prestamos;
     private int _staticId;
+    private string _errorCode;
     private readonly string _mode;
-    private readonly IMemberRepository _memberRepository;
+    private ObservableCollection<MemberModel> _members;
+    private readonly IMemberRepository _membersRepository;
 
     #endregion
 
@@ -66,8 +53,18 @@ public class MembersFieldsViewModel : ViewModelBase
 
     private async void ExecuteEditionCommand(object obj)
     {
+        var isDuplicate = false;
         if (_mode == "Add")
         {
+            foreach (var member in Members)
+            {
+                if (_memberId == member.MemberId) continue;
+                _errorCode = "Id duplicada, Intente con otra porfavor";
+                GoBackCommand.Execute(null);
+                isDuplicate = true;
+            }
+
+            if (isDuplicate) return;
             _member = new MemberModel
             {
                 MemberId = _memberId,
@@ -79,16 +76,34 @@ public class MembersFieldsViewModel : ViewModelBase
                 Deudor = _deudor,
                 Prestamos = _prestamos
             };
-
-
-            await _memberRepository.Add(_member);
+            await _membersRepository.Add(_member);
             GoBackCommand.Execute(null);
+
         }
         else
         {
-            await _memberRepository.Edit(_member, _staticId);
+
+            _member = new MemberModel
+            {
+                MemberId = _memberId,
+                FirstName = _firstName,
+                LastName = _lastName,
+                Carrera = _carrera,
+                Email = _email,
+                PhoneNumber = _phoneNumber,
+                Deudor = _deudor,
+                Prestamos = _prestamos
+            };
+            await _membersRepository.Add(_member);
             GoBackCommand.Execute(null);
         }
+    }
+
+    private async void ExecuteGetAllCommand(object o)
+    {
+        Members = new ObservableCollection<MemberModel>(await _membersRepository.GetByAll());
+
+        _errorCode = _membersRepository.GetError();
     }
 
     #endregion
@@ -200,6 +215,34 @@ public class MembersFieldsViewModel : ViewModelBase
             _staticId = value;
             OnPropertyChanged(nameof(StaticId));
         }
+    }
+
+    public ObservableCollection<MemberModel> Members
+    {
+        get => _members;
+        set
+        {
+            if (Equals(value, _members)) return;
+            _members = value;
+            OnPropertyChanged(nameof(Members));
+        }
+    }
+
+    #endregion
+
+    #region Constructor
+
+    public MembersFieldsViewModel(MemberModel member, string mode, NavigationStore navigationStore)
+    {
+        _mode = mode;
+        _member = member ?? new MemberModel();
+
+        GoBackCommand = new GoMembersCommand(null,
+            new NavigationService<MembersViewModel>(navigationStore, () => new MembersViewModel(navigationStore)));
+        _membersRepository = new MemberRepository();
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
+        if (mode == "Edit") FillModel();
+        ExecuteGetAllCommand(null);
     }
 
     #endregion

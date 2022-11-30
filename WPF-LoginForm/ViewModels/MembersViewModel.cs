@@ -11,27 +11,7 @@ namespace WPFBiblioteca.ViewModels;
 
 public class MembersViewModel : ViewModelBase
 {
-    #region Constructor
-
-    public MembersViewModel(NavigationStore navigationStore)
-    {
-        _canDelete = false;
-        _errorCode = string.Empty;
-        _navigationStore = navigationStore;
-        _membersRepository = new MemberRepository();
-        _member = new MemberModel();
-        _collectionMembers = new ObservableCollection<MemberModel>();
-        RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand, CanExecuteRemove);
-        AddCommand = new NavigateCommand<MembersFieldsViewModel>(
-            new NavigationService<MembersFieldsViewModel>(navigationStore,
-                () => new MembersFieldsViewModel(null, "Add", navigationStore)));
-        EditCommand = new NavigateCommand<MembersFieldsViewModel>(
-            new NavigationService<MembersFieldsViewModel>(navigationStore,
-                () => new MembersFieldsViewModel(_member, "Edit", navigationStore)));
-        ExecuteGetAllCommand(null);
-    }
-
-    #endregion
+    
 
     #region Fields
 
@@ -107,6 +87,28 @@ public class MembersViewModel : ViewModelBase
             _canDelete = value;
             OnPropertyChanged(nameof(CanDelete));
         }
+    }
+
+    #endregion
+
+    #region Constructor
+
+    public MembersViewModel(NavigationStore navigationStore)
+    {
+        _canDelete = false;
+        _errorCode = string.Empty;
+        _navigationStore = navigationStore;
+        _membersRepository = new MemberRepository();
+        _member = new MemberModel();
+        _collectionMembers = new ObservableCollection<MemberModel>();
+        RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand, CanExecuteRemove);
+        AddCommand = new NavigateCommand<MembersFieldsViewModel>(
+            new NavigationService<MembersFieldsViewModel>(navigationStore,
+                () => new MembersFieldsViewModel(null, "Add", navigationStore)));
+        EditCommand = new NavigateCommand<MembersFieldsViewModel>(
+            new NavigationService<MembersFieldsViewModel>(navigationStore,
+                () => new MembersFieldsViewModel(_member, "Edit", navigationStore)));
+        ExecuteGetAllCommand(null);
     }
 
     #endregion

@@ -16,6 +16,7 @@ public class UserFieldsViewModel : ViewModelBase
     {
         if (_mode == "Add")
         {
+            
             _userModel = new UserModel
             {
                 Id = _id,

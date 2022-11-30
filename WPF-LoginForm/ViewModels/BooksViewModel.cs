@@ -11,8 +11,6 @@ namespace WPFBiblioteca.ViewModels;
 
 public class BooksViewModel : ViewModelBase
 {
-    
-
     #region fields
 
     private ObservableCollection<BookModel> _collectionBooks;
