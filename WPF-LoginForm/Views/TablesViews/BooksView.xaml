@@ -170,9 +170,11 @@
                             </Button>
                         </Grid>
                         <Popup
+                            AllowsTransparency="True"
                             IsOpen="{Binding Visibility}"
                             Placement="Center"
                             PlacementTarget="{Binding ElementName=dgBooks, UpdateSourceTrigger=Default}"
+                            PopupAnimation="Slide"
                             StaysOpen="False">
                             <menusPopUp:ConfirmDeleteView />
                         </Popup>

@@ -16,6 +16,6 @@ public interface IUserRepository
     UserModel GetByUsername(string username);
     Task<IEnumerable<UserModel>> GetByAll();
 
-    MySqlException GetError();
+    string GetError();
     //...
 }

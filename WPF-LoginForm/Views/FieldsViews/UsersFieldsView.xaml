@@ -5,11 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menusPopUp="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
     d:DesignHeight="845"
     d:DesignWidth="1535"
     mc:Ignorable="d">
     <Border Background="white" CornerRadius="1">
-        <Grid>
+        <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <!--  Control Bar  -->
                 <RowDefinition Height="35" />
@@ -144,6 +145,13 @@
                             Text="Aceptar" />
                     </Button>
                 </DockPanel>
+                <Popup Grid.Column="0"
+                    AllowsTransparency="True"
+                    IsOpen="{Binding Visibility}"
+                    Placement="Center"
+                    StaysOpen="False" 
+                    PlacementTarget="{Binding ElementName=MainGrid, UpdateSourceTrigger=Default}">
+                    <menusPopUp:ErrorField/></Popup>
             </Grid>
         </Grid>
     </Border>
