@@ -1,14 +1,16 @@
-﻿<UserControl x:Class="WPFBiblioteca.Views.FieldsViews.MembersFieldsView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             mc:Ignorable="d"
-             d:DesignHeight="845"
-             d:DesignWidth="1535">
+﻿<UserControl
+    x:Class="WPFBiblioteca.Views.FieldsViews.MembersFieldsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menusPopUp="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
+    d:DesignHeight="845"
+    d:DesignWidth="1535"
+    mc:Ignorable="d">
     <Border Background="white" CornerRadius="1">
-        <Grid>
+        <Grid x:Name="MainGrid">
             <Grid>
                 <Grid.RowDefinitions>
                     <!--  Control Bar  -->
@@ -22,19 +24,18 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                 </Grid>
-                <StackPanel Grid.Row="0"
-                            Grid.Column="0"
-                            VerticalAlignment="Center"
-                            Orientation="Horizontal">
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
 
                     <fa:IconImage
                         Height="30"
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
                         Icon="Portrait" />
-                    <TextBlock
-                        Style="{StaticResource ViewsHeaders}"
-                        Text="Miembros" />
+                    <TextBlock Style="{StaticResource ViewsHeaders}" Text="Miembros" />
                 </StackPanel>
             </Grid>
             <ScrollViewer Grid.Row="1" Margin="0,0,0,20">
@@ -51,10 +52,11 @@
                                 Text="Nombre(s)" />
                             <TextBox
                                 Width="400"
-                                HorizontalAlignment="Left"
-                                Text="{Binding FirstName}"
                                 Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                PreviewTextInput="TextStringOnPreviewTextInput"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding FirstName}" />
 
 
                             <TextBlock
@@ -62,11 +64,12 @@
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Carrera" />
                             <TextBox
-                                Text="{Binding Carrera}"
                                 Width="400"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                PreviewTextInput="TextStringOnPreviewTextInput"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Carrera}" />
 
 
                             <TextBlock
@@ -75,22 +78,23 @@
                                 Text="Numero de telefono" />
                             <TextBox
                                 Width="400"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Text="{Binding PhoneNumber}"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                PreviewTextInput="TextIntegerPreviewTextInput"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding PhoneNumber}" />
 
 
-                            <TextBlock
+                            <!--<TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Deudor" />
                             <TextBox
                                 Width="400"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Text="{Binding Deudor}"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Deudor}" />-->
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -105,10 +109,11 @@
                                 Text="Apellido(s)" />
                             <TextBox
                                 Width="400"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Text="{Binding LastName}"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                PreviewTextInput="TextStringOnPreviewTextInput"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding LastName}" />
 
 
                             <TextBlock
@@ -117,10 +122,11 @@
                                 Text="ID" />
                             <TextBox
                                 Width="400"
-                                HorizontalAlignment="Left"
-                                Text="{Binding MemberId}"
                                 Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                PreviewTextInput="TextIntegerPreviewTextInput"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding MemberId}" />
 
 
                             <TextBlock
@@ -129,22 +135,24 @@
                                 Text="Email" />
                             <TextBox
                                 Width="400"
-                                HorizontalAlignment="Left"
                                 Margin="0,5,0,5"
-                                Text="{Binding Email}"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Email}" />
 
 
-                            <TextBlock
+                            <!--<TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Prestamo" />
                             <TextBox
                                 Width="400"
-                                HorizontalAlignment="Left"
-                                Text="{Binding Prestamos}"
                                 Margin="0,5,0,5"
-                                Style="{StaticResource CustomCardTextBox}" />
+                                HorizontalAlignment="Left"
+                                AcceptsReturn="False"
+                                PreviewTextInput="TextIntegerPreviewTextInput"
+                                Style="{StaticResource CustomCardTextBox}"
+                                Text="{Binding Prestamos}" />-->
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -154,25 +162,40 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button Margin="20" Style="{StaticResource CardButton}" Command="{Binding GoBackCommand}">
+                <DockPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+                    <Button
+                        Margin="20"
+                        Command="{Binding GoBackCommand}"
+                        Style="{StaticResource CardButton}">
                         <TextBlock
+                            Name="BtnCancelar"
                             Margin="20,6,20,6"
                             FontSize="20"
-                            Text="Cancelar"
-                            Name="BtnCancelar" />
+                            Text="Cancelar" />
                     </Button>
                     <Button
                         Margin="20"
                         Command="{Binding EditionCommand}"
                         Style="{StaticResource CardButton}">
                         <TextBlock
+                            Name="BtnAceptar"
                             Margin="20,6,20,6"
                             FontSize="20"
-                            Text="Aceptar"
-                            Name="BtnAceptar" />
+                            Text="Aceptar" />
                     </Button>
                 </DockPanel>
+                <Popup
+                    Grid.Column="0"
+                    AllowsTransparency="True"
+                    IsOpen="{Binding Visibility}"
+                    Placement="Center"
+                    PlacementTarget="{Binding ElementName=MainGrid, UpdateSourceTrigger=Default}"
+                    StaysOpen="False">
+                    <menusPopUp:ErrorField />
+                </Popup>
             </Grid>
         </Grid>
     </Border>

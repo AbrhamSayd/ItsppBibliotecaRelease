@@ -59,7 +59,7 @@ public class UsersViewModel : ViewModelBase
 
     private void ExecuteRemoveRowCommand(object obj)
     {
-        Element = "¿Estas seguro de borra al usuario " + _usersModel.FirstName + " " + _usersModel.LastName + " ?";
+        Element =  _usersModel.FirstName + " " + _usersModel.LastName ;
         RemoveVisibility = true;
     }
 
@@ -224,12 +224,13 @@ public class UsersViewModel : ViewModelBase
 
     public UsersViewModel(NavigationStore navigationStore)
     {
+        
         _canDelete = false;
         _errorCode = string.Empty;
         _userRepository = new UserRepository();
         _navigationStore = navigationStore;
         _usersModel = new UserModel();
-        _title = "Eliminar usuario";
+        _title = "Usuarios";
         _element = null;
         _removeVisibility = false;
         _editVisibility = false;
@@ -248,7 +249,6 @@ public class UsersViewModel : ViewModelBase
         AcceptPasswordCommand = new ViewModelCommand(ValidateEdit);
         CancelPasswordCommand = new ViewModelCommand(CancelEdit);
 
-        
         ExecuteGetAllCommand(null);
     }
 

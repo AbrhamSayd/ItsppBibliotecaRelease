@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Text.RegularExpressions;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace WPFBiblioteca.Views.TablesViews;
 
@@ -11,4 +13,5 @@ public partial class MembersView : UserControl
     {
         InitializeComponent();
     }
+    
 }

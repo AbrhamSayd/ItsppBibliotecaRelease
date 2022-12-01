@@ -18,9 +18,12 @@ public class MainViewModel : ViewModelBase
         _navigationStore = navigationStore ?? throw new ArgumentNullException(nameof(navigationStore));
         // _navigationStore.CurrentViewModel 
         _userRepository = new UserRepository();
+        
+        var date = System.DateTime.Now;
+        _dateTime = date.Date.ToShortDateString();
         CurrentUserAccount = new UserAccountModel();
         LoadCurrentUserData();
-
+        
         NavigateLendings = new GoLendingsCommand(null,
             new NavigationService<LendingsViewModel>(navigationStore, () => new LendingsViewModel(navigationStore, _currentUser)));
         NavigateBooks = new GoBooksCommand(null,
@@ -37,7 +40,6 @@ public class MainViewModel : ViewModelBase
 
     #endregion
 
-
     #region Fields
 
     private readonly NavigationStore _navigationStore;
@@ -50,6 +52,8 @@ public class MainViewModel : ViewModelBase
     private string _lastName;
     private string _userType;
     private UserModel _currentUser;
+    private string _dateTime;
+
 
     #endregion
 
@@ -60,6 +64,7 @@ public class MainViewModel : ViewModelBase
     public ICommand NavigateBooks { get; }
     public ICommand NavigateMembers { get; }
     public ICommand NavigateHome { get; }
+    
 
     #endregion
 
@@ -164,6 +169,17 @@ public class MainViewModel : ViewModelBase
         {
             _currentUserAccount = value;
             OnPropertyChanged(nameof(CurrentUserAccount));
+        }
+    }
+
+    public string DateTime
+    {
+        get => _dateTime;
+        set
+        {
+            if (value == _dateTime) return;
+            _dateTime = value;
+            OnPropertyChanged(nameof(DateTime));
         }
     }
 

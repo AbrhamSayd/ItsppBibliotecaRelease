@@ -104,11 +104,13 @@
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock
+                                Visibility="Hidden"
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Tipo de usuario" />
                             <TextBox
                                 Width="200"
+                                Visibility="Hidden"
                                 HorizontalAlignment="Left"
                                 PreviewTextInput="TextStringOnPreviewTextInput"
                                 Style="{StaticResource CustomCardTextBox}"

@@ -27,7 +27,7 @@ public class BooksViewModel : ViewModelBase
 
     #region ICommands
 
-    public ICommand NavigateAddCommand { get; }
+    public ICommand AddCommand { get; }
     public ICommand RemoveCommand { get; }
     public ICommand EditCommand { get; }
     public ICommand AcceptRemoveCommand { get; }
@@ -37,20 +37,20 @@ public class BooksViewModel : ViewModelBase
 
     #region Methods
 
-    private async void ExecuteGetAllCommand(object o)
+    private bool CanExecuteRemove(object obj)
+    {
+        return _bookModel != null;
+    }
+
+    private async void ExecuteGetAllCommand()
     {
         CollectionBooks = new ObservableCollection<BookModel>(await _bookRepository.GetByAll());
         _errorCode = _bookRepository.GetError();
     }
 
-    private bool CanExecuteRemoveRowCommand(object obj)
+    private void ExecuteRemoveCommand(object obj)
     {
-        return _bookModel != null;
-    }
-
-    private void ExecuteRemoveRowCommand(object obj)
-    {
-        Element = "¿Estas seguro de borra este " + _bookModel.Name + " libro";
+        Element = _bookModel.Name ;
         Visibility = true;
     }
 
@@ -69,16 +69,6 @@ public class BooksViewModel : ViewModelBase
     #endregion
 
     #region Properties
-
-    public ObservableCollection<BookModel> CollectionBooks
-    {
-        get => _collectionBooks;
-        set
-        {
-            _collectionBooks = value;
-            OnPropertyChanged(nameof(CollectionBooks));
-        }
-    }
 
     public string ErrorCode
     {
@@ -99,18 +89,6 @@ public class BooksViewModel : ViewModelBase
             OnPropertyChanged(nameof(CanDelete));
         }
     }
-
-    public BookModel BookModel
-    {
-        get => _bookModel;
-        set
-        {
-            _bookModel = value;
-            CanDelete = _bookModel != null;
-            OnPropertyChanged(nameof(BookModel));
-        }
-    }
-
     public string Title
     {
         get => _title;
@@ -144,6 +122,27 @@ public class BooksViewModel : ViewModelBase
         }
     }
 
+    public BookModel BookModel
+    {
+        get => _bookModel;
+        set
+        {
+            _bookModel = value;
+            CanDelete = _bookModel != null;
+            OnPropertyChanged(nameof(BookModel));
+        }
+    }
+
+    public ObservableCollection<BookModel> CollectionBooks
+    {
+        get => _collectionBooks;
+        set
+        {
+            _collectionBooks = value;
+            OnPropertyChanged(nameof(CollectionBooks));
+        }
+    }
+
     #endregion
 
     #region Constructor
@@ -156,19 +155,19 @@ public class BooksViewModel : ViewModelBase
         _bookRepository = new BookRepository();
         _bookModel = new BookModel();
         _collectionBooks = new ObservableCollection<BookModel>();
-        _title = "Eliminar libro";
+        _title = "Libros";
         _element = null;
         _visibility = false;
-        NavigateAddCommand = new NavigateCommand<BooksFieldsViewModel>(
+        AddCommand = new NavigateCommand<BooksFieldsViewModel>(
             new NavigationService<BooksFieldsViewModel>(navigationStore,
                 () => new BooksFieldsViewModel(null, "Add", navigationStore)));
         EditCommand = new NavigateCommand<BooksFieldsViewModel>(
             new NavigationService<BooksFieldsViewModel>(navigationStore,
                 () => new BooksFieldsViewModel(_bookModel, "Edit", navigationStore)));
-        RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
+        RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand, CanExecuteRemove);
         AcceptRemoveCommand = new ViewModelCommand(ExecuteRemove);
         CancelRemoveCommand = new ViewModelCommand(CancelRemove);
-        ExecuteGetAllCommand(null);
+        ExecuteGetAllCommand();
     }
 
     #endregion

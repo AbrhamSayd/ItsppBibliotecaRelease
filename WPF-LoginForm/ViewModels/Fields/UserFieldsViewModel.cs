@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Security.RightsManagement;
 using System.Windows;
@@ -13,12 +14,14 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace WPFBiblioteca.ViewModels.Fields;
 
+
+
 public class UserFieldsViewModel : ViewModelBase
 {
     #region Fields
 
     private UserModel _userModel;
-    private int _id;
+    private string _id;
     private int _staticId;
     private string _username;
     private string _password;
@@ -53,15 +56,14 @@ public class UserFieldsViewModel : ViewModelBase
         {
             foreach (var user in Users)
             {
-                if (user.Id == _id)
+                if (user.Id.ToString() == _id) 
                 {
                     Element = "Numero de empleado duplicado, Intente con otro porfavor";
                     Title = "Dato duplicado";
                     Visibility = true;
                     isDuplicate = true;
                     _errorFocus = "Id";
-                }
-                else if (_username == user.Username)
+                }else if (_username == user.Username)
                 {
                     Element = "Nombre de usuario duplicado, Intente con otro porfavor";
                     Title = "Dato duplicado";
@@ -74,7 +76,7 @@ public class UserFieldsViewModel : ViewModelBase
             if (isDuplicate) return;
             _userModel = new UserModel
             {
-                Id = _id,
+                Id = TryConvert.ToInt32(_id,0),
                 Username = _username,
                 Password = _password,
                 FirstName = _firstName,
@@ -92,7 +94,12 @@ public class UserFieldsViewModel : ViewModelBase
         }
     }
 
-    private async void ExecuteGetAllCommand(object o)
+    private bool CanExecuteEdition(object obj)
+    {
+       return Id != "0" && Username is { Length: > 5 } && Password is { Length: > 4 } && FirstName is { Length: > 3 } && UserType != null;
+    }
+
+    private async void ExecuteGetAllCommand()
     {
         Users = new ObservableCollection<UserModel>(await _userRepository.GetByAll());
         _errorCode = _userRepository.GetError();
@@ -103,7 +110,7 @@ public class UserFieldsViewModel : ViewModelBase
         switch (_errorFocus)
         {
             case "Id":
-                Id = 0;
+                Id = string.Empty;
                 break;
             case "Username":
                 Username = string.Empty;
@@ -117,13 +124,13 @@ public class UserFieldsViewModel : ViewModelBase
 
     #region Properties
 
-    public int Id
+    public string Id
     {
         get => _id;
         set
         {
             _id = value;
-            _userModel.Id = value;
+            _userModel.Id = TryConvert.ToInt32(value,0);
             OnPropertyChanged(nameof(Id));
         }
     }
@@ -234,29 +241,32 @@ public class UserFieldsViewModel : ViewModelBase
     public UserFieldsViewModel(UserModel editUser, string mode, NavigationStore navigationStore)
     {
         _mode = mode;
+        _userType = "admin";
         _userModel = editUser ?? new UserModel();
         _userRepository = new UserRepository();
         GoBackCommand = new GoUsersCommand(null,
             new NavigationService<UsersViewModel>(navigationStore,
                 () => new UsersViewModel(navigationStore)));
 
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
         AcceptCommand = new ViewModelCommand(ExecuteAcceptCommand);
-        ExecuteGetAllCommand(null);
-        if (mode == "Edit")
-            FillModel();
+        ExecuteGetAllCommand();
+        if (mode == "Edit") FillModel();
+
     }
+
+    
 
 
     private void FillModel()
     {
         _staticId = _userModel.Id;
-        Id = _userModel.Id;
+        Id = _userModel.Id.ToString();
         Username = _userModel.Username;
         Password = _userModel.Password;
         FirstName = _userModel.FirstName;
         LastName = _userModel.LastName;
-        UserType = _userModel.UserType;
+        UserType = "admin";
     }
 
     #endregion

@@ -35,14 +35,24 @@
                 <TextBlock
                     Margin="0,0,0,20"
                     Style="{StaticResource ViewsHeaders}"
-                    Text="{Binding Title}"
-                    TextAlignment="Center" />
+                    TextAlignment="Center">
+                    <Run FontWeight="Bold">Eliminar</Run>
+                    <Run FontWeight="Bold" Text="{Binding Title}" />
+                </TextBlock>
                 <TextBlock
                     FontSize="25"
                     Foreground="Black"
                     Style="{StaticResource FieldsHeaders}"
-                    Text="{Binding Element}"
-                    TextAlignment="Center" />
+                    TextAlignment="Center">
+                    <Run>¿Desea eliminar</Run>
+                    <Run
+                        FontWeight="Bold"
+                        Text="{Binding Element}"
+                        TextDecorations="Underline" />
+                    <Run>de los</Run>
+                    <Run Text="{Binding Title}" />
+                    <Run> ?</Run>
+                </TextBlock>
             </StackPanel>
             <Grid Grid.Row="1" Margin="50,0,50,30">
                 <Grid.ColumnDefinitions>
