@@ -55,16 +55,10 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                     @"UPDATE lendings
                 SET Book_Id = @book_Id,
                     Member_Id = @member_Id,
-                    Date_Time_Returned = @date_time_Returned,
-                    Username_Returned = @username_Returned,
-                    Fined_Amount = @fined_Amount,
                     Remarks = @remarks
                 WHERE Lending_Id = @lending_Id";
                 command.Parameters.Add("@book_Id", MySqlDbType.Int64).Value = lending.BookId;
                 command.Parameters.Add("@member_Id", MySqlDbType.Int64).Value = lending.MemberId;
-                command.Parameters.Add("@date_time_Returned", MySqlDbType.DateTime).Value = lending.DateTimeReturned;
-                command.Parameters.Add("@username_Returned", MySqlDbType.String).Value = lending.UsernameReturned;
-                command.Parameters.Add("@fined_Amount", MySqlDbType.Int64).Value = lending.FinedAmount;
                 command.Parameters.Add("@remarks", MySqlDbType.String).Value = lending.Remarks;
                 command.Parameters.Add("@lending_Id", MySqlDbType.Int64).Value = lendingId;
                 await command.ExecuteScalarAsync(CancellationToken.None);
@@ -129,9 +123,6 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                 lendings.Member_Id,
             lendings.Date_Time_Borrowed,
             lendings.Username_Lent,
-            lendings.Date_Time_Returned,
-            lendings.Username_Returned,
-            lendings.Fined_Amount,
             lendings.Remarks,
             lendings.Lending_Id
                 FROM lendings
@@ -150,12 +141,9 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                     MemberId = Convert.ToInt32(reader[2].ToString()),
                     DateTimeBorrowed = DateTime.Parse(reader[3].ToString() ?? string.Empty),
                     UsernameLent = reader[4].ToString(),
-                    DateTimeReturned = DateTime.Parse(reader[5].ToString() ?? string.Empty),
-                    UsernameReturned = reader[6].ToString(),
-                    FinedAmount = Convert.ToInt32(reader[7].ToString()),
-                    Remarks = reader[8].ToString(),
-                    MemberName = reader[9].ToString(),
-                    BookName = reader[10].ToString()
+                    Remarks = reader[5].ToString(),
+                    MemberName = reader[6].ToString(),
+                    BookName = reader[7].ToString()
                 };
 
                 lendingList.Add(lending);
@@ -209,12 +197,9 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                     MemberId = Convert.ToInt32(reader[2].ToString()),
                     DateTimeBorrowed = DateTime.Parse(reader[3].ToString() ?? string.Empty),
                     UsernameLent = reader[4].ToString(),
-                    DateTimeReturned = DateTime.Parse(reader[5].ToString() ?? string.Empty),
-                    UsernameReturned = reader[6].ToString(),
-                    FinedAmount = Convert.ToInt32(reader[7].ToString()),
-                    Remarks = reader[8].ToString(),
-                    MemberName = reader[9].ToString(),
-                    BookName = reader[10].ToString()
+                    Remarks = reader[5].ToString(),
+                    MemberName = reader[6].ToString(),
+                    BookName = reader[7].ToString()
                 };
 
                 lendingList.Add(lending);
@@ -249,9 +234,6 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                 lendings.Member_Id,
             lendings.Date_Time_Borrowed,
             lendings.Username_Lent,
-            lendings.Date_Time_Returned,
-            lendings.Username_Returned,
-            lendings.Fined_Amount,
             lendings.Remarks,
             lendings.Lending_Id
                 FROM lendings
@@ -276,12 +258,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                 if (DateTime.TryParse(reader[5].ToString(), out dateValue))
                     lending.DateTimeBorrowed = dateValue;
                 lending.UsernameLent = reader[6].ToString();
-                if (DateTime.TryParse(reader[7].ToString(), out dateValue))
-                    lending.DateTimeReturned = dateValue;
-                lending.UsernameReturned = reader[8].ToString();
-                if (int.TryParse(reader[9].ToString(), out tempInt))
-                    lending.FinedAmount = tempInt;
-                lending.Remarks = reader[10].ToString();
+                lending.Remarks = reader[7].ToString();
 
 
                 lendingList.Add(lending);

@@ -108,39 +108,6 @@ public class LendingsFieldsViewModel : ViewModelBase
         }
     }
 
-    public DateTime DateTimeReturned
-    {
-        get => _dateTimeReturned;
-        set
-        {
-            if (value == _dateTimeReturned) return;
-            _dateTimeReturned = value;
-            _lending.DateTimeReturned = value;
-            OnPropertyChanged(nameof(DateTimeReturned));
-        }
-    }
-
-    public string UsernameReturned
-    {
-        get => _usernameReturned;
-        set
-        {
-            if (value == _usernameReturned) return;
-            _usernameReturned = value;
-            OnPropertyChanged(nameof(UsernameReturned));
-        }
-    }
-
-    public int FinedAmount
-    {
-        get => _finedAmount;
-        set
-        {
-            if (value == _finedAmount) return;
-            _finedAmount = value;
-            OnPropertyChanged(nameof(FinedAmount));
-        }
-    }
 
     public string Remarks
     {
@@ -197,9 +164,6 @@ public class LendingsFieldsViewModel : ViewModelBase
         _memberName = _lending.MemberName;
         _dateTimeBorrowed = _lending.DateTimeBorrowed;
         _usernameLent = _lending.UsernameLent;
-        _dateTimeReturned = _lending.DateTimeReturned;
-        _usernameReturned = _lending.UsernameReturned;
-        if (_lending.FinedAmount != null) _finedAmount = (int)_lending.FinedAmount;
         _remarks = _lending.Remarks;
     }
 
@@ -216,9 +180,6 @@ public class LendingsFieldsViewModel : ViewModelBase
                 MemberName = _memberName,
                 DateTimeBorrowed = _dateTimeBorrowed,
                 UsernameLent = _usernameLent,
-                DateTimeReturned = _dateTimeReturned,
-                UsernameReturned = _usernameReturned,
-                FinedAmount = _finedAmount,
                 Remarks = _remarks
             };
 
