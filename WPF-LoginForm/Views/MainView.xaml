@@ -4,12 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    xmlns:popUpsViews="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
     xmlns:fieldsModels="clr-namespace:WPFBiblioteca.ViewModels.Fields"
-    xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:popUpsViews="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
     Title="MainWindowView"
     d:DesignHeight="900"
     d:DesignWidth="1700"
@@ -21,7 +23,7 @@
     WindowStyle="None"
     mc:Ignorable="d">
     <ContentControl.Resources>
-        <!--Views-->
+        <!--  Views  -->
         <DataTemplate DataType="{x:Type viewModels:MembersViewModel}">
             <tablesViews:MembersView />
         </DataTemplate>
@@ -38,7 +40,7 @@
             <tablesViews:HomeView />
         </DataTemplate>
 
-        <!--Fields-->
+        <!--  Fields  -->
         <DataTemplate DataType="{x:Type fieldsModels:LendingsFieldsViewModel}">
             <fieldsViews:LendingsFieldsView />
         </DataTemplate>
@@ -106,10 +108,12 @@
                             Style="{StaticResource menuButtonStyle}"
                             Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
-                                <fa:IconImage 
+                                <fa:IconImage
                                     x:Name="btnNavigateLendings"
-                                    Icon="BookOpen" 
-                                    Style="{StaticResource menuButtonIcon}" MouseEnter="btnNavigateLendings_MouseEnter" MouseLeave="btnNavigateLendings_MouseLeave" />
+                                    Icon="BookOpen"
+                                    MouseEnter="btnNavigateLendings_MouseEnter"
+                                    MouseLeave="btnNavigateLendings_MouseLeave"
+                                    Style="{StaticResource menuButtonIcon}" />
                             </StackPanel>
                             <!--  MembersButton  -->
                         </RadioButton>
@@ -119,9 +123,11 @@
                             Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
-                                    x:Name="btnNavigateMembers" 
-                                    Icon="BookOpenReader" 
-                                    Style="{StaticResource menuButtonIcon}" MouseEnter="btnNavigateMembers_MouseEnter" MouseLeave="btnNavigateMembers_MouseLeave" />
+                                    x:Name="btnNavigateMembers"
+                                    Icon="BookOpenReader"
+                                    MouseEnter="btnNavigateMembers_MouseEnter"
+                                    MouseLeave="btnNavigateMembers_MouseLeave"
+                                    Style="{StaticResource menuButtonIcon}" />
                             </StackPanel>
                         </RadioButton>
                         <!--  HomeButton  -->
@@ -130,10 +136,12 @@
                             Style="{StaticResource menuButtonStyle}"
                             Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
-                                <fa:IconImage 
+                                <fa:IconImage
                                     x:Name="btnNavigateHome"
-                                    Icon="HomeAlt" 
-                                    Style="{StaticResource menuButtonIcon}" MouseEnter="btnNavigateHome_MouseEnter" MouseLeave="btnNavigateHome_MouseLeave" />
+                                    Icon="HomeAlt"
+                                    MouseEnter="btnNavigateHome_MouseEnter"
+                                    MouseLeave="btnNavigateHome_MouseLeave"
+                                    Style="{StaticResource menuButtonIcon}" />
                             </StackPanel>
                         </RadioButton>
                         <!--  UsersButton  -->
@@ -142,10 +150,12 @@
                             Style="{StaticResource menuButtonStyle}"
                             Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
-                                <fa:IconImage 
+                                <fa:IconImage
                                     x:Name="btnNavigateUsers"
-                                    Icon="Portrait" 
-                                    Style="{StaticResource menuButtonIcon}" MouseEnter="btnNavigateUsers_MouseEnter" MouseLeave="btnNavigateUsers_MouseLeave" />
+                                    Icon="Portrait"
+                                    MouseEnter="btnNavigateUsers_MouseEnter"
+                                    MouseLeave="btnNavigateUsers_MouseLeave"
+                                    Style="{StaticResource menuButtonIcon}" />
                             </StackPanel>
                         </RadioButton>
                         <RadioButton
@@ -153,10 +163,12 @@
                             Style="{StaticResource menuButtonStyle}"
                             Tag="{StaticResource primarySolidColor}">
                             <StackPanel Orientation="Horizontal">
-                                <fa:IconImage 
+                                <fa:IconImage
                                     x:Name="btnNavigateBooks"
-                                    Icon="BookBookmark" 
-                                    Style="{StaticResource menuButtonIcon}" MouseEnter="btnNavigateBooks_MouseEnter" MouseLeave="btnNavigateBooks_MouseLeave" />
+                                    Icon="BookBookmark"
+                                    MouseEnter="btnNavigateBooks_MouseEnter"
+                                    MouseLeave="btnNavigateBooks_MouseLeave"
+                                    Style="{StaticResource menuButtonIcon}" />
                             </StackPanel>
                         </RadioButton>
                     </StackPanel>
@@ -229,15 +241,13 @@
                                 FontSize="20"
                                 FontWeight="Bold"
                                 Foreground="{StaticResource DateTextUIColor}"
-                                TextWrapping="Wrap">
-                                <Run Language="es-mx" Text="10/22/2022" />
-                            </TextBlock>
+                                Text="{Binding DateTime}"
+                                TextWrapping="Wrap" />
 
                             <Button
                                 x:Name="btnMinimize"
                                 Click="btnMinimize_Click"
-                                Style="{StaticResource controlButton}"
-                                Tag="primaryGradientColor">
+                                Style="{StaticResource controlButton}">
                                 <fa:IconImage
                                     Width="25"
                                     Height="25"
@@ -248,8 +258,7 @@
                             <Button
                                 x:Name="btnMaximize"
                                 Click="btnMaximize_Click"
-                                Style="{StaticResource controlButton}"
-                                Tag="primaryGradientColor">
+                                Style="{StaticResource controlButton}">
                                 <fa:IconImage
                                     Width="25"
                                     Height="25"
@@ -260,8 +269,7 @@
                             <Button
                                 x:Name="btnClose"
                                 Click="btnClose_Click"
-                                Style="{StaticResource controlButton}"
-                                Tag="CloseOrDeleteColor">
+                                Style="{StaticResource controlButton}">
                                 <fa:IconImage
                                     Width="25"
                                     Height="25"

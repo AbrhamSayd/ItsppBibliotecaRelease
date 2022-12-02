@@ -141,7 +141,7 @@
                             <!--  BOTON AGREGAR  -->
                             <Button
                                 Grid.Column="2"
-                                Command="{Binding NavigateAddCommand}"
+                                Command="{Binding AddCommand}"
                                 Style="{StaticResource BtnAgregarStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Style="{StaticResource AddIconStyle}" />
@@ -170,9 +170,11 @@
                             </Button>
                         </Grid>
                         <Popup
+                            AllowsTransparency="True"
                             IsOpen="{Binding Visibility}"
                             Placement="Center"
                             PlacementTarget="{Binding ElementName=dgBooks, UpdateSourceTrigger=Default}"
+                            PopupAnimation="Slide"
                             StaysOpen="False">
                             <menusPopUp:ConfirmDeleteView />
                         </Popup>
@@ -183,7 +185,9 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                         <!--  TextBlock Errores  -->
-                        <TextBlock Style="{StaticResource ErrorAddingTextStyle}" />
+                        <TextBlock 
+                            Visibility="Collapsed"
+                            Style="{StaticResource ErrorAddingTextStyle}" />
                         <!--  Text="{Binding NotImplementedProperty}"  -->
                     </Grid>
                 </Grid>

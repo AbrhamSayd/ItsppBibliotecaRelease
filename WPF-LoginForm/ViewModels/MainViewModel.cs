@@ -19,6 +19,9 @@ public class MainViewModel : ViewModelBase
         _navigationStore = navigationStore ?? throw new ArgumentNullException(nameof(navigationStore));
         // _navigationStore.CurrentViewModel 
         _userRepository = new UserRepository();
+        
+        var date = System.DateTime.Now;
+        _dateTime = date.Date.ToShortDateString();
         CurrentUserAccount = new UserAccountModel();
         LoadCurrentUserData();
         ShowCurrentUserMenu = new ViewModelCommand(ShowCurrentUser);
@@ -39,7 +42,6 @@ public class MainViewModel : ViewModelBase
 
     #endregion
 
-
     #region Fields
 
     private readonly NavigationStore _navigationStore;
@@ -54,6 +56,8 @@ public class MainViewModel : ViewModelBase
     private UserModel _currentUser;
     private bool _visibility;
     private int _blurRadius;
+    private string _dateTime;
+
 
     #endregion
 
@@ -209,6 +213,17 @@ public class MainViewModel : ViewModelBase
         {
             _visibility = value;
             OnPropertyChanged(nameof(Visibility));
+        }
+    }
+
+    public string DateTime
+    {
+        get => _dateTime;
+        set
+        {
+            if (value == _dateTime) return;
+            _dateTime = value;
+            OnPropertyChanged(nameof(DateTime));
         }
     }
 

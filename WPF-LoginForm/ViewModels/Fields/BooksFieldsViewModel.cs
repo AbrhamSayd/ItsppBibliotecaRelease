@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -7,13 +8,12 @@ using WPFBiblioteca.Repositories;
 using WPFBiblioteca.Repositories.ComboBox;
 using WPFBiblioteca.Services;
 using WPFBiblioteca.Stores;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WPFBiblioteca.ViewModels.Fields;
 
 public class BooksFieldsViewModel : ViewModelBase
 {
-    
-
     #region Fields
 
     private BookModel _book;
@@ -34,6 +34,10 @@ public class BooksFieldsViewModel : ViewModelBase
     private string _remarks;
     private readonly string _mode;
     private int _categoryId;
+    private string _element;
+    private string _title;
+    private bool _visibility;
+    private string _errorFocus;
     private string _errorCode;
     private readonly IBookRepository _bookRepository;
     private readonly ICategoryRepository _categoryRepository;
@@ -48,6 +52,7 @@ public class BooksFieldsViewModel : ViewModelBase
 
     public ICommand EditionCommand { get; }
     public ICommand GoBackCommand { get; }
+    public ICommand AcceptCommand { get; }
 
     #endregion
 
@@ -79,9 +84,10 @@ public class BooksFieldsViewModel : ViewModelBase
         {
             foreach (var book in Books)
             {
-                if (_isbn == book.Isbn) continue;
-                _errorCode = "Isbn duplicado, Intente con otro porfavor o verifique";
-                GoBackCommand.Execute(null);
+                if (_isbn != book.Isbn) continue;
+                Element = "Isbn duplicado, Intente con otro porfavor o verifique";
+                Title = "Dato duplicado";
+                Visibility = true;
                 isDuplicate = true;
             }
 
@@ -102,7 +108,6 @@ public class BooksFieldsViewModel : ViewModelBase
             };
             await _bookRepository.Add(_book, _staticId);
             GoBackCommand.Execute(null);
-
         }
         else
         {
@@ -120,7 +125,8 @@ public class BooksFieldsViewModel : ViewModelBase
                 Location = _location,
                 Remarks = _remarks
             };
-           await _bookRepository.Edit(_book, _staticId);
+            await _bookRepository.Edit(_book, _staticId);
+            _errorCode = _bookRepository.GetError();
             GoBackCommand.Execute(null);
         }
     }
@@ -128,30 +134,81 @@ public class BooksFieldsViewModel : ViewModelBase
     private async void ExecuteGetCategories(object obj)
     {
         Categories = new ObservableCollection<CategoryModel>(await _categoryRepository.GetByAll());
-        Category = _categories[CategoryId];
+        if (_mode == "Edit")
+        {
+            Category = _categories[CategoryId - 1];
+        }
     }
 
     private async void ExecuteGetColors(object obj)
     {
         Colors = new ObservableCollection<ColorModel>(await _colorRepository.GetByAll());
-        Color = _colors[ColorId];
+        if (_mode == "Edit")
+        {
+            Color = _colors[ColorId - 1];
+        }
     }
 
     private bool CanExecuteEdition(object obj)
     {
-        if (Category == null || Color == null || string.IsNullOrEmpty(LocationA) ||
-            string.IsNullOrEmpty(LocationB)) return false;
-        return true;
+        return Category != null && Color != null && !string.IsNullOrEmpty(LocationA) &&
+               !string.IsNullOrEmpty(LocationB);
     }
+
     private async void ExecuteGetAllCommand(object o)
     {
         Books = new ObservableCollection<BookModel>(await _bookRepository.GetByAll());
         _errorCode = _bookRepository.GetError();
     }
 
+    private void ExecuteAcceptCommand(object obj)
+    {
+        switch (_errorFocus)
+        {
+            case "Id":
+                Id = 0;
+                break;
+        }
+
+        Visibility = false;
+    }
+
     #endregion
 
     #region Properties
+
+    public string Element
+    {
+        get => _element;
+        set
+        {
+            if (value == _element) return;
+            _element = value;
+            OnPropertyChanged(nameof(Element));
+        }
+    }
+
+    public string Title
+    {
+        get => _title;
+        set
+        {
+            if (value == _title) return;
+            _title = value;
+            OnPropertyChanged(nameof(Title));
+        }
+    }
+
+    public bool Visibility
+    {
+        get => _visibility;
+        set
+        {
+            if (value == _visibility) return;
+            _visibility = value;
+            OnPropertyChanged(nameof(Visibility));
+        }
+    }
 
     public int Id
     {
@@ -253,26 +310,6 @@ public class BooksFieldsViewModel : ViewModelBase
         }
     }
 
-    public ColorModel Color
-    {
-        get => _color;
-        set
-        {
-            _color = value;
-            OnPropertyChanged(nameof(Color));
-        }
-    }
-
-    public CategoryModel Category
-    {
-        get => _category;
-        set
-        {
-            _category = value;
-            OnPropertyChanged(nameof(Category));
-        }
-    }
-
     public string Location
     {
         get => _location;
@@ -319,6 +356,26 @@ public class BooksFieldsViewModel : ViewModelBase
             _locationB = value;
             _location = _locationA + '-' + _locationB;
             OnPropertyChanged(nameof(LocationB));
+        }
+    }
+
+    public ColorModel Color
+    {
+        get => _color;
+        set
+        {
+            _color = value;
+            OnPropertyChanged(nameof(Color));
+        }
+    }
+
+    public CategoryModel Category
+    {
+        get => _category;
+        set
+        {
+            _category = value;
+            OnPropertyChanged(nameof(Category));
         }
     }
 
@@ -369,6 +426,7 @@ public class BooksFieldsViewModel : ViewModelBase
         _categoryRepository = new CategoryRepository();
         _colorRepository = new ColorRepository();
         EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
+        AcceptCommand = new ViewModelCommand(ExecuteAcceptCommand);
         ExecuteGetCategories(null);
         ExecuteGetColors(null);
         ExecuteGetAllCommand(null);

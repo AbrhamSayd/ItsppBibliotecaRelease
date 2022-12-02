@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using System;
+using MySqlConnector;
 
 namespace WPFBiblioteca.Repositories;
 
@@ -19,6 +20,15 @@ public abstract class RepositoryBase
 
     protected MySqlConnection GetConnection()
     {
-        return new MySqlConnection(_connectionString);
+        try
+        {
+            return new MySqlConnection(_connectionString);
+        }
+        catch (MySqlException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
     }
 }

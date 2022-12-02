@@ -5,11 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menusPopUp="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
     d:DesignHeight="845"
     d:DesignWidth="1535"
     mc:Ignorable="d">
     <Border Background="white" CornerRadius="1">
-        <Grid>
+        <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <!--  Control Bar  -->
                 <RowDefinition Height="35" />
@@ -166,8 +167,8 @@
                                 HorizontalAlignment="Left"
                                 FontFamily="{StaticResource SFUIBold}"
                                 FontSize="30"
-                                ItemsSource="{Binding Categories}"
                                 Foreground="{StaticResource FieldsTextsColor}"
+                                ItemsSource="{Binding Categories}"
                                 SelectedItem="{Binding Category, Mode=TwoWay, IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -248,6 +249,15 @@
                             Text="Aceptar" />
                     </Button>
                 </DockPanel>
+                <Popup
+                    Grid.Column="0"
+                    AllowsTransparency="True"
+                    IsOpen="{Binding Visibility}"
+                    Placement="Center"
+                    PlacementTarget="{Binding ElementName=MainGrid, UpdateSourceTrigger=Default}"
+                    StaysOpen="False">
+                    <menusPopUp:ErrorField />
+                </Popup>
             </Grid>
         </Grid>
     </Border>

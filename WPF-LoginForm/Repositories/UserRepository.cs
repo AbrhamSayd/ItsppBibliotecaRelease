@@ -9,7 +9,7 @@ namespace WPFBiblioteca.Repositories;
 
 public class UserRepository : RepositoryBase, IUserRepository
 {
-    private MySqlException _errorCode;
+    private string _errorCode;
 
     public async Task Add(UserModel userModel)
     {
@@ -32,7 +32,7 @@ public class UserRepository : RepositoryBase, IUserRepository
             }
             catch (MySqlException ex)
             {
-                _errorCode = ex;
+                _errorCode = ex.ToString();
             }
         }
     }
@@ -78,7 +78,7 @@ public class UserRepository : RepositoryBase, IUserRepository
         }
         catch (MySqlException ex)
         {
-            _errorCode = ex;
+            _errorCode = ex.ToString();
         }
     }
 
@@ -108,7 +108,7 @@ public class UserRepository : RepositoryBase, IUserRepository
         return userList;
     }
 
-    public MySqlException GetError()
+    public string GetError()
     {
         return _errorCode;
     }
@@ -161,7 +161,7 @@ public class UserRepository : RepositoryBase, IUserRepository
             }
             catch (MySqlException e)
             {
-                _errorCode = e;
+                _errorCode = e.ToString();
                 throw;
             }
         }

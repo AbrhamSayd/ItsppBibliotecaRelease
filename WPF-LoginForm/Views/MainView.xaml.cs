@@ -15,16 +15,13 @@ namespace WPFBiblioteca.Views;
 /// </summary>
 public partial class MainView : Window
 {
-    //DispatcherTimer timer;
-
-    //double panelWidth;
-    //bool hidden;
+    private string _dateTime;
 
     public MainView()
     {
         InitializeComponent();
         //SOLO PRUEBAS CAMBIARA LUEGO
-
+        
         //timer = new DispatcherTimer();
         //timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
         //timer.Tick += Timer_Tick;
@@ -160,6 +157,8 @@ public partial class MainView : Window
 
     #endregion
 
+    #region PopUpMethods
+
     private void btnNavigateMembers_MouseEnter(object sender, MouseEventArgs e)
     {
         ShowPopUpMethod(btnNavigateMembers, "Miembros");
@@ -199,7 +198,9 @@ public partial class MainView : Window
     {
         HidePopUpMethod();
     }
+    
 
+    #endregion
     private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
     {
         popUpMenuButtons.PlacementTarget = btnCurrentUser;
@@ -213,4 +214,10 @@ public partial class MainView : Window
     {
         HidePopUpMethod();
     }
+
+    #region Properties
+
+    
+
+    #endregion
 }

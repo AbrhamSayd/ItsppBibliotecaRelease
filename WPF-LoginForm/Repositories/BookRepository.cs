@@ -37,7 +37,7 @@ public class BookRepository : RepositoryBase, IBookRepository
                 _errorCode = "400";
             }
         }
-        catch (Exception e)
+        catch (MySqlException e)
         {
             _errorCode = e.ToString();
             throw;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -11,8 +12,6 @@ namespace WPFBiblioteca.ViewModels;
 
 public class MembersViewModel : ViewModelBase
 {
-    
-
     #region Fields
 
     private ObservableCollection<MemberModel> _collectionMembers;
@@ -21,6 +20,9 @@ public class MembersViewModel : ViewModelBase
     private NavigationStore _navigationStore;
     private string _errorCode;
     private bool _canDelete;
+    private string _title;
+    private string _element;
+    private bool _visibility;
 
     #endregion
 
@@ -29,6 +31,8 @@ public class MembersViewModel : ViewModelBase
     public ICommand AddCommand { get; }
     public ICommand RemoveCommand { get; }
     public ICommand EditCommand { get; }
+    public ICommand AcceptRemoveCommand { get; }
+    public ICommand CancelRemoveCommand { get; }
 
     #endregion
 
@@ -39,30 +43,86 @@ public class MembersViewModel : ViewModelBase
         return _member != null;
     }
 
-    private void ExecuteRemoveCommand(object obj)
-    {
-        _membersRepository.Delete(_member.MemberId);
-        ExecuteGetAllCommand(null);
-    }
-
-    private async void ExecuteGetAllCommand(object o)
+    private async void ExecuteGetAllCommand()
     {
         CollectionMembers = new ObservableCollection<MemberModel>(await _membersRepository.GetByAll());
 
         _errorCode = _membersRepository.GetError();
     }
 
+    private void ExecuteRemoveCommand(object obj)
+    {
+        Element = _member.FirstName + " " + _member.LastName;
+        Visibility = true;
+    }
+
+    private void ExecuteRemove(object obj)
+    {
+        Visibility = false;
+        _membersRepository.Delete(_member.MemberId);
+        CollectionMembers.Remove(_member);
+    }
+
+    private void CancelRemove(object obj)
+    {
+        Visibility = false;
+    }
+
     #endregion
 
     #region Properties
 
-    public ObservableCollection<MemberModel> CollectionMembers
+    public string ErrorCode
     {
-        get => _collectionMembers;
+        get => _errorCode;
         set
         {
-            _collectionMembers = value;
-            OnPropertyChanged(nameof(CollectionMembers));
+            _errorCode = value;
+            OnPropertyChanged(nameof(ErrorCode));
+        }
+    }
+
+    public bool CanDelete
+    {
+        get => _canDelete;
+        set
+        {
+            if (value == _canDelete) return;
+            _canDelete = value;
+            OnPropertyChanged(nameof(CanDelete));
+        }
+    }
+
+    public string Title
+    {
+        get => _title;
+        set
+        {
+            if (value == _title) return;
+            _title = value;
+            OnPropertyChanged(nameof(Title));
+        }
+    }
+
+    public string Element
+    {
+        get => _element;
+        set
+        {
+            if (value == _element) return;
+            _element = value;
+            OnPropertyChanged(nameof(Element));
+        }
+    }
+
+    public bool Visibility
+    {
+        get => _visibility;
+        set
+        {
+            if (value == _visibility) return;
+            _visibility = value;
+            OnPropertyChanged(nameof(Visibility));
         }
     }
 
@@ -78,14 +138,13 @@ public class MembersViewModel : ViewModelBase
         }
     }
 
-    public bool CanDelete
+    public ObservableCollection<MemberModel> CollectionMembers
     {
-        get => _canDelete;
+        get => _collectionMembers;
         set
         {
-            if (value == _canDelete) return;
-            _canDelete = value;
-            OnPropertyChanged(nameof(CanDelete));
+            _collectionMembers = value;
+            OnPropertyChanged(nameof(CollectionMembers));
         }
     }
 
@@ -101,14 +160,19 @@ public class MembersViewModel : ViewModelBase
         _membersRepository = new MemberRepository();
         _member = new MemberModel();
         _collectionMembers = new ObservableCollection<MemberModel>();
-        RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand, CanExecuteRemove);
+        _title = "Miembros";
+        _element = null;
+        _visibility = false;
         AddCommand = new NavigateCommand<MembersFieldsViewModel>(
             new NavigationService<MembersFieldsViewModel>(navigationStore,
                 () => new MembersFieldsViewModel(null, "Add", navigationStore)));
         EditCommand = new NavigateCommand<MembersFieldsViewModel>(
             new NavigationService<MembersFieldsViewModel>(navigationStore,
                 () => new MembersFieldsViewModel(_member, "Edit", navigationStore)));
-        ExecuteGetAllCommand(null);
+        RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand, CanExecuteRemove);
+        AcceptRemoveCommand = new ViewModelCommand(ExecuteRemove);
+        CancelRemoveCommand = new ViewModelCommand(CancelRemove);
+        ExecuteGetAllCommand();
     }
 
     #endregion
