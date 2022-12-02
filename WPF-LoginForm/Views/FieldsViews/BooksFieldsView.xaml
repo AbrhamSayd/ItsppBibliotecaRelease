@@ -38,7 +38,7 @@
                     <TextBlock Style="{StaticResource ViewsHeaders}" Text="Libro" />
                 </StackPanel>
             </Grid>
-            <ScrollViewer Grid.Row="1" Margin="0,0,0,0">
+            <ScrollViewer Grid.Row="1" Margin="0,0,0,0"  CanContentScroll="True">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -232,23 +232,19 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom">
                     <Button
-                        Margin="20"
                         Command="{Binding GoBackCommand}"
                         Style="{StaticResource CardButton}">
                         <TextBlock
                             Name="BtnCancelar"
-                            Margin="20,6,20,6"
-                            FontSize="20"
+                            Style="{StaticResource TxtCardButton}"
                             Text="Cancelar" />
                     </Button>
-                    <Button
-                        Margin="20"
+                    <Button 
                         Command="{Binding EditionCommand}"
                         Style="{StaticResource CardButton}">
                         <TextBlock
                             Name="BtnAceptar"
-                            Margin="20,6,20,6"
-                            FontSize="20"
+                            Style="{StaticResource TxtCardButton}"
                             Text="Aceptar" />
                     </Button>
                 </DockPanel>

@@ -71,7 +71,11 @@
     <None Remove="Images\tecnmLogo.png" />
     <None Remove="Images\user-icon.png" />
     <None Remove="Images\userLogo.png" />
+    <None Remove="Images\User_Default_Image.png" />
     <None Remove="Images\User_Vector.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\User_Default_Image.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Fonts\SFCompactDisplay-Regular.ttf" />

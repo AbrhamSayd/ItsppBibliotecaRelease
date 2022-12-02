@@ -9,10 +9,10 @@ public abstract class RepositoryBase
     protected RepositoryBase()
     {
         //BaseDeDatosItspp22.
-        const string server = "bjleh1b6zqctbrjujbr0-mysql.services.clever-cloud.com";
+        const string server = "localhost";
         const string database = "bjleh1b6zqctbrjujbr0";
-        const string uid = "uapdgnuxdwlim1mi";
-        const string password = "XgIn3rTTb4KH4I6wIQ5G"; // se establece coneccion a base de datos externa,.
+        const string uid = "root";
+        const string password = "itspp"; // se establece coneccion a base de datos externa,.
         _connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" +
                             password + ";";
     }

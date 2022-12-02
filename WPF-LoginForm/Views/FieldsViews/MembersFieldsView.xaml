@@ -155,21 +155,20 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button Margin="20" Style="{StaticResource CardButton}" Command="{Binding GoBackCommand}">
+                    <Button 
+                            Style="{StaticResource CardButton}" 
+                            Command="{Binding GoBackCommand}">
                         <TextBlock
-                            Margin="20,6,20,6"
-                            FontSize="20"
                             Text="Cancelar"
+                            Style="{StaticResource TxtCardButton}"
                             Name="BtnCancelar" />
                     </Button>
                     <Button
-                        Margin="20"
                         Command="{Binding EditionCommand}"
                         Style="{StaticResource CardButton}">
-                        <TextBlock
-                            Margin="20,6,20,6"
-                            FontSize="20"
+                        <TextBlock 
                             Text="Aceptar"
+                            Style="{StaticResource TxtCardButton}"
                             Name="BtnAceptar" />
                     </Button>
                 </DockPanel>

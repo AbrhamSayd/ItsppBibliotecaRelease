@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="845"
-             d:DesignWidth="1596"
+             d:DesignWidth="1555"
              mc:Ignorable="d">
-    <Border Background="white" CornerRadius="1">
+    <Border Background="white" CornerRadius="0">
         <Grid>
             <Grid.RowDefinitions>
                 <!--  Control Bar  -->
@@ -114,11 +115,12 @@
             <Grid Grid.Row="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <!--  Grid Buttons  -->
-                    <Grid Grid.Column="1">
+                    <Grid Grid.Column="2">
                         <Grid HorizontalAlignment="Right">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -157,12 +159,36 @@
 
                         </Grid>
                     </Grid>
-                    <!--  Grid ErroHandler  -->
-                    <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!--  Grid ErrorHandler  -->
+                    <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <!--  TextBlock Errores  -->
                         <TextBlock
                             Style="{StaticResource ErrorAddingTextStyle}" />
                         <!--Text="{Binding NotImplementedProperty}"-->
+                    </Grid>
+                    <!--  Grid Switch tables  -->
+                    <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!--  CheckBox Switch tables  -->
+                        <StackPanel Orientation="Horizontal" Margin="50,0,0,0">
+                            <TextBlock
+                                Style="{StaticResource ErrorAddingTextStyle}"
+                                Text="{Binding TableNameSelected}">
+                            </TextBlock>
+                            <CheckBox 
+                                Style="{StaticResource OrangeSwitchStyle}" 
+                                IsChecked="{Binding IsChecked}" 
+                                Command="{Binding SwitchTableSLendings}"
+                                Margin="30,0,0,0">
+                                <!--<CheckBox.Triggers>
+                                <Trigger Property="CheckBox.IsChecked" Value="True">
+                                    <Setter Value="{Binding IsChecked}"/>
+                                </Trigger>
+                                <Trigger Property="CheckBox.IsChecked" Value="False">
+                                    <Setter Value="{Binding IsChecked}"/>
+                                </Trigger>
+                            </CheckBox.Triggers>-->
+                            </CheckBox>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Grid>

@@ -3,7 +3,89 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="400">
-    <Border CornerRadius="50" Background="{StaticResource primaryGradientColor}" />
+             d:DesignHeight="450" d:DesignWidth="350"
+             Height="450" Width="350">
+    <Border CornerRadius="50" Background="{StaticResource primaryGradientColor}"  Margin="10">
+         <Grid>
+             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                 <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+             <StackPanel Grid.Row="0">
+                <Ellipse Width="200" Height="200" Margin="0,20,0,0">
+                    <Ellipse.Fill>                      
+                        <ImageBrush 
+                            Stretch="UniformToFill" 
+                            ImageSource="/Images/User_Default_Image.png" />
+                    </Ellipse.Fill>
+                    <Ellipse.Effect>
+                        <DropShadowEffect ShadowDepth="10" BlurRadius="15" Opacity=".3" Direction="310"/>
+                    </Ellipse.Effect>
+                </Ellipse>
+
+                <TextBlock 
+                    Style="{StaticResource FieldsHeaders}"
+                    Margin="0,5,0,0"
+                    FontSize="22"
+                    Foreground="#214efc"
+                    Text="Elegir foto de perfil" 
+                    HorizontalAlignment="Center">
+                    
+                </TextBlock>
+            </StackPanel>
+             <TextBlock Grid.Row="1" 
+                 Style="{StaticResource FieldsHeaders}"   
+                 FontSize="22"
+                 Foreground="{StaticResource primarySolidColor}"
+                 Text="{Binding username}" 
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Bottom"
+                 Margin="0,0,0,20">
+
+             </TextBlock>
+            <TextBlock Grid.Row="2"  
+                 Style="{StaticResource FieldsHeaders}"
+                 FontSize="22"
+                 Foreground="{StaticResource primarySolidColor}"
+                 Text="{Binding Email}" 
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Bottom"
+                 Margin="0,0,0,20" 
+                 TextDecorations="Underline">
+            </TextBlock>
+
+            <Button Grid.Row="3"  
+                    Style="{StaticResource iconButton}"
+                    Foreground="{StaticResource primarySolidColor}"
+                    FontSize="22"
+                    Margin="0,0,0,20"  
+                    Width="auto">
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage
+                        x:Name="btnLogOut" 
+                        Style="{StaticResource menuButtonIcon}"
+                        Icon="ArrowRightFromBracket" 
+                        Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType= Button}}"
+                        Margin="0,0,10,0">
+                        <fa:IconImage.Effect>
+                            <DropShadowEffect Opacity="0" />
+                        </fa:IconImage.Effect>
+                    </fa:IconImage>
+                    <TextBlock
+                               Style="{StaticResource FieldsHeaders}"
+                               FontSize="22"
+                               Foreground="{StaticResource primarySolidColor}"
+                               Text="Cerrar Sesión"
+                               VerticalAlignment="Center">
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+        </Grid>
+    </Border>
 </UserControl>

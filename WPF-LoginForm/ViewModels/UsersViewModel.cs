@@ -33,7 +33,7 @@ public class UsersViewModel : ViewModelBase
 
         #endregion
 
-        #region ICommands
+    #region ICommands
 
     public ICommand NavigateAddCommand { get; }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Windows.Foundation.Collections;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
@@ -44,6 +45,8 @@ public class LendingsViewModel : ViewModelBase
     private string _errorCode;
     private bool _canDelete;
     private readonly UserModel _currentUser;
+    private bool _isChecked;
+    private string _tableNameSelected;
 
     #endregion
 
@@ -53,6 +56,7 @@ public class LendingsViewModel : ViewModelBase
     public ICommand NavigateAddCommand { get; }
     public ICommand RemoveCommand { get; }
     public ICommand EditCommand { get; }
+    public ICommand SwitchTableSLendings { get; }
 
     #endregion
 
@@ -117,6 +121,26 @@ public class LendingsViewModel : ViewModelBase
             _lendingModel = value;
             CanDelete = _lendingModel != null;
             OnPropertyChanged(nameof(LendingModel));
+        }
+    }
+
+    public bool IsChecked
+    {
+        get => _isChecked;
+        set
+        {
+            _isChecked = value;
+            OnPropertyChanged(nameof(IsChecked));
+        }
+    }
+
+    public string TableNameSelected
+    {
+        get => _tableNameSelected;
+        set 
+        {
+            _tableNameSelected = value;
+            OnPropertyChanged(nameof(TableNameSelected));
         }
     }
 

@@ -119,32 +119,32 @@ public partial class MainView : Window
 
     void ShowPopUpMethod(UIElement variable, string buttonText)
     {
-        popUpMenunButtons.PlacementTarget = variable;
-        popUpMenunButtons.Placement = PlacementMode.Right;
-        popUpMenunButtons.IsOpen = true;
+        popUpMenuButtons.PlacementTarget = variable;
+        popUpMenuButtons.Placement = PlacementMode.Right;
+        popUpMenuButtons.IsOpen = true;
         Header.txtPopUpMenuNavigation.Text = buttonText;
     }
 
     void HidePopUpMethod()
     {
-        popUpMenunButtons.Visibility = Visibility.Collapsed;
-        popUpMenunButtons.IsOpen = false;
+        popUpMenuButtons.Visibility = Visibility.Collapsed;
+        popUpMenuButtons.IsOpen = false;
     }
 
     private void btnCurrentUser_MouseEnter(object sender, MouseEventArgs e)
     {
-        popUpMenunButtons.PlacementTarget = btnCurrentUser;
-        popUpMenunButtons.Placement = PlacementMode.Right;
-        popUpMenunButtons.VerticalOffset = 0;
-        popUpMenunButtons.IsOpen = true;
+        popUpMenuButtons.PlacementTarget = btnCurrentUser;
+        popUpMenuButtons.Placement = PlacementMode.Right;
+        popUpMenuButtons.VerticalOffset = 0;
+        popUpMenuButtons.IsOpen = true;
         Header.txtPopUpMenuNavigation.Text = "Usuario Actual";
         //ShowPopUpMethod(btnCurrentUser, "Usuario Actual");
     }
 
     private void btnCurrentUser_MouseLeave(object sender, MouseEventArgs e)
     {
-        //popUpMenunButtons.Visibility = Visibility.Collapsed;
-        //popUpMenunButtons.IsOpen = false;
+        //popUpMenuButtons.Visibility = Visibility.Collapsed;
+        //popUpMenuButtons.IsOpen = false;
         HidePopUpMethod();
     }
 
@@ -202,10 +202,10 @@ public partial class MainView : Window
 
     private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
     {
-        popUpMenunButtons.PlacementTarget = btnCurrentUser;
-        popUpMenunButtons.Placement = PlacementMode.Right;
-        popUpMenunButtons.VerticalOffset = 0;
-        popUpMenunButtons.IsOpen = true;
+        popUpMenuButtons.PlacementTarget = btnCurrentUser;
+        popUpMenuButtons.Placement = PlacementMode.Right;
+        popUpMenuButtons.VerticalOffset = 0;
+        popUpMenuButtons.IsOpen = true;
         Header.txtPopUpMenuNavigation.Text = "Cerrar Sesión";
     }
 

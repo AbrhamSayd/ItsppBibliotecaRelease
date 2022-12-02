@@ -45,4 +45,8 @@
         </Style.Triggers>
     </Style>
 
+       <!--  #region Rounded Image Style --> 
+
+       <!--  #endregion Rounded Image Style -->
+
 </ResourceDictionary>

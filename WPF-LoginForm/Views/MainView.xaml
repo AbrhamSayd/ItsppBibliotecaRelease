@@ -6,9 +6,9 @@
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:popUpsViews="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
     xmlns:fieldsModels="clr-namespace:WPFBiblioteca.ViewModels.Fields"
+    xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
-    xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindowView"
     d:DesignHeight="900"
@@ -64,7 +64,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <!--  Navigation Menu  -->
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="auto" />
 
                 <!--  Content Menu  -->
                 <ColumnDefinition Width="*" />
@@ -72,13 +72,13 @@
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <!--  Navigation Menu  -->
                 <ScrollViewer
                     Grid.Row="0"
-                    Margin="0,20,10,0"
+                    Margin="0,40,5,0"
                     CanContentScroll="True"
                     HorizontalScrollBarVisibility="Disabled"
                     VerticalScrollBarVisibility="Disabled">
@@ -87,12 +87,14 @@
                         <RadioButton
                             BorderThickness="0"
                             Style="{StaticResource menuButtonStyleV2}"
-                            Tag="{StaticResource primarySolidColor}" >
+                            Tag="{StaticResource primarySolidColor}" 
+                            Command="{Binding ShowCurrentUserMenu}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage  
                                     x:Name="btnCurrentUser"
                                     Width="65"
                                     Height="65"
+                                    Margin="10,0,15,0"
                                     Icon="UserAlt"
                                     Style="{StaticResource menuButtonIcon}" MouseEnter="btnCurrentUser_MouseEnter" MouseLeave="btnCurrentUser_MouseLeave" />
                             </StackPanel>
@@ -160,8 +162,7 @@
                     </StackPanel>
                 </ScrollViewer>
 
-
-                <RadioButton
+                <!--<RadioButton
                     Grid.Row="1"
                     Margin="0,0,0,0"
                     Style="{StaticResource menuButtonStyleV2}"
@@ -170,7 +171,7 @@
                         x:Name="btnLogOut" 
                         Icon="ArrowRightFromBracket" 
                         Style="{StaticResource menuButtonIcon}" MouseEnter="btnLogOut_MouseEnter" MouseLeave="btnLogOut_MouseLeave" />
-                </RadioButton>
+                </RadioButton>-->
             </Grid>
 
             <!--  Main Section  -->
@@ -278,15 +279,36 @@
                     <!--  Content control  -->
                     <Grid Grid.Row="1" Margin="20,0,20,20">
                         <!-- PopUp for navigation buttons-->
-                        <Popup x:Name="popUpMenunButtons"
+                        <Popup x:Name="popUpMenuButtons"
                                AllowsTransparency="True"
                                HorizontalOffset="40"
-                               VerticalOffset="-20">
+                               VerticalOffset="-10">
                             <Grid>
-                                <popUpsViews:ToolTipNavigationButtons x:Name="Header" Foreground="{StaticResource SecundarySolidColor}"/>
+                                <popUpsViews:ToolTipNavigationButtons x:Name="Header" Foreground="{StaticResource SecundarySolidColor}"/> 
                             </Grid>
                         </Popup>
-                        <ContentControl Content="{Binding CurrentViewModel}"/>
+                        <Popup x:Name="popUpCurrentUser"
+                               AllowsTransparency="True"
+                               IsOpen="{Binding Visibility}"
+                               PlacementTarget="{Binding ElementName=btnCurrentUser}"
+                               PopupAnimation="Fade"
+                               HorizontalOffset="100"
+                               VerticalOffset="-100">
+                            <popUpsViews:CurrentUserAccountView x:Name="CurrentUserPopUp">
+                                <popUpsViews:CurrentUserAccountView.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="10"
+                                        Opacity=".5"
+                                        ShadowDepth="5"
+                                        Color="Gray"/>
+                                </popUpsViews:CurrentUserAccountView.Effect>
+                            </popUpsViews:CurrentUserAccountView>
+                        </Popup>
+                        <ContentControl Content="{Binding CurrentViewModel}">
+                                <ContentControl.Effect >
+                                <BlurEffect Radius="{Binding BlurRadius}"/>
+                                </ContentControl.Effect>
+                            </ContentControl>
                     </Grid>
                 </Grid>
             </Border>

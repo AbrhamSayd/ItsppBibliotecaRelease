@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -20,7 +21,10 @@ public class MainViewModel : ViewModelBase
         _userRepository = new UserRepository();
         CurrentUserAccount = new UserAccountModel();
         LoadCurrentUserData();
+        ShowCurrentUserMenu = new ViewModelCommand(ShowCurrentUser);
 
+        NavigateHome = new GoHomeCommand(null,
+            new NavigationService<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore)));
         NavigateLendings = new GoLendingsCommand(null,
             new NavigationService<LendingsViewModel>(navigationStore, () => new LendingsViewModel(navigationStore, _currentUser)));
         NavigateBooks = new GoBooksCommand(null,
@@ -29,9 +33,7 @@ public class MainViewModel : ViewModelBase
             new NavigationService<UsersViewModel>(navigationStore, () => new UsersViewModel(navigationStore)));
         NavigateMembers = new GoMembersCommand(null,
             new NavigationService<MembersViewModel>(navigationStore, () => new MembersViewModel(navigationStore)));
-        NavigateHome = new GoHomeCommand(null,
-            new NavigationService<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore)));
-
+        
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
 
@@ -50,6 +52,8 @@ public class MainViewModel : ViewModelBase
     private string _lastName;
     private string _userType;
     private UserModel _currentUser;
+    private bool _visibility;
+    private int _blurRadius;
 
     #endregion
 
@@ -60,6 +64,7 @@ public class MainViewModel : ViewModelBase
     public ICommand NavigateBooks { get; }
     public ICommand NavigateMembers { get; }
     public ICommand NavigateHome { get; }
+    public ICommand ShowCurrentUserMenu { get; }
 
     #endregion
 
@@ -89,6 +94,26 @@ public class MainViewModel : ViewModelBase
             }
         }
     }
+
+    private void ShowCurrentUser(object obj)
+    {
+        if (Visibility == true )
+        {
+            HideCUpopup(null);
+        }
+        else
+        {
+            Visibility = true;
+            BlurRadius = 12;
+        }
+    }
+
+    public void HideCUpopup(object obj)
+    {
+        Visibility = false;
+        BlurRadius = 0;
+    }
+
 
     #endregion
 
@@ -164,6 +189,26 @@ public class MainViewModel : ViewModelBase
         {
             _currentUserAccount = value;
             OnPropertyChanged(nameof(CurrentUserAccount));
+        }
+    }
+
+    public int BlurRadius
+    {
+        get => _blurRadius;
+        set
+        {
+            _blurRadius = value;
+            OnPropertyChanged(nameof(BlurRadius));
+        }
+    }
+
+    public bool Visibility
+    {
+        get => _visibility;
+        set
+        {
+            _visibility = value;
+            OnPropertyChanged(nameof(Visibility));
         }
     }
 
