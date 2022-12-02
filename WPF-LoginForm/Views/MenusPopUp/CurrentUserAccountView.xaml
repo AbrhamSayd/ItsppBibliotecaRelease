@@ -1,88 +1,106 @@
-﻿<UserControl x:Class="WPFBiblioteca.Views.MenusPopUp.CurrentUserAccountView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="350"
-             Height="450" Width="350">
-    <Border CornerRadius="50" Background="{StaticResource primaryGradientColor}"  Margin="10">
-         <Grid>
-             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                 <RowDefinition Height="*"/>
+﻿<UserControl
+    x:Class="WPFBiblioteca.Views.MenusPopUp.CurrentUserAccountView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="350"
+    Height="450"
+    d:DesignHeight="450"
+    d:DesignWidth="350"
+    mc:Ignorable="d">
+    <Border
+        Margin="10"
+        Background="{StaticResource primaryGradientColor}"
+        CornerRadius="50">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-             <StackPanel Grid.Row="0">
-                <Ellipse Width="200" Height="200" Margin="0,20,0,0">
-                    <Ellipse.Fill>                      
-                        <ImageBrush 
-                            Stretch="UniformToFill" 
-                            ImageSource="/Images/User_Default_Image.png" />
+            <StackPanel Grid.Row="0">
+                <Ellipse
+                    Width="200"
+                    Height="200"
+                    Margin="0,10,0,0">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="/Images/User_Default_Image.png" Stretch="UniformToFill" />
                     </Ellipse.Fill>
                     <Ellipse.Effect>
-                        <DropShadowEffect ShadowDepth="10" BlurRadius="15" Opacity=".3" Direction="310"/>
+                        <DropShadowEffect
+                            BlurRadius="15"
+                            Direction="310"
+                            Opacity=".3"
+                            ShadowDepth="10" />
                     </Ellipse.Effect>
                 </Ellipse>
 
-                <TextBlock 
-                    Style="{StaticResource FieldsHeaders}"
-                    Margin="0,5,0,0"
+                <TextBlock
+                    Margin="0,5,0,10"
+                    HorizontalAlignment="Center"
                     FontSize="22"
                     Foreground="#214efc"
-                    Text="Elegir foto de perfil" 
-                    HorizontalAlignment="Center">
-                    
-                </TextBlock>
+                    Style="{StaticResource FieldsHeaders}"
+                    Text="Elegir foto de perfil" />
             </StackPanel>
-             <TextBlock Grid.Row="1" 
-                 Style="{StaticResource FieldsHeaders}"   
-                 FontSize="22"
-                 Foreground="{StaticResource primarySolidColor}"
-                 Text="{Binding username}" 
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Bottom"
-                 Margin="0,0,0,20">
+            <TextBlock
+                Grid.Row="1"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                FontSize="22"
+                Foreground="{StaticResource primarySolidColor}"
+                Style="{StaticResource FieldsHeaders}"
+                Text="{Binding username}" />
+            <TextBlock
+                Grid.Row="2"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                FontSize="22"
+                Foreground="{StaticResource primarySolidColor}"
+                Style="{StaticResource FieldsHeaders}"
+                Text="{Binding name}" />
+            <TextBlock
+                Grid.Row="3"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                FontSize="22"
+                Foreground="{StaticResource primarySolidColor}"
+                Style="{StaticResource FieldsHeaders}"
+                Text="{Binding id}"
+                TextDecorations="Underline" />
 
-             </TextBlock>
-            <TextBlock Grid.Row="2"  
-                 Style="{StaticResource FieldsHeaders}"
-                 FontSize="22"
-                 Foreground="{StaticResource primarySolidColor}"
-                 Text="{Binding Email}" 
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Bottom"
-                 Margin="0,0,0,20" 
-                 TextDecorations="Underline">
-            </TextBlock>
-
-            <Button Grid.Row="3"  
-                    Style="{StaticResource iconButton}"
-                    Foreground="{StaticResource primarySolidColor}"
-                    FontSize="22"
-                    Margin="0,0,0,20"  
-                    Width="auto">
+            <Button
+                Grid.Row="4"
+                Width="auto"
+                Margin="0,0,0,10"
+                FontSize="22"
+                Foreground="{StaticResource primarySolidColor}"
+                Style="{StaticResource iconButton}">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage
-                        x:Name="btnLogOut" 
-                        Style="{StaticResource menuButtonIcon}"
-                        Icon="ArrowRightFromBracket" 
-                        Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType= Button}}"
-                        Margin="0,0,10,0">
+                        x:Name="btnLogOut"
+                        Margin="0,0,10,0"
+                        Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                        Icon="ArrowRightFromBracket"
+                        Style="{StaticResource menuButtonIcon}">
                         <fa:IconImage.Effect>
                             <DropShadowEffect Opacity="0" />
                         </fa:IconImage.Effect>
                     </fa:IconImage>
                     <TextBlock
-                               Style="{StaticResource FieldsHeaders}"
-                               FontSize="22"
-                               Foreground="{StaticResource primarySolidColor}"
-                               Text="Cerrar Sesión"
-                               VerticalAlignment="Center">
-                    </TextBlock>
+                        VerticalAlignment="Center"
+                        FontSize="22"
+                        Foreground="{StaticResource primarySolidColor}"
+                        Style="{StaticResource FieldsHeaders}"
+                        Text="Cerrar Sesión" />
                 </StackPanel>
             </Button>
 

@@ -37,11 +37,22 @@ internal static class TryConvert
     /// <summary>
     /// Returns the integer result of parsing a string, or null.
     /// </summary>
+    
     internal static int? ToNullableInt32(string toParse)
     {
         int result;
         if (Int32.TryParse(toParse, out result)) return result;
         return null;
+    }
+
+    internal static long? ToNullableLong(string toParse)
+    {
+        long result;
+        if (long.TryParse(toParse, out result)) return result;
+        return null;
+        
+            
+        
     }
 
     /// <summary>
@@ -52,6 +63,11 @@ internal static class TryConvert
     {
         // The nullable-result method sets up for a coalesce operator.
         return ToNullableInt32(toParse) ?? toReturnOnFailure;
+    }
+
+    internal static long ToLong(string toParse, int toReturnOnFailure)
+    {
+        return  ToNullableLong(toParse) ?? toReturnOnFailure;
     }
 }
 

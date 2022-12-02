@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using MySqlConnector;
 using WPFBiblioteca.Models;
@@ -10,7 +11,6 @@ namespace WPFBiblioteca.Repositories
 {
     public class LendingReturnedRepository : RepositoryBase, ILendingReturnedRepository
     {
-
         private string _errorCode;
 
         public async Task<IEnumerable<LendingReturnedModel>> GetByAll()
@@ -80,12 +80,41 @@ namespace WPFBiblioteca.Repositories
             return lendingList;
         }
 
+        public async Task<string> Insert(LendingModel lending, UserModel user)
+        {
+            try
+            {
+                await using var connection = GetConnection();
+                await using (var command = new MySqlCommand())
+                {
+                    await connection.OpenAsync();
+                    command.Connection = connection;
+                    command.CommandText =
+                        "INSERT INTO lendings_returned (Lending_Id, Book_Id, Member_Id, Date_Time_Borrowed, Username_Lent, Date_Time_Returned, Username_Returned, Remarks) VALUES (@lending_Id, @book_Id, @member_Id, @date_Time_Borrowed, @username_Lent, NOW(),@username_Returned, @remarks)";
+                    command.Parameters.Add("@lending_Id", MySqlDbType.Int64).Value = lending.LendingId;
+                    command.Parameters.Add("@book_Id", MySqlDbType.Int64).Value = lending.BookId;
+                    command.Parameters.Add("@member_Id", MySqlDbType.Int64).Value = lending.MemberId;
+                    command.Parameters.Add("@date_Time_Borrowed", MySqlDbType.DateTime).Value = lending.DateTimeBorrowed;
+                    command.Parameters.Add("@username_Lent", MySqlDbType.VarChar).Value = lending.UsernameLent;
+                    command.Parameters.Add("@username_Returned", MySqlDbType.VarChar).Value = user.FirstName;
+                    command.Parameters.Add("@remarks", MySqlDbType.VarChar).Value = lending.Remarks;
+                    await command.ExecuteScalarAsync(CancellationToken.None);
+                    _errorCode = "400";
+                }
+            }
+            catch (Exception e)
+            {
+                _errorCode = e.ToString();
+                throw;
+            }
+
+
+            return _errorCode;
+        } 
+
         public string GetError()
         {
             return _errorCode;
         }
-
-        
     }
 }
-

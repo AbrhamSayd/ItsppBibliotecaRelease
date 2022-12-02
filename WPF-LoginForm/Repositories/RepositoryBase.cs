@@ -10,10 +10,10 @@ public abstract class RepositoryBase
     protected RepositoryBase()
     {
         //BaseDeDatosItspp22.
-        const string server = "localhost";
-        const string database = "bjleh1b6zqctbrjujbr0";
-        const string uid = "root";
-        const string password = "itspp"; // se establece coneccion a base de datos externa,.
+        const string server = "140.84.183.195";
+        const string database = "biblioteca";
+        const string uid = "libraryConnection";
+        const string password = @"it-2spp21.Conn][1/^7"; // se establece coneccion a base de datos externa,.
         _connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" +
                             password + ";";
     }

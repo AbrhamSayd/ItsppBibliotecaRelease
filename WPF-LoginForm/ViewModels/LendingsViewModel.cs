@@ -12,44 +12,20 @@ namespace WPFBiblioteca.ViewModels;
 
 public class LendingsViewModel : ViewModelBase
 {
-    #region Constructor
-
-    public LendingsViewModel(NavigationStore navigationStore, UserModel currentUser)
-    {
-        _currentUser = currentUser;
-        _canDelete = false;
-        _errorCode = string.Empty;
-        _navigationStore = navigationStore;
-        _lendingRepository = new LendingRepository();
-        _lendingModel = new LendingModel();
-        _collectionLendings = new ObservableCollection<LendingModel>();
-        NavigateAddCommand = new NavigateCommand<LendingsFieldsViewModel>(
-            new NavigationService<LendingsFieldsViewModel>(navigationStore,
-                () => new LendingsFieldsViewModel(null, "Add", navigationStore, _currentUser)));
-
-        EditCommand = new NavigateCommand<LendingsFieldsViewModel>(
-            new NavigationService<LendingsFieldsViewModel>(navigationStore,
-                () => new LendingsFieldsViewModel(_lendingModel, "Edit", navigationStore, _currentUser)));
-        RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
-        ExecuteGetAllCommand(null);
-    }
-
-    #endregion
-
     #region fields
 
     private ObservableCollection<LendingModel> _collectionLendings;
     private LendingModel _lendingModel;
     private readonly ILendingRepository _lendingRepository;
+    private readonly ILendingReturnedRepository _lendingReturnedRepository;
     private NavigationStore _navigationStore;
     private string _errorCode;
     private bool _canDelete;
-    private readonly UserModel _currentUser;
     private bool _isChecked;
     private string _tableNameSelected;
+    private readonly UserModel _currentUser;
 
     #endregion
-
 
     #region ICommands
 
@@ -62,7 +38,7 @@ public class LendingsViewModel : ViewModelBase
 
     #region Methods
 
-    private async void ExecuteGetAllCommand(object o)
+    private async void ExecuteGetAllCommand()
     {
         CollectionLendings = new ObservableCollection<LendingModel>(await _lendingRepository.GetByAll());
         _errorCode = _lendingRepository.GetError();
@@ -76,7 +52,8 @@ public class LendingsViewModel : ViewModelBase
     private void ExecuteRemoveRowCommand(object obj)
     {
         _lendingRepository.Delete(_lendingModel.LendingId);
-        ExecuteGetAllCommand(null);
+        _lendingReturnedRepository.Insert(_lendingModel,_currentUser);
+        ExecuteGetAllCommand();
     }
 
     #endregion
@@ -142,6 +119,31 @@ public class LendingsViewModel : ViewModelBase
             _tableNameSelected = value;
             OnPropertyChanged(nameof(TableNameSelected));
         }
+    }
+
+    #endregion
+
+    #region Constructor
+
+    public LendingsViewModel(NavigationStore navigationStore, UserModel currentUser)
+    {
+        _currentUser = currentUser;
+        _canDelete = false;
+        _errorCode = string.Empty;
+        _navigationStore = navigationStore;
+        _lendingRepository = new LendingRepository();
+        _lendingReturnedRepository = new LendingReturnedRepository();
+        _lendingModel = new LendingModel();
+        _collectionLendings = new ObservableCollection<LendingModel>();
+        NavigateAddCommand = new NavigateCommand<LendingsFieldsViewModel>(
+            new NavigationService<LendingsFieldsViewModel>(navigationStore,
+                () => new LendingsFieldsViewModel(null, "Add", navigationStore, _currentUser)));
+
+        EditCommand = new NavigateCommand<LendingsFieldsViewModel>(
+            new NavigationService<LendingsFieldsViewModel>(navigationStore,
+                () => new LendingsFieldsViewModel(_lendingModel, "Edit", navigationStore, _currentUser)));
+        RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
+        ExecuteGetAllCommand();
     }
 
     #endregion

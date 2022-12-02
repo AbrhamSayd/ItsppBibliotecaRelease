@@ -10,6 +10,7 @@ public interface IBookRepository
     Task<string> Edit(BookModel user, int id);
     Task<string> Delete(int id);
     Task<BookModel> GetById(int id);
+    Task<BookModel> GetById(long id);
     Task<BookModel> GetByIsbn(string isbn);
     Task<IEnumerable<BookModel>> GetByAll();
     string GetError();

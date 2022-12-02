@@ -86,7 +86,10 @@ public class MainViewModel : ViewModelBase
             var user = _userRepository.GetByUsername(Thread.CurrentPrincipal.Identity!.Name);
             if (user != null)
             {
+                _name = user.FirstName + " " + user.LastName;
                 _currentUser = user;
+                _username = user.Username;
+                _id = user.Id;
                 CurrentUserAccount.Username = user.Username;
                 CurrentUserAccount.DisplayName = $"Bienvenido {user.FirstName} {user.LastName} ;)";
                 CurrentUserAccount.ProfilePicture = null;

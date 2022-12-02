@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -12,27 +13,32 @@ namespace WPFBiblioteca.ViewModels.Fields;
 
 public class LendingsFieldsViewModel : ViewModelBase
 {
-    #region Constructor
+    #region Fields
 
-    public LendingsFieldsViewModel(LendingModel lending, string mode, NavigationStore navigationStore,
-        UserModel currentModel)
-    {
-        _mode = mode;
-        _lending = lending ?? new LendingModel();
-        _currentUser = new UserModel();
-        _currentUser = currentModel;
-        GoBackCommand = new GoLendingsCommand(null,
-            new NavigationService<LendingsViewModel>(navigationStore,
-                () => new LendingsViewModel(navigationStore, _currentUser)));
-        _lendingRepository = new LendingRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
+    
+    private readonly string _mode;
+    private LendingModel _lending;
+    private readonly UserModel _currentUser;
 
-        if (mode == "Edit")
-            FillModel();
-    }
+    private readonly ILendingRepository _lendingRepository;
+    private readonly IBookRepository _bookRepository;
+    private ObservableCollection<CategoryModel> _lendings;
+
+
+    private int _lendingId;
+    private int _bookId;
+    private string _isbn;
+    private string _bookName;
+    private int _memberId;
+    private string _memberName;
+    private DateTime _dateTimeBorrowed;
+    private string _usernameLent;
+    private DateTime _dateTimeReturned;
+    private string _usernameReturned;
+    private int _finedAmount;
+    private string _remarks;
 
     #endregion
-
     #region Properties
 
     public int LendingId
@@ -59,6 +65,16 @@ public class LendingsFieldsViewModel : ViewModelBase
         }
     }
 
+    public string Isbn
+    {
+        get => _isbn;
+        set
+        {
+            if (value == _isbn) return;
+            _isbn = value;
+            OnPropertyChanged(nameof(Isbn));
+        }
+    }
 
     public int MemberId
     {
@@ -121,31 +137,7 @@ public class LendingsFieldsViewModel : ViewModelBase
     }
 
     #endregion
-
-    #region Fields
-
-    private readonly string _mode;
-    private LendingModel _lending;
-    private readonly UserModel _currentUser;
-
-    private readonly ILendingRepository _lendingRepository;
-    private ObservableCollection<CategoryModel> _lendings;
-
-
-    private int _lendingId;
-    private int _bookId;
-    private string _bookName;
-    private int _memberId;
-    private string _memberName;
-    private DateTime _dateTimeBorrowed;
-    private string _usernameLent;
-    private DateTime _dateTimeReturned;
-    private string _usernameReturned;
-    private int _finedAmount;
-    private string _remarks;
-
-    #endregion
-
+    
     #region ICommands
 
     public ICommand EditionCommand { get; }
@@ -157,14 +149,23 @@ public class LendingsFieldsViewModel : ViewModelBase
 
     private void FillModel()
     {
-        _lendingId = _lending.LendingId;
-        _bookId = _lending.BookId;
-        _bookName = _lending.BookName;
-        _memberId = _lending.MemberId;
-        _memberName = _lending.MemberName;
-        _dateTimeBorrowed = _lending.DateTimeBorrowed;
-        _usernameLent = _lending.UsernameLent;
-        _remarks = _lending.Remarks;
+        if (_mode == "Edit")
+        {
+            _lendingId = _lending.LendingId;
+            _bookId = _lending.BookId;
+            _bookName = _lending.BookName;
+            _memberId = _lending.MemberId;
+            _memberName = _lending.MemberName;
+            _dateTimeBorrowed = _lending.DateTimeBorrowed;
+            _usernameLent = _lending.UsernameLent;
+            _remarks = _lending.Remarks;
+        }
+        else
+        {
+            DateTimeBorrowed = DateTime.Now;
+            UsernameLent = _currentUser.FirstName;
+        }
+        
     }
 
     private async void ExecuteEditionCommand(object obj)
@@ -173,8 +174,8 @@ public class LendingsFieldsViewModel : ViewModelBase
         {
             _lending = new LendingModel
             {
-                LendingId = _lendingId,
-                BookId = _bookId,
+                LendingId = 0,
+                BookId =  _bookRepository.GetById(TryConvert.ToInt32(_isbn,0)).Id,
                 BookName = _bookName,
                 MemberId = _memberId,
                 MemberName = _memberName,
@@ -189,9 +190,43 @@ public class LendingsFieldsViewModel : ViewModelBase
         }
         else
         {
+            var book = Task.Run(() => _bookRepository.GetById(TryConvert.ToLong(_isbn,0))).Result;
+            _lending = new LendingModel
+            {
+                LendingId = 0,
+                BookId = book.Id ,
+                BookName = book.Name,
+                MemberId = _memberId,
+                MemberName = _memberName,
+                DateTimeBorrowed = _dateTimeBorrowed,
+                UsernameLent = _usernameLent,
+                Remarks = _remarks
+            };
             await _lendingRepository.Edit(_lending, _lendingId);
             GoBackCommand.Execute(null);
         }
+    }
+
+    #endregion
+
+    #region Constructor
+
+    public LendingsFieldsViewModel(LendingModel lending, string mode, NavigationStore navigationStore,
+        UserModel currentModel)
+    {
+        _mode = mode;
+        _lending = lending ?? new LendingModel();
+        _currentUser = new UserModel();
+        _currentUser = currentModel;
+        GoBackCommand = new GoLendingsCommand(null,
+            new NavigationService<LendingsViewModel>(navigationStore,
+                () => new LendingsViewModel(navigationStore, _currentUser)));
+        _lendingRepository = new LendingRepository();
+        _bookRepository = new BookRepository();
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
+
+        
+            FillModel();
     }
 
     #endregion

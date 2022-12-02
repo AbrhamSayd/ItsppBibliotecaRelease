@@ -52,12 +52,11 @@
                 SelectedItem="{Binding LendingModel, UpdateSourceTrigger=PropertyChanged}"
                 Style="{DynamicResource DataGridStyle}">
                 <DataGrid.Columns>
-
                     <!--  ID Column  -->
                     <DataGridTextColumn
                         Width="auto"
                         Binding="{Binding LendingId}"
-                        Header="Id"
+                        Header="Folio"
                         IsReadOnly="True" />
                     <!--  ISBN Column  -->
                     <DataGridTextColumn
@@ -67,43 +66,43 @@
                         IsReadOnly="True" />
                     <!--  Name Column  -->
                     <DataGridTextColumn
-                        Width="*"
+                        Width="auto"
                         Binding="{Binding MemberName}"
                         Header="Nombre"
                         IsReadOnly="True" />
                     <!--  Author Column  -->
                     <DataGridTextColumn
-                        Width="auto"
+                        Width="310"
                         Binding="{Binding DateTimeBorrowed}"
                         Header="Fecha de prestamo"
                         IsReadOnly="True" />
                     <!--  Editorial Column  -->
                     <DataGridTextColumn
-                        Width="Auto"
+                        Width="200"
                         Binding="{Binding UsernameLent}"
                         Header="Entregó"
                         IsReadOnly="True" />
                     <!--  Published_Year Name Column  -->
-                    <DataGridTextColumn
+                    <!--<DataGridTextColumn
                         Width="Auto"
                         Binding="{Binding DateTimeReturned}"
                         Header="Fecha de devolucion"
                         IsReadOnly="True" />
-                    <!--  stock Column  -->
+                    --><!--  stock Column  --><!--
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding UsernameReturned}"
                         Header="Recibió"
                         IsReadOnly="True" />
-                    <!--  Color Column  -->
+                    --><!--  Color Column  --><!--
                     <DataGridTextColumn
                         Width="Auto"
                         Binding="{Binding FinedAmount}"
                         Header="Fianza"
-                        IsReadOnly="True" />
+                        IsReadOnly="True" />-->
                     <!--  Category Column  -->
                     <DataGridTextColumn
-                        Width="*"
+                        Width="auto"
                         Binding="{Binding Remarks}"
                         Header="Notas"
                         IsReadOnly="True" />
