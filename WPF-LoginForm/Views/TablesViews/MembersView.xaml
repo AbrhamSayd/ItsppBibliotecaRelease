@@ -98,7 +98,7 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Prestamos}"
-                        Header="Deudor"
+                        Header="Cantidad sin devolver"
                         IsReadOnly="True" />
 
                 </DataGrid.Columns>

@@ -62,15 +62,28 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Carrera" />
-                            <TextBox
+                                Text="Carrera/Academia" />
+                            <!--<TextBox
                                 Width="400"
                                 Margin="0,5,0,5"
                                 HorizontalAlignment="Left"
                                 PreviewTextInput="TextStringOnPreviewTextInput"
                                 Style="{StaticResource CustomCardTextBox}"
-                                Text="{Binding Carrera}" />
-
+                                Text="{Binding Carrera}" />-->
+                            <ComboBox 
+                                Width="400"
+                                Margin="0,5,0,5"
+                                HorizontalAlignment="Left"
+                                PreviewTextInput="TextStringOnPreviewTextInput"
+                                Style="{StaticResource CardComboBoxStyle}"
+                                Text="{Binding Carrera}" 
+                                ItemContainerStyle="{DynamicResource theComboBoxItem}">
+                                <ComboBoxItem>ISC</ComboBoxItem>
+                                <ComboBoxItem>LADM</ComboBoxItem>
+                                <ComboBoxItem>ICIV</ComboBoxItem>
+                                <ComboBoxItem>IIND</ComboBoxItem>
+                                <ComboBoxItem>N/A</ComboBoxItem>
+                            </ComboBox>
 
                             <TextBlock
                                 Padding="20,40,0,0"
@@ -127,6 +140,8 @@
                                 PreviewTextInput="TextIntegerPreviewTextInput"
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding MemberId}" />
+
+                            <!--No. Control / Empleado / ID INE-->
 
 
                             <TextBlock
