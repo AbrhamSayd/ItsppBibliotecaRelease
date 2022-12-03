@@ -17,8 +17,14 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
-                <StackPanel Grid.Row="1">
+                <TextBox 
+                    Grid.Row="0"
+                    Width="1000"
+                    Height="60"
+                    Margin="50,15,100,15"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource ModernTextbox}" Text="Buscar"/>
+                    <StackPanel Grid.Row="1">
                     <TextBlock 
                     Style="{StaticResource ViewsHeaders}"
                     Text="Bienvenid@"
@@ -36,8 +42,8 @@
 
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
 
@@ -80,7 +86,6 @@
                                                 Grid.Row="0"
                                                Margin="20,0,20,0"
                                                Style="{StaticResource LendReturnTextStyle}"
-                                               FontSize="46"
                                                Text="Realizar un prestamo"/>
                                                 <TextBlock 
                                                 Grid.Row="1"
@@ -107,7 +112,6 @@
                         <Button   Grid.Row="1"
                             Margin="25,25,25,25"
                             Padding="0">
-
                             <Button.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -142,7 +146,6 @@
                                                     Grid.Row="0"
                                                    Margin="20,0,20,0"
                                                    Style="{StaticResource LendReturnTextStyle}"
-                                                   FontSize="46"
                                                    Text="Devolver un prestamo"/>
                                                 <TextBlock 
                                                     Grid.Row="1"
