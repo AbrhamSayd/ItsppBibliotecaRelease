@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using WPFBiblioteca.Commands;
+using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
 using WPFBiblioteca.Services;
@@ -11,65 +12,7 @@ using WPFBiblioteca.Stores;
 
 namespace WPFBiblioteca.ViewModels.Fields;
 
-internal static class Email
-{
-    internal static bool IsValidEmail(string email)
-    {
-        var trimmedEmail = email.Trim();
 
-        if (trimmedEmail.EndsWith("."))
-        {
-            return false; // suggested by @TK-421
-        }
-        try
-        {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == trimmedEmail;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-}
-internal static class TryConvert
-{
-    /// <summary>
-    /// Returns the integer result of parsing a string, or null.
-    /// </summary>
-    
-    internal static int? ToNullableInt32(string toParse)
-    {
-        int result;
-        if (Int32.TryParse(toParse, out result)) return result;
-        return null;
-    }
-
-    internal static long? ToNullableLong(string toParse)
-    {
-        long result;
-        if (long.TryParse(toParse, out result)) return result;
-        return null;
-        
-            
-        
-    }
-
-    /// <summary>
-    /// Returns the integer result of parsing a string,
-    /// or the supplied failure value if the parse fails.
-    /// </summary>
-    internal static int ToInt32(string toParse, int toReturnOnFailure)
-    {
-        // The nullable-result method sets up for a coalesce operator.
-        return ToNullableInt32(toParse) ?? toReturnOnFailure;
-    }
-
-    internal static long ToLong(string toParse, int toReturnOnFailure)
-    {
-        return  ToNullableLong(toParse) ?? toReturnOnFailure;
-    }
-}
 
 public class MembersFieldsViewModel : ViewModelBase
 {
@@ -121,8 +64,8 @@ public class MembersFieldsViewModel : ViewModelBase
 
     private bool CanExecuteEdition(object obj)
     {
-        return TryConvert.ToInt32(MemberId, 0) != 0 && MemberId.Length > 3 && !string.IsNullOrEmpty(MemberId) &&
-               FirstName.Length > 3 && !string.IsNullOrEmpty(FirstName) && LastName.Length > 4 && !string.IsNullOrEmpty(LastName) && Fields.Email.IsValidEmail(Email);
+        return ValidationHelper.TryConvert.ToInt32(MemberId, 0) != 0 && MemberId.Length > 3 && !string.IsNullOrEmpty(MemberId) &&
+               FirstName.Length > 3 && !string.IsNullOrEmpty(FirstName) && LastName.Length > 4 && !string.IsNullOrEmpty(LastName) && !string.IsNullOrWhiteSpace(Email) && ValidationHelper.Email.IsValidEmail(Email);
     }
 
     private async void ExecuteEditionCommand(object obj)
@@ -142,14 +85,14 @@ public class MembersFieldsViewModel : ViewModelBase
             if (isDuplicate) return;
             _member = new MemberModel
             {
-                MemberId = TryConvert.ToInt32(_memberId, 0),
+                MemberId = ValidationHelper.TryConvert.ToInt32(_memberId, 0),
                 FirstName = _firstName,
                 LastName = _lastName,
                 Carrera = _carrera,
                 Email = _email,
                 PhoneNumber = _phoneNumber,
                 Deudor = _deudor,
-                Prestamos = TryConvert.ToInt32(_prestamos, 0)
+                Prestamos = ValidationHelper.TryConvert.ToInt32(_prestamos, 0)
             };
             await _membersRepository.Add(_member);
             GoBackCommand.Execute(null);
@@ -158,14 +101,14 @@ public class MembersFieldsViewModel : ViewModelBase
         {
             _member = new MemberModel
             {
-                MemberId = TryConvert.ToInt32(_memberId, 0),
+                MemberId = ValidationHelper.TryConvert.ToInt32(_memberId, 0),
                 FirstName = _firstName,
                 LastName = _lastName,
                 Carrera = _carrera,
                 Email = _email,
                 PhoneNumber = _phoneNumber,
                 Deudor = _deudor,
-                Prestamos = TryConvert.ToInt32(_prestamos, 0)
+                Prestamos = ValidationHelper.TryConvert.ToInt32(_prestamos, 0)
             };
             await _membersRepository.Add(_member);
             GoBackCommand.Execute(null);
@@ -232,7 +175,7 @@ public class MembersFieldsViewModel : ViewModelBase
         {
             if (value == _memberId) return;
             _memberId = value;
-            _member.MemberId = TryConvert.ToInt32(value, 0);
+            _member.MemberId = ValidationHelper.TryConvert.ToInt32(value, 0);
             OnPropertyChanged(nameof(MemberId));
         }
     }
@@ -316,7 +259,7 @@ public class MembersFieldsViewModel : ViewModelBase
         {
             if (value == _prestamos) return;
             _prestamos = value;
-            _member.Prestamos = TryConvert.ToInt32(_prestamos, 0);
+            _member.Prestamos = ValidationHelper.TryConvert.ToInt32(_prestamos, 0);
             OnPropertyChanged(nameof(Prestamos));
         }
     }

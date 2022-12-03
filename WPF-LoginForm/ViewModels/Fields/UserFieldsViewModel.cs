@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using MySqlConnector;
 using WPFBiblioteca.Commands;
+using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
 using WPFBiblioteca.Services;
@@ -13,8 +14,6 @@ using WPFBiblioteca.Stores;
 using static System.Reflection.Metadata.BlobBuilder;
 
 namespace WPFBiblioteca.ViewModels.Fields;
-
-
 
 public class UserFieldsViewModel : ViewModelBase
 {
@@ -31,6 +30,7 @@ public class UserFieldsViewModel : ViewModelBase
     private string _element;
     private string _title;
     private bool _visibility;
+    private string _email;
     private readonly string _mode;
     private readonly IUserRepository _userRepository;
     private ObservableCollection<UserModel> _users;
@@ -56,14 +56,15 @@ public class UserFieldsViewModel : ViewModelBase
         {
             foreach (var user in Users)
             {
-                if (user.Id.ToString() == _id) 
+                if (user.Id.ToString() == _id)
                 {
                     Element = "Numero de empleado duplicado, Intente con otro porfavor";
                     Title = "Dato duplicado";
                     Visibility = true;
                     isDuplicate = true;
                     _errorFocus = "Id";
-                }else if (_username == user.Username)
+                }
+                else if (_username == user.Username)
                 {
                     Element = "Nombre de usuario duplicado, Intente con otro porfavor";
                     Title = "Dato duplicado";
@@ -76,18 +77,29 @@ public class UserFieldsViewModel : ViewModelBase
             if (isDuplicate) return;
             _userModel = new UserModel
             {
-                Id = TryConvert.ToInt32(_id,0),
+                Id = ValidationHelper.TryConvert.ToInt32(_id, 0),
                 Username = _username,
                 Password = _password,
                 FirstName = _firstName,
                 LastName = _lastName,
-                UserType = _userType
+                UserType = _userType,
+                Email = _email
             };
             await _userRepository.Add(_userModel);
             GoBackCommand.Execute(null);
         }
         else
         {
+            _userModel = new UserModel
+            {
+                Id = ValidationHelper.TryConvert.ToInt32(_id, 0),
+                Username = _username,
+                Password = _password,
+                FirstName = _firstName,
+                LastName = _lastName,
+                UserType = _userType,
+                Email = _email
+            };
             await _userRepository.Edit(_userModel, _staticId);
             GoBackCommand.Execute(null);
             _errorCode = _userRepository.GetError();
@@ -96,7 +108,9 @@ public class UserFieldsViewModel : ViewModelBase
 
     private bool CanExecuteEdition(object obj)
     {
-       return Id != "0" && Username is { Length: > 5 } && Password is { Length: > 4 } && FirstName is { Length: > 3 } && UserType != null;
+        return Id != "0" && Username is { Length: > 5 } && Password is { Length: > 4 } &&
+               FirstName is { Length: > 3 } && UserType != null && !string.IsNullOrEmpty(Email) &&
+               ValidationHelper.Email.IsValidEmail(Email);
     }
 
     private async void ExecuteGetAllCommand()
@@ -130,7 +144,7 @@ public class UserFieldsViewModel : ViewModelBase
         set
         {
             _id = value;
-            _userModel.Id = TryConvert.ToInt32(value,0);
+            _userModel.Id = ValidationHelper.TryConvert.ToInt32(value, 0);
             OnPropertyChanged(nameof(Id));
         }
     }
@@ -187,6 +201,17 @@ public class UserFieldsViewModel : ViewModelBase
             _userType = value;
             _userModel.UserType = value;
             OnPropertyChanged(nameof(UserType));
+        }
+    }
+
+    public string Email
+    {
+        get => _email;
+        set
+        {
+            if (value == _email) return;
+            _email = value;
+            OnPropertyChanged(nameof(Email));
         }
     }
 
@@ -252,10 +277,7 @@ public class UserFieldsViewModel : ViewModelBase
         AcceptCommand = new ViewModelCommand(ExecuteAcceptCommand);
         ExecuteGetAllCommand();
         if (mode == "Edit") FillModel();
-
     }
-
-    
 
 
     private void FillModel()
@@ -267,6 +289,7 @@ public class UserFieldsViewModel : ViewModelBase
         FirstName = _userModel.FirstName;
         LastName = _userModel.LastName;
         UserType = "admin";
+        Email = _userModel.Email;
     }
 
     #endregion

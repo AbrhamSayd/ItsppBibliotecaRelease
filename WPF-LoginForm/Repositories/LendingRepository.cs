@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MySqlConnector;
+using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
+using static WPFBiblioteca.Helpers.ValidationHelper;
 
 namespace WPFBiblioteca.Repositories;
 
@@ -22,7 +24,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                 await connection.OpenAsync();
                 command.Connection = connection;
                 command.CommandText =
-                    "INSERT INTO lendings (Book_Id, Member_Id, Date_Time_Borrowed, Username_Lent, Date_Time_Returned, Username_Returned, Fined_Amount, Remarks) VALUES (@book_Id, @member_Id, NOW(), @username, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
+                    "INSERT INTO lendings (Book_Id, Member_Id, Date_Time_Borrowed, Username_Lent, Remarks) VALUES (@book_Id, @member_Id, NOW(), @username, @remarks)";
                 command.Parameters.Add("@book_Id", MySqlDbType.Int64).Value = lending.BookId;
                 command.Parameters.Add("@member_Id", MySqlDbType.Int64).Value = lending.MemberId;
                 command.Parameters.Add("@username", MySqlDbType.String).Value = currentUser.Username;
@@ -65,7 +67,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                 _errorCode = "400";
             }
         }
-        catch (Exception e)
+        catch (MySqlException e)
         {
             _errorCode = e.ToString();
             throw;
@@ -217,7 +219,8 @@ public class LendingRepository : RepositoryBase, ILendingRepository
 
     public async Task<IEnumerable<LendingModel>> GetByAll()
     {
-        DateTime dateValue;
+        var memberRepository = new MemberRepository();
+        var userRepository = new UserRepository();
         var lendingList = new List<LendingModel>();
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();
@@ -227,39 +230,34 @@ public class LendingRepository : RepositoryBase, ILendingRepository
             command.Connection = connection;
             command.CommandText =
                 @"SELECT
-            lendings.Lending_Id,
-            lendings.Book_Id,
-            CONCAT(members.First_Name, ' ', members.Last_Name) AS Member_Name,
-                books.Name AS Book_Name,
-                lendings.Member_Id,
-            lendings.Date_Time_Borrowed,
-            lendings.Username_Lent,
-            lendings.Remarks,
-            lendings.Lending_Id
-                FROM lendings
-                LEFT OUTER JOIN books
-                ON lendings.Book_Id = books.Book_Id
-            LEFT OUTER JOIN members
-            ON lendings.Member_Id = members.Member_Id";
+              lendings.Lending_Id,
+              lendings.Book_Id,
+              books.Name AS Book_Name,
+              lendings.Member_Id,
+              lendings.Date_Time_Borrowed,
+              lendings.Username_Lent,
+              lendings.Remarks
+            FROM lendings
+              INNER JOIN books
+                ON lendings.Book_Id = books.Book_Id";
             await using var reader = await command.ExecuteReaderAsync();
-            int tempInt;
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
-                var lending = new LendingModel();
-
-                lending.LendingId = Convert.ToInt32(reader[0].ToString());
-                if (int.TryParse(reader[1].ToString(), out tempInt))
-                    lending.BookId = tempInt;
-
-                lending.MemberName = reader[2].ToString();
-                lending.BookName = reader[3].ToString();
-                if (int.TryParse(reader[4].ToString(), out tempInt))
-                    lending.MemberId = tempInt;
-                if (DateTime.TryParse(reader[5].ToString(), out dateValue))
-                    lending.DateTimeBorrowed = dateValue;
-                lending.UsernameLent = reader[6].ToString();
-                lending.Remarks = reader[7].ToString();
-
+                var member = Task.Run(() => memberRepository.GetById(TryConvert.ToInt32(reader[3].ToString(), 0)))
+                    .Result;
+                var user = Task.Run(() => userRepository.GetByUsername(reader[5].ToString())).Result;
+                DateTime.TryParse(reader[4].ToString(), out var dateValue);
+                var lending = new LendingModel
+                {
+                    LendingId = TryConvert.ToInt32(reader[0].ToString(), 0),
+                    BookId = TryConvert.ToInt32(reader[1].ToString(), 0),
+                    MemberName = member.FirstName + " " + member.LastName,
+                    BookName = reader[2].ToString(),
+                    MemberId = TryConvert.ToInt32(reader[2].ToString(), 0),
+                    DateTimeBorrowed = dateValue,
+                    UsernameLent = user.FirstName,
+                    Remarks = reader[6].ToString(),
+                };
 
                 lendingList.Add(lending);
                 _errorCode = "400";

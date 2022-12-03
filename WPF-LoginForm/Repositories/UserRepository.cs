@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using MySqlConnector;
+using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
+using WPFBiblioteca.ViewModels.Fields;
 
 namespace WPFBiblioteca.Repositories;
 
@@ -21,13 +23,14 @@ public class UserRepository : RepositoryBase, IUserRepository
                 await connection.OpenAsync();
                 command.Connection = connection;
                 command.CommandText =
-                    "insert into users(Username_ID,Username,Password,First_Name,Last_Name,User_Type) values (@username_id,@username,@password,@first_name,@last_name,@user_type)";
+                    "insert into users(Username_ID,Username,Password,First_Name,Last_Name,User_Type,Email) values (@username_id,@username,@password,@first_name,@last_name,@user_type,@email)";
                 command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = userModel.Id;
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = userModel.Username;
                 command.Parameters.Add("@password", MySqlDbType.VarChar).Value = userModel.Password;
                 command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.FirstName;
                 command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
                 command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
+                command.Parameters.Add("@email", MySqlDbType.VarChar).Value = userModel.Email;
                 await command.ExecuteScalarAsync();
             }
             catch (MySqlException ex)
@@ -66,7 +69,7 @@ public class UserRepository : RepositoryBase, IUserRepository
             await connection.OpenAsync();
             command.Connection = connection;
             command.CommandText =
-                "UPDATE users SET Username_ID = @username_id, Username = @username, Password = @password, First_Name = @first_name, Last_Name = @last_name, User_Type = @user_type WHERE Username_ID = @static_id";
+                "UPDATE users SET Username_ID = @username_id, Username = @username, Password = @password, First_Name = @first_name, Last_Name = @last_name, User_Type = @user_type, Email = @email WHERE Username_ID = @static_id";
             command.Parameters.Add("@static_id", MySqlDbType.Int64).Value = id;
             command.Parameters.Add("@username_id", MySqlDbType.Int64).Value = userModel.Id;
             command.Parameters.Add("@username", MySqlDbType.VarChar).Value = userModel.Username;
@@ -74,6 +77,7 @@ public class UserRepository : RepositoryBase, IUserRepository
             command.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = userModel.FirstName;
             command.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = userModel.LastName;
             command.Parameters.Add("@user_type", MySqlDbType.VarChar).Value = userModel.UserType;
+            command.Parameters.Add("@email", MySqlDbType.VarChar).Value = userModel.Email;
             await command.ExecuteScalarAsync();
         }
         catch (MySqlException ex)
@@ -100,7 +104,8 @@ public class UserRepository : RepositoryBase, IUserRepository
                 Password = reader[2].ToString() ?? string.Empty,
                 FirstName = reader[3].ToString() ?? string.Empty,
                 LastName = reader[4].ToString() ?? string.Empty,
-                UserType = reader[5].ToString() ?? string.Empty
+                UserType = reader[5].ToString() ?? string.Empty,
+                Email = reader[6].ToString() ?? string.Empty
             };
             userList.Add(userModel);
         }
@@ -133,7 +138,7 @@ public class UserRepository : RepositoryBase, IUserRepository
                 if (reader.Read())
                     user = new UserModel
                     {
-                        Id = int.Parse(reader[0].ToString()),
+                        Id = ValidationHelper.TryConvert.ToInt32(reader[0].ToString(),0),
                         Username = reader[1].ToString(),
                         Password = string.Empty,
                         FirstName = reader[3].ToString(),

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
+using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Models.ComboBoxModels;
 using WPFBiblioteca.Repositories;
@@ -149,8 +150,10 @@ public class LendingsFieldsViewModel : ViewModelBase
 
     private void FillModel()
     {
+        var book = Task.Run(() => _bookRepository.GetById(_lending.BookId)).Result;
         if (_mode == "Edit")
         {
+            _isbn = book.Isbn;
             _lendingId = _lending.LendingId;
             _bookId = _lending.BookId;
             _bookName = _lending.BookName;
@@ -172,10 +175,11 @@ public class LendingsFieldsViewModel : ViewModelBase
     {
         if (_mode == "Add")
         {
+            var book = Task.Run(() => _bookRepository.GetById(ValidationHelper.TryConvert.ToLong(_isbn, 0))).Result;
             _lending = new LendingModel
             {
                 LendingId = 0,
-                BookId =  _bookRepository.GetById(TryConvert.ToInt32(_isbn,0)).Id,
+                BookId =  book.Id,
                 BookName = _bookName,
                 MemberId = _memberId,
                 MemberName = _memberName,
@@ -190,7 +194,7 @@ public class LendingsFieldsViewModel : ViewModelBase
         }
         else
         {
-            var book = Task.Run(() => _bookRepository.GetById(TryConvert.ToLong(_isbn,0))).Result;
+            var book = Task.Run(() => _bookRepository.GetById(ValidationHelper.TryConvert.ToLong(_isbn,0))).Result;
             _lending = new LendingModel
             {
                 LendingId = 0,

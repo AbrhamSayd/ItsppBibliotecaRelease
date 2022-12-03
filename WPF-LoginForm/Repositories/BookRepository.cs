@@ -142,6 +142,7 @@ public class BookRepository : RepositoryBase, IBookRepository
             await connection.OpenAsync();
             command.Connection = connection;
             command.CommandText = "SELECT * FROM books Where Book_Id = @book_Id;";
+            command.Parameters.Add("@book_Id", MySqlDbType.VarChar).Value = id.ToString();
             await using var reader = await command.ExecuteReaderAsync();
 
             while (await reader.ReadAsync())
@@ -272,7 +273,6 @@ public class BookRepository : RepositoryBase, IBookRepository
 
     public async Task<IEnumerable<BookModel>> GetByAll()
     {
-        int tempInt;
         var bookList = new List<BookModel>();
         await using var connection = GetConnection();
         await using var command = new MySqlCommand();
@@ -294,7 +294,7 @@ public class BookRepository : RepositoryBase, IBookRepository
             while (reader.Read())
             {
                 var book = new BookModel();
-                if (int.TryParse(reader[0].ToString(), out tempInt))
+                if (int.TryParse(reader[0].ToString(), out var tempInt))
                     book.Id = tempInt;
                 book.Isbn = reader[1].ToString();
                 book.Name = reader[2].ToString();

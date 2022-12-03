@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MySqlConnector;
+using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.ViewModels.Fields;
 
@@ -138,9 +139,7 @@ public class MemberRepository : RepositoryBase, IMemberRepository
                     LastName = reader[2].ToString(),
                     Carrera = reader[3].ToString(),
                     Email = reader[4].ToString(),
-                    PhoneNumber = reader[5].ToString(),
-                    Deudor = reader.GetBoolean(6),
-                    Prestamos = Convert.ToInt32(reader[7].ToString())
+                    PhoneNumber = reader[5].ToString()
                 };
 
             _errorCode = "400";
@@ -227,7 +226,7 @@ public class MemberRepository : RepositoryBase, IMemberRepository
                     Carrera = reader[3].ToString(),
                     Email = reader[4].ToString(),
                     PhoneNumber = reader[5].ToString(),
-                    Deudor = TryConvert.ToInt32(reader[6].ToString(),0) > 0,
+                    Deudor = ValidationHelper.TryConvert.ToInt32(reader[6].ToString(),0) > 0,
                     Prestamos = Convert.ToInt32(reader[6].ToString())
                 };
                 memberList.Add(member);

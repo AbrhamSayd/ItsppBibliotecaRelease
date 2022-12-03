@@ -134,12 +134,12 @@
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Email" />
                             <TextBox
-                                Width="400"
+                                Width="auto"
+                                MinWidth="400"
                                 Margin="0,5,0,5"
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding Email}" />
-
 
                             <!--<TextBlock
                                 Padding="20,40,0,0"
@@ -162,22 +162,21 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <DockPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button 
-                            Style="{StaticResource CardButton}" 
-                            Command="{Binding GoBackCommand}">
+                <DockPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+                    <Button Command="{Binding GoBackCommand}" Style="{StaticResource CardButton}">
                         <TextBlock
-                            Text="Cancelar"
+                            Name="BtnCancelar"
                             Style="{StaticResource TxtCardButton}"
-                            Name="BtnCancelar" />
+                            Text="Cancelar" />
                     </Button>
-                    <Button
-                        Command="{Binding EditionCommand}"
-                        Style="{StaticResource CardButton}">
-                        <TextBlock 
-                            Text="Aceptar"
+                    <Button Command="{Binding EditionCommand}" Style="{StaticResource CardButton}">
+                        <TextBlock
+                            Name="BtnAceptar"
                             Style="{StaticResource TxtCardButton}"
-                            Name="BtnAceptar" />
+                            Text="Aceptar" />
                     </Button>
                 </DockPanel>
                 <Popup
