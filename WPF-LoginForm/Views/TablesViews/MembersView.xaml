@@ -4,11 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:local="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:menusPopUp="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
+    xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
     d:DesignHeight="845"
     d:DesignWidth="1596"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <local:BooleanToYesNoConverter x:Key="BooleanToYesNoConverter" />
+    </UserControl.Resources>
     <Border Background="white" CornerRadius="1">
 
         <Grid>
@@ -91,7 +96,7 @@
                     <!--  IsDeptor? Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Deudor}"
+                        Binding="{Binding Deudor, Converter={StaticResource BooleanToYesNoConverter}}"
                         Header="Deudor"
                         IsReadOnly="True" />
                     <!--  Lendings number? Column  -->
