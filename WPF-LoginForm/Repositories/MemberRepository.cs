@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MySqlConnector;
 using WPFBiblioteca.Models;
+using WPFBiblioteca.ViewModels.Fields;
 
 namespace WPFBiblioteca.Repositories;
 
@@ -21,15 +22,13 @@ public class MemberRepository : RepositoryBase, IMemberRepository
                 await connection.OpenAsync();
                 command.Connection = connection;
                 command.CommandText =
-                    "INSERT INTO members(Member_Id, First_Name, Last_Name, Carrera, Email, Phone_Number, Deudor, Prestamos) VALUES(@memberId, @firstName, @lastName, @carrera, @email, @phoneNumber, @deudor, @prestamos)";
+                    "INSERT INTO members(Member_Id, First_Name, Last_Name, Carrera, Email, Phone_Number) VALUES(@memberId, @firstName, @lastName, @carrera, @email, @phoneNumber)";
                 command.Parameters.Add("@memberId", MySqlDbType.Int64).Value = member.MemberId;
                 command.Parameters.Add("@firstName", MySqlDbType.VarChar).Value = member.FirstName;
                 command.Parameters.Add("@lastName", MySqlDbType.VarChar).Value = member.LastName;
                 command.Parameters.Add("@carrera", MySqlDbType.VarChar).Value = member.Carrera;
                 command.Parameters.Add("@email", MySqlDbType.DateTime).Value = member.Email;
                 command.Parameters.Add("@phoneNumber", MySqlDbType.Int64).Value = member.PhoneNumber;
-                command.Parameters.Add("@deudor", MySqlDbType.Bool).Value = member.Deudor;
-                command.Parameters.Add("@prestamos", MySqlDbType.Int64).Value = member.Prestamos;
                 await command.ExecuteScalarAsync(CancellationToken.None);
                 _errorCode = "400";
             }
@@ -62,9 +61,7 @@ public class MemberRepository : RepositoryBase, IMemberRepository
                     " Last_Name = @lastName," +
                     " Carrera = @carrera," +
                     " Email = @email," +
-                    " Phone_Number = @phoneNumber," +
-                    " Deudor = @deudor," +
-                    " Prestamos = @prestamos" +
+                    " Phone_Number = @phoneNumber" +
                     " WHERE" +
                     " Member_Id = @dataId;";
                 command.Parameters.Add("@dataId", MySqlDbType.Int64).Value = memberId;
@@ -74,8 +71,6 @@ public class MemberRepository : RepositoryBase, IMemberRepository
                 command.Parameters.Add("@carrera", MySqlDbType.VarChar).Value = member.Carrera;
                 command.Parameters.Add("@email", MySqlDbType.DateTime).Value = member.Email;
                 command.Parameters.Add("@phoneNumber", MySqlDbType.Int64).Value = member.PhoneNumber;
-                command.Parameters.Add("@deudor", MySqlDbType.Bool).Value = member.Deudor;
-                command.Parameters.Add("@prestamos", MySqlDbType.Int64).Value = member.Prestamos;
                 command.ExecuteScalar();
                 _errorCode = "400";
             }
@@ -210,7 +205,17 @@ public class MemberRepository : RepositoryBase, IMemberRepository
         {
             await connection.OpenAsync();
             command.Connection = connection;
-            command.CommandText = "select * from members";
+            command.CommandText = @"SELECT
+            members.Member_Id,
+            members.First_Name,
+            members.Last_Name,
+            members.Carrera,
+            members.Email,
+            members.Phone_Number,
+            COUNT(lendings.Member_Id) AS Prestamos
+            FROM members
+            LEFT JOIN lendings ON members.Member_Id = lendings.Member_Id
+            GROUP BY members.Member_Id;" ;
             await using var reader = await command.ExecuteReaderAsync();
             while (reader.Read())
             {
@@ -222,8 +227,8 @@ public class MemberRepository : RepositoryBase, IMemberRepository
                     Carrera = reader[3].ToString(),
                     Email = reader[4].ToString(),
                     PhoneNumber = reader[5].ToString(),
-                    Deudor = reader.GetBoolean(6),
-                    Prestamos = Convert.ToInt32(reader[7].ToString())
+                    Deudor = TryConvert.ToInt32(reader[6].ToString(),0) > 0,
+                    Prestamos = Convert.ToInt32(reader[6].ToString())
                 };
                 memberList.Add(member);
                 _errorCode = "400";
