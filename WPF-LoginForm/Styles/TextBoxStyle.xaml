@@ -218,7 +218,7 @@
                             Template="{StaticResource ComboBoxTextBox}"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Margin="3,3,23,3"
+                            Margin="3,3,25,3"
                             Focusable="True"                               
                             Visibility="Hidden"
                             IsReadOnly="{TemplateBinding IsReadOnly}"/>
@@ -237,9 +237,9 @@
                                 <Border
                                     CornerRadius="20" 
                                     x:Name="DropDownBorder"
-                                    Background="{StaticResource primaryGradientColor}"
+                                    Background="{StaticResource ComboTextBoxColor}"
                                     BorderThickness="1"
-                                    BorderBrush="{StaticResource primaryGradientColor}"
+                                    BorderBrush="{StaticResource ComboTextBoxBORDERColor}"
                                     />
                                 <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
@@ -267,21 +267,25 @@
         <Style.Triggers>
         </Style.Triggers>
     </Style>
-    <Style x:Key="theComboBoxItem" TargetType="{x:Type ComboBoxItem}">
+    <Style x:Key="theComboBoxItem" TargetType="{x:Type ComboBoxItem}" >
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Background" Value="{StaticResource ComboTextBoxColor}" />
+        <Setter Property="Foreground" Value="{StaticResource FieldsTextsColor}" />
+        <Setter Property="Padding" Value="15,2,15,2" />
+        <Setter Property="Margin" Value="12" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBoxItem">
                     <Border
                         Name="Border"
-                        Padding="5"
+                        Padding="10"
                         Margin="2"
-                        BorderThickness="2,0,0,0"
-                        CornerRadius="0"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="15"
                         Background="Transparent"
                         BorderBrush="Transparent">
                         <TextBlock TextAlignment="Left">
@@ -293,6 +297,7 @@
                             <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource primaryGradientColor}"/>
                             <Setter TargetName="Border" Property="Background" Value="#F8FAEB"/>
                         </Trigger>
+                        
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -104,6 +104,41 @@
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="E-Mail" />
+                                 <StackPanel Orientation="Horizontal">
+                                     <TextBox
+                                         Width="400"
+                                         HorizontalAlignment="Left"
+                                         Style="{StaticResource CustomCardTextBox}"
+                                         Text="{Binding Correo}" />
+                                     <TextBlock
+                                         Style="{StaticResource FieldsHeaders}"
+                                         Text="@"
+                                         Visibility="Collapsed"
+                                         FontSize="30"
+                                         Foreground="{StaticResource FieldsTextsColor}"
+                                         VerticalAlignment="Center"/>
+                                     <ComboBox 
+                                         Width="auto"
+                                         Visibility="Collapsed"
+                                         HorizontalAlignment="Left"
+                                         PreviewTextInput="TextStringOnPreviewTextInput"
+                                         Style="{StaticResource CardComboBoxStyle}"
+                                         Text="{Binding Carrera}" 
+                                         ItemContainerStyle="{DynamicResource theComboBoxItem}">
+                                        <ComboBoxItem>puertopenasco.tecnm.mx</ComboBoxItem>
+                                        <ComboBoxItem>gmail.com</ComboBoxItem>
+                                         <ComboBoxItem>hotmail.com</ComboBoxItem>
+                                         <ComboBoxItem>hotmail.es</ComboBoxItem>
+                                         <ComboBoxItem>outlook.com</ComboBoxItem>
+                                         <ComboBoxItem>outlook.es</ComboBoxItem>
+                                         <ComboBoxItem>yahoo.com</ComboBoxItem>
+                                         <ComboBoxItem>yahoo.es</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                            <TextBlock
                                 Visibility="Hidden"
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"

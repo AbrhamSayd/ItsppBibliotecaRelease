@@ -39,7 +39,7 @@
                     <TextBlock Style="{StaticResource ViewsHeaders}" Text="Libro" />
                 </StackPanel>
             </Grid>
-            <ScrollViewer Grid.Row="1" Margin="0,0,0,0"  CanContentScroll="True">
+            <ScrollViewer Grid.Row="1" Margin="0,0,0,80"  CanContentScroll="True">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -94,14 +94,11 @@
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Color" />
                             <ComboBox
-                                x:Name="ComboBoxColor"
+                                Style="{StaticResource CardComboBoxStyle}"
                                 Width="400"
                                 Margin="0,5,0,5"
-                                Padding="15,2,15,2"
                                 HorizontalAlignment="Left"
                                 FontFamily="{StaticResource SFUIBold}"
-                                FontSize="30"
-                                Foreground="{StaticResource FieldsTextsColor}"
                                 ItemsSource="{Binding Colors}"
                                 SelectedItem="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=Default, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}">
                                 <ComboBox.ItemTemplate>
@@ -161,13 +158,11 @@
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Categoria" />
                             <ComboBox
+                                Style="{StaticResource CardComboBoxStyle}"
                                 Width="400"
                                 Margin="0,5,0,5"
-                                Padding="15,2,15,2"
                                 HorizontalAlignment="Left"
                                 FontFamily="{StaticResource SFUIBold}"
-                                FontSize="30"
-                                Foreground="{StaticResource FieldsTextsColor}"
                                 ItemsSource="{Binding Categories}"
                                 SelectedItem="{Binding Category, Mode=TwoWay, IsAsync=True, UpdateSourceTrigger=PropertyChanged}">
                                 <ComboBox.ItemTemplate>
