@@ -74,13 +74,13 @@
                         IsReadOnly="True" />
                     <!--  Author Column  -->
                     <DataGridTextColumn
-                        Width="Auto"
+                        Width="*"
                         Binding="{Binding Author}"
                         Header="Autor"
                         IsReadOnly="True" />
                     <!--  Editorial Column  -->
                     <DataGridTextColumn
-                        Width="Auto"
+                        Width="*"
                         Binding="{Binding Editorial}"
                         Header="Editorial"
                         IsReadOnly="True" />
@@ -98,9 +98,9 @@
                         IsReadOnly="True" />
                     <!--  Color Column  -->
                     <DataGridTextColumn
-                        Width="Auto"
+                        Width="*"
                         Binding="{Binding Color}"
-                        Header="ColorId"
+                        Header="Color"
                         IsReadOnly="True" />
                     <!--  Category Column  -->
                     <DataGridTextColumn
@@ -110,7 +110,7 @@
                         IsReadOnly="True" />
                     <!--  Location Column  -->
                     <DataGridTextColumn
-                        Width="Auto"
+                        Width="*"
                         Binding="{Binding Location}"
                         Header="Ubicación"
                         IsReadOnly="True" />
