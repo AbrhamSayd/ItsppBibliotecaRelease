@@ -111,7 +111,8 @@
                         <RadioButton
                             Command="{Binding NavigateLendings}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateLendings"
@@ -125,7 +126,8 @@
                         <RadioButton
                             Command="{Binding NavigateMembers}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateMembers"
@@ -139,7 +141,8 @@
                         <RadioButton
                             Command="{Binding NavigateHome}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateHome"
@@ -153,7 +156,8 @@
                         <RadioButton
                             Command="{Binding NavigateUsers}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateUsers"
@@ -166,7 +170,8 @@
                         <RadioButton
                             Command="{Binding NavigateBooks}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateBooks"
@@ -302,14 +307,13 @@
                                                                       Foreground="{StaticResource SecundarySolidColor}" />
                             </Grid>
                         </Popup>
-                        <Popup
-                            x:Name="popUpCurrentUser"
-                            AllowsTransparency="True"
-                            HorizontalOffset="100"
-                            IsOpen="{Binding Visibility}"
-                            PlacementTarget="{Binding ElementName=btnCurrentUser}"
-                            PopupAnimation="Fade"
-                            VerticalOffset="-100">
+                        <Popup x:Name="popUpCurrentUser"
+                               AllowsTransparency="True"
+                               IsOpen="{Binding Visibility, UpdateSourceTrigger=PropertyChanged}"
+                               PlacementTarget="{Binding ElementName=btnCurrentUser}"
+                               PopupAnimation="Fade"
+                               HorizontalOffset="100"
+                               VerticalOffset="-95">
                             <popUpsViews:CurrentUserAccountView x:Name="CurrentUserPopUp">
                                 <popUpsViews:CurrentUserAccountView.Effect>
                                     <DropShadowEffect
@@ -320,11 +324,14 @@
                                 </popUpsViews:CurrentUserAccountView.Effect>
                             </popUpsViews:CurrentUserAccountView>
                         </Popup>
-                        <ContentControl Content="{Binding CurrentViewModel}">
+                        <ContentControl Content="{Binding CurrentViewModel}" IsEnabled="{Binding IsEnabledButton}">
                             <ContentControl.Effect>
-                                <BlurEffect Radius="{Binding BlurRadius}" />
-                            </ContentControl.Effect>
-                        </ContentControl>
+                                <BlurEffect 
+                                    x:Name="BlurEffectContent"
+                                    Radius="{Binding BlurRadius, UpdateSourceTrigger=PropertyChanged}"
+                                     />
+                                </ContentControl.Effect>
+                            </ContentControl>
                     </Grid>
                 </Grid>
             </Border>

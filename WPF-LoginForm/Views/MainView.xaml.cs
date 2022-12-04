@@ -173,6 +173,7 @@ public partial class MainView : Window
     
 
     #endregion
+
     private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
     {
         popUpMenuButtons.PlacementTarget = btnCurrentUser;
@@ -192,4 +193,9 @@ public partial class MainView : Window
     
 
     #endregion
+
+    //private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+    //{
+    //   this.BlurEffectContent.Radius = 0;
+    //}
 }
