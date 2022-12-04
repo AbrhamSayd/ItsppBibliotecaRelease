@@ -21,7 +21,7 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
-    <ContentControl.Resources>
+        <ContentControl.Resources>
         <!--  Views  -->
         <DataTemplate DataType="{x:Type viewModels:MembersViewModel}">
             <tablesViews:MembersView />
@@ -105,7 +105,8 @@
                         <RadioButton
                             Command="{Binding NavigateLendings}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateLendings"
@@ -119,7 +120,8 @@
                         <RadioButton
                             Command="{Binding NavigateMembers}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateMembers"
@@ -133,7 +135,8 @@
                         <RadioButton
                             Command="{Binding NavigateHome}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateHome"
@@ -147,7 +150,8 @@
                         <RadioButton
                             Command="{Binding NavigateUsers}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateUsers"
@@ -160,7 +164,8 @@
                         <RadioButton
                             Command="{Binding NavigateBooks}"
                             Style="{StaticResource menuButtonStyle}"
-                            Tag="{StaticResource primarySolidColor}">
+                            Tag="{StaticResource primarySolidColor}"
+                            IsEnabled="{Binding IsEnabledButton}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage
                                     x:Name="btnNavigateBooks"
@@ -296,7 +301,7 @@
                         </Popup>
                         <Popup x:Name="popUpCurrentUser"
                                AllowsTransparency="True"
-                               IsOpen="{Binding Visibility}"
+                               IsOpen="{Binding Visibility, UpdateSourceTrigger=PropertyChanged}"
                                PlacementTarget="{Binding ElementName=btnCurrentUser}"
                                PopupAnimation="Fade"
                                HorizontalOffset="100"
@@ -311,9 +316,12 @@
                                 </popUpsViews:CurrentUserAccountView.Effect>
                             </popUpsViews:CurrentUserAccountView>
                         </Popup>
-                        <ContentControl Content="{Binding CurrentViewModel}">
-                                <ContentControl.Effect >
-                                <BlurEffect Radius="{Binding BlurRadius}"/>
+                        <ContentControl Content="{Binding CurrentViewModel}" IsEnabled="{Binding IsEnabledButton}">
+                            <ContentControl.Effect>
+                                <BlurEffect 
+                                    x:Name="BlurEffectContent"
+                                    Radius="{Binding BlurRadius, UpdateSourceTrigger=PropertyChanged}"
+                                     />
                                 </ContentControl.Effect>
                             </ContentControl>
                     </Grid>

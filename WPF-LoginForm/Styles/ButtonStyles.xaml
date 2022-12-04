@@ -7,13 +7,14 @@
     <Style x:Key="menuButtonStyle" TargetType="RadioButton">
         <Setter Property="GroupName" Value="ViewsButtonGroup" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0,0,0,60" />
         <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Foreground" Value="{StaticResource MenuForegroundColor}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Border
-                        Margin="0,0,0,60"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="10,0,0,0">
@@ -332,23 +333,9 @@
     <!--#endregion (Login)Close Button-->
 
     <!--#region Switch Style -->
-        <LinearGradientBrush x:Key="CheckedBlue" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#FF285AB3" Offset="0" />
-            <GradientStop Color="#FF4184EC" Offset="0.5" />
-            <GradientStop Color="#FF558BED" Offset="0.5" />
-            <GradientStop Color="#FF7DACF0" Offset="1" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="CheckedOrange" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#FFCA6A13" Offset="0" />
-            <GradientStop Color="#FFF67D0C" Offset="0.2" />
-            <GradientStop Color="#FFFE7F0C" Offset="0.2" />
-            <GradientStop Color="#FFFA8E12" Offset="0.5" />
-            <GradientStop Color="#FFFF981D" Offset="0.5" />
-            <GradientStop Color="#FFFCBC5A" Offset="1" />
-        </LinearGradientBrush>
-        <SolidColorBrush x:Key="CheckedOrangeBorder" Color="#FF8E4A1B" />
-        <SolidColorBrush x:Key="CheckedBlueBorder" Color="#FF143874" />
-        <Style x:Key="OrangeSwitchStyle" TargetType="{x:Type CheckBox}">
+    
+
+    <Style x:Key="OrangeSwitchStyle" TargetType="{x:Type CheckBox}">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
             <Setter Property="Template">
@@ -434,9 +421,9 @@
                                 <Setter TargetName="Off" Property="Stroke" Value="White" />
                                 <!-- Change Orange or Blue color here -->
                                 <Setter TargetName="BackgroundBorder" Property="Background"
-                                        Value="{StaticResource CheckedOrange}" />
+                                        Value="{StaticResource primaryGradientColor}" />
                                 <Setter TargetName="BackgroundBorder" Property="BorderBrush"
-                                        Value="{StaticResource CheckedOrangeBorder}" />
+                                        Value="{StaticResource SecundarySolidColor}" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <!-- ToDo: Add Style for Isenabled == False -->

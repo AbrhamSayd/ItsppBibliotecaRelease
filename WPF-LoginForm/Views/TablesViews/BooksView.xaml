@@ -9,7 +9,7 @@
     d:DesignHeight="845"
     d:DesignWidth="1535"
     mc:Ignorable="d">
-    <Border Background="white" CornerRadius="1">
+    <Border Background="{StaticResource primarySolidColor}" CornerRadius="1">
         <Grid>
             <Grid.RowDefinitions>
                 <!--  Control Bar  -->
@@ -32,13 +32,15 @@
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
-
                     <fa:IconImage
                         Height="30"
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
                         Icon="BookBookmark" />
-                    <TextBlock Style="{StaticResource ViewsHeaders}" Text="Inventario de libros" />
+                    <TextBlock 
+                        Style="{StaticResource ViewsHeaders}" 
+                        Text="Inventario de libros" 
+                        Background="Transparent"/>
                 </StackPanel>
             </Grid>
             <DataGrid

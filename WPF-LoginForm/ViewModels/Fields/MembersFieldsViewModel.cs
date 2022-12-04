@@ -64,7 +64,7 @@ public class MembersFieldsViewModel : ViewModelBase
 
     private bool CanExecuteEdition(object obj)
     {
-        return ValidationHelper.TryConvert.ToInt32(MemberId, 0) != 0 && MemberId.Length > 3 && !string.IsNullOrEmpty(MemberId) &&
+        return ValidationHelper.TryConvert.ToInt32(MemberId, 0) != 0 && MemberId.Length > 0 && !string.IsNullOrEmpty(MemberId) &&
                FirstName.Length > 3 && !string.IsNullOrEmpty(FirstName) && LastName.Length > 4 && !string.IsNullOrEmpty(LastName) && !string.IsNullOrWhiteSpace(Email) && ValidationHelper.Email.IsValidEmail(Email);
     }
 
