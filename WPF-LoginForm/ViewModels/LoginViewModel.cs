@@ -13,6 +13,7 @@ public class LoginViewModel : ViewModelBase
     private readonly IUserRepository userRepository; // interface de usuario
     private string _errorMessage;
     private bool _isViewVisible = true;
+    private string _dateTime;
 
     private SecureString _password;
 
@@ -22,6 +23,8 @@ public class LoginViewModel : ViewModelBase
     //Constructor
     public LoginViewModel()
     {
+        var date = System.DateTime.Now;
+        _dateTime = date.Date.ToShortDateString();
         userRepository = new UserRepository();
         LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
         RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPassCommand("", ""));
@@ -69,6 +72,17 @@ public class LoginViewModel : ViewModelBase
         {
             _isViewVisible = value;
             OnPropertyChanged(nameof(IsViewVisible));
+        }
+    }
+
+    public string DateTime
+    {
+        get => _dateTime;
+        set
+        {
+            if (value == _dateTime) return;
+            _dateTime = value;
+            OnPropertyChanged(nameof(DateTime));
         }
     }
 

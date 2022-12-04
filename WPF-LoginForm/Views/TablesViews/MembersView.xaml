@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <local:BooleanToYesNoConverter x:Key="BooleanToYesNoConverter" />
     </UserControl.Resources>
-    <Border Background="white" CornerRadius="1">
+    <Border Background="{StaticResource primarySolidColor}" CornerRadius="1">
 
         <Grid>
             <Grid.RowDefinitions>

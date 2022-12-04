@@ -25,7 +25,8 @@ public class MainViewModel : ViewModelBase
         CurrentUserAccount = new UserAccountModel();
         LoadCurrentUserData();
         ShowCurrentUserMenu = new ViewModelCommand(ShowCurrentUser);
-
+        _isEnabledButton = true;
+            
         NavigateHome = new GoHomeCommand(null,
             new NavigationService<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore)));
         NavigateLendings = new GoLendingsCommand(null,
@@ -55,6 +56,7 @@ public class MainViewModel : ViewModelBase
     private string _userType;
     private UserModel _currentUser;
     private bool _visibility;
+    private bool _isEnabledButton;
     private int _blurRadius;
     private string _dateTime;
 
@@ -106,10 +108,13 @@ public class MainViewModel : ViewModelBase
     {
         if (Visibility == true )
         {
-            HideCUpopup(null);
+            IsEnabledButton = true;
+            Visibility = false;
+            BlurRadius = 0;
         }
         else
         {
+            IsEnabledButton = false;
             Visibility = true;
             BlurRadius = 12;
         }
@@ -117,6 +122,7 @@ public class MainViewModel : ViewModelBase
 
     public void HideCUpopup(object obj)
     {
+        IsEnabledButton = true;
         Visibility = false;
         BlurRadius = 0;
     }
@@ -216,6 +222,16 @@ public class MainViewModel : ViewModelBase
         {
             _visibility = value;
             OnPropertyChanged(nameof(Visibility));
+        }
+    }
+
+    public bool IsEnabledButton
+    {
+        get => _isEnabledButton;
+        set
+        {
+            _isEnabledButton = value;
+            OnPropertyChanged(nameof(IsEnabledButton));
         }
     }
 

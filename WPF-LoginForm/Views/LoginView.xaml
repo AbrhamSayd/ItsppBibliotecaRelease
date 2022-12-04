@@ -67,8 +67,8 @@
                     FontFamily="{DynamicResource SFUIDisplay}"
                     FontSize="20"
                     Foreground="{StaticResource DateTextUIColor}"
-                    TextWrapping="Wrap">
-                    <Run Language="es-mx" Text="10/22/2022" />
+                    TextWrapping="Wrap"
+                    Text="{Binding DateTime}">
                 </TextBlock>
 
                 <Button
@@ -109,7 +109,7 @@
                 CornerRadius="0,500,500,0"
                 HorizontalAlignment="Left"
                 Width="320" Margin="452,0,0,0"
-                Background="#FF7FD7AC" />
+                Background="{StaticResource BordersLoginGradient}" />
 
             <!--Border decorativo derecho de capa de el fondo--><!--
             
@@ -333,14 +333,16 @@
                         Foreground="White"
                         Text="Forgot Password?" />
 
-                    <TextBlock
+                    <RadioButton
+                        Style="{StaticResource menuButtonStyle}"
                         Margin="8,0,0,0"
                         Cursor="Hand"
                         FontFamily="Montserrat"
                         FontSize="12"
                         FontWeight="Medium"
                         Foreground="White"
-                        Text="Reset" />
+                        Content="Reset" 
+                        />
                 </StackPanel>
 
                 <StackPanel

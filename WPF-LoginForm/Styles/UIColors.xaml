@@ -26,7 +26,7 @@
         <GradientStop Offset="0.14" Color="#3AA499" />
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="primarySolidColor" Color="White" />
+    <SolidColorBrush x:Key="primarySolidColor" Color="WhiteSmoke" />
     <SolidColorBrush x:Key="SecundarySolidColor" Color="#00785C" />
     <SolidColorBrush x:Key="tertiarySolidColor" Color="#00c496" />
     <SolidColorBrush x:Key="quaternarySolidColor" Color="#e3e3e3" />

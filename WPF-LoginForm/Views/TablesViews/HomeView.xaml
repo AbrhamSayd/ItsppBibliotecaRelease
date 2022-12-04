@@ -17,7 +17,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBox 
+                <TextBox
+                    Visibility="Collapsed"
                     Grid.Row="0"
                     Width="1000"
                     Height="60"
@@ -171,7 +172,7 @@
                     </Grid>
 
                     <Grid Grid.Column="1">
-                        <Border Background="Gray"
+                        <Border Background="{StaticResource quaternarySolidColor}"
                             CornerRadius="50"
                             Margin="25">
 

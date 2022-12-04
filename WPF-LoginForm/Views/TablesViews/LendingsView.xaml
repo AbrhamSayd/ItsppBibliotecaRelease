@@ -8,7 +8,7 @@
              d:DesignHeight="845"
              d:DesignWidth="1555"
              mc:Ignorable="d">
-    <Border Background="white" CornerRadius="0">
+    <Border Background="{StaticResource primarySolidColor}" CornerRadius="0">
         <Grid>
             <Grid.RowDefinitions>
                 <!--  Control Bar  -->
