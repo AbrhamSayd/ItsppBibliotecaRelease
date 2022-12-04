@@ -74,7 +74,7 @@
                     <DataGridTextColumn
                         Width="auto"
                         Binding="{Binding MemberName}"
-                        Header="Nombre"
+                        Header="Solicitó"
                         IsReadOnly="True" />
                     <!--  Author Column  -->
                     <DataGridTextColumn
@@ -128,7 +128,7 @@
                     <DataGridTextColumn
                         Width="auto"
                         Binding="{Binding MemberName}"
-                        Header="Nombre"
+                        Header="Solicitó"
                         IsReadOnly="True" />
                     <!--  Author Column  -->
                     <DataGridTextColumn

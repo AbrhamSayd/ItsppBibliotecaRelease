@@ -358,7 +358,8 @@
                     x:Name="btnClose"
                     Click="btnClose_Click"
                     Margin="0,0,0,0"
-                    Style="{StaticResource LoginCloseButton}">
+                    Style="{StaticResource LoginCloseButton}"
+                    Cursor="Hand">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
