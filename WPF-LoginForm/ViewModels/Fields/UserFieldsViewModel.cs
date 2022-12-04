@@ -22,6 +22,8 @@ public class UserFieldsViewModel : ViewModelBase
     private UserModel _userModel;
     private string _id;
     private int _staticId;
+    private int _staticEditId;
+    private string _staticEditUsern;
     private string _username;
     private string _password;
     private string _firstName;
@@ -51,24 +53,29 @@ public class UserFieldsViewModel : ViewModelBase
 
     private async void ExecuteEditionCommand(object obj)
     {
+        var staticId = _staticId;
+        var staticUserName = _staticEditUsern;
         var isDuplicate = false;
         foreach (var user in Users)
         {
-            if (user.Id.ToString() == _id)
+            if (user.Id == staticId || user.Username == staticUserName) continue;
+            if (user.Id.ToString() == _id )
             {
                 Element = "Numero de empleado duplicado, Intente con otro porfavor";
                 Title = "Dato duplicado";
                 Visibility = true;
                 isDuplicate = true;
                 _errorFocus = "Id";
+                break;
             }
             else if (_username == user.Username)
             {
                 Element = "Nombre de usuario duplicado, Intente con otro porfavor";
                 Title = "Dato duplicado";
-                Visibility = true;
+                _visibility = true;
                 isDuplicate = true;
                 _errorFocus = "Username";
+                break;
             }
         }
 
@@ -292,6 +299,8 @@ public class UserFieldsViewModel : ViewModelBase
         LastName = _userModel.LastName;
         UserType = "admin";
         Email = _userModel.Email;
+        _staticEditId = ValidationHelper.TryConvert.ToInt32(Id, 0);
+        _staticEditUsern = Username;
     }
 
     #endregion

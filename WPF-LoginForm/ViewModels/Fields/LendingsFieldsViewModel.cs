@@ -220,7 +220,6 @@ public class LendingsFieldsViewModel : ViewModelBase
     {
         _mode = mode;
         _lending = lending ?? new LendingModel();
-        _currentUser = new UserModel();
         _currentUser = currentModel;
         GoBackCommand = new GoLendingsCommand(null,
             new NavigationService<LendingsViewModel>(navigationStore,

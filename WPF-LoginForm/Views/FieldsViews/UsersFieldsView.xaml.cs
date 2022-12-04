@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Input;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace WPFBiblioteca.Views.FieldsViews;
 
@@ -23,5 +24,16 @@ public partial class UsersFieldsView : UserControl
     private void TextStringOnPreviewTextInput(object sender, TextCompositionEventArgs e)
     {
         if (!Regex.IsMatch(e.Text, "^[a-zA-Z]")) e.Handled = true;
+    }
+
+    private void UIElement_OnPreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        var key = e.Key;
+        if (key == Key.Space)
+        {
+            e.Handled = true;
+        }
+
+        base.OnKeyDown(e);
     }
 }

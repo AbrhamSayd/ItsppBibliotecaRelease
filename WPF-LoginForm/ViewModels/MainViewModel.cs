@@ -16,19 +16,16 @@ public class MainViewModel : ViewModelBase
 
     public MainViewModel(NavigationStore navigationStore)
     {
+        
         _navigationStore = navigationStore ?? throw new ArgumentNullException(nameof(navigationStore));
         // _navigationStore.CurrentViewModel 
         _userRepository = new UserRepository();
-
-        var date = System.DateTime.Now;
-        _dateTime = date.Date.ToShortDateString();
         CurrentUserAccount = new UserAccountModel();
         LoadCurrentUserData();
         ShowCurrentUserMenu = new ViewModelCommand(ShowCurrentUser);
         _isEnabledButton = true;
-            
         NavigateHome = new GoHomeCommand(null,
-            new NavigationService<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore)));
+            new NavigationService<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore,_currentUser)));
         NavigateLendings = new GoLendingsCommand(null,
             new NavigationService<LendingsViewModel>(navigationStore,
                 () => new LendingsViewModel(navigationStore, _currentUser)));

@@ -87,7 +87,6 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBox
-                                    Visibility="Collapsed"
                                     x:Name="SearchBox"
                                     Margin="10,0,0,0"
                                     Padding="25,0,0,7"
@@ -95,7 +94,8 @@
                                     Background="{Binding Background, RelativeSource={RelativeSource AncestorType=TextBox}}"
                                     BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType=TextBox}}"
                                     FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=TextBox}}"
-                                    Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TextBox}}" />
+                                    Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TextBox}}"
+                                    Visibility="Collapsed" />
                                 <TextBlock
                                     Margin="10,0,0,0"
                                     Padding="25,0,0,7"

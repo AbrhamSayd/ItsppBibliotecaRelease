@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
-    <Border Background="white" CornerRadius="0">
+    <Border Background="{StaticResource primarySolidColor}" CornerRadius="0">
         <Grid>
             <Grid.RowDefinitions>
                 <!--  Control Bar  -->
@@ -51,12 +51,12 @@
                 Height="auto"
                 CellStyle="{DynamicResource DataGridCellStyle}"
                 ClipboardCopyMode="None"
-                Visibility="{Binding ActiveLendings, Converter={StaticResource BoolToVis}}"
                 ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
                 ItemsSource="{Binding ActiveLendingsCollection, UpdateSourceTrigger=PropertyChanged}"
                 RowStyle="{DynamicResource DataGridRowStyle}"
                 SelectedItem="{Binding LendingModel, UpdateSourceTrigger=PropertyChanged}"
-                Style="{DynamicResource DataGridStyle}">
+                Style="{DynamicResource DataGridStyle}"
+                Visibility="{Binding ActiveLendings, Converter={StaticResource BoolToVis}}">
                 <DataGrid.Columns>
                     <!--  ID Column  -->
                     <DataGridTextColumn
@@ -88,7 +88,7 @@
                         Binding="{Binding UsernameLent}"
                         Header="Entregó"
                         IsReadOnly="True" />
-                    
+
                     <DataGridTextColumn
                         Width="auto"
                         Binding="{Binding Remarks}"
@@ -241,9 +241,11 @@
                                 Margin="30,0,0,0"
                                 Command="{Binding SwitchTableSLendings}"
                                 IsChecked="{Binding IsChecked, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource OrangeSwitchStyle}">
-                                <TextBlock Style="{StaticResource ErrorAddingTextStyle}" Text="{Binding ActiveCollection}" />
-                            </CheckBox>
+                                Style="{StaticResource OrangeSwitchStyle}" />
+                            <TextBlock
+                                Margin="20,0,0,0"
+                                Style="{StaticResource ErrorAddingTextStyle}"
+                                Text="{Binding ActiveCollection}" />
                         </StackPanel>
                     </Grid>
                 </Grid>

@@ -61,6 +61,7 @@
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Nombre de usuario" />
                             <TextBox
+                                PreviewKeyDown="UIElement_OnPreviewKeyDown"
                                 Width="300"
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource CustomCardTextBox}"
@@ -142,7 +143,7 @@
                 <Popup
                     Grid.Column="0"
                     AllowsTransparency="True"
-                    IsOpen="{Binding Visibility}"
+                    IsOpen="{Binding Visibility, Mode=TwoWay}"
                     Placement="Center"
                     PlacementTarget="{Binding ElementName=MainGrid, UpdateSourceTrigger=Default}"
                     StaysOpen="False">
