@@ -51,14 +51,14 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-
                         <!--#region Make a lend Button-->
                         <Button
                             Grid.Row="0"
                             Margin="25,10,25,0"
                             Padding="0"
-                            Command="{Binding NavigateAddCommand}">
-
+                            Command="{Binding NavigateAddCommand}"
+                            Cursor="Hand"
+                            Foreground="{StaticResource primarySolidColor}">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -107,7 +107,7 @@
                                                 Grid.Column="1"
                                                 Margin="20"
                                                 VerticalAlignment="Top"
-                                                Foreground="{StaticResource primarySolidColor}"
+                                                Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType= Button}}"
                                                 Icon="plus" />
                                         </Grid>
                                     </Grid>
@@ -120,7 +120,9 @@
                         <Button
                             Grid.Row="1"
                             Margin="25,25,25,25"
-                            Padding="0">
+                            Padding="0"
+                            Cursor="Hand"
+                            Foreground="{StaticResource primarySolidColor}">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -169,7 +171,7 @@
                                                 Grid.Column="1"
                                                 Margin="20"
                                                 VerticalAlignment="Top"
-                                                Foreground="{StaticResource primarySolidColor}"
+                                                Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType= Button}}"
                                                 Icon="plus" />
                                         </Grid>
                                     </Grid>
@@ -188,9 +190,9 @@
                     </Grid>
 
                     <Grid Grid.Column="2">
+
                         <!--#region Future Feature Button-->
                         <Button Width="300" Margin="25">
-
                             <Button.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -246,6 +248,7 @@
                             </Button.Template>
                         </Button>
                         <!--#endregion Future Feature  Button-->
+
                     </Grid>
                 </Grid>
             </Grid>
