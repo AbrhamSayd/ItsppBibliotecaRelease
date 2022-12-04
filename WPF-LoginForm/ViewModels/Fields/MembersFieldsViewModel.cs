@@ -12,8 +12,6 @@ using WPFBiblioteca.Stores;
 
 namespace WPFBiblioteca.ViewModels.Fields;
 
-
-
 public class MembersFieldsViewModel : ViewModelBase
 {
     #region Fields
@@ -64,54 +62,58 @@ public class MembersFieldsViewModel : ViewModelBase
 
     private bool CanExecuteEdition(object obj)
     {
-        return ValidationHelper.TryConvert.ToInt32(MemberId, 0) != 0 && MemberId.Length > 3 && !string.IsNullOrEmpty(MemberId) &&
-               FirstName.Length > 3 && !string.IsNullOrEmpty(FirstName) && LastName.Length > 4 && !string.IsNullOrEmpty(LastName) && !string.IsNullOrWhiteSpace(Email) && ValidationHelper.Email.IsValidEmail(Email);
+        return ValidationHelper.TryConvert.ToInt32(MemberId, 0) != 0 && MemberId.Length > 3 &&
+               !string.IsNullOrEmpty(MemberId) &&
+               FirstName.Length > 3 && !string.IsNullOrEmpty(FirstName) && LastName.Length > 4 &&
+               !string.IsNullOrEmpty(LastName) && !string.IsNullOrWhiteSpace(Email) &&
+               ValidationHelper.Email.IsValidEmail(Email);
     }
 
     private async void ExecuteEditionCommand(object obj)
     {
         var isDuplicate = false;
-        if (_mode == "Add")
+        foreach (var member in Members)
         {
-            foreach (var member in Members)
-            {
-                if (_memberId != member.MemberId.ToString()) continue;
-                Element = "Id duplicada, Intente con otra porfavor";
-                Title = "Dato duplicado";
-                Visibility = true;
-                isDuplicate = true;
-            }
-
-            if (isDuplicate) return;
-            _member = new MemberModel
-            {
-                MemberId = ValidationHelper.TryConvert.ToInt32(_memberId, 0),
-                FirstName = _firstName,
-                LastName = _lastName,
-                Carrera = _carrera,
-                Email = _email,
-                PhoneNumber = _phoneNumber,
-                Deudor = _deudor,
-                Prestamos = ValidationHelper.TryConvert.ToInt32(_prestamos, 0)
-            };
-            await _membersRepository.Add(_member);
-            GoBackCommand.Execute(null);
+            if (_memberId != member.MemberId.ToString()) continue;
+            Element = "Id duplicada, Intente con otra porfavor";
+            Title = "Dato duplicado";
+            Visibility = true;
+            isDuplicate = true;
         }
-        else
+
+        if (isDuplicate) return;
+        switch (_mode)
         {
-            _member = new MemberModel
-            {
-                MemberId = ValidationHelper.TryConvert.ToInt32(_memberId, 0),
-                FirstName = _firstName,
-                LastName = _lastName,
-                Carrera = _carrera,
-                Email = _email,
-                PhoneNumber = _phoneNumber,
-                Deudor = _deudor,
-                Prestamos = ValidationHelper.TryConvert.ToInt32(_prestamos, 0)
-            };
-            await _membersRepository.Add(_member);
-            GoBackCommand.Execute(null);
+            case "Add":
+                _member = new MemberModel
+                {
+                    MemberId = ValidationHelper.TryConvert.ToInt32(_memberId, 0),
+                    FirstName = _firstName,
+                    LastName = _lastName,
+                    Carrera = _carrera,
+                    Email = _email,
+                    PhoneNumber = _phoneNumber,
+                    Deudor = _deudor,
+                    Prestamos = ValidationHelper.TryConvert.ToInt32(_prestamos, 0)
+                };
+                await _membersRepository.Add(_member);
+                GoBackCommand.Execute(null);
+                break;
+            case "Edit":
+                _member = new MemberModel
+                {
+                    MemberId = ValidationHelper.TryConvert.ToInt32(_memberId, 0),
+                    FirstName = _firstName,
+                    LastName = _lastName,
+                    Carrera = _carrera,
+                    Email = _email,
+                    PhoneNumber = _phoneNumber,
+                    Deudor = _deudor,
+                    Prestamos = ValidationHelper.TryConvert.ToInt32(_prestamos, 0)
+                };
+                await _membersRepository.Edit(_member, _staticId);
+                GoBackCommand.Execute(null);
+                break;
         }
     }
 
@@ -133,9 +135,11 @@ public class MembersFieldsViewModel : ViewModelBase
 
         Visibility = false;
     }
+
     #endregion
 
     #region Properties
+
     public string Element
     {
         get => _element;
@@ -168,6 +172,7 @@ public class MembersFieldsViewModel : ViewModelBase
             OnPropertyChanged(nameof(Visibility));
         }
     }
+
     public string MemberId
     {
         get => _memberId;
@@ -299,7 +304,7 @@ public class MembersFieldsViewModel : ViewModelBase
         GoBackCommand = new GoMembersCommand(null,
             new NavigationService<MembersViewModel>(navigationStore, () => new MembersViewModel(navigationStore)));
         _membersRepository = new MemberRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand,CanExecuteEdition);
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
         AcceptCommand = new ViewModelCommand(ExecuteAcceptCommand);
         if (mode == "Edit") FillModel();
         ExecuteGetAllCommand(null);

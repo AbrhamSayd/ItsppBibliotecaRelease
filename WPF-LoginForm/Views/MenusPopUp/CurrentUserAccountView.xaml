@@ -95,12 +95,18 @@
                             <DropShadowEffect Opacity="0" />
                         </fa:IconImage.Effect>
                     </fa:IconImage>
-                    <TextBlock
-                        VerticalAlignment="Center"
-                        FontSize="22"
-                        Foreground="{StaticResource primarySolidColor}"
-                        Style="{StaticResource FieldsHeaders}"
-                        Text="Cerrar Sesión" />
+                    <Button Background="Transparent"
+                            Foreground="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{x:Static ApplicationCommands.Close}">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="22"
+                            Foreground="{StaticResource primarySolidColor}"
+                            Style="{StaticResource FieldsHeaders}"
+                            Text="Cerrar Sesión"/>
+                    </Button>
+                    
                 </StackPanel>
             </Button>
 

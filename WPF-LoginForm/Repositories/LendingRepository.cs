@@ -287,15 +287,3 @@ public class LendingRepository : RepositoryBase, ILendingRepository
         throw new NotImplementedException();
     }
 }
-
-//lending.LendingId = Convert.ToInt32(reader[0].ToString());
-//lending.BookId = Convert.ToInt32(reader[1].ToString());
-//MemberId = Convert.ToInt32(reader[2].ToString()),
-//DateTimeBorrowed = DateTime.Parse(reader[3].ToString() ?? string.Empty),
-//UsernameLent = reader[4].ToString(),
-//DateTimeReturned = DateTime.Parse(reader[5].ToString() ?? string.Empty),
-//UsernameReturned = reader[6].ToString(),
-//FinedAmount = Convert.ToInt32(reader[7].ToString()),
-//Remarks = reader[8].ToString(),
-//MemberName = reader[9].ToString(),
-//BookName = reader[10].ToString(),

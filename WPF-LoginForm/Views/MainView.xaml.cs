@@ -7,6 +7,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using System.Windows.Controls.Primitives;
+using WPFBiblioteca.ViewModels;
+using System.Diagnostics;
 
 namespace WPFBiblioteca.Views;
 
@@ -15,49 +17,19 @@ namespace WPFBiblioteca.Views;
 /// </summary>
 public partial class MainView : Window
 {
-    private string _dateTime;
 
     public MainView()
     {
         InitializeComponent();
-        //SOLO PRUEBAS CAMBIARA LUEGO
-        
-        //timer = new DispatcherTimer();
-        //timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-        //timer.Tick += Timer_Tick;
-
-        ////grdContentMenu.Width = new GridLength(ActualWidth);
-
-        //panelWidth = Convert.ToDouble(grdContentMenu.Width);
     }
 
-    //private void Timer_Tick(object sender, EventArgs e)
-    //{
-    //    GridLengthConverter myLengthConverter = new GridLengthConverter();
-    //    if (hidden)
-    //    {
-    //        grdContentMenu.Width = new GridLength(ActualWidth + 1);
-    //        if (Convert.ToDouble(grdContentMenu.Width) >= panelWidth)
-    //        {
-    //            timer.Stop();
-    //            hidden = false;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        grdContentMenu.Width = new GridLength(ActualWidth - 1);
-    //        if (Convert.ToDouble(grdContentMenu.Width) <= 35)
-    //        {
-    //            timer.Stop();
-    //            hidden = true;
-    //        }
-    //    }
-    //}
+    private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
+    {
 
-    //private void Button_Click(object sender, RoutedEventArgs e)
-    //{
-    //    timer.Start();
-    //}
+        System.Windows.Forms.Application.Restart();
+        Application.Current.Shutdown();
+
+    }
 
 
     [DllImport("user32.dll")]

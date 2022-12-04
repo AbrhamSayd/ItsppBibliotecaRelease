@@ -47,9 +47,13 @@ namespace WPFBiblioteca.Helpers
                 long result;
                 if (long.TryParse(toParse, out result)) return result;
                 return null;
+            }
 
-
-
+            internal static DateTime? ToNullableDateTime(string toParse)
+            {
+                DateTime result;
+                if (DateTime.TryParse(toParse, out result)) return result;
+                return null;
             }
 
             /// <summary>
@@ -65,6 +69,11 @@ namespace WPFBiblioteca.Helpers
             internal static long ToLong(string toParse, int toReturnOnFailure)
             {
                 return ToNullableLong(toParse) ?? toReturnOnFailure;
+            }
+
+            internal static DateTime ToDateTime(string toParse, DateTime toReturnOnFailure)
+            {
+                return ToNullableDateTime(toParse) ?? toReturnOnFailure;
             }
         }
     }

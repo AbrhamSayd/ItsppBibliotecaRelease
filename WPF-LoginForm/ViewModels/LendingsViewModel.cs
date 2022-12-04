@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Foundation.Collections;
 using WPFBiblioteca.Commands;
@@ -14,7 +16,8 @@ public class LendingsViewModel : ViewModelBase
 {
     #region fields
 
-    private ObservableCollection<LendingModel> _collectionLendings;
+    private ObservableCollection<LendingModel> _activeLendingsCollection;
+    private ObservableCollection<LendingReturnedModel> _lendingsUnActiveCollection;
     private LendingModel _lendingModel;
     private readonly ILendingRepository _lendingRepository;
     private readonly ILendingReturnedRepository _lendingReturnedRepository;
@@ -22,7 +25,9 @@ public class LendingsViewModel : ViewModelBase
     private string _errorCode;
     private bool _canDelete;
     private bool _isChecked;
-    private string _tableNameSelected;
+    private bool _activeLendings;
+    private bool _unActiveLendings;
+    private string _activeCollection;
     private readonly UserModel _currentUser;
 
     #endregion
@@ -40,7 +45,12 @@ public class LendingsViewModel : ViewModelBase
 
     private async void ExecuteGetAllCommand()
     {
-        CollectionLendings = new ObservableCollection<LendingModel>(await _lendingRepository.GetByAll());
+       
+        if (_activeLendings) ActiveLendingsCollection = new ObservableCollection<LendingModel>(await Task.Run(() => _lendingRepository.GetByAll()));
+        if (_unActiveLendings)
+            UnActiveLendingsCollection =
+                new ObservableCollection<LendingReturnedModel>(Task.Run(() => _lendingReturnedRepository.GetByAll()).Result);
+
         _errorCode = _lendingRepository.GetError();
     }
 
@@ -52,23 +62,34 @@ public class LendingsViewModel : ViewModelBase
     private void ExecuteRemoveRowCommand(object obj)
     {
         _lendingRepository.Delete(_lendingModel.LendingId);
-        _lendingReturnedRepository.Insert(_lendingModel,_currentUser);
+        _lendingReturnedRepository.Insert(_lendingModel, _currentUser);
         ExecuteGetAllCommand();
+    }
+
+    private void SwitchItemSource(object obj)
+    {
+        switch (_isChecked)
+        {
+            case true:
+                UnActiveLendings = true;
+                ActiveLendings = false;
+                ActiveCollection = "Prestamos devueltos";
+                ExecuteGetAllCommand();
+                break;
+            case false:
+                UnActiveLendings = false;
+                ActiveLendings = true;
+                ActiveCollection = "Prestamos Activos";
+                ExecuteGetAllCommand();
+                break;
+        }
     }
 
     #endregion
 
     #region Properties
 
-    public ObservableCollection<LendingModel> CollectionLendings
-    {
-        get => _collectionLendings;
-        set
-        {
-            _collectionLendings = value;
-            OnPropertyChanged(nameof(CollectionLendings));
-        }
-    }
+    
 
     public string ErrorCode
     {
@@ -111,13 +132,60 @@ public class LendingsViewModel : ViewModelBase
         }
     }
 
-    public string TableNameSelected
+
+    public ObservableCollection<LendingModel> ActiveLendingsCollection
     {
-        get => _tableNameSelected;
-        set 
+        get => _activeLendingsCollection;
+        set
         {
-            _tableNameSelected = value;
-            OnPropertyChanged(nameof(TableNameSelected));
+            if (Equals(value, _activeLendingsCollection)) return;
+            _activeLendingsCollection = value;
+            OnPropertyChanged(nameof(ActiveLendingsCollection));
+            ;
+        }
+    }
+
+    public ObservableCollection<LendingReturnedModel> UnActiveLendingsCollection
+    {
+        get => _lendingsUnActiveCollection;
+        set
+        {
+            if (Equals(value, _lendingsUnActiveCollection)) return;
+            _lendingsUnActiveCollection = value;
+            OnPropertyChanged(nameof(UnActiveLendingsCollection));
+            ;
+        }
+    }
+    public bool ActiveLendings
+    {
+        get => _activeLendings;
+        set
+        {
+            if (value == _activeLendings) return;
+            _activeLendings = value;
+            OnPropertyChanged(nameof(ActiveLendings));
+        }
+    }
+
+    public bool UnActiveLendings
+    {
+        get => _unActiveLendings;
+        set
+        {
+            if (value == _unActiveLendings) return;
+            _unActiveLendings = value;
+            OnPropertyChanged(nameof(UnActiveLendings));
+        }
+    }
+
+    public string ActiveCollection
+    {
+        get => _activeCollection;
+        set
+        {
+            if (value == _activeCollection) return;
+            _activeCollection = value;
+            OnPropertyChanged(nameof(ActiveCollection));
         }
     }
 
@@ -129,16 +197,20 @@ public class LendingsViewModel : ViewModelBase
     {
         _currentUser = currentUser;
         _canDelete = false;
+        _isChecked = false;
         _errorCode = string.Empty;
+        _activeLendings = true;
+        _activeCollection = "Prestamos Activos";
+        _unActiveLendings = false;
         _navigationStore = navigationStore;
         _lendingRepository = new LendingRepository();
         _lendingReturnedRepository = new LendingReturnedRepository();
         _lendingModel = new LendingModel();
-        _collectionLendings = new ObservableCollection<LendingModel>();
+        _activeLendingsCollection = new ObservableCollection<LendingModel>();
         NavigateAddCommand = new NavigateCommand<LendingsFieldsViewModel>(
             new NavigationService<LendingsFieldsViewModel>(navigationStore,
                 () => new LendingsFieldsViewModel(null, "Add", navigationStore, _currentUser)));
-
+        SwitchTableSLendings = new ViewModelCommand(SwitchItemSource);
         EditCommand = new NavigateCommand<LendingsFieldsViewModel>(
             new NavigationService<LendingsFieldsViewModel>(navigationStore,
                 () => new LendingsFieldsViewModel(_lendingModel, "Edit", navigationStore, _currentUser)));

@@ -19,7 +19,7 @@ public class MainViewModel : ViewModelBase
         _navigationStore = navigationStore ?? throw new ArgumentNullException(nameof(navigationStore));
         // _navigationStore.CurrentViewModel 
         _userRepository = new UserRepository();
-        
+
         var date = System.DateTime.Now;
         _dateTime = date.Date.ToShortDateString();
         CurrentUserAccount = new UserAccountModel();
@@ -29,14 +29,15 @@ public class MainViewModel : ViewModelBase
         NavigateHome = new GoHomeCommand(null,
             new NavigationService<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore)));
         NavigateLendings = new GoLendingsCommand(null,
-            new NavigationService<LendingsViewModel>(navigationStore, () => new LendingsViewModel(navigationStore, _currentUser)));
+            new NavigationService<LendingsViewModel>(navigationStore,
+                () => new LendingsViewModel(navigationStore, _currentUser)));
         NavigateBooks = new GoBooksCommand(null,
             new NavigationService<BooksViewModel>(navigationStore, () => new BooksViewModel(navigationStore)));
-        NavigateUsers = new GoUsersCommand(null, 
+        NavigateUsers = new GoUsersCommand(null,
             new NavigationService<UsersViewModel>(navigationStore, () => new UsersViewModel(navigationStore)));
         NavigateMembers = new GoMembersCommand(null,
             new NavigationService<MembersViewModel>(navigationStore, () => new MembersViewModel(navigationStore)));
-        
+
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
 
@@ -44,6 +45,7 @@ public class MainViewModel : ViewModelBase
 
     #region Fields
 
+    
     private readonly NavigationStore _navigationStore;
     private UserAccountModel _currentUserAccount;
     private readonly IUserRepository _userRepository;
@@ -69,6 +71,7 @@ public class MainViewModel : ViewModelBase
     public ICommand NavigateMembers { get; }
     public ICommand NavigateHome { get; }
     public ICommand ShowCurrentUserMenu { get; }
+    public ICommand Close { get; }
 
     #endregion
 
@@ -232,3 +235,4 @@ public class MainViewModel : ViewModelBase
 
     #endregion
 }
+

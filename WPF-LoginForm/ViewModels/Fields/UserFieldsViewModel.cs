@@ -52,57 +52,59 @@ public class UserFieldsViewModel : ViewModelBase
     private async void ExecuteEditionCommand(object obj)
     {
         var isDuplicate = false;
-        if (_mode == "Add")
+        foreach (var user in Users)
         {
-            foreach (var user in Users)
+            if (user.Id.ToString() == _id)
             {
-                if (user.Id.ToString() == _id)
-                {
-                    Element = "Numero de empleado duplicado, Intente con otro porfavor";
-                    Title = "Dato duplicado";
-                    Visibility = true;
-                    isDuplicate = true;
-                    _errorFocus = "Id";
-                }
-                else if (_username == user.Username)
-                {
-                    Element = "Nombre de usuario duplicado, Intente con otro porfavor";
-                    Title = "Dato duplicado";
-                    Visibility = true;
-                    isDuplicate = true;
-                    _errorFocus = "Username";
-                }
+                Element = "Numero de empleado duplicado, Intente con otro porfavor";
+                Title = "Dato duplicado";
+                Visibility = true;
+                isDuplicate = true;
+                _errorFocus = "Id";
             }
-
-            if (isDuplicate) return;
-            _userModel = new UserModel
+            else if (_username == user.Username)
             {
-                Id = ValidationHelper.TryConvert.ToInt32(_id, 0),
-                Username = _username,
-                Password = _password,
-                FirstName = _firstName,
-                LastName = _lastName,
-                UserType = _userType,
-                Email = _email
-            };
-            await _userRepository.Add(_userModel);
-            GoBackCommand.Execute(null);
+                Element = "Nombre de usuario duplicado, Intente con otro porfavor";
+                Title = "Dato duplicado";
+                Visibility = true;
+                isDuplicate = true;
+                _errorFocus = "Username";
+            }
         }
-        else
+
+        if (isDuplicate) return;
+
+        switch (_mode)
         {
-            _userModel = new UserModel
-            {
-                Id = ValidationHelper.TryConvert.ToInt32(_id, 0),
-                Username = _username,
-                Password = _password,
-                FirstName = _firstName,
-                LastName = _lastName,
-                UserType = _userType,
-                Email = _email
-            };
-            await _userRepository.Edit(_userModel, _staticId);
-            GoBackCommand.Execute(null);
-            _errorCode = _userRepository.GetError();
+            case "Add":
+                _userModel = new UserModel
+                {
+                    Id = ValidationHelper.TryConvert.ToInt32(_id, 0),
+                    Username = _username,
+                    Password = _password,
+                    FirstName = _firstName,
+                    LastName = _lastName,
+                    UserType = _userType,
+                    Email = _email
+                };
+                await _userRepository.Add(_userModel);
+                GoBackCommand.Execute(null);
+                break;
+            case "Edit":
+                _userModel = new UserModel
+                {
+                    Id = ValidationHelper.TryConvert.ToInt32(_id, 0),
+                    Username = _username,
+                    Password = _password,
+                    FirstName = _firstName,
+                    LastName = _lastName,
+                    UserType = _userType,
+                    Email = _email
+                };
+                await _userRepository.Edit(_userModel, _staticId);
+                GoBackCommand.Execute(null);
+                _errorCode = _userRepository.GetError();
+                break;
         }
     }
 
