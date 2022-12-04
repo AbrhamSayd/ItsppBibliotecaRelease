@@ -300,7 +300,7 @@
                                PlacementTarget="{Binding ElementName=btnCurrentUser}"
                                PopupAnimation="Fade"
                                HorizontalOffset="100"
-                               VerticalOffset="-100">
+                               VerticalOffset="-95">
                             <popUpsViews:CurrentUserAccountView x:Name="CurrentUserPopUp">
                                 <popUpsViews:CurrentUserAccountView.Effect>
                                     <DropShadowEffect
