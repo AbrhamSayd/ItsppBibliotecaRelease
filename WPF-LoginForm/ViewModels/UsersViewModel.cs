@@ -44,7 +44,6 @@ public class UsersViewModel : ViewModelBase
 
     #endregion
 
-
     #region Fields
 
     private ObservableCollection<UserModel> _collectionUsers;

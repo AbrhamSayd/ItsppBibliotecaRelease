@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFBiblioteca", "WPF-LoginForm\WPFBiblioteca.csproj", "{B88027D1-FD36-4AA4-8FE3-1803A15C3EF2}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WpfBibliotecaSetup", "WpfBibliotecaSetup\WpfBibliotecaSetup.vdproj", "{468A845A-B51B-4B9B-8714-711990B8C619}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{B88027D1-FD36-4AA4-8FE3-1803A15C3EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B88027D1-FD36-4AA4-8FE3-1803A15C3EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B88027D1-FD36-4AA4-8FE3-1803A15C3EF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{468A845A-B51B-4B9B-8714-711990B8C619}.Debug|Any CPU.ActiveCfg = Debug
+		{468A845A-B51B-4B9B-8714-711990B8C619}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

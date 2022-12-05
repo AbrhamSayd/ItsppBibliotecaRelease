@@ -1,19 +1,24 @@
 ﻿using System;
+using System.Configuration;
 using MySqlConnector;
 
 namespace WPFBiblioteca.Repositories;
 
 public abstract class RepositoryBase
 {
+    private readonly string _server = ConfigurationManager.AppSettings.Get("db.server");
+    private readonly string _database = ConfigurationManager.AppSettings.Get("db.database");
+    private readonly string _uid= ConfigurationManager.AppSettings.Get("db.uid");
+    private readonly string _password = ConfigurationManager.AppSettings.Get("db.password");
     private readonly string _connectionString;
 
     protected RepositoryBase()
     {
         //BaseDeDatosItspp22.
-        const string server = "140.84.183.195";
-        const string database = "biblioteca";
-        const string uid = "libraryConnection";
-        const string password = @"it-2spp21.Conn][1/^7"; // se establece coneccion a base de datos externa,.
+        var server = _server;
+        var database = _database;
+        var uid = _uid;
+        var password = _password; // se establece coneccion a base de datos externa,.
         _connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" +
                             password + ";";
     }
