@@ -70,14 +70,14 @@
                                 PreviewTextInput="TextStringOnPreviewTextInput"
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding Carrera}" />-->
-                            <ComboBox 
+                            <ComboBox
                                 Width="400"
                                 Margin="0,5,0,5"
                                 HorizontalAlignment="Left"
+                                ItemContainerStyle="{DynamicResource theComboBoxItem}"
                                 PreviewTextInput="TextStringOnPreviewTextInput"
                                 Style="{StaticResource CardComboBoxStyle}"
-                                Text="{Binding Carrera}" 
-                                ItemContainerStyle="{DynamicResource theComboBoxItem}">
+                                Text="{Binding Carrera}">
                                 <ComboBoxItem>ISC</ComboBoxItem>
                                 <ComboBoxItem>LADM</ComboBoxItem>
                                 <ComboBoxItem>ICIV</ComboBoxItem>
@@ -141,7 +141,7 @@
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding MemberId}" />
 
-                            <!--No. Control / Empleado / ID INE-->
+                            <!--  No. Control / Empleado / ID INE  -->
 
 
                             <TextBlock

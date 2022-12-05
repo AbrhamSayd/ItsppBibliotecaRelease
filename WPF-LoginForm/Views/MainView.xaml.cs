@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Threading;
-using System.Windows.Controls.Primitives;
-using WPFBiblioteca.ViewModels;
-using System.Diagnostics;
+using Application = System.Windows.Forms.Application;
 
 namespace WPFBiblioteca.Views;
 
@@ -17,7 +13,6 @@ namespace WPFBiblioteca.Views;
 /// </summary>
 public partial class MainView : Window
 {
-
     public MainView()
     {
         InitializeComponent();
@@ -25,10 +20,8 @@ public partial class MainView : Window
 
     private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
     {
-
-        System.Windows.Forms.Application.Restart();
-        Application.Current.Shutdown();
-
+        Application.Restart();
+        System.Windows.Application.Current.Shutdown();
     }
 
 
@@ -69,7 +62,7 @@ public partial class MainView : Window
     //Action buttons functions
     private void btnClose_Click(object sender, RoutedEventArgs e)
     {
-        Application.Current.Shutdown();
+        System.Windows.Application.Current.Shutdown();
     }
 
     private void btnMaximize_Click(object sender, RoutedEventArgs e)
@@ -84,9 +77,23 @@ public partial class MainView : Window
         else WindowState = WindowState.Normal;
     }
 
+    private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
+    {
+        popUpMenuButtons.PlacementTarget = btnCurrentUser;
+        popUpMenuButtons.Placement = PlacementMode.Right;
+        popUpMenuButtons.VerticalOffset = 0;
+        popUpMenuButtons.IsOpen = true;
+        Header.txtPopUpMenuNavigation.Text = "Cerrar Sesión";
+    }
+
+    private void btnLogOut_MouseLeave(object sender, MouseEventArgs e)
+    {
+        HidePopUpMethod();
+    }
+
     #region PopUpRegion
 
-    void ShowPopUpMethod(UIElement variable, string buttonText)
+    private void ShowPopUpMethod(UIElement variable, string buttonText)
     {
         popUpMenuButtons.PlacementTarget = variable;
         popUpMenuButtons.Placement = PlacementMode.Right;
@@ -94,7 +101,7 @@ public partial class MainView : Window
         Header.txtPopUpMenuNavigation.Text = buttonText;
     }
 
-    void HidePopUpMethod()
+    private void HidePopUpMethod()
     {
         popUpMenuButtons.Visibility = Visibility.Collapsed;
         popUpMenuButtons.IsOpen = false;
@@ -170,27 +177,10 @@ public partial class MainView : Window
     {
         HidePopUpMethod();
     }
-    
 
     #endregion
 
-    private void btnLogOut_MouseEnter(object sender, MouseEventArgs e)
-    {
-        popUpMenuButtons.PlacementTarget = btnCurrentUser;
-        popUpMenuButtons.Placement = PlacementMode.Right;
-        popUpMenuButtons.VerticalOffset = 0;
-        popUpMenuButtons.IsOpen = true;
-        Header.txtPopUpMenuNavigation.Text = "Cerrar Sesión";
-    }
-
-    private void btnLogOut_MouseLeave(object sender, MouseEventArgs e)
-    {
-        HidePopUpMethod();
-    }
-
     #region Properties
-
-    
 
     #endregion
 

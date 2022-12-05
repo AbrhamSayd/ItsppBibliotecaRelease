@@ -46,8 +46,8 @@
                     FontSize="22"
                     Foreground="#214efc"
                     Style="{StaticResource FieldsHeaders}"
-                    Text="Elegir foto de perfil" 
-                    Visibility="Collapsed"/>
+                    Text="Elegir foto de perfil"
+                    Visibility="Collapsed" />
             </StackPanel>
             <TextBlock
                 Grid.Row="1"
@@ -96,19 +96,18 @@
                             <DropShadowEffect Opacity="0" />
                         </fa:IconImage.Effect>
                     </fa:IconImage>
-                    <Button Background="Transparent"
-                            Foreground="Transparent"
-                            BorderBrush="Transparent"
-                            Command="{x:Static ApplicationCommands.Close}"
-                            Style="{StaticResource LoginCloseButton}">
+                    <Button
+                        Command="{x:Static ApplicationCommands.Close}"
+                        Foreground="Transparent"
+                        Style="{StaticResource LoginCloseButton}">
                         <TextBlock
                             VerticalAlignment="Center"
                             FontSize="22"
                             Foreground="{StaticResource primarySolidColor}"
                             Style="{StaticResource FieldsHeaders}"
-                            Text="Cerrar Sesión"/>
+                            Text="Cerrar Sesión" />
                     </Button>
-                    
+
                 </StackPanel>
             </Button>
 

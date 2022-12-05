@@ -29,6 +29,5 @@ public abstract class RepositoryBase
             Console.WriteLine(e);
             throw;
         }
-        
     }
 }

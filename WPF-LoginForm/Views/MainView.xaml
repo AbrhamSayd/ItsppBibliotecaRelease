@@ -8,7 +8,6 @@
     xmlns:fieldsViews="clr-namespace:WPFBiblioteca.Views.FieldsViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:popUpsViews="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:viewModels="clr-namespace:WPFBiblioteca.ViewModels"
     x:Name="WindowMainView"
@@ -302,7 +301,8 @@
                             HorizontalOffset="40"
                             VerticalOffset="-10">
                             <Grid>
-                                <popUpsViews:ToolTipNavigationButtons x:Name="Header" Foreground="{StaticResource SecundarySolidColor}" />
+                                <popUpsViews:ToolTipNavigationButtons x:Name="Header"
+                                                                      Foreground="{StaticResource SecundarySolidColor}" />
                             </Grid>
                         </Popup>
                         <Popup
@@ -325,7 +325,8 @@
                         </Popup>
                         <ContentControl Content="{Binding CurrentViewModel}" IsEnabled="{Binding IsEnabledButton}">
                             <ContentControl.Effect>
-                                <BlurEffect x:Name="BlurEffectContent" Radius="{Binding BlurRadius, UpdateSourceTrigger=PropertyChanged}" />
+                                <BlurEffect x:Name="BlurEffectContent"
+                                            Radius="{Binding BlurRadius, UpdateSourceTrigger=PropertyChanged}" />
                             </ContentControl.Effect>
                         </ContentControl>
                     </Grid>

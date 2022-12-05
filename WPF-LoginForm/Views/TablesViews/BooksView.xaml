@@ -37,10 +37,10 @@
                         Margin="15,0,10,0"
                         Foreground="{StaticResource FieldsHeadersColor}"
                         Icon="BookBookmark" />
-                    <TextBlock 
-                        Style="{StaticResource ViewsHeaders}" 
-                        Text="Inventario de libros" 
-                        Background="Transparent"/>
+                    <TextBlock
+                        Background="Transparent"
+                        Style="{StaticResource ViewsHeaders}"
+                        Text="Inventario de libros" />
                 </StackPanel>
             </Grid>
             <DataGrid
@@ -187,9 +187,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                         <!--  TextBlock Errores  -->
-                        <TextBlock 
-                            Visibility="Collapsed"
-                            Style="{StaticResource ErrorAddingTextStyle}" />
+                        <TextBlock Style="{StaticResource ErrorAddingTextStyle}" Visibility="Collapsed" />
                         <!--  Text="{Binding NotImplementedProperty}"  -->
                     </Grid>
                 </Grid>

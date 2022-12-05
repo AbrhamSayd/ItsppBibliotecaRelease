@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.Xml.Linq;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
@@ -14,6 +11,25 @@ namespace WPFBiblioteca.ViewModels.Fields;
 
 public class MembersFieldsViewModel : ViewModelBase
 {
+    #region Constructor
+
+    public MembersFieldsViewModel(MemberModel member, string mode, NavigationStore navigationStore)
+    {
+        _email = "";
+        _mode = mode;
+        _member = member ?? new MemberModel();
+
+        GoBackCommand = new GoMembersCommand(null,
+            new NavigationService<MembersViewModel>(navigationStore, () => new MembersViewModel(navigationStore)));
+        _membersRepository = new MemberRepository();
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
+        AcceptCommand = new ViewModelCommand(ExecuteAcceptCommand);
+        if (mode == "Edit") FillModel();
+        ExecuteGetAllCommand(null);
+    }
+
+    #endregion
+
     #region Fields
 
     private MemberModel _member;
@@ -289,25 +305,6 @@ public class MembersFieldsViewModel : ViewModelBase
             _members = value;
             OnPropertyChanged(nameof(Members));
         }
-    }
-
-    #endregion
-
-    #region Constructor
-
-    public MembersFieldsViewModel(MemberModel member, string mode, NavigationStore navigationStore)
-    {
-        _email = "";
-        _mode = mode;
-        _member = member ?? new MemberModel();
-
-        GoBackCommand = new GoMembersCommand(null,
-            new NavigationService<MembersViewModel>(navigationStore, () => new MembersViewModel(navigationStore)));
-        _membersRepository = new MemberRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
-        AcceptCommand = new ViewModelCommand(ExecuteAcceptCommand);
-        if (mode == "Edit") FillModel();
-        ExecuteGetAllCommand(null);
     }
 
     #endregion

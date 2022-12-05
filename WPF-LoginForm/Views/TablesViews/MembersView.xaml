@@ -7,7 +7,6 @@
     xmlns:local="clr-namespace:WPFBiblioteca.Views.TablesViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:menusPopUp="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
-    xmlns:tablesViews="clr-namespace:WPFBiblioteca.Views.TablesViews"
     d:DesignHeight="845"
     d:DesignWidth="1596"
     mc:Ignorable="d">

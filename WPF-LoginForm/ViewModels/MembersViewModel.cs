@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -12,6 +11,33 @@ namespace WPFBiblioteca.ViewModels;
 
 public class MembersViewModel : ViewModelBase
 {
+    #region Constructor
+
+    public MembersViewModel(NavigationStore navigationStore)
+    {
+        _canDelete = false;
+        _errorCode = string.Empty;
+        _navigationStore = navigationStore;
+        _membersRepository = new MemberRepository();
+        _member = new MemberModel();
+        _collectionMembers = new ObservableCollection<MemberModel>();
+        _title = "Miembros";
+        _element = null;
+        _visibility = false;
+        AddCommand = new NavigateCommand<MembersFieldsViewModel>(
+            new NavigationService<MembersFieldsViewModel>(navigationStore,
+                () => new MembersFieldsViewModel(null, "Add", navigationStore)));
+        EditCommand = new NavigateCommand<MembersFieldsViewModel>(
+            new NavigationService<MembersFieldsViewModel>(navigationStore,
+                () => new MembersFieldsViewModel(_member, "Edit", navigationStore)));
+        RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand, CanExecuteRemove);
+        AcceptRemoveCommand = new ViewModelCommand(ExecuteRemove);
+        CancelRemoveCommand = new ViewModelCommand(CancelRemove);
+        ExecuteGetAllCommand();
+    }
+
+    #endregion
+
     #region Fields
 
     private ObservableCollection<MemberModel> _collectionMembers;
@@ -146,33 +172,6 @@ public class MembersViewModel : ViewModelBase
             _collectionMembers = value;
             OnPropertyChanged(nameof(CollectionMembers));
         }
-    }
-
-    #endregion
-
-    #region Constructor
-
-    public MembersViewModel(NavigationStore navigationStore)
-    {
-        _canDelete = false;
-        _errorCode = string.Empty;
-        _navigationStore = navigationStore;
-        _membersRepository = new MemberRepository();
-        _member = new MemberModel();
-        _collectionMembers = new ObservableCollection<MemberModel>();
-        _title = "Miembros";
-        _element = null;
-        _visibility = false;
-        AddCommand = new NavigateCommand<MembersFieldsViewModel>(
-            new NavigationService<MembersFieldsViewModel>(navigationStore,
-                () => new MembersFieldsViewModel(null, "Add", navigationStore)));
-        EditCommand = new NavigateCommand<MembersFieldsViewModel>(
-            new NavigationService<MembersFieldsViewModel>(navigationStore,
-                () => new MembersFieldsViewModel(_member, "Edit", navigationStore)));
-        RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand, CanExecuteRemove);
-        AcceptRemoveCommand = new ViewModelCommand(ExecuteRemove);
-        CancelRemoveCommand = new ViewModelCommand(CancelRemove);
-        ExecuteGetAllCommand();
     }
 
     #endregion

@@ -279,7 +279,8 @@
 
                 <!--  TEXTBOX and CARD for Password  -->
                 <Grid>
-                    <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <customcontrols:BindablePasswordBox
+                        Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
                 <TextBlock
@@ -353,7 +354,6 @@
                         Margin="8,0,0,0"
                         Command="{Binding RecoverPasswordCommand}"
                         Content="Reset"
-                        Cursor="Hand"
                         FontFamily="Montserrat"
                         FontSize="12"
                         FontWeight="Medium"
@@ -373,7 +373,7 @@
                 <Button
                     x:Name="btnClose"
                     Margin="0,0,0,0"
-                    Click="btnClose_Click" 
+                    Click="btnClose_Click"
                     Style="{StaticResource LoginCloseButton}"
                     Cursor="Hand">
                     <Grid>

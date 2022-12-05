@@ -157,7 +157,8 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                         <!--  TextBlock Errores  -->
-                        <TextBlock Style="{StaticResource ErrorAddingTextStyle}" Text="{Binding ErrorMessage, Mode=OneWay, NotifyOnSourceUpdated=True}" />
+                        <TextBlock Style="{StaticResource ErrorAddingTextStyle}"
+                                   Text="{Binding ErrorMessage, Mode=OneWay, NotifyOnSourceUpdated=True}" />
 
                     </Grid>
                 </Grid>

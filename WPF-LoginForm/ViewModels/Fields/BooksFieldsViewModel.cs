@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -8,12 +7,34 @@ using WPFBiblioteca.Repositories;
 using WPFBiblioteca.Repositories.ComboBox;
 using WPFBiblioteca.Services;
 using WPFBiblioteca.Stores;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WPFBiblioteca.ViewModels.Fields;
 
 public class BooksFieldsViewModel : ViewModelBase
 {
+    #region Constructor
+
+    public BooksFieldsViewModel(BookModel book, string mode, NavigationStore navigationStore)
+    {
+        _mode = mode;
+        _book = book ?? new BookModel();
+
+        GoBackCommand = new GoBooksCommand(null,
+            new NavigationService<BooksViewModel>(navigationStore,
+                () => new BooksViewModel(navigationStore)));
+        _bookRepository = new BookRepository();
+        _categoryRepository = new CategoryRepository();
+        _colorRepository = new ColorRepository();
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
+        AcceptCommand = new ViewModelCommand(ExecuteAcceptCommand);
+        ExecuteGetCategories(null);
+        ExecuteGetColors(null);
+        ExecuteGetAllCommand(null);
+        if (mode == "Edit") FillModel();
+    }
+
+    #endregion
+
     #region Fields
 
     private BookModel _book;
@@ -134,19 +155,13 @@ public class BooksFieldsViewModel : ViewModelBase
     private async void ExecuteGetCategories(object obj)
     {
         Categories = new ObservableCollection<CategoryModel>(await _categoryRepository.GetByAll());
-        if (_mode == "Edit")
-        {
-            Category = _categories[CategoryId - 1];
-        }
+        if (_mode == "Edit") Category = _categories[CategoryId - 1];
     }
 
     private async void ExecuteGetColors(object obj)
     {
         Colors = new ObservableCollection<ColorModel>(await _colorRepository.GetByAll());
-        if (_mode == "Edit")
-        {
-            Color = _colors[ColorId - 1];
-        }
+        if (_mode == "Edit") Color = _colors[ColorId - 1];
     }
 
     private bool CanExecuteEdition(object obj)
@@ -408,29 +423,6 @@ public class BooksFieldsViewModel : ViewModelBase
             _books = value;
             OnPropertyChanged(nameof(Books));
         }
-    }
-
-    #endregion
-
-    #region Constructor
-
-    public BooksFieldsViewModel(BookModel book, string mode, NavigationStore navigationStore)
-    {
-        _mode = mode;
-        _book = book ?? new BookModel();
-
-        GoBackCommand = new GoBooksCommand(null,
-            new NavigationService<BooksViewModel>(navigationStore,
-                () => new BooksViewModel(navigationStore)));
-        _bookRepository = new BookRepository();
-        _categoryRepository = new CategoryRepository();
-        _colorRepository = new ColorRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand, CanExecuteEdition);
-        AcceptCommand = new ViewModelCommand(ExecuteAcceptCommand);
-        ExecuteGetCategories(null);
-        ExecuteGetColors(null);
-        ExecuteGetAllCommand(null);
-        if (mode == "Edit") FillModel();
     }
 
     #endregion

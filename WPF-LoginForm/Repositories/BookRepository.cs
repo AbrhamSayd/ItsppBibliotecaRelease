@@ -178,6 +178,7 @@ public class BookRepository : RepositoryBase, IBookRepository
 
         return book;
     }
+
     public async Task<BookModel> GetById(long id)
     {
         int tempInt;
@@ -225,6 +226,7 @@ public class BookRepository : RepositoryBase, IBookRepository
 
         return book;
     }
+
     public async Task<BookModel> GetBookById(int id)
     {
         int tempInt;

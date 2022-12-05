@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -12,7 +11,39 @@ namespace WPFBiblioteca.ViewModels;
 
 public class UsersViewModel : ViewModelBase
 {
-   
+    #region constructor
+
+    public UsersViewModel(NavigationStore navigationStore)
+    {
+        _canDelete = false;
+        _errorCode = string.Empty;
+        _userRepository = new UserRepository();
+        _navigationStore = navigationStore;
+        _usersModel = new UserModel();
+        _title = "Usuarios";
+        _element = null;
+        _removeVisibility = false;
+        _editVisibility = false;
+        NavigateAddCommand = new NavigateCommand<UserFieldsViewModel>(
+            new NavigationService<UserFieldsViewModel>(navigationStore,
+                () => new UserFieldsViewModel(null, "Add", navigationStore)));
+        NavigateEditCommand = new NavigateCommand<UserFieldsViewModel>(
+            new NavigationService<UserFieldsViewModel>(navigationStore,
+                () => new UserFieldsViewModel(_usersModel, "Edit", navigationStore)));
+        RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
+
+        AcceptRemoveCommand = new ViewModelCommand(ExecuteRemove);
+        CancelRemoveCommand = new ViewModelCommand(CancelRemove);
+
+        EditCommand = new ViewModelCommand(ExecuteEdit);
+        AcceptPasswordCommand = new ViewModelCommand(ValidateEdit);
+        CancelPasswordCommand = new ViewModelCommand(CancelEdit);
+
+        ExecuteGetAllCommand(null);
+    }
+
+    #endregion
+
 
     #region Fields
 
@@ -29,9 +60,7 @@ public class UsersViewModel : ViewModelBase
     private string _element;
     private string _password;
 
-    
-
-        #endregion
+    #endregion
 
     #region ICommands
 
@@ -46,7 +75,6 @@ public class UsersViewModel : ViewModelBase
 
     public ICommand NavigateEditCommand { get; } // No ejecutar directamente
     public ICommand EditCommand { get; } // No ejecutar directamente
-    
 
     #endregion
 
@@ -59,7 +87,7 @@ public class UsersViewModel : ViewModelBase
 
     private void ExecuteRemoveRowCommand(object obj)
     {
-        Element =  _usersModel.FirstName + " " + _usersModel.LastName ;
+        Element = _usersModel.FirstName + " " + _usersModel.LastName;
         RemoveVisibility = true;
     }
 
@@ -106,7 +134,6 @@ public class UsersViewModel : ViewModelBase
     {
         EditVisibility = false;
     }
-    
 
     #endregion
 
@@ -196,6 +223,7 @@ public class UsersViewModel : ViewModelBase
             OnPropertyChanged(nameof(RemoveVisibility));
         }
     }
+
     public bool EditVisibility
     {
         get => _editVisibility;
@@ -216,40 +244,6 @@ public class UsersViewModel : ViewModelBase
             _password = value;
             OnPropertyChanged(nameof(Password));
         }
-    }
-
-    #endregion
-
-    #region constructor
-
-    public UsersViewModel(NavigationStore navigationStore)
-    {
-        
-        _canDelete = false;
-        _errorCode = string.Empty;
-        _userRepository = new UserRepository();
-        _navigationStore = navigationStore;
-        _usersModel = new UserModel();
-        _title = "Usuarios";
-        _element = null;
-        _removeVisibility = false;
-        _editVisibility = false;
-        NavigateAddCommand = new NavigateCommand<UserFieldsViewModel>(
-            new NavigationService<UserFieldsViewModel>(navigationStore,
-                () => new UserFieldsViewModel(null, "Add", navigationStore)));
-        NavigateEditCommand = new NavigateCommand<UserFieldsViewModel>(
-            new NavigationService<UserFieldsViewModel>(navigationStore,
-                () => new UserFieldsViewModel(_usersModel, "Edit", navigationStore)));
-        RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
-
-        AcceptRemoveCommand = new ViewModelCommand(ExecuteRemove);
-        CancelRemoveCommand = new ViewModelCommand(CancelRemove);
-
-        EditCommand = new ViewModelCommand(ExecuteEdit);
-        AcceptPasswordCommand = new ViewModelCommand(ValidateEdit);
-        CancelPasswordCommand = new ViewModelCommand(CancelEdit);
-
-        ExecuteGetAllCommand(null);
     }
 
     #endregion
