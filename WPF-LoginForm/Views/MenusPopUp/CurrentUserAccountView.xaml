@@ -46,7 +46,8 @@
                     FontSize="22"
                     Foreground="#214efc"
                     Style="{StaticResource FieldsHeaders}"
-                    Text="Elegir foto de perfil" />
+                    Text="Elegir foto de perfil" 
+                    Visibility="Collapsed"/>
             </StackPanel>
             <TextBlock
                 Grid.Row="1"
@@ -98,7 +99,8 @@
                     <Button Background="Transparent"
                             Foreground="Transparent"
                             BorderBrush="Transparent"
-                            Command="{x:Static ApplicationCommands.Close}">
+                            Command="{x:Static ApplicationCommands.Close}"
+                            Style="{StaticResource LoginCloseButton}">
                         <TextBlock
                             VerticalAlignment="Center"
                             FontSize="22"

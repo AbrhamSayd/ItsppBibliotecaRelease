@@ -35,7 +35,8 @@
                 <TextBlock
                     Margin="0,0,0,20"
                     Style="{StaticResource ViewsHeaders}"
-                    TextAlignment="Center">
+                    TextAlignment="Center"
+                    TextWrapping="Wrap">
                     <Run FontWeight="Bold">Eliminar</Run>
                     <Run FontWeight="Bold" Text="{Binding Title}" />
                 </TextBlock>
@@ -43,7 +44,8 @@
                     FontSize="25"
                     Foreground="Black"
                     Style="{StaticResource FieldsHeaders}"
-                    TextAlignment="Center">
+                    TextAlignment="Center"
+                    TextWrapping="Wrap">
                     <Run>¿Desea eliminar</Run>
                     <Run
                         FontWeight="Bold"
