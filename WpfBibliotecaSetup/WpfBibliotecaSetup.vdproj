@@ -5343,7 +5343,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Biblioteca ITSPP"
         "ProductCode" = "8:{D5FB49D7-C820-4E0F-910B-213C30E6C20E}"
-        "PackageCode" = "8:{4165F339-9694-4847-80FB-66FE2B8CF780}"
+        "PackageCode" = "8:{812CBBC1-9D9F-4110-B964-25FE51F642C5}"
         "UpgradeCode" = "8:{1321952E-8005-4D2B-A86B-19FD8E058574}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -5479,7 +5479,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_69F27A350A1A40C0949B9996A98E71B2"
             {
-            "Name" = "8:Shortcut to WPFBiblioteca.exe"
+            "Name" = "8:Biblioteca Itspp"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
