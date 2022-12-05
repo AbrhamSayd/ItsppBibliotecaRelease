@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
-using WPFBiblioteca.Models.ComboBoxModels;
 using WPFBiblioteca.Repositories;
 using WPFBiblioteca.Services;
 using WPFBiblioteca.Stores;
@@ -23,7 +21,6 @@ public class LendingsFieldsViewModel : ViewModelBase
 
     private readonly ILendingRepository _lendingRepository;
     private readonly IBookRepository _bookRepository;
-    private ObservableCollection<CategoryModel> _lendings;
 
 
     private int _lendingId;
@@ -32,11 +29,11 @@ public class LendingsFieldsViewModel : ViewModelBase
     private string _bookName;
     private int _memberId;
     private string _memberName;
+    private string _element;
+    private string _title;
+    private bool _visibility;
     private DateTime _dateTimeBorrowed;
     private string _usernameLent;
-    private DateTime _dateTimeReturned;
-    private string _usernameReturned;
-    private int _finedAmount;
     private string _remarks;
 
     #endregion
@@ -137,10 +134,43 @@ public class LendingsFieldsViewModel : ViewModelBase
         }
     }
 
+    public string Element
+    {
+        get => _element;
+        set
+        {
+            if (value == _element) return;
+            _element = value;
+            OnPropertyChanged(nameof(Element));
+        }
+    }
+
+    public string Title
+    {
+        get => _title;
+        set
+        {
+            if (value == _title) return;
+            _title = value;
+            OnPropertyChanged(nameof(Title));
+        }
+    }
+
+    public bool Visibility
+    {
+        get => _visibility;
+        set
+        {
+            if (value == _visibility) return;
+            _visibility = value;
+            OnPropertyChanged(nameof(Visibility));
+        }
+    }
+
     #endregion
     
     #region ICommands
-
+    public ICommand AcceptCommand { get; }
     public ICommand EditionCommand { get; }
     public ICommand GoBackCommand { get; }
 
@@ -173,44 +203,75 @@ public class LendingsFieldsViewModel : ViewModelBase
 
     private async void ExecuteEditionCommand(object obj)
     {
-        if (_mode == "Add")
+        
+        switch (_mode)
         {
-            var book = Task.Run(() => _bookRepository.GetById(ValidationHelper.TryConvert.ToLong(_isbn, 0))).Result;
-            _lending = new LendingModel
+            case "Add" when !Task.Run(() => _lendingRepository.IsbnExists(_isbn)).Result:
+                Element = "Isbn no existe, porfavor verifique.";
+                Title = "Dato no encontrado";
+                Visibility = true;
+                break;
+            case "Add" when !Task.Run(() => _lendingRepository.IdExist(_memberId)).Result:
+                Element = "Miembro no existe, porfavor registrelo primero.";
+                Title = "Miembro no registrado";
+                Visibility = true;
+                break;
+            
+            case "Add":
             {
-                LendingId = 0,
-                BookId =  book.Id,
-                BookName = _bookName,
-                MemberId = _memberId,
-                MemberName = _memberName,
-                DateTimeBorrowed = _dateTimeBorrowed,
-                UsernameLent = _usernameLent,
-                Remarks = _remarks
-            };
+                var book = Task.Run(() => _bookRepository.GetById(ValidationHelper.TryConvert.ToLong(_isbn, 0))).Result;
+                _lending = new LendingModel
+                {
+                    LendingId = 0,
+                    BookId = book.Id,
+                    BookName = _bookName,
+                    MemberId = _memberId,
+                    MemberName = _memberName,
+                    DateTimeBorrowed = _dateTimeBorrowed,
+                    UsernameLent = _usernameLent,
+                    Remarks = _remarks
+                };
+                await _lendingRepository.Add(_lending, _currentUser);
+                GoBackCommand.Execute(null);
+                break;
+            }
 
+            case "Edit" when !Task.Run(() => _lendingRepository.IsbnExists(_isbn)).Result:
+                Element = "Isbn no existe, porfavor verifique.";
+                Title = "Dato no encontrado";
+                Visibility = true;
+                break;
 
-            await _lendingRepository.Add(_lending, _currentUser);
-            GoBackCommand.Execute(null);
-        }
-        else
-        {
-            var book = Task.Run(() => _bookRepository.GetById(ValidationHelper.TryConvert.ToLong(_isbn,0))).Result;
-            _lending = new LendingModel
+            case "Edit" when !Task.Run(() => _lendingRepository.IdExist(_memberId)).Result:
+                Element = "Miembro no existe, porfavor registrelo primero.";
+                Title = "Miembro no registrado";
+                Visibility = true;
+                break;
+            case "Edit":
             {
-                LendingId = 0,
-                BookId = book.Id ,
-                BookName = book.Name,
-                MemberId = _memberId,
-                MemberName = _memberName,
-                DateTimeBorrowed = _dateTimeBorrowed,
-                UsernameLent = _usernameLent,
-                Remarks = _remarks
-            };
-            await _lendingRepository.Edit(_lending, _lendingId);
-            GoBackCommand.Execute(null);
+                var book = Task.Run(() => _bookRepository.GetById(ValidationHelper.TryConvert.ToLong(_isbn,0))).Result;
+                _lending = new LendingModel
+                {
+                    LendingId = 0,
+                    BookId = book.Id ,
+                    BookName = book.Name,
+                    MemberId = _memberId,
+                    MemberName = _memberName,
+                    DateTimeBorrowed = _dateTimeBorrowed,
+                    UsernameLent = _usernameLent,
+                    Remarks = _remarks
+                };
+                await _lendingRepository.Edit(_lending, _lendingId);
+                GoBackCommand.Execute(null);
+                break;
+            }
         }
     }
 
+    private void ExecuteAccept(object obj)
+    {
+        Visibility = false;
+    }
     #endregion
 
     #region Constructor
@@ -227,10 +288,13 @@ public class LendingsFieldsViewModel : ViewModelBase
         _lendingRepository = new LendingRepository();
         _bookRepository = new BookRepository();
         EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
+        AcceptCommand = new ViewModelCommand(ExecuteAccept);
 
         
             FillModel();
     }
+
+    
 
     #endregion
 }

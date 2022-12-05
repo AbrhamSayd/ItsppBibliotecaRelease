@@ -6,6 +6,9 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <UseWindowsForms>True</UseWindowsForms>
+    <ApplicationIcon>Img_LogoApp.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Views\PopUpMenus\**" />
@@ -73,6 +76,9 @@
     <None Remove="Images\userLogo.png" />
     <None Remove="Images\User_Default_Image.png" />
     <None Remove="Images\User_Vector.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Img_LogoApp.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\User_Default_Image.png" />

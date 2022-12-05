@@ -13,6 +13,99 @@ public class LendingRepository : RepositoryBase, ILendingRepository
 {
     private string _errorCode;
 
+    public async Task<bool> IdExist(int id)
+    {
+        var exist = false;
+        try
+        {
+            await using var connection = GetConnection();
+            await using (var command = new MySqlCommand())
+            {
+                await connection.OpenAsync();
+                command.Connection = connection;
+                command.CommandText =
+                    "SELECT EXISTS(SELECT * FROM members  WHERE Member_Id = @member_Id)";
+                command.Parameters.Add("@member_Id", MySqlDbType.Int64).Value = id;
+
+                await using var reader = await command.ExecuteReaderAsync();
+                while (reader.Read())
+                {
+                    exist = reader[0].ToString() == "1";
+                }
+
+                _errorCode = "400";
+            }
+        }
+        catch (Exception e)
+        {
+            _errorCode = e.ToString();
+            throw;
+        }
+
+        return exist;
+    }
+
+    public async Task<bool> IsbnExists(string isbn)
+    {
+        var exist = false;
+        try
+        {
+            await using var connection = GetConnection();
+            await using (var command = new MySqlCommand())
+            {
+                await connection.OpenAsync();
+                command.Connection = connection;
+                command.CommandText =
+                    "SELECT EXISTS(SELECT * FROM books WHERE Isbn = @isbn)";
+                command.Parameters.Add("@isbn", MySqlDbType.VarChar).Value = isbn;
+
+                await using var reader = await command.ExecuteReaderAsync();
+                while (reader.Read())
+                {
+                    exist = reader[0].ToString() == "1";
+                }
+
+                _errorCode = "400";
+            }
+        }
+        catch (Exception e)
+        {
+            _errorCode = e.ToString();
+            throw;
+        }
+
+        return exist;
+    }
+
+    public async Task<bool> LendingExist(int lendingId)
+    {
+        var exist = false;
+        try
+        {
+            await using var connection = GetConnection();
+            await using var command = new MySqlCommand();
+            await connection.OpenAsync();
+            command.Connection = connection;
+            command.CommandText =
+                "SELECT EXISTS(SELECT * FROM lendings WHERE Lending_Id = @lending_Id)";
+            command.Parameters.Add("@lending_Id", MySqlDbType.Int64).Value = lendingId;
+
+            await using var reader = await command.ExecuteReaderAsync();
+            while (reader.Read())
+            {
+                exist = reader[0].ToString() == "1";
+            }
+
+            _errorCode = "400";
+        }
+        catch (Exception e)
+        {
+            _errorCode = e.ToString();
+            throw;
+        }
+
+        return exist;
+    }
 
     public async Task<string> Add(LendingModel lending, UserModel currentUser)
     {
@@ -244,7 +337,17 @@ public class LendingRepository : RepositoryBase, ILendingRepository
             while (await reader.ReadAsync())
             {
                 var member = Task.Run(() => memberRepository.GetById(TryConvert.ToInt32(reader[3].ToString(), 0)))
-                    .Result;
+                    .Result ?? new MemberModel
+                {
+                    MemberId = 0,
+                    FirstName = "Usuario no ",
+                    LastName = "encontrado",
+                    Carrera = null,
+                    Email = null,
+                    PhoneNumber = null,
+                    Deudor = false,
+                    Prestamos = 0
+                };
                 var user = Task.Run(() => userRepository.GetByUsername(reader[5].ToString())).Result;
                 DateTime.TryParse(reader[4].ToString(), out var dateValue);
                 var lending = new LendingModel
@@ -277,9 +380,88 @@ public class LendingRepository : RepositoryBase, ILendingRepository
         return _errorCode;
     }
 
-    public Task<LendingModel> GetById(int lendingId)
+    public async Task<string> GetNameById(int lendingId)
     {
-        throw new NotImplementedException();
+        var lending = "";
+        await using var connection = GetConnection();
+        await using var command = new MySqlCommand();
+        try
+        {
+            await connection.OpenAsync();
+            command.Connection = connection;
+            command.CommandText =
+                @"SELECT
+                 books.Name
+                FROM books
+                  INNER JOIN lendings
+                    ON books.Book_Id = lendings.Book_Id
+                WHERE lendings.Lending_Id = @lending_Id";
+            command.Parameters.Add("@lending_Id", MySqlDbType.Int64).Value = lendingId;
+            await using var reader = await command.ExecuteReaderAsync();
+            while (reader.Read())
+            {
+                lending = reader[0].ToString();
+                _errorCode = "400";
+            }
+        }
+        catch (MySqlException e)
+        {
+            _errorCode = e.ToString();
+            throw;
+        }
+
+        return lending;
+    }
+
+    public async Task<LendingModel> GetById(int lendingId)
+    {
+        var lending = new LendingModel();
+        await using var connection = GetConnection();
+        await using var command = new MySqlCommand();
+        try
+        {
+            await connection.OpenAsync();
+            command.Connection = connection;
+            command.CommandText =
+                @"SELECT
+            lendings.Book_Id,
+            CONCAT(members.First_Name, ' ', members.Last_Name) AS Member_Name,
+                books.Name AS Book_Name,
+                lendings.Member_Id,
+            lendings.Date_Time_Borrowed,
+            lendings.Username_Lent,
+            lendings.Remarks,
+            lendings.Lending_Id
+                FROM lendings
+                LEFT OUTER JOIN books
+                ON lendings.Book_Id = books.Book_Id
+            LEFT OUTER JOIN members
+            ON lendings.Member_Id = members.Member_Id WHERE lendings.Lending_Id = @lending_Id";
+            command.Parameters.Add("@lending_Id", MySqlDbType.Int64).Value = lendingId;
+            await using var reader = await command.ExecuteReaderAsync();
+            while (reader.Read())
+            {
+                lending = new LendingModel
+                {
+                    LendingId = TryConvert.ToInt32(reader[7].ToString(), 0),
+                    BookId = TryConvert.ToInt32(reader[0].ToString(), 0),
+                    MemberId = TryConvert.ToInt32(reader[3].ToString(), 0),
+                    DateTimeBorrowed = TryConvert.ToDateTime(reader[4].ToString(), DateTime.Now),
+                    UsernameLent = reader[5].ToString(),
+                    Remarks = reader[6].ToString(),
+                    MemberName = reader[1].ToString(),
+                    BookName = reader[2].ToString()
+                };
+                _errorCode = "400";
+            }
+        }
+        catch (MySqlException e)
+        {
+            _errorCode = e.ToString();
+            throw;
+        }
+
+        return lending;
     }
 
     public Task<LendingModel> GetByBook(string firstName)

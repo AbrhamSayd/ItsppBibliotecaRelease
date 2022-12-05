@@ -68,15 +68,14 @@ public class UserFieldsViewModel : ViewModelBase
                 _errorFocus = "Id";
                 break;
             }
-            else if (_username == user.Username)
-            {
-                Element = "Nombre de usuario duplicado, Intente con otro porfavor";
-                Title = "Dato duplicado";
-                _visibility = true;
-                isDuplicate = true;
-                _errorFocus = "Username";
-                break;
-            }
+
+            if (_username != user.Username) continue;
+            Element = "Nombre de usuario duplicado, Intente con otro porfavor";
+            Title = "Dato duplicado";
+            _visibility = true;
+            isDuplicate = true;
+            _errorFocus = "Username";
+            break;
         }
 
         if (isDuplicate) return;

@@ -9,6 +9,7 @@ namespace WPFBiblioteca.Repositories;
 public interface IUserRepository
 {
     Task<bool> AuthenticateUser(NetworkCredential credential);
+    Task<bool> VerifyMail(string mail);
     Task Add(UserModel userModel);
     Task Edit(UserModel userModel, int id);
     Task Delete(int id);

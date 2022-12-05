@@ -61,9 +61,9 @@
                                 Style="{StaticResource FieldsHeaders}"
                                 Text="Nombre de usuario" />
                             <TextBox
-                                PreviewKeyDown="UIElement_OnPreviewKeyDown"
                                 Width="300"
                                 HorizontalAlignment="Left"
+                                PreviewKeyDown="UIElement_OnPreviewKeyDown"
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock

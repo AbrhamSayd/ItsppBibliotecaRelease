@@ -9,7 +9,7 @@
     d:DesignHeight="845"
     d:DesignWidth="1535"
     mc:Ignorable="d">
-    <Border Background="{StaticResource primarySolidColor}">
+    <Border x:Name="MainControl" Background="{StaticResource primarySolidColor}">
         <ScrollViewer
             Margin="0,0,0,5"
             CanContentScroll="True"
@@ -68,8 +68,7 @@
                                             BorderThickness="2"
                                             CornerRadius="50">
                                             <Border.Background>
-                                                <ImageBrush ImageSource="/Images/lend-a-book.jpg"
-                                                            Stretch="UniformToFill" />
+                                                <ImageBrush ImageSource="/Images/lend-a-book.jpg" Stretch="UniformToFill" />
                                             </Border.Background>
                                             <Border.Effect>
                                                 <DropShadowEffect
@@ -120,7 +119,8 @@
                         <Button
                             Grid.Row="1"
                             Margin="25,25,25,25"
-                            Padding="0">
+                            Padding="0"
+                            Command="{Binding ReturnBook}">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -130,8 +130,7 @@
                                             BorderThickness="2"
                                             CornerRadius="50">
                                             <Border.Background>
-                                                <ImageBrush ImageSource="/Images/Return-a-book.jpg"
-                                                            Stretch="UniformToFill" />
+                                                <ImageBrush ImageSource="/Images/Return-a-book.jpg" Stretch="UniformToFill" />
                                             </Border.Background>
                                             <Border.Effect>
                                                 <DropShadowEffect
@@ -248,7 +247,18 @@
                         <!--#endregion Future Feature  Button-->
                     </Grid>
                 </Grid>
+                <Popup
+                    Grid.Row="0"
+                    AllowsTransparency="True"
+                    IsOpen="{Binding Visibility}"
+                    Placement="Center"
+                    PlacementTarget="{Binding ElementName=MainControl, UpdateSourceTrigger=Default}"
+                    StaysOpen="True">
+                    <menusPopUp:ReturnBookView />
+                </Popup>
             </Grid>
         </ScrollViewer>
+
     </Border>
+
 </UserControl>

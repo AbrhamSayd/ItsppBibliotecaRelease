@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace WPFBiblioteca.Views.MenusPopUp
 {
     /// <summary>
-    /// Lógica de interacción para RecoveryLoginCredentials.xaml
+    /// Lógica de interacción para ReturnBookView.xaml
     /// </summary>
-    public partial class RecoveryLoginCredentials : UserControl
+    public partial class ReturnBookView : UserControl
     {
-        public RecoveryLoginCredentials()
+        public ReturnBookView()
         {
             InitializeComponent();
         }
-
-        
     }
 }

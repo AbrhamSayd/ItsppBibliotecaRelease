@@ -13,6 +13,31 @@ public class UserRepository : RepositoryBase, IUserRepository
 {
     private string _errorCode;
 
+
+    public async Task<bool> VerifyMail(string mail)
+    {
+        bool isValid = false;
+        await using (var connection = GetConnection())
+        await using (var command = new MySqlCommand())
+        {
+            try
+            {
+                await connection.OpenAsync();
+                command.Connection = connection;
+                command.CommandText =
+                    "select count(*) from users where Email = @email";
+                command.Parameters.AddWithValue("@email", mail.Trim());
+                isValid = ValidationHelper.TryConvert.ToInt32(command.ExecuteScalar()?.ToString(), 0) > 0;
+                
+            }
+            catch (MySqlException ex)
+            {
+                _errorCode = ex.ToString();
+            }
+        }
+        return isValid;
+    }
+
     public async Task Add(UserModel userModel)
     {
         await using (var connection = GetConnection())
@@ -140,9 +165,12 @@ public class UserRepository : RepositoryBase, IUserRepository
                     {
                         Id = ValidationHelper.TryConvert.ToInt32(reader[0].ToString(),0),
                         Username = reader[1].ToString(),
-                        Password = string.Empty,
+                        Password = reader[2].ToString(),
                         FirstName = reader[3].ToString(),
-                        LastName = reader[4].ToString()
+                        LastName = reader[4].ToString(),
+                        UserType = reader[5].ToString(),
+                        Email = reader[6].ToString(),
+                        
                     };
             }
         }

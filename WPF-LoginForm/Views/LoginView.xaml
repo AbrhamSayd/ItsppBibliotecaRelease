@@ -4,10 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:customcontrols="clr-namespace:WPFBiblioteca.CustomControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    Title="LoginView"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menusPopUp="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
+    xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
+    Title="Login Biblioteca"
     Width="1700"
     Height="900"
     AllowsTransparency="True"
@@ -36,12 +37,21 @@
         Background="White"
         BorderBrush="Transparent"
         CornerRadius="50">
-        <Grid>
+        <Grid x:Name="MainLoginGrid">
+            <Popup
+                Grid.Column="0"
+                AllowsTransparency="True"
+                IsOpen="{Binding Visibility}"
+                Placement="Center"
+                PlacementTarget="{Binding ElementName=MainLoginGrid, UpdateSourceTrigger=Default}"
+                StaysOpen="False">
+                <menusPopUp:RecoveryLoginCredentials />
+            </Popup>
             <StackPanel
-                VerticalAlignment="Top"
                 x:Name="pnlcontrolBar"
                 Margin="0,0,25,0"
                 HorizontalAlignment="Right"
+                VerticalAlignment="Top"
                 Background="Transparent"
                 MouseEnter="pnlcontrolBar_MouseEnter"
                 MouseLeftButtonDown="pnlcontrolBar_MouseLeftButtonDown"
@@ -63,13 +73,12 @@
                     Margin="15,0,50,0"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom"
-                    FontWeight="Bold"
                     FontFamily="{DynamicResource SFUIDisplay}"
                     FontSize="20"
+                    FontWeight="Bold"
                     Foreground="{StaticResource DateTextUIColor}"
-                    TextWrapping="Wrap"
-                    Text="{Binding DateTime}">
-                </TextBlock>
+                    Text="{Binding DateTime}"
+                    TextWrapping="Wrap" />
 
                 <Button
                     x:Name="btnMinimize"
@@ -98,21 +107,23 @@
             </StackPanel>
 
 
-            <!--Border de hasta la izquierda-->
+            <!--  Border de hasta la izquierda  -->
             <Border
-                CornerRadius="50,0,0,50"
-                HorizontalAlignment="Left"
                 Width="452"
-                Background="{StaticResource BordersLoginGradient}" />
-            <!--segundo Border de hasta la izquierda-->
-            <Border
-                CornerRadius="0,500,500,0"
                 HorizontalAlignment="Left"
-                Width="320" Margin="452,0,0,0"
-                Background="{StaticResource BordersLoginGradient}" />
+                Background="{StaticResource BordersLoginGradient}"
+                CornerRadius="50,0,0,50" />
+            <!--  segundo Border de hasta la izquierda  -->
+            <Border
+                Width="320"
+                Margin="452,0,0,0"
+                HorizontalAlignment="Left"
+                Background="{StaticResource BordersLoginGradient}"
+                CornerRadius="0,500,500,0" />
 
-            <!--Border decorativo derecho de capa de el fondo--><!--
-            
+            <!--  Border decorativo derecho de capa de el fondo  -->
+            <!--
+
             <Border
             CornerRadius="5000,0,50,0"
             HorizontalAlignment="Left"
@@ -129,9 +140,11 @@
                     <SolidColorBrush Color="#50C9CB"/>
                 </Border.Background>
             </Border>
-            
-              --><!--Border decorativo derecho de capa de en medio--><!--  
-            
+
+            -->
+            <!--  Border decorativo derecho de capa de en medio  -->
+            <!--
+
             <Border
             CornerRadius="5000,0,50,0"
             HorizontalAlignment="Left"
@@ -143,9 +156,11 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            
-              --><!--Border decorativo derecho de capa frontal--><!--  
-            
+
+            -->
+            <!--  Border decorativo derecho de capa frontal  -->
+            <!--
+
             <Border
             CornerRadius="5000,0,50,0"
             HorizontalAlignment="Left"
@@ -176,8 +191,10 @@
                     </Image>
                 </Grid>
             </Border>
-              --><!--Logo del TECNM--><!--  
-            
+            -->
+            <!--  Logo del TECNM  -->
+            <!--
+
             <Border
                 CornerRadius="75"
                 Margin="572,170,420,425">
@@ -262,8 +279,7 @@
 
                 <!--  TEXTBOX and CARD for Password  -->
                 <Grid>
-                    <customcontrols:BindablePasswordBox
-                        Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
                 <TextBlock
@@ -334,15 +350,15 @@
                         Text="Forgot Password?" />
 
                     <RadioButton
-                        Style="{StaticResource menuButtonStyle}"
                         Margin="8,0,0,0"
+                        Command="{Binding RecoverPasswordCommand}"
+                        Content="Reset"
                         Cursor="Hand"
                         FontFamily="Montserrat"
                         FontSize="12"
                         FontWeight="Medium"
                         Foreground="White"
-                        Content="Reset" 
-                        />
+                        Style="{StaticResource menuButtonStyle}" />
                 </StackPanel>
 
                 <StackPanel
@@ -351,34 +367,36 @@
                     Orientation="Horizontal" />
             </StackPanel>
             <StackPanel
-                VerticalAlignment="Bottom"
+                Margin="90,0,0,60"
                 HorizontalAlignment="Left"
-                Margin="90,0,0,60">
+                VerticalAlignment="Bottom">
                 <Button
                     x:Name="btnClose"
-                    Click="btnClose_Click"
                     Margin="0,0,0,0"
+                    Click="btnClose_Click"
                     Style="{StaticResource LoginCloseButton}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <fa:IconImage Grid.Column="0"
-                                      Width="40"
-                                      Height="45"
-                                      Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                                      HorizontalAlignment="Left"
-                                      Icon="ArrowRightFromBracket"
-                                      FlowDirection="RightToLeft" />
-                        <TextBlock Grid.Column="1"
-                                   Margin="10,0,0,0"
-                                   VerticalAlignment="Center"
-                                   Background="Transparent"
-                                   FontFamily="SF Display"
-                                   FontSize="30"
-                                   Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                                   Text="Cerrar" />
+                        <fa:IconImage
+                            Grid.Column="0"
+                            Width="40"
+                            Height="45"
+                            HorizontalAlignment="Left"
+                            FlowDirection="RightToLeft"
+                            Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                            Icon="ArrowRightFromBracket" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            FontFamily="SF Display"
+                            FontSize="30"
+                            Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                            Text="Cerrar" />
                     </Grid>
                 </Button>
 
