@@ -106,7 +106,7 @@
                                                 Grid.Column="1"
                                                 Margin="20"
                                                 VerticalAlignment="Top"
-                                                Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType= Button}}"
+                                                Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
                                                 Icon="plus" />
                                         </Grid>
                                     </Grid>
@@ -120,9 +120,9 @@
                             Grid.Row="1"
                             Margin="25,25,25,25"
                             Padding="0"
+                            Command="{Binding ReturnBook}"
                             Cursor="Hand"
                             Foreground="{StaticResource primarySolidColor}">
-                            Command="{Binding ReturnBook}">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Grid>
@@ -170,7 +170,7 @@
                                                 Grid.Column="1"
                                                 Margin="20"
                                                 VerticalAlignment="Top"
-                                                Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType= Button}}"
+                                                Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
                                                 Icon="plus" />
                                         </Grid>
                                     </Grid>
@@ -256,7 +256,8 @@
                     IsOpen="{Binding Visibility}"
                     Placement="Center"
                     PlacementTarget="{Binding ElementName=MainControl, UpdateSourceTrigger=Default}"
-                    StaysOpen="True">
+                    PopupAnimation="Fade"
+                    StaysOpen="False">
                     <menusPopUp:ReturnBookView />
                 </Popup>
             </Grid>

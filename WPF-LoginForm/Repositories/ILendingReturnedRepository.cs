@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using WPFBiblioteca.Models;
 
-namespace WPFBiblioteca.Repositories
+namespace WPFBiblioteca.Repositories;
+
+internal interface ILendingReturnedRepository
 {
-    internal interface ILendingReturnedRepository
-    {
-        Task<IEnumerable<LendingReturnedModel>> GetByAll();
-        Task<string> Insert(LendingModel lending, UserModel user);
-        string GetError();
-    }
+    Task<IEnumerable<LendingReturnedModel>> GetByAll();
+    Task<string> Insert(LendingModel lending, UserModel user);
+    string GetError();
 }

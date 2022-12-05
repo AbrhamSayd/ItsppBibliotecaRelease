@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace WPFBiblioteca.Views.MenusPopUp;
 
@@ -12,6 +11,4 @@ public partial class CurrentUserAccountView : UserControl
     {
         InitializeComponent();
     }
-
-    
 }

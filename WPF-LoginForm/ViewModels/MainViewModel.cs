@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Windows;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -16,7 +15,6 @@ public class MainViewModel : ViewModelBase
 
     public MainViewModel(NavigationStore navigationStore)
     {
-        
         _navigationStore = navigationStore ?? throw new ArgumentNullException(nameof(navigationStore));
         // _navigationStore.CurrentViewModel 
         _userRepository = new UserRepository();
@@ -25,7 +23,8 @@ public class MainViewModel : ViewModelBase
         ShowCurrentUserMenu = new ViewModelCommand(ShowCurrentUser);
         _isEnabledButton = true;
         NavigateHome = new GoHomeCommand(null,
-            new NavigationService<HomeViewModel>(navigationStore, () => new HomeViewModel(navigationStore,_currentUser)));
+            new NavigationService<HomeViewModel>(navigationStore,
+                () => new HomeViewModel(navigationStore, _currentUser)));
         NavigateLendings = new GoLendingsCommand(null,
             new NavigationService<LendingsViewModel>(navigationStore,
                 () => new LendingsViewModel(navigationStore, _currentUser)));
@@ -43,7 +42,6 @@ public class MainViewModel : ViewModelBase
 
     #region Fields
 
-    
     private readonly NavigationStore _navigationStore;
     private UserAccountModel _currentUserAccount;
     private readonly IUserRepository _userRepository;
@@ -58,7 +56,6 @@ public class MainViewModel : ViewModelBase
     private bool _isEnabledButton;
     private int _blurRadius;
     private string _dateTime;
-
 
     #endregion
 
@@ -106,7 +103,7 @@ public class MainViewModel : ViewModelBase
 
     private void ShowCurrentUser(object obj)
     {
-        if (Visibility == true )
+        if (Visibility)
         {
             IsEnabledButton = true;
             Visibility = false;
@@ -126,7 +123,6 @@ public class MainViewModel : ViewModelBase
         Visibility = false;
         BlurRadius = 0;
     }
-
 
     #endregion
 
@@ -248,4 +244,3 @@ public class MainViewModel : ViewModelBase
 
     #endregion
 }
-

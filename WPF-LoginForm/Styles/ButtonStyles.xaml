@@ -41,7 +41,8 @@
 
     <!--  Menu button icon  -->
     <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Margin" Value="0,0,0,0" />
@@ -105,7 +106,8 @@
     </Style>
     <!--  Menu button icon  -->
     <Style x:Key="controlButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="Width" Value="15" />
         <Setter Property="Height" Value="15" />
 
@@ -135,13 +137,15 @@
     </Style>
     <!--  Menu button icon  -->
     <Style x:Key="iconButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="Width" Value="16" />
         <Setter Property="Height" Value="16" />
     </Style>
     <!--  Menu button text  -->
     <Style x:Key="menuButtonText" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
         <Setter Property="FontFamily" Value="Montserrat" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="FontSize" Value="13.5" />
@@ -184,9 +188,12 @@
     <!--#region  Text for Card Button-->
     <Style x:Key="TxtCardButton" TargetType="TextBlock">
         <Setter Property="Margin" Value="20,6,20,6" />
-        <Setter Property="FontFamily" Value="{Binding Path=FontFamily, RelativeSource={RelativeSource AncestorType=Button}}" />
-        <Setter Property="FontSize" Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=Button}}" />
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="FontFamily"
+                Value="{Binding Path=FontFamily, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="FontSize"
+                Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
     </Style>
     <!--#endregion Text for Card Button-->
 
@@ -226,7 +233,8 @@
     <!--  Icon add Style  -->
     <Style x:Key="AddIconStyle" TargetType="fa:IconImage">
         <Setter Property="Icon" Value="CirclePlus" />
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="Margin" Value="0,0,20,0" />
         <!--<Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -242,7 +250,8 @@
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Margin" Value="0,0,20,0" />
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <!--<Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -272,7 +281,8 @@
 
     <!--#region grid Edit Icon Style-->
     <Style x:Key="gridEditIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Icon" Value="Trash" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -298,7 +308,8 @@
     <Style x:Key="gridDeleteIcon" TargetType="fa:IconImage">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Icon" Value="Trash" />
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <!--#endregion grid Delete Icon-->
@@ -431,16 +442,20 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Trigger.ExitActions>
-                                <BeginStoryboard x:Name="OnUnchecking_BeginStoryboard" Storyboard="{StaticResource OnUnchecking}" />
+                                <BeginStoryboard x:Name="OnUnchecking_BeginStoryboard"
+                                                 Storyboard="{StaticResource OnUnchecking}" />
                             </Trigger.ExitActions>
                             <Trigger.EnterActions>
-                                <BeginStoryboard x:Name="OnChecking_BeginStoryboard" Storyboard="{StaticResource OnChecking}" />
+                                <BeginStoryboard x:Name="OnChecking_BeginStoryboard"
+                                                 Storyboard="{StaticResource OnChecking}" />
                             </Trigger.EnterActions>
                             <Setter TargetName="On" Property="Stroke" Value="White" />
                             <Setter TargetName="Off" Property="Stroke" Value="White" />
                             <!--  Change Orange or Blue color here  -->
-                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource primaryGradientColor}" />
-                            <Setter TargetName="BackgroundBorder" Property="BorderBrush" Value="{StaticResource SecundarySolidColor}" />
+                            <Setter TargetName="BackgroundBorder" Property="Background"
+                                    Value="{StaticResource primaryGradientColor}" />
+                            <Setter TargetName="BackgroundBorder" Property="BorderBrush"
+                                    Value="{StaticResource SecundarySolidColor}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <!--  ToDo: Add Style for Isenabled == False  -->

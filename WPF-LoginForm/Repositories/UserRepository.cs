@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using MySqlConnector;
 using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
-using WPFBiblioteca.ViewModels.Fields;
 
 namespace WPFBiblioteca.Repositories;
 
@@ -16,7 +15,7 @@ public class UserRepository : RepositoryBase, IUserRepository
 
     public async Task<bool> VerifyMail(string mail)
     {
-        bool isValid = false;
+        var isValid = false;
         await using (var connection = GetConnection())
         await using (var command = new MySqlCommand())
         {
@@ -28,13 +27,13 @@ public class UserRepository : RepositoryBase, IUserRepository
                     "select count(*) from users where Email = @email";
                 command.Parameters.AddWithValue("@email", mail.Trim());
                 isValid = ValidationHelper.TryConvert.ToInt32(command.ExecuteScalar()?.ToString(), 0) > 0;
-                
             }
             catch (MySqlException ex)
             {
                 _errorCode = ex.ToString();
             }
         }
+
         return isValid;
     }
 
@@ -163,14 +162,13 @@ public class UserRepository : RepositoryBase, IUserRepository
                 if (reader.Read())
                     user = new UserModel
                     {
-                        Id = ValidationHelper.TryConvert.ToInt32(reader[0].ToString(),0),
+                        Id = ValidationHelper.TryConvert.ToInt32(reader[0].ToString(), 0),
                         Username = reader[1].ToString(),
                         Password = reader[2].ToString(),
                         FirstName = reader[3].ToString(),
                         LastName = reader[4].ToString(),
                         UserType = reader[5].ToString(),
-                        Email = reader[6].ToString(),
-                        
+                        Email = reader[6].ToString()
                     };
             }
         }

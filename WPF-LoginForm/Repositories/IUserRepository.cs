@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using MySqlConnector;
 using WPFBiblioteca.Models;
 
 namespace WPFBiblioteca.Repositories;

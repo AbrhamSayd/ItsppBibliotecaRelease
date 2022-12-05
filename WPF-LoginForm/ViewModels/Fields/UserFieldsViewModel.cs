@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq.Expressions;
-using System.Security.RightsManagement;
-using System.Windows;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MySqlConnector;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
 using WPFBiblioteca.Services;
 using WPFBiblioteca.Stores;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace WPFBiblioteca.ViewModels.Fields;
 
@@ -59,7 +53,7 @@ public class UserFieldsViewModel : ViewModelBase
         foreach (var user in Users)
         {
             if (user.Id == staticId || user.Username == staticUserName) continue;
-            if (user.Id.ToString() == _id )
+            if (user.Id.ToString() == _id)
             {
                 Element = "Numero de empleado duplicado, Intente con otro porfavor";
                 Title = "Dato duplicado";

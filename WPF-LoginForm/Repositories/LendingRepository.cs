@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MySqlConnector;
-using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
 using static WPFBiblioteca.Helpers.ValidationHelper;
 
@@ -28,10 +27,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                 command.Parameters.Add("@member_Id", MySqlDbType.Int64).Value = id;
 
                 await using var reader = await command.ExecuteReaderAsync();
-                while (reader.Read())
-                {
-                    exist = reader[0].ToString() == "1";
-                }
+                while (reader.Read()) exist = reader[0].ToString() == "1";
 
                 _errorCode = "400";
             }
@@ -60,43 +56,10 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                 command.Parameters.Add("@isbn", MySqlDbType.VarChar).Value = isbn;
 
                 await using var reader = await command.ExecuteReaderAsync();
-                while (reader.Read())
-                {
-                    exist = reader[0].ToString() == "1";
-                }
+                while (reader.Read()) exist = reader[0].ToString() == "1";
 
                 _errorCode = "400";
             }
-        }
-        catch (Exception e)
-        {
-            _errorCode = e.ToString();
-            throw;
-        }
-
-        return exist;
-    }
-
-    public async Task<bool> LendingExist(int lendingId)
-    {
-        var exist = false;
-        try
-        {
-            await using var connection = GetConnection();
-            await using var command = new MySqlCommand();
-            await connection.OpenAsync();
-            command.Connection = connection;
-            command.CommandText =
-                "SELECT EXISTS(SELECT * FROM lendings WHERE Lending_Id = @lending_Id)";
-            command.Parameters.Add("@lending_Id", MySqlDbType.Int64).Value = lendingId;
-
-            await using var reader = await command.ExecuteReaderAsync();
-            while (reader.Read())
-            {
-                exist = reader[0].ToString() == "1";
-            }
-
-            _errorCode = "400";
         }
         catch (Exception e)
         {
@@ -359,7 +322,7 @@ public class LendingRepository : RepositoryBase, ILendingRepository
                     MemberId = TryConvert.ToInt32(reader[2].ToString(), 0),
                     DateTimeBorrowed = dateValue,
                     UsernameLent = user.FirstName,
-                    Remarks = reader[6].ToString(),
+                    Remarks = reader[6].ToString()
                 };
 
                 lendingList.Add(lending);
@@ -411,6 +374,33 @@ public class LendingRepository : RepositoryBase, ILendingRepository
         }
 
         return lending;
+    }
+
+    public async Task<bool> LendingExist(int lendingId)
+    {
+        var exist = false;
+        try
+        {
+            await using var connection = GetConnection();
+            await using var command = new MySqlCommand();
+            await connection.OpenAsync();
+            command.Connection = connection;
+            command.CommandText =
+                "SELECT EXISTS(SELECT * FROM lendings WHERE Lending_Id = @lending_Id)";
+            command.Parameters.Add("@lending_Id", MySqlDbType.Int64).Value = lendingId;
+
+            await using var reader = await command.ExecuteReaderAsync();
+            while (reader.Read()) exist = reader[0].ToString() == "1";
+
+            _errorCode = "400";
+        }
+        catch (Exception e)
+        {
+            _errorCode = e.ToString();
+            throw;
+        }
+
+        return exist;
     }
 
     public async Task<LendingModel> GetById(int lendingId)

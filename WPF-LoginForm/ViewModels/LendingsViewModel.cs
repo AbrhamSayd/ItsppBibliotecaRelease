@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.Foundation.Collections;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
 using WPFBiblioteca.Repositories;
@@ -14,6 +12,35 @@ namespace WPFBiblioteca.ViewModels;
 
 public class LendingsViewModel : ViewModelBase
 {
+    #region Constructor
+
+    public LendingsViewModel(NavigationStore navigationStore, UserModel currentUser)
+    {
+        _currentUser = currentUser;
+        _canDelete = false;
+        _isChecked = false;
+        _errorCode = string.Empty;
+        _activeLendings = true;
+        _activeCollection = "Prestamos Activos";
+        _unActiveLendings = false;
+        _navigationStore = navigationStore;
+        _lendingRepository = new LendingRepository();
+        _lendingReturnedRepository = new LendingReturnedRepository();
+        _lendingModel = new LendingModel();
+        _activeLendingsCollection = new ObservableCollection<LendingModel>();
+        NavigateAddCommand = new NavigateCommand<LendingsFieldsViewModel>(
+            new NavigationService<LendingsFieldsViewModel>(navigationStore,
+                () => new LendingsFieldsViewModel(null, "Add", navigationStore, _currentUser)));
+        SwitchTableSLendings = new ViewModelCommand(SwitchItemSource);
+        EditCommand = new NavigateCommand<LendingsFieldsViewModel>(
+            new NavigationService<LendingsFieldsViewModel>(navigationStore,
+                () => new LendingsFieldsViewModel(_lendingModel, "Edit", navigationStore, _currentUser)));
+        RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
+        ExecuteGetAllCommand();
+    }
+
+    #endregion
+
     #region fields
 
     private ObservableCollection<LendingModel> _activeLendingsCollection;
@@ -45,11 +72,13 @@ public class LendingsViewModel : ViewModelBase
 
     private async void ExecuteGetAllCommand()
     {
-       
-        if (_activeLendings) ActiveLendingsCollection = new ObservableCollection<LendingModel>(await Task.Run(() => _lendingRepository.GetByAll()));
+        if (_activeLendings)
+            ActiveLendingsCollection =
+                new ObservableCollection<LendingModel>(await Task.Run(() => _lendingRepository.GetByAll()));
         if (_unActiveLendings)
             UnActiveLendingsCollection =
-                new ObservableCollection<LendingReturnedModel>(Task.Run(() => _lendingReturnedRepository.GetByAll()).Result);
+                new ObservableCollection<LendingReturnedModel>(Task.Run(() => _lendingReturnedRepository.GetByAll())
+                    .Result);
 
         _errorCode = _lendingRepository.GetError();
     }
@@ -88,8 +117,6 @@ public class LendingsViewModel : ViewModelBase
     #endregion
 
     #region Properties
-
-    
 
     public string ErrorCode
     {
@@ -156,6 +183,7 @@ public class LendingsViewModel : ViewModelBase
             ;
         }
     }
+
     public bool ActiveLendings
     {
         get => _activeLendings;
@@ -187,35 +215,6 @@ public class LendingsViewModel : ViewModelBase
             _activeCollection = value;
             OnPropertyChanged(nameof(ActiveCollection));
         }
-    }
-
-    #endregion
-
-    #region Constructor
-
-    public LendingsViewModel(NavigationStore navigationStore, UserModel currentUser)
-    {
-        _currentUser = currentUser;
-        _canDelete = false;
-        _isChecked = false;
-        _errorCode = string.Empty;
-        _activeLendings = true;
-        _activeCollection = "Prestamos Activos";
-        _unActiveLendings = false;
-        _navigationStore = navigationStore;
-        _lendingRepository = new LendingRepository();
-        _lendingReturnedRepository = new LendingReturnedRepository();
-        _lendingModel = new LendingModel();
-        _activeLendingsCollection = new ObservableCollection<LendingModel>();
-        NavigateAddCommand = new NavigateCommand<LendingsFieldsViewModel>(
-            new NavigationService<LendingsFieldsViewModel>(navigationStore,
-                () => new LendingsFieldsViewModel(null, "Add", navigationStore, _currentUser)));
-        SwitchTableSLendings = new ViewModelCommand(SwitchItemSource);
-        EditCommand = new NavigateCommand<LendingsFieldsViewModel>(
-            new NavigationService<LendingsFieldsViewModel>(navigationStore,
-                () => new LendingsFieldsViewModel(_lendingModel, "Edit", navigationStore, _currentUser)));
-        RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
-        ExecuteGetAllCommand();
     }
 
     #endregion

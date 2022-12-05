@@ -1,43 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static System.String;
 
-namespace WPFBiblioteca.Helpers
+namespace WPFBiblioteca.Helpers;
+
+internal class RandomPasswordGenerator
 {
-    class RandomPasswordGenerator
+    private const string LowerCase = "abcdefghijklmnopqursuvwxyz";
+    private const string UpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private const string Numbers = "123456789";
+    private const string Specials = @"!@£$%^&*()#€";
+
+
+    public string GeneratePassword(bool useLowercase, bool useUppercase, bool useNumbers, bool useSpecial,
+        int passwordSize)
     {
-        private const string LowerCase = "abcdefghijklmnopqursuvwxyz";
-        private const string UpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const string Numbers = "123456789";
-        private const string Specials = @"!@£$%^&*()#€";
+        var password = new char[passwordSize];
+        var charSet = ""; // Initialise to blank
+        var random = new Random();
+        int counter;
 
+        // Build up the character set to choose from
+        if (useLowercase) charSet += LowerCase;
 
-        public string GeneratePassword(bool useLowercase, bool useUppercase, bool useNumbers, bool useSpecial,
-            int passwordSize)
-        {
-            var password = new char[passwordSize];
-            var charSet = ""; // Initialise to blank
-            var random = new Random();
-            int counter;
+        if (useUppercase) charSet += UpperCase;
 
-            // Build up the character set to choose from
-            if (useLowercase) charSet += LowerCase;
+        if (useNumbers) charSet += Numbers;
 
-            if (useUppercase) charSet += UpperCase;
+        if (useSpecial) charSet += Specials;
 
-            if (useNumbers) charSet += Numbers;
+        for (counter = 0; counter < passwordSize; counter++)
+            password[counter] = charSet[random.Next(charSet.Length - 1)];
 
-            if (useSpecial) charSet += Specials;
-
-            for (counter = 0; counter < passwordSize; counter++)
-            {
-                password[counter] = charSet[random.Next(charSet.Length - 1)];
-            }
-
-            return Join(null, password);
-        }
+        return Join(null, password);
     }
 }

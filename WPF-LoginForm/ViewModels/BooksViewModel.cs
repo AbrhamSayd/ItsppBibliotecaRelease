@@ -11,6 +11,33 @@ namespace WPFBiblioteca.ViewModels;
 
 public class BooksViewModel : ViewModelBase
 {
+    #region Constructor
+
+    public BooksViewModel(NavigationStore navigationStore)
+    {
+        _canDelete = false;
+        _errorCode = string.Empty;
+        _navigationStore = navigationStore;
+        _bookRepository = new BookRepository();
+        _bookModel = new BookModel();
+        _collectionBooks = new ObservableCollection<BookModel>();
+        _title = "Libros";
+        _element = null;
+        _visibility = false;
+        AddCommand = new NavigateCommand<BooksFieldsViewModel>(
+            new NavigationService<BooksFieldsViewModel>(navigationStore,
+                () => new BooksFieldsViewModel(null, "Add", navigationStore)));
+        EditCommand = new NavigateCommand<BooksFieldsViewModel>(
+            new NavigationService<BooksFieldsViewModel>(navigationStore,
+                () => new BooksFieldsViewModel(_bookModel, "Edit", navigationStore)));
+        RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand, CanExecuteRemove);
+        AcceptRemoveCommand = new ViewModelCommand(ExecuteRemove);
+        CancelRemoveCommand = new ViewModelCommand(CancelRemove);
+        ExecuteGetAllCommand();
+    }
+
+    #endregion
+
     #region fields
 
     private ObservableCollection<BookModel> _collectionBooks;
@@ -50,7 +77,7 @@ public class BooksViewModel : ViewModelBase
 
     private void ExecuteRemoveCommand(object obj)
     {
-        Element = _bookModel.Name ;
+        Element = _bookModel.Name;
         Visibility = true;
     }
 
@@ -89,6 +116,7 @@ public class BooksViewModel : ViewModelBase
             OnPropertyChanged(nameof(CanDelete));
         }
     }
+
     public string Title
     {
         get => _title;
@@ -141,33 +169,6 @@ public class BooksViewModel : ViewModelBase
             _collectionBooks = value;
             OnPropertyChanged(nameof(CollectionBooks));
         }
-    }
-
-    #endregion
-
-    #region Constructor
-
-    public BooksViewModel(NavigationStore navigationStore)
-    {
-        _canDelete = false;
-        _errorCode = string.Empty;
-        _navigationStore = navigationStore;
-        _bookRepository = new BookRepository();
-        _bookModel = new BookModel();
-        _collectionBooks = new ObservableCollection<BookModel>();
-        _title = "Libros";
-        _element = null;
-        _visibility = false;
-        AddCommand = new NavigateCommand<BooksFieldsViewModel>(
-            new NavigationService<BooksFieldsViewModel>(navigationStore,
-                () => new BooksFieldsViewModel(null, "Add", navigationStore)));
-        EditCommand = new NavigateCommand<BooksFieldsViewModel>(
-            new NavigationService<BooksFieldsViewModel>(navigationStore,
-                () => new BooksFieldsViewModel(_bookModel, "Edit", navigationStore)));
-        RemoveCommand = new ViewModelCommand(ExecuteRemoveCommand, CanExecuteRemove);
-        AcceptRemoveCommand = new ViewModelCommand(ExecuteRemove);
-        CancelRemoveCommand = new ViewModelCommand(CancelRemove);
-        ExecuteGetAllCommand();
     }
 
     #endregion

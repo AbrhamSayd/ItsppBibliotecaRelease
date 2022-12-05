@@ -12,9 +12,30 @@ namespace WPFBiblioteca.ViewModels.Fields;
 
 public class LendingsFieldsViewModel : ViewModelBase
 {
+    #region Constructor
+
+    public LendingsFieldsViewModel(LendingModel lending, string mode, NavigationStore navigationStore,
+        UserModel currentModel)
+    {
+        _mode = mode;
+        _lending = lending ?? new LendingModel();
+        _currentUser = currentModel;
+        GoBackCommand = new GoLendingsCommand(null,
+            new NavigationService<LendingsViewModel>(navigationStore,
+                () => new LendingsViewModel(navigationStore, _currentUser)));
+        _lendingRepository = new LendingRepository();
+        _bookRepository = new BookRepository();
+        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
+        AcceptCommand = new ViewModelCommand(ExecuteAccept);
+
+
+        FillModel();
+    }
+
+    #endregion
+
     #region Fields
 
-    
     private readonly string _mode;
     private LendingModel _lending;
     private readonly UserModel _currentUser;
@@ -37,6 +58,7 @@ public class LendingsFieldsViewModel : ViewModelBase
     private string _remarks;
 
     #endregion
+
     #region Properties
 
     public int LendingId
@@ -168,8 +190,9 @@ public class LendingsFieldsViewModel : ViewModelBase
     }
 
     #endregion
-    
+
     #region ICommands
+
     public ICommand AcceptCommand { get; }
     public ICommand EditionCommand { get; }
     public ICommand GoBackCommand { get; }
@@ -198,12 +221,10 @@ public class LendingsFieldsViewModel : ViewModelBase
             DateTimeBorrowed = DateTime.Now;
             UsernameLent = _currentUser.FirstName;
         }
-        
     }
 
     private async void ExecuteEditionCommand(object obj)
     {
-        
         switch (_mode)
         {
             case "Add" when !Task.Run(() => _lendingRepository.IsbnExists(_isbn)).Result:
@@ -216,7 +237,7 @@ public class LendingsFieldsViewModel : ViewModelBase
                 Title = "Miembro no registrado";
                 Visibility = true;
                 break;
-            
+
             case "Add":
             {
                 var book = Task.Run(() => _bookRepository.GetById(ValidationHelper.TryConvert.ToLong(_isbn, 0))).Result;
@@ -249,11 +270,11 @@ public class LendingsFieldsViewModel : ViewModelBase
                 break;
             case "Edit":
             {
-                var book = Task.Run(() => _bookRepository.GetById(ValidationHelper.TryConvert.ToLong(_isbn,0))).Result;
+                var book = Task.Run(() => _bookRepository.GetById(ValidationHelper.TryConvert.ToLong(_isbn, 0))).Result;
                 _lending = new LendingModel
                 {
                     LendingId = 0,
-                    BookId = book.Id ,
+                    BookId = book.Id,
                     BookName = book.Name,
                     MemberId = _memberId,
                     MemberName = _memberName,
@@ -272,29 +293,6 @@ public class LendingsFieldsViewModel : ViewModelBase
     {
         Visibility = false;
     }
-    #endregion
-
-    #region Constructor
-
-    public LendingsFieldsViewModel(LendingModel lending, string mode, NavigationStore navigationStore,
-        UserModel currentModel)
-    {
-        _mode = mode;
-        _lending = lending ?? new LendingModel();
-        _currentUser = currentModel;
-        GoBackCommand = new GoLendingsCommand(null,
-            new NavigationService<LendingsViewModel>(navigationStore,
-                () => new LendingsViewModel(navigationStore, _currentUser)));
-        _lendingRepository = new LendingRepository();
-        _bookRepository = new BookRepository();
-        EditionCommand = new ViewModelCommand(ExecuteEditionCommand);
-        AcceptCommand = new ViewModelCommand(ExecuteAccept);
-
-        
-            FillModel();
-    }
-
-    
 
     #endregion
 }

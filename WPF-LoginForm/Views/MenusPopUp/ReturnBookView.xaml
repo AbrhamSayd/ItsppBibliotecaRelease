@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    xmlns:local="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -53,7 +52,6 @@
                             Style="{StaticResource CustomCardTextBox}"
                             Text="{Binding Folio, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" />
                         <Button
-                            Grid.Column="1"
                             Margin="30,10,30,5"
                             VerticalContentAlignment="Center"
                             Background="White"
@@ -122,7 +120,7 @@
                         Background="Transparent"
                         BorderBrush="Black"
                         BorderThickness="1"
-                        Command="{Binding CancelReturnCommand}"
+                        Command="{Binding CancelReturnCommand, UpdateSourceTrigger=PropertyChanged}"
                         Content="Cancelar"
                         FontSize="28"
                         Foreground="Black"
@@ -132,7 +130,7 @@
                         Margin="30,10,30,5"
                         VerticalContentAlignment="Center"
                         BorderThickness="1"
-                        Command="{Binding AcceptReturnCommand}"
+                        Command="{Binding AcceptReturnCommand, UpdateSourceTrigger=PropertyChanged}"
                         Content="Aceptar"
                         FontSize="28"
                         Style="{StaticResource CardButton}" />

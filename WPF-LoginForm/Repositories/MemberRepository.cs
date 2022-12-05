@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using MySqlConnector;
 using WPFBiblioteca.Helpers;
 using WPFBiblioteca.Models;
-using WPFBiblioteca.ViewModels.Fields;
 
 namespace WPFBiblioteca.Repositories;
 
@@ -214,7 +213,7 @@ public class MemberRepository : RepositoryBase, IMemberRepository
             COUNT(lendings.Member_Id) AS Prestamos
             FROM members
             LEFT JOIN lendings ON members.Member_Id = lendings.Member_Id
-            GROUP BY members.Member_Id;" ;
+            GROUP BY members.Member_Id;";
             await using var reader = await command.ExecuteReaderAsync();
             while (reader.Read())
             {
@@ -226,7 +225,7 @@ public class MemberRepository : RepositoryBase, IMemberRepository
                     Carrera = reader[3].ToString(),
                     Email = reader[4].ToString(),
                     PhoneNumber = reader[5].ToString(),
-                    Deudor = ValidationHelper.TryConvert.ToInt32(reader[6].ToString(),0) > 0,
+                    Deudor = ValidationHelper.TryConvert.ToInt32(reader[6].ToString(), 0) > 0,
                     Prestamos = Convert.ToInt32(reader[6].ToString())
                 };
                 memberList.Add(member);
