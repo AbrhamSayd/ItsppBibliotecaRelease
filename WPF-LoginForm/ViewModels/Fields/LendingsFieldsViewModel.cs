@@ -240,7 +240,7 @@ public class LendingsFieldsViewModel : ViewModelBase
         switch (_mode)
         {
             case "Add" when !Task.Run(() => _lendingRepository.IsbnExists(_isbn)).Result:
-                Element = "Isbn no existe, porfavor verifique.";
+                Element = "ISBN no existe, por favor verifique.";
                 Title = "Dato no encontrado";
                 Visibility = true;
                 break;

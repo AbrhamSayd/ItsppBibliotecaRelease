@@ -106,7 +106,7 @@ public class BooksFieldsViewModel : ViewModelBase
             foreach (var book in Books)
             {
                 if (_isbn != book.Isbn) continue;
-                Element = "Isbn duplicado, Intente con otro porfavor o verifique";
+                Element = "ISBN duplicado, Intente con otro por favor o verifique";
                 Title = "Dato duplicado";
                 Visibility = true;
                 isDuplicate = true;

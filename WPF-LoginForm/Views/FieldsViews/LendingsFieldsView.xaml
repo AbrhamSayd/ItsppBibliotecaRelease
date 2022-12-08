@@ -104,7 +104,7 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Ejemplar Numero:" />
+                                Text="Ejemplar número" />
                             <ComboBox
                                 Width="300"
                                 Margin="0,5,0,5"
@@ -146,7 +146,7 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="NOTA" />
+                                Text="Nota" />
                             <TextBox
                                 Width="300"
                                 HorizontalAlignment="Left"

@@ -105,7 +105,7 @@
                             FontSize="22"
                             Foreground="{StaticResource primarySolidColor}"
                             Style="{StaticResource FieldsHeaders}"
-                            Text="Cerrar Sesión" />
+                            Text="Cerrar sesión" />
                     </Button>
 
                 </StackPanel>

@@ -84,7 +84,7 @@
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Email}"
-                        Header="Email"
+                        Header="E-mail"
                         IsReadOnly="True" />
                     <!--  Phone Number Column  -->
                     <DataGridTextColumn

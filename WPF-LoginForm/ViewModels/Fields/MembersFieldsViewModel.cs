@@ -91,7 +91,7 @@ public class MembersFieldsViewModel : ViewModelBase
         foreach (var member in Members)
         {
             if (_memberId != member.MemberId.ToString()) continue;
-            Element = "Id duplicada, Intente con otra porfavor";
+            Element = "ID duplicada, Intente con otra por favor";
             Title = "Dato duplicado";
             Visibility = true;
             isDuplicate = true;
