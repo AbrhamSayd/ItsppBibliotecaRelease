@@ -100,6 +100,27 @@
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding MemberId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                            <TextBlock
+                                Padding="20,40,0,0"
+                                Style="{StaticResource FieldsHeaders}"
+                                Text="Ejemplar Numero:" />
+                            <ComboBox
+                                Width="300"
+                                Margin="0,5,0,5"
+                                HorizontalAlignment="Left"
+                                FontFamily="{StaticResource SFUIBold}"
+                                ItemsSource="{Binding NotImpleted}"
+                                SelectedItem="{Binding NotImpleted, Mode=TwoWay, UpdateSourceTrigger=Default, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                Style="{StaticResource CardComboBoxStyle}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding NotImpleted}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <!-- #region Unused-->
                             <!--<TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
@@ -120,6 +141,7 @@
                                 IsReadOnly="True"
                                 Style="{StaticResource CustomCardTextBox}"
                                 Text="{Binding UserType, UpdateSourceTrigger=PropertyChanged}" />-->
+                               <!-- #endregion -->
 
                             <TextBlock
                                 Padding="20,40,0,0"

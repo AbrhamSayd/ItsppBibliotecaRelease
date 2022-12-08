@@ -57,6 +57,8 @@ public class LendingsFieldsViewModel : ViewModelBase
     private string _usernameLent;
     private string _remarks;
 
+    private bool _filteringVisibility;
+
     #endregion
 
     #region Properties
@@ -186,6 +188,16 @@ public class LendingsFieldsViewModel : ViewModelBase
             if (value == _visibility) return;
             _visibility = value;
             OnPropertyChanged(nameof(Visibility));
+        }
+    }
+
+    public bool FiteringVisibility
+    {
+        get => _filteringVisibility;
+        set
+        {
+            _filteringVisibility = value;
+            OnPropertyChanged(nameof(FiteringVisibility));
         }
     }
 
