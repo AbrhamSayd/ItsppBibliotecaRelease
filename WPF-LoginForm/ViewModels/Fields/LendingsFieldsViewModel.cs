@@ -240,12 +240,12 @@ public class LendingsFieldsViewModel : ViewModelBase
         switch (_mode)
         {
             case "Add" when !Task.Run(() => _lendingRepository.IsbnExists(_isbn)).Result:
-                Element = "Isbn no existe, porfavor verifique.";
+                Element = "ISBN no existe, por favor verifique.";
                 Title = "Dato no encontrado";
                 Visibility = true;
                 break;
             case "Add" when !Task.Run(() => _lendingRepository.IdExist(_memberId)).Result:
-                Element = "Miembro no existe, porfavor registrelo primero.";
+                Element = "Miembro no existe, por favor registrelo primero.";
                 Title = "Miembro no registrado";
                 Visibility = true;
                 break;
@@ -270,13 +270,13 @@ public class LendingsFieldsViewModel : ViewModelBase
             }
 
             case "Edit" when !Task.Run(() => _lendingRepository.IsbnExists(_isbn)).Result:
-                Element = "Isbn no existe, porfavor verifique.";
+                Element = "Isbn no existe, por favor verifique.";
                 Title = "Dato no encontrado";
                 Visibility = true;
                 break;
 
             case "Edit" when !Task.Run(() => _lendingRepository.IdExist(_memberId)).Result:
-                Element = "Miembro no existe, porfavor registrelo primero.";
+                Element = "Miembro no existe, por favor registrelo primero.";
                 Title = "Miembro no registrado";
                 Visibility = true;
                 break;

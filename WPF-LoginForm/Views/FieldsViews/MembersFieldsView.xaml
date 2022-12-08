@@ -88,7 +88,7 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Numero de telefono" />
+                                Text="Número de teléfono" />
                             <TextBox
                                 Width="400"
                                 Margin="0,5,0,5"
@@ -147,7 +147,7 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Email" />
+                                Text="E-mail" />
                             <TextBox
                                 Width="auto"
                                 MinWidth="400"

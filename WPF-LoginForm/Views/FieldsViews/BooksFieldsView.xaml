@@ -113,7 +113,7 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="NOTA" />
+                                Text="Nota" />
                             <TextBox
                                 x:Name="TxtNota"
                                 Width="400"
@@ -159,7 +159,7 @@
                             <TextBlock
                                 Padding="20,40,0,0"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Categoria" />
+                                Text="Categoría" />
                             <ComboBox
                                 Width="400"
                                 Margin="0,5,0,5"
@@ -190,7 +190,7 @@
                             <TextBlock
                                 Padding="20,40,0,5"
                                 Style="{StaticResource FieldsHeaders}"
-                                Text="Ubicacion" />
+                                Text="Ubicación" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBox
                                     Width="120"

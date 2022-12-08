@@ -100,7 +100,7 @@
                                                     FontSize="16"
                                                     FontWeight="Light"
                                                     Style="{StaticResource LendReturnTextStyle}"
-                                                    Text="Seleccione para realizar el registro de un prestamo" />
+                                                    Text="Seleccione para registrar un prestamo" />
                                             </Grid>
                                             <fa:IconImage
                                                 Grid.Column="1"
@@ -164,7 +164,7 @@
                                                     FontSize="16"
                                                     FontWeight="Light"
                                                     Style="{StaticResource LendReturnTextStyle}"
-                                                    Text="Seleccione para añadir la devolución de un libro prestado" />
+                                                    Text="Seleccione para devolver libro prestado" />
                                             </Grid>
                                             <fa:IconImage
                                                 Grid.Column="1"
@@ -233,7 +233,7 @@
                                                     FontSize="16"
                                                     FontWeight="Light"
                                                     Style="{StaticResource LendReturnTextStyle}"
-                                                    Text=" (Enviar Formato de no adeudo)"
+                                                    Text=" (Enviar formato de no adeudo)"
                                                     TextWrapping="Wrap" />
                                             </Grid>
                                             <fa:IconImage

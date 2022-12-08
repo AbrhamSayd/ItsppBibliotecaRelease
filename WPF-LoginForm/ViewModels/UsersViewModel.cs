@@ -20,7 +20,7 @@ public class UsersViewModel : ViewModelBase
         _userRepository = new UserRepository();
         _navigationStore = navigationStore;
         _usersModel = new UserModel();
-        _title = "Usuarios";
+        _title = "usuarios";
         _element = null;
         _removeVisibility = false;
         _editVisibility = false;

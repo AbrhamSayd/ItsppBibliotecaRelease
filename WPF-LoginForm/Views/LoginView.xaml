@@ -269,7 +269,7 @@
                     FontSize="30"
                     FontStyle="Normal"
                     Foreground="White"
-                    Text="Iniciar Sesión"
+                    Text="Iniciar sesión"
                     TextAlignment="Center" />
 
                 <!--  TEXTBOX and CARD for User  -->
@@ -343,19 +343,12 @@
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
-                    <TextBlock
-                        FontFamily="Montserrat"
-                        FontSize="12"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="Forgot Password?" />
-
                     <RadioButton
                         Margin="8,0,0,0"
                         Command="{Binding RecoverPasswordCommand}"
-                        Content="Reset"
+                        Content="¿Olvidaste tu contraseña?"
                         FontFamily="Montserrat"
-                        FontSize="12"
+                        FontSize="15"
                         FontWeight="Medium"
                         Foreground="White"
                         Style="{StaticResource menuButtonStyle}" />

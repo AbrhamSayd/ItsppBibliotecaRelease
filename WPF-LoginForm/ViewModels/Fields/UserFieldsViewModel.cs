@@ -55,7 +55,7 @@ public class UserFieldsViewModel : ViewModelBase
             if (user.Id == staticId || user.Username == staticUserName) continue;
             if (user.Id.ToString() == _id)
             {
-                Element = "Numero de empleado duplicado, Intente con otro porfavor";
+                Element = "Número de empleado duplicado, Intente con otro por favor";
                 Title = "Dato duplicado";
                 Visibility = true;
                 isDuplicate = true;
@@ -64,7 +64,7 @@ public class UserFieldsViewModel : ViewModelBase
             }
 
             if (_username != user.Username) continue;
-            Element = "Nombre de usuario duplicado, Intente con otro porfavor";
+            Element = "Nombre de usuario duplicado, Intente con otro por favor";
             Title = "Dato duplicado";
             _visibility = true;
             isDuplicate = true;
