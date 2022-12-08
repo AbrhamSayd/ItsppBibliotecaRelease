@@ -21,7 +21,7 @@ public class MembersViewModel : ViewModelBase
         _membersRepository = new MemberRepository();
         _member = new MemberModel();
         _collectionMembers = new ObservableCollection<MemberModel>();
-        _title = "Miembros";
+        _title = "miembros";
         _element = null;
         _visibility = false;
         AddCommand = new NavigateCommand<MembersFieldsViewModel>(

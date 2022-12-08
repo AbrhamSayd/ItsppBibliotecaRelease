@@ -21,7 +21,7 @@ public class BooksViewModel : ViewModelBase
         _bookRepository = new BookRepository();
         _bookModel = new BookModel();
         _collectionBooks = new ObservableCollection<BookModel>();
-        _title = "Libros";
+        _title = "libros";
         _element = null;
         _visibility = false;
         AddCommand = new NavigateCommand<BooksFieldsViewModel>(

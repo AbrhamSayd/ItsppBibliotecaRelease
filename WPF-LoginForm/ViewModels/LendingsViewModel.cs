@@ -21,7 +21,7 @@ public class LendingsViewModel : ViewModelBase
         _isChecked = false;
         _errorCode = string.Empty;
         _activeLendings = true;
-        _activeCollection = "Prestamos Activos";
+        _activeCollection = "Prestamos activos";
         _unActiveLendings = false;
         _navigationStore = navigationStore;
         _lendingRepository = new LendingRepository();
