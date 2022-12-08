@@ -208,6 +208,7 @@
         <Setter Property="Margin" Value="0,0,25,0" />
         <Setter Property="Height" Value="60" />
         <Setter Property="Width" Value="Auto" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

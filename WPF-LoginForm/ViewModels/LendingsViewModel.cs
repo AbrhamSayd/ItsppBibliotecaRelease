@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WPFBiblioteca.Commands;
 using WPFBiblioteca.Models;
@@ -36,6 +37,7 @@ public class LendingsViewModel : ViewModelBase
             new NavigationService<LendingsFieldsViewModel>(navigationStore,
                 () => new LendingsFieldsViewModel(_lendingModel, "Edit", navigationStore, _currentUser)));
         RemoveCommand = new ViewModelCommand(ExecuteRemoveRowCommand, CanExecuteRemoveRowCommand);
+        FilteringVisibilityCommand = new ViewModelCommand(FiteringVisible);
         ExecuteGetAllCommand();
     }
 
@@ -56,6 +58,7 @@ public class LendingsViewModel : ViewModelBase
     private bool _unActiveLendings;
     private string _activeCollection;
     private readonly UserModel _currentUser;
+    private bool _filteringVisibility;
 
     #endregion
 
@@ -65,6 +68,7 @@ public class LendingsViewModel : ViewModelBase
     public ICommand RemoveCommand { get; }
     public ICommand EditCommand { get; }
     public ICommand SwitchTableSLendings { get; }
+    public ICommand FilteringVisibilityCommand { get; }
 
     #endregion
 
@@ -111,6 +115,14 @@ public class LendingsViewModel : ViewModelBase
                 ActiveCollection = "Prestamos Activos";
                 ExecuteGetAllCommand();
                 break;
+        }
+    }
+
+    private void FiteringVisible(object obj)
+    {
+        if (!FilteringVisibility)
+        {
+            FilteringVisibility = true;
         }
     }
 
@@ -214,6 +226,17 @@ public class LendingsViewModel : ViewModelBase
             if (value == _activeCollection) return;
             _activeCollection = value;
             OnPropertyChanged(nameof(ActiveCollection));
+        }
+    }
+
+    public bool FilteringVisibility
+    {
+        get => _filteringVisibility;
+        set
+        {
+            if (value == _filteringVisibility) return;
+            _filteringVisibility = value;
+            OnPropertyChanged(nameof(FilteringVisibility));
         }
     }
 

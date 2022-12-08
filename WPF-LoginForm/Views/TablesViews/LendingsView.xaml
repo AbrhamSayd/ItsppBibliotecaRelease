@@ -30,7 +30,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <!--  Caption  -->
+                <!--  #region Caption  -->
                 <StackPanel
                     Grid.Column="0"
                     VerticalAlignment="Center"
@@ -43,8 +43,11 @@
                         Icon="BookOpen" />
                     <TextBlock Style="{StaticResource ViewsHeaders}" Text="Prestamos" />
                 </StackPanel>
+                <!--  #endregion Caption  -->
+
             </Grid>
-            <!--  DataGrid Active Lendings  -->
+
+            <!--  #region DataGrid Active Lendings  -->
             <DataGrid
                 Grid.Row="1"
                 Width="auto"
@@ -98,7 +101,9 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <!--  DataGrid UnActive Lendings  -->
+            <!--  #endregion DataGrid Active Lendings  -->
+
+            <!--  #region DataGrid UnActive Lendings  -->
             <DataGrid
                 Grid.Row="1"
                 Width="auto"
@@ -174,16 +179,84 @@
 
                 </DataGrid.Columns>
             </DataGrid>
+            <!--  #endregion DataGrid UnActive Lendings  -->
 
-            <Grid Grid.Row="2">
-                <Grid>
+            <ScrollViewer Grid.Row="2"
+                CanContentScroll="True"
+                HorizontalScrollBarVisibility="Auto">
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <!--  Grid Buttons  -->
-                    <Grid Grid.Column="2">
+
+                    <!--  #region BOTON Filtering  -->
+                    <Button
+                        x:Name="bntFiltering"
+                        Grid.Column="0"
+                        Command="{Binding FilteringVisibilityCommand}"
+                        Style="{StaticResource GridEditButton}">
+                        <fa:IconImage Style="{StaticResource gridEditIcon}" Icon="Filter"/>
+                    </Button>
+                    <!--  #endregion BOTON Filtering  -->
+
+                    <!-- #region PopUp Filtering  -->
+                    <Popup Grid.Column="0"
+                        x:Name="popUpFiltering"
+                        AllowsTransparency="True"
+                        IsOpen="{Binding Visibility, UpdateSourceTrigger=PropertyChanged}"
+                        PlacementTarget="{Binding ElementName=bntFiltering}"
+                        PopupAnimation="Slide"
+                        VerticalOffset="0"
+                        HorizontalOffset="0"
+                        StaysOpen="False">
+                        <menusPopUp:LendingsFilteringView x:Name="FilteringPopUp">
+                            <menusPopUp:LendingsFilteringView.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="10"
+                                    Opacity=".5"
+                                    ShadowDepth="5"
+                                    Color="Gray" />
+                            </menusPopUp:LendingsFilteringView.Effect>
+                        </menusPopUp:LendingsFilteringView>
+                    </Popup>
+                    <!-- #endregion PopUp Filtering  -->
+
+                    <!--  #region Grid Switch tables  -->
+                    <Grid
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                        <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
+                            <!--  CheckBox Switch tables  -->
+                            <CheckBox
+                                Command="{Binding SwitchTableSLendings}"
+                                IsChecked="{Binding IsChecked, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource OrangeSwitchStyle}" />
+                            <TextBlock
+                                Margin="20,0,20,0"
+                                VerticalAlignment="Center"
+                                TextWrapping="Wrap"
+                                Style="{StaticResource ErrorAddingTextStyle}"
+                                Text="{Binding ActiveCollection}" />
+                        </StackPanel>
+                    </Grid>
+                    <!--  #endregion Grid Switch tables  -->
+
+                    <!--  #region Grid ErrorHandler  -->
+                <Grid
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <!--  TextBlock Errores  -->
+                    <!--  Text="{Binding NotImplementedProperty}"  -->
+                </Grid>
+                <!--  #endregion Grid ErrorHandler  -->
+
+                    <!--  #region Grid Buttons  -->
+                    <Grid Grid.Column="3">
                         <Grid HorizontalAlignment="Right">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -193,9 +266,9 @@
 
                             <!--  BOTON AGREGAR  -->
                             <Button
-                                Grid.Column="2"
-                                Command="{Binding NavigateAddCommand}"
-                                Style="{StaticResource BtnAgregarStyle}">
+                            Grid.Column="2"
+                            Command="{Binding NavigateAddCommand}"
+                            Style="{StaticResource BtnAgregarStyle}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Style="{StaticResource AddIconStyle}" />
                                     <TextBlock Style="{StaticResource TextBlockAddStyle}" />
@@ -204,80 +277,28 @@
 
                             <!--  BOTON Editar  -->
                             <Button
-                                Grid.Column="1"
-                                Command="{Binding EditCommand}"
-                                IsEnabled="{Binding CanDelete}"
-                                Style="{StaticResource GridEditButton}">
+                            Grid.Column="1"
+                            Command="{Binding EditCommand}"
+                            IsEnabled="{Binding CanDelete}"
+                            Style="{StaticResource GridEditButton}">
                                 <fa:IconImage Icon="Edit" Style="{StaticResource gridDeleteIcon}" />
                             </Button>
 
                             <!--  BOTON Eliminar  -->
                             <Button
-                                Grid.Column="0"
-                                Command="{Binding RemoveCommand}"
-                                IsEnabled="{Binding CanDelete}"
-                                Style="{StaticResource GridDeleteButton}">
+                            Grid.Column="0"
+                            Command="{Binding RemoveCommand}"
+                            IsEnabled="{Binding CanDelete}"
+                            Style="{StaticResource GridDeleteButton}">
                                 <fa:IconImage Style="{StaticResource gridDeleteIcon}" />
                             </Button>
 
                         </Grid>
                     </Grid>
-                    <!--  Grid ErrorHandler  -->
-                    <Grid
-                        Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                        <!--  TextBlock Errores  -->
-                        <!--  Text="{Binding NotImplementedProperty}"  -->
-                    </Grid>
-                    <!--  Grid Switch tables  -->
-                    <Grid
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                        <!--  CheckBox Switch tables  -->
-                        <StackPanel Margin="50,0,0,0" Orientation="Horizontal">
-                            <!--  PopUp Filtering  -->
-                            <Popup
-                                x:Name="popUpFiltering"
-                                AllowsTransparency="True"
-                                IsOpen="{Binding Visibility, UpdateSourceTrigger=PropertyChanged}"
-                                PlacementTarget="{Binding ElementName=bntFiltering}"
-                                PopupAnimation="Slide"
-                                VerticalOffset="0"
-                                HorizontalOffset="0"
-                                StaysOpen="False">
-                                <menusPopUp:LendingsFilteringView x:Name="FilteringPopUp">
-                                    <menusPopUp:LendingsFilteringView.Effect>
-                                        <DropShadowEffect
-                                            BlurRadius="10"
-                                            Opacity=".5"
-                                            ShadowDepth="5"
-                                            Color="Gray" />
-                                    </menusPopUp:LendingsFilteringView.Effect>
-                                </menusPopUp:LendingsFilteringView>
-                            </Popup>
-                            <!--  BOTON Filtering  -->
-                            <Button
-                                x:Name="bntFiltering"
-                                IsEnabled="{Binding CanDelete}"
-                                Style="{StaticResource GridDeleteButton}">
-                                <fa:IconImage Style="{StaticResource gridEditIcon}" Icon="Filter"/>
-                            </Button>
+                    <!-- #endregion  Grid Buttons  -->
 
-                            <CheckBox
-                                Margin="30,0,0,0"
-                                Command="{Binding SwitchTableSLendings}"
-                                IsChecked="{Binding IsChecked, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource OrangeSwitchStyle}" />
-                            <TextBlock
-                                Margin="20,0,0,0"
-                                Style="{StaticResource ErrorAddingTextStyle}"
-                                Text="{Binding ActiveCollection}" />
-                        </StackPanel>
-                    </Grid>
                 </Grid>
-            </Grid>
+            </ScrollViewer>
         </Grid>
     </Border>
 </UserControl>
