@@ -9,8 +9,8 @@
     xmlns:menusPopUp="clr-namespace:WPFBiblioteca.Views.MenusPopUp"
     xmlns:viewModel="clr-namespace:WPFBiblioteca.ViewModels"
     Title="Login Biblioteca"
-    Width="1700"
-    Height="900"
+    d:DesignHeight="800"
+    d:DesignWidth="1500"
     AllowsTransparency="True"
     Background="Transparent"
     MouseDown="Window_MouseDown"
@@ -208,28 +208,28 @@
 
 
             <TextBlock
-                Width="928"
+                Width="728"
                 Height="192"
                 Margin="0,286,0,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 FontFamily="{DynamicResource Roboto Mono Regular}"
-                FontSize="85"
+                FontSize="72"
                 FontWeight="Bold"
                 Foreground="#00785C"
                 LineHeight="20"
                 TextAlignment="Center"
                 TextWrapping="Wrap">
-                <Run Text="Tec" /><Run Text="n" /><Run Text="ológico N" /><Run Text="acional de Mexico" />
+                <Run Text="Tec" /><Run Text="n" /><Run Text="ológico N" /><Run Text="acional de México" />
             </TextBlock>
             <TextBlock
-                Width="923"
+                Width="733"
                 Height="58"
-                Margin="0,518,0,0"
+                Margin="0,480,0,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 FontFamily="{DynamicResource SFUIDisplay}"
-                FontSize="48"
+                FontSize="36"
                 Foreground="#FF00785C"
                 LineHeight="20"
                 TextAlignment="Center"

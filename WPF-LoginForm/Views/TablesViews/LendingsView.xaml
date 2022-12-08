@@ -245,7 +245,8 @@
                                 PlacementTarget="{Binding ElementName=bntFiltering}"
                                 PopupAnimation="Slide"
                                 VerticalOffset="0"
-                                HorizontalOffset="0">
+                                HorizontalOffset="0"
+                                StaysOpen="False">
                                 <menusPopUp:LendingsFilteringView x:Name="FilteringPopUp">
                                     <menusPopUp:LendingsFilteringView.Effect>
                                         <DropShadowEffect
