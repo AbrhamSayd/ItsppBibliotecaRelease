@@ -206,7 +206,7 @@
                     <Popup Grid.Column="0"
                         x:Name="popUpFiltering"
                         AllowsTransparency="True"
-                        IsOpen="{Binding Visibility, UpdateSourceTrigger=PropertyChanged}"
+                        IsOpen="{Binding FilteringVisibility, UpdateSourceTrigger=PropertyChanged}"
                         PlacementTarget="{Binding ElementName=bntFiltering}"
                         PopupAnimation="Slide"
                         VerticalOffset="0"
